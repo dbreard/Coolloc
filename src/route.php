@@ -8,8 +8,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
-$app->get('/bite', function () use ($app) {
-    return $app['twig']->render('bite.html.twig', array());
+$app->get('/login', function () use ($app) {
+    return $app['twig']->render('login.html.twig', array());
 })
 ->bind('homepage')
 ;
