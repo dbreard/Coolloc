@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 //ROUTE HOME
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html.twig', array());
+
 })
 ->bind('acceuil');
 $app->post('/', function () use ($app) {
@@ -51,14 +52,6 @@ $app->post('/login', function () use ($app) {
     //controleur
 });
 
-//LOGIN
-$app->get('/login', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
-})
-    ->bind('login');
-$app->post('/login', function () use ($app) {
-    //controleur
-});
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
@@ -98,13 +91,13 @@ $app->post('/contact', function () use ($app) {
 
 //*** ROUTES GET ***//
 
-//MENTIONS LEGAL
+//MENTIONS LEGALES
 $app->get('/mentions-legal', function () use ($app) {
     return $app['twig']->render('mentions-legal.html.twig', array());
 })
     ->bind('mentions-legal');
 
-//CONDITIONS GENERAL DE VENTES
+//CONDITIONS GENERALES DE VENTES
 $app->get('/condition-general-de-vente', function () use ($app) {
     return $app['twig']->render('condition-general-de-vente.html.twig', array());
 })
