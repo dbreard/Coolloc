@@ -1,4 +1,8 @@
 /vendor
+
+test.rtf
+
+
 .idea/workspace.xml
 .idea/Coolloc.iml
 .idea/modules.xml
@@ -6,3 +10,4 @@
 .idea/php.xml
 .idea/php.xml
 .idea/php.xml
+
