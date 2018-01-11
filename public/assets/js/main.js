@@ -5,7 +5,7 @@ $(window).load(function () { // makes sure the whole site is loaded
 })
 $(document).ready(function () {
 
-    
+
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-yellow',
         radioClass: 'iradio_square-yellow',
@@ -42,11 +42,11 @@ $(document).ready(function () {
         mouseDrag: false,
         transitionStyle: "fade"
                 // "singleItem:true" is a shortcut for:
-                // items : 1, 
+                // items : 1,
                 // itemsDesktop : false,
                 // itemsDesktopSmall : false,
                 // itemsTablet: false,
-                // itemsMobile : false 
+                // itemsMobile : false
     });
     $("#prop-smlr-slide_0").owlCarousel({
         navigation: false, // Show next and prev buttons
@@ -76,10 +76,28 @@ $(document).ready(function () {
     // Advanced search toggle
     var $SearchToggle = $('.search-form .search-toggle');
     $SearchToggle.hide();
+    var $SearchToggle2 = $('.search-form .search-toggle2');
+    $SearchToggle.hide();
+    var $SearchToggle3 = $('.search-form .search-toggle3');
+    $SearchToggle.hide();
+    var $SearchToggle4 = $('.search-form .search-toggle4');
+    $SearchToggle.hide();
 
     $('.search-form .toggle-btn').on('click', function (e) {
         e.preventDefault();
         $SearchToggle.slideToggle(300);
+    });
+    $('.search-form .toggle-btn2').on('click', function (e) {
+        e.preventDefault();
+        $SearchToggle2.slideToggle(300);
+    });
+    $('.search-form .toggle-btn3').on('click', function (e) {
+        e.preventDefault();
+        $SearchToggle3.slideToggle(300);
+    });
+    $('.search-form .toggle-btn4').on('click', function (e) {
+        e.preventDefault();
+        $SearchToggle4.slideToggle(300);
     });
 
     setTimeout(function () {
