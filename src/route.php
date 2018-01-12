@@ -17,10 +17,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 //ROUTE HOME
 $app->get('/', function () use ($app) {
+
+    // si internaute non connecté rdv vers index-nc.html.twig autrement rdv vers index-c.html.twig
     return $app['twig']->render('index.html.twig', array());
 
 })
-->bind('acceuil');
+->bind('accueil');
 $app->post('/', function () use ($app) {
     //controleur
 });
