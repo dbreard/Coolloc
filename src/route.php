@@ -28,11 +28,11 @@ $app->post('/', function () use ($app) {
 });
 
 //RESULTAT RECHERCHE
-$app->get('/resultat-recherhce', function () use ($app) {
+$app->get('/resultat-recherche', function () use ($app) {
     return $app['twig']->render('details-annonce.html.twig', array());
 })
-    ->bind('resultat-recherhce');
-$app->post('/resultat-recherhce', function () use ($app) {
+    ->bind('resultat-recherche');
+$app->post('/resultat-recherche', function () use ($app) {
     //controleur
 });
 
@@ -47,7 +47,7 @@ $app->post('/details-annonce-non-connecter', function () use ($app) {
 
 //LOGIN
 $app->get('/login', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
+    return $app['twig']->render('formulaires/login.html.twig', array());
 })
     ->bind('login');
 $app->post('/login', function () use ($app) {
@@ -57,7 +57,7 @@ $app->post('/login', function () use ($app) {
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
-    return $app['twig']->render('inscription.html.twig', array());
+    return $app['twig']->render('formulaires/register.html.twig', array());
 })
     ->bind('inscription');
 $app->post('/inscription', function () use ($app) {
@@ -94,16 +94,16 @@ $app->post('/contact', function () use ($app) {
 //*** ROUTES GET ***//
 
 //MENTIONS LEGALES
-$app->get('/mentions-legal', function () use ($app) {
-    return $app['twig']->render('mentions-legal.html.twig', array());
+$app->get('/mentions-legales', function () use ($app) {
+    return $app['twig']->render('mentions-legales.html.twig', array());
 })
-    ->bind('mentions-legal');
+    ->bind('mentions-legales');
 
 //CONDITIONS GENERALES DE VENTES
-$app->get('/condition-general-de-vente', function () use ($app) {
-    return $app['twig']->render('condition-general-de-vente.html.twig', array());
+$app->get('/conditions-generales-de-vente', function () use ($app) {
+    return $app['twig']->render('conditions-generales-de-vente.html.twig', array());
 })
-    ->bind('condition-general-de-vente');
+    ->bind('conditions-generales-de-vente');
 
 //A PROPOS
 $app->get('/a-propos', function () use ($app) {
