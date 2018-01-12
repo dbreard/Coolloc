@@ -1,0 +1,102 @@
+{% extends"layout.html.twig" %}
+
+
+{% block headTitle %}
+    Inscription | CoolLoc, la colocation cool !
+{% endblock %}
+
+{# Bloc nav #}
+
+{% block navigation %}
+    {% include 'required/navigation_nc.html.twig' ignore missing  %}
+{% endblock %}
+
+{% block content %}
+        <div class="page-head"> 
+            <div class="container">
+                <div class="row">
+                    <div class="page-head-content">
+                        <h1 class="page-title">Créer votre compte / Inscrivez-vous </h1>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page header -->
+<!-- register-area -->
+        <div class="register-area" style="background-color: rgb(249, 249, 249);">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <div class="box-for overflow">
+                        <div class="col-md-12 col-xs-12 register-blocks">
+                            <h2 class="col-md-12 text-center">Nouveau compte : </h2> 
+
+                            <form action="" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12">    
+                                    <div class="form-group">
+                                        <label for="firstname">Prénom</label>
+                                        <input type="text" class="form-control" id="firstanme" name="firstname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdate">Date de naissance</label>
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Mot de passe</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="repeat_password">Mot de passe</label>
+                                        <input type="password" class="form-control" id="repeat_password" name="repeat_password">
+                                    </div>
+                                    
+                                </div>
+                {# "firstname","lastname","birthdate","password","repeat_password", "mail","tel","activity","sex","status","conditions" #}
+
+                                <div class="col-md-6 col-xs-12">
+                                    
+                                    <div class="form-group">
+                                        <label for="mail">Email</label>
+                                        <input type="email" class="form-control" id="mail" name="mail" placeholder="de la forme votre-nom@nom.fr">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tel">Tél.</label>
+                                        <input type="text" class="form-control" id="mail" name="tel">
+                                    </div>
+                                    <div class="form-group">
+                                    
+						                <div class="coloc_title">Vous êtes :</div>
+                                        <label class="coloc_button coloc_genre0 c_femme first" for="c_femme_0" id="sexe">
+                                        <input name="sexe" value="femme" id="c_femme_0" type="radio">
+                                        <span></span>Une femme</label>
+                                        <label class="coloc_button coloc_genre0 c_homme" for="c_homme_0" id="sexe">
+                                        <input name="sexe" value="homme" id="c_homme_0" type="radio">
+                                        <span></span>Un homme</label>
+                                        <div class="clear"></div>
+                                        
+		                            </div>
+                                    <div class="form-group">
+                                        <label for="password">Activité</label>
+                                        <input type="password" class="form-control" id="password">
+                                    </div>
+                                    {# ajout de la photo #}
+                                    {# par défaut user est inactif tant que le compte n'est pas vérifié par le token d'inscription #}
+                                </div>
+                                </div>    
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-default">Register</button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
+
+{% endblock %}
