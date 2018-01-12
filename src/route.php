@@ -62,7 +62,7 @@ $app->get('/inscription', function () use ($app) {
     ->bind('inscription');
 $app->post('/inscription', function () use ($app) {
     //controleur
-});
+})->before($verifParamRegister);
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
