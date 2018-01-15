@@ -30,3 +30,21 @@ $verifParamRegister = function (Request $request)
                         if($retour["error"])
                         return  $app->redirect("/login");
                       };
+$verifParamLogin = function (Request $request)
+                      {
+                        $retour = verifParam($request->request, array("mail","password"));
+                        if($retour["error"])
+                        return  $app->redirect("/login");
+                      };
+$verifParamForgotPass = function (Request $request)
+                      {
+                        $retour = verifParam($request->request, array("mail"));
+                        if($retour["error"])
+                        return  $app->redirect("/home(special connecté)");
+                      };
+$verifParamChangePass = function (Request $request)
+                      {
+                        $retour = verifParam($request->request, array("mail"));
+                        if($retour["error"])
+                        return  $app->redirect("/verifemail");
+};
