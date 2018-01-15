@@ -204,11 +204,19 @@
     .nav-tabs > li > a {
         font-size: 12px;
     }
-    .tab-content ul li {
+    /* modification du la height */
+    /* .tab-content ul li {
         height: 235px;
         margin-bottom: 20px;
         width: 219px;
-    }
+    } */
+
+    .tab-content ul li {
+        height: 30px;
+        margin-bottom: 20px;
+        width: 219px;
+    } 
+
     .tab-content ul li a img {
         height: 100%;
         width: 100%;
@@ -665,11 +673,17 @@
         margin-top: 10px;
         font-size: 12px;
     }
+
     .tab-content ul li {
-        height: 235px;
+        height: 30px;
         margin-bottom: 20px;
         width: 219px;
     }
+    /* .tab-content ul li {
+        height: 235px;
+        margin-bottom: 20px;
+        width: 219px;
+    } */
     .tab-content ul li a img {
         height: 100%;
         width: 100%;
