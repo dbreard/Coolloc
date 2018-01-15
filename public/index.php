@@ -5,6 +5,8 @@
     require_once __DIR__.'/../vendor/autoload.php';
 
     use Silex\Application;
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
     $app = new Application();
 

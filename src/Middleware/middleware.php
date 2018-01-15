@@ -36,7 +36,13 @@ $verifParamRegister = function (Request $request, Application $app)
 //----------------- MiddleWare du formulaire de CONTACT-----------------------//
 $verifContact = function (Request $request, Application $app)
                       {
-                        $retour = verifParam($request->request, array("email","subject","message"));
+                        $retour = verifParam($request->request, array("firstname", "lastname", "email", "subject", "message"));
+                        // var_dump($request->get("firstname"));
+                        // var_dump($request->get("lastname"));
+                        // var_dump($request->get("email"));
+                        // var_dump($request->get("subject"));
+                        // var_dump($request->get("message"));
+                        // die();
                         if($retour["error"])
-                          return  $app->redirect("/contact");
+                          return  $app->redirect("/projet_soutenance/Coolloc/public/contact"); // /!\ enlever projet soutenance /!\
                       };
