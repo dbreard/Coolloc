@@ -12,11 +12,11 @@ class ModelUser {
     }
 
     function verifEmailBdd($email) {
-            $sql = "SELECT * FROM user WHERE email = ?";
+            $sql = "SELECT * FROM user WHERE mail = ?";
             $user = $app['db']->fetchAssoc($sql, array((string) $email));
         
-            return $user;
-            rowCount($user);
+            $resultat = ($user->rowCount()) ? true : false ;
+            return $resultat;
     }
     
 }

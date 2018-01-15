@@ -19,7 +19,7 @@ class registerController extends Controller
     {
         $password = strip_tags(trim($request->get("password")));
         $password_repeat = strip_tags(trim($request->get("password_repeat")));
-        $email = strip_tags(trim($request->get("email")));
+        $email = strip_tags(trim($request->get("mail")));
 
         //prénom : supérieur ou = a 2 inférieur a 50
         //nom : supérieur ou = a 2 inférieur a 50

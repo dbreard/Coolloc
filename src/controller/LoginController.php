@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function loginAction(Application $app, Request $request)
     {
         $password = strip_tags(trim($request->get("password")));
-        $email = strip_tags(trim($request->get("email")));
+        $email = strip_tags(trim($request->get("mail")));
 
         //email : filter var et doit être égal à un email register
         //mdp : doit être égal au mdp register lié à l'email register
@@ -36,6 +36,10 @@ class LoginController extends Controller
         else {
             $user = new UserModel($app['db']);
             $userVerifEmail = $user->verifEmailBdd($email);
+            ($userVerifEmail) ? $this->erreur .= 'ok' : $this->erreur .= 'pas ok';
+            return $app['twig']->render('formulaires/login.html.twig', array(
+                "error" => $this->erreur,
+            ));
         }
     }
 
