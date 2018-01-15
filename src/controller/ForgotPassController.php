@@ -20,6 +20,11 @@ class ForgotPassController extends Controller
         ($this->verifEmail($email)) ?  : $this->erreur .= 'Email invalide';
         // et email = email register
 
+        if (strlen($this->erreur) > 0) {
+            return $app['twig']->render('formulaires/forgotten-password.html.twig', array(
+                "error" => $this->erreur,
+            ));
+        }
     }
 
 }
