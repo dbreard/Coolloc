@@ -137,7 +137,9 @@ $app->post('/connected/profil', function () use ($app) {
 });
 
 //AJOUT ANNONCE
-$app->get('/connected/ajout-annonce', function () use ($app) {
+
+$app->get('connected/ajout-annonce', function () use ($app) {
+
     return $app['twig']->render('connected/ajout-annonce.html.twig', array());
 })
     ->bind('ajout-annonce');
