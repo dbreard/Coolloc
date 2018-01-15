@@ -2,10 +2,10 @@
 
 namespace Coolloc\Controller;
 
-use Coolloc\Controller\Controller;
 use Silex\Application;
+use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-//use Webforce\Model\TokensDAO;
+use Symfony\Component\HttpFoundation\Response;
 
 
 
