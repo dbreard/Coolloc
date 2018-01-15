@@ -36,7 +36,7 @@ $verifParamRegister = function (Request $request)
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
 $verifParamAnnonce = function (Request $request)
                     {
-                      $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
+                      $retour = verifParam($request->request, array("name_coloc", "rent", "tel_annonce", "mail_annonce", "description", "city", "adress", "adress_details", "postal_code", "housing_type", "surface", "nb_room", "date_dispo", "nb_roommates", "handicap_access", "smoking", "animals", "sex_roommates", "furniture", "garden", "balcony", "parking", "district", "equipments", "member_profil", "hobbies", "conditions"));
                       if($retour["error"])
-                      return  $app->redirect("/login");
+                      return  $app->redirect("/connected/ajout_annonce");
                     };

@@ -13,12 +13,11 @@
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
-
-<div class="page-head"> 
+<div class="page-head">
     <div class="container">
         <div class="row">
             <div class="page-head-content">
-                <h1 class="page-title">Postez votre annonce et trouvez des colocataires</h1>               
+                <h1 class="page-title">Postez votre annonce et trouvez des colocataires</h1>
             </div>
         </div>
     </div>
@@ -28,11 +27,11 @@
 <!-- property area -->
 <div class="content-area submit-property" style="background-color: #FCFCFC;">&nbsp;
     <div class="container">
-        <div class="clearfix" > 
-            <div class="wizard-container"> 
+        <div class="clearfix" >
+            <div class="wizard-container">
 
                 <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-                    <form action="" method="POST">                        
+                    <form action="" method="POST">
                         <div class="wizard-header">
                             <h3>
                                 <b>CRÉER</b> VOTRE ANNONCE<br>
@@ -58,8 +57,8 @@
                                         <div class="picture-container">
                                             <div class="picture">
                                                 <img src="{{ asset ('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
-                                                <input type="file" id="wizard-picture">
-                                            </div> 
+                                                <input type="file" id="wizard-picture" name="photo">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -70,7 +69,7 @@
                                         <div class="form-group">
                                             <label>Loyer (€)</label>
                                             <input name="rent" type="text" class="form-control" placeholder="3330000">
-                                        </div> 
+                                        </div>
                                         <div class="form-group">
                                             <label>Téléphone <small>(vide si vous avez le même que sur votre profil)</small></label>
                                             <input name="tel_annonce" type="text" class="form-control" placeholder="+33 6 47 84 74 36">
@@ -87,12 +86,12 @@
                             <div class="tab-pane" id="step2">
                                 <h4 class="info-text"> Décrivez votre colocation </h4>
                                 <div class="row">
-                                    <div class="col-sm-12"> 
-                                        <div class="col-sm-6"> 
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description :</label>
                                                 <textarea style="line-height: 82px;" name="description" class="form-control" ></textarea>
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -103,21 +102,21 @@
                                                 <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse">
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-sm-12 padding-top-15">
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Type de bien immobilier :</label>
-                                                <select id="housing_type" name="housing_type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="house">Maison</option>
-                                                    <option value="apartment">Appartement</option>
+                                                <select id="housing_type" name="housing_type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Selectionner">
+                                                    <option value="maison">Maison</option>
+                                                    <option value="appartement">Appartement</option>
                                                     <option value="loft">Loft</option>
-                                                    <option value="hotel">Hôtel particulier</option>
-                                                    <option value="farmhouse">Corps de ferme</option>
-                                                    <option value="other">Autre</option>
+                                                    <option value="hotel particulier">Hôtel particulier</option>
+                                                    <option value="corps de ferme">Corps de ferme</option>
+                                                    <option value="autre">Autre</option>
                                                 </select>
                                             </div>
-                                        </div>                                    
+                                        </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Surface générale (m²):</label>
@@ -135,7 +134,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Date de disponibilité :</label>
-                                                <input name="date_dispo_annonce" type="date" class="form-control" placeholder="">
+                                                <input name="date_dispo" type="date" class="form-control" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -143,15 +142,15 @@
                                                 <label>Nombre de colocataires (max 7):</label>
                                                 <input name="nb_roommates" type="number" class="form-control" placeholder="0-7 *">
                                             </div>
-                                        </div>                                                                                                
+                                        </div>
                                     </div>
                                     <div class="col-sm-12 padding-top-15">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Accès handicapé :</label>
                                                 <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -159,9 +158,9 @@
                                             <div class="form-group">
                                                 <label>Fumeur :</label>
                                                 <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
-                                                    <option value="what_ever">Peu importe</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -169,9 +168,9 @@
                                             <div class="form-group">
                                                 <label>Animaux :</label>
                                                 <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
-                                                    <option value="what_ever">Peu importe</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -179,9 +178,9 @@
                                             <div class="form-group">
                                                 <label>Sexe :</label>
                                                 <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Homme</option>
-                                                    <option value="no">Femme</option>
-                                                    <option value="what_ever">Mixte</option>
+                                                    <option value="homme">Homme</option>
+                                                    <option value="femme">Femme</option>
+                                                    <option value="peu importe">Mixte</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -189,9 +188,8 @@
                                             <div class="form-group">
                                                 <label>Meublé :</label>
                                                 <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
-                                                    <option value="what_ever">Peu importe</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -199,9 +197,8 @@
                                             <div class="form-group">
                                                 <label>Jardin :</label>
                                                 <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
-                                                    <option value="what_ever">Peu importe</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -209,9 +206,8 @@
                                             <div class="form-group">
                                                 <label>Balcon :</label>
                                                 <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
-                                                    <option value="what_ever">Peu importe</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -219,210 +215,210 @@
                                             <div class="form-group">
                                                 <label>Parking :</label>
                                                 <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="yes">Oui</option>
-                                                    <option value="no">Non</option>
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 padding-top-15">
                                             <label>Quartier :</label>
-                                            <div name="district">                                                     
+                                            <div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="close_to_shops"> Proche de commerces
+                                                            <input type="checkbox" name="district" value="Proche de commerces"> Proche de commerces
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="close_to_schools"> Proche d'écoles
+                                                            <input type="checkbox" name="district" value="Proche d'écoles"> Proche d'écoles
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="close_to_public_transport"> Proche de transports
+                                                            <input type="checkbox" name="district" value="Proche de transports"> Proche de transports
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="calm"> Calme
+                                                            <input type="checkbox" name="district" value="Calme"> Calme
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="animated"> Animé
+                                                            <input type="checkbox" name="district" value="Animé"> Animé
                                                         </label>
                                                     </div>
-                                                </div>               
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 padding-top-15">
                                             <label>Équipements :</label>
-                                            <div name="equipments">                                                     
+                                            <div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="tv"> TV
+                                                            <input type="checkbox" name="equipments" value="TV"> TV
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hifi"> Hifi
+                                                            <input type="checkbox" name="equipments" value="Hifi"> Hifi
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="wifi"> Wifi
+                                                            <input type="checkbox" name="equipments" value="Wifi"> Wifi
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="optical_fiber"> Fibre optique
+                                                            <input type="checkbox" name="equipments" value="Fibre optique"> Fibre optique
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="game_room"> Salle de jeux
+                                                            <input type="checkbox" name="equipments" value="Salle de jeux"> Salle de jeux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="washing_machine"> Machine à laver
+                                                            <input type="checkbox" name="equipments" value="Machine à laver"> Machine à laver
                                                         </label>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 padding-top-15">
                                             <label>Profil de colocataire recherché :</label>
-                                            <div name="member_profil">                                                     
+                                            <div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="shy"> Timide
+                                                            <input type="checkbox" name="member_profil" value="Timide"> Timide
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="talkative"> Bavard
+                                                            <input type="checkbox" name="member_profil" value="Bavard"> Bavard
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="solitary"> Solitaire
+                                                            <input type="checkbox" name="member_profil" value="Solitaire"> Solitaire
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="homebody"> Casanier
+                                                            <input type="checkbox" name="member_profil" value="Casanier"> Casanier
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="discreet"> Discret
+                                                            <input type="checkbox" name="member_profil" value="Discret"> Discret
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="friendly"> Convivial
+                                                            <input type="checkbox" name="member_profil" value="Convivial"> Convivial
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="cool"> Cool
+                                                            <input type="checkbox" name="member_profil" value="Cool"> Cool
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="extrovert"> Extraverti
+                                                            <input type="checkbox" name="member_profil" value="Extraverti"> Extraverti
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="ordered"> Ordonné
+                                                            <input type="checkbox" name="member_profil" value="Ordonné"> Ordonné
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="tolerant"> Tolérant
+                                                            <input type="checkbox" name="member_profil" value="Tolérant"> Tolérant
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="athletic"> Sportif
+                                                            <input type="checkbox" name="member_profil" value="Sportif"> Sportif
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="reveler"> Fétard
+                                                            <input type="checkbox" name="member_profil" value="Fétard"> Fétard
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="studious"> Studieux
+                                                            <input type="checkbox" name="member_profil" value="Studieux"> Studieux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="curious"> Curieux
+                                                            <input type="checkbox" name="member_profil" value="Curieux"> Curieux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="merry"> Joyeux
+                                                            <input type="checkbox" name="member_profil" value="Joyeux"> Joyeux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="respectful"> Respectueux
+                                                            <input type="checkbox" name="member_profil" value="Respectueux"> Respectueux
                                                         </label>
                                                     </div>
                                                 </div>
@@ -430,88 +426,88 @@
                                         </div>
                                     <div class="col-sm-12 padding-top-15">
                                             <label>Centre d'intérêts :</label>
-                                            <div name="hobbies">                                                     
+                                            <div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="TV"> Ciné - TV - Série
+                                                            <input type="checkbox" name="hobbies" value="Ciné - TV - Série"> Ciné - TV - Série
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="literature"> Littérature
+                                                            <input type="checkbox" name="hobbies" value="Littérature"> Littérature
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="music"> Musique
+                                                            <input type="checkbox" name="hobbies" value="Musique"> Musique
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="video_games"> Jeux vidéo
+                                                            <input type="checkbox" name="hobbies" value="Jeux vidéo"> Jeux vidéo
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="board_games"> Jeux plateau - Société
+                                                            <input type="checkbox" name="hobbies" value="Jeux plateau - Société"> Jeux plateau - Société
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="fashion"> Mode
+                                                            <input type="checkbox" name="hobbies" value="Mode"> Mode
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="shopping"> Shopping
+                                                            <input type="checkbox" name="hobbies" value="Shopping"> Shopping
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="sport"> Sport
+                                                            <input type="checkbox" name="hobbies" value="Sport"> Sport
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="cooking"> Cuisine - Pâtisserie
+                                                            <input type="checkbox" name="hobbies" value="Cuisine - Pâtisserie"> Cuisine - Pâtisserie
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="cultural_outings"> Sorties culturelles (musée, expo, théâtre ...)
+                                                            <input type="checkbox" name="hobbies" value="Sorties culturelles"> Sorties culturelles (musée, expo, théâtre ...)
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="travels"> Voyages
+                                                            <input type="checkbox" name="hobbies" value="Voyages"> Voyages
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="other"> Autres
+                                                            <input type="checkbox" name="hobbies" value="Autres"> Autres
                                                         </label>
                                                     </div>
                                                 </div>
@@ -523,21 +519,24 @@
                             </div>
                             <!-- End step 2 -->
 
-                            <div class="tab-pane" id="step3">                                        
+                            <div class="tab-pane" id="step3">
                                 <h4 class="info-text">Donnez-nous quelques images et/ou vidéos</h4>
-                                <div class="row">  
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="photo-images">Choisis tes images :</label>
-                                            <input class="form-control" type="file" id="photo" name="photo">
-                                            <p class="help-block">Sélectionne plusieurs images de ta colocation.</p>
+                                            <input class="form-control" type="file" class="photo" name="photo2">
+                                            <input class="form-control" type="file" class="photo" name="photo3">
+                                            <input class="form-control" type="file" class="photo" name="photo4">
+                                            <input class="form-control" type="file" class="photo" name="photo5">
+                                            <p class="help-block">Sélectionne plusieurs images de ta colocation. (jusqu'à 5 gratuites)</p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6"> 
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="videos">Choisis tes vidéos :</label>
                                             <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
-                                        </div> 
+                                        </div>
 
                                         <div class="form-group">
                                             <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video2" type="text">
@@ -552,19 +551,19 @@
                             <!--  End step 3 -->
 
 
-                            <div class="tab-pane" id="step4">                                        
+                            <div class="tab-pane" id="step4">
                                 <h4 class="info-text"> Terminer et poster l'annonce </h4>
-                                <div class="row">  
+                                <div class="row">
                                     <div class="col-sm-12">
                                         <p>
-                                            Les présentes <strong>Conditions Générales</strong> ont pour objet de définir les modalités de mise à disposition des services du site coloc.com et les conditions d'utilisation du Service par l'Utilisateur. 
-                                            Tout accès et/ou Utilisation du site coloc.com suppose l'acceptation et le respect de l'ensemble des termes des présentes Conditions et leur acceptation inconditionnelle. Elles constituent donc un contrat entre le Service et l'Utilisateur. 
+                                            Les présentes <strong>Conditions Générales</strong> ont pour objet de définir les modalités de mise à disposition des services du site coolloc.com et les conditions d'utilisation du Service par l'Utilisateur.
+                                            Tout accès et/ou Utilisation du site coolloc.com suppose l'acceptation et le respect de l'ensemble des termes des présentes Conditions et leur acceptation inconditionnelle. Elles constituent donc un contrat entre le Service et l'Utilisateur.
                                             Dans le cas où l'Utilisateur ne souhaite pas accepter tout ou partie des présentes conditions générales, il lui est demandé de renoncer à tout usage du Service.
                                         </p>
 
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="termsOfUse"/> <strong>Accepter les conditions générales d'utilisation.</strong>
+                                                <input type="checkbox" name="conditions"/> <strong>Accepter les conditions générales d'utilisation.</strong>
                                             </label>
                                         </div>
                                     </div>
@@ -583,12 +582,12 @@
                             <div class="pull-left">
                                 <input type='button' class='btn btn-previous btn-default' name='previous' value='Précédent' />
                             </div>
-                            <div class="clearfix"></div>                                            
-                        </div>	
+                            <div class="clearfix"></div>
+                        </div>
                     </form>
                 </div>
                 <!-- End submit form -->
-            </div> 
+            </div>
         </div>
     </div>
 </div>
