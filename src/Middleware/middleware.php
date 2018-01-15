@@ -1,4 +1,5 @@
 <?php
+
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +29,8 @@ $verifParamRegister = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-                          return  $app->redirect("/login");
+
+                        return  $app->redirect("/Coolloc/public/inscription");
                       };
 
 //----------------- MiddleWare du formulaire de CONTACT-----------------------//

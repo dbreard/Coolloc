@@ -50,8 +50,8 @@ $app->get('/login', function () use ($app) {
     return $app['twig']->render('formulaires/login.html.twig', array());
 })
     ->bind('login');
-$app->post('/login', function () use ($app) {
-    //controleur
+$app->post('/login', function (Request $request) use ($app ) {
+    array ("post" => $request);
 });
 
 
@@ -60,9 +60,7 @@ $app->get('/inscription', function () use ($app) {
     return $app['twig']->render('formulaires/register.html.twig', array());
 })
     ->bind('inscription');
-$app->post('/inscription', function () use ($app) {
-    //controleur
-})->before($verifParamRegister);
+$app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
