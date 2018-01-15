@@ -12,7 +12,10 @@
 {% endblock %}
 
 {% block content %}
-        <div class="page-head"> 
+    {% if error is defined %}
+    {{ error }}
+    {% endif %}
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
@@ -35,24 +38,24 @@
                                 <div class="row">
                                     <div class="col-md-6 col-xs-12">    
                                     <div class="form-group">
-                                        <label for="firstname">Prénom</label>
+                                        <label for="firstname">Prénom *</label>
                                         <input type="text" class="form-control" id="firstanme" name="firstname">
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Nom</label>
+                                        <label for="name">Nom *</label>
                                         <input type="text" class="form-control" id="lastname" name="lastname">
                                     </div>
                                     <div class="form-group">
-                                        <label for="birthdate">Date de naissance</label>
+                                        <label for="birthdate">Date de naissance *</label>
                                         <input type="date" class="form-control" id="birthdate" name="birthdate">
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">Mot de passe</label>
+                                        <label for="password">Mot de passe *</label>
                                         <input type="password" class="form-control" id="password" name="password">
                                     </div>
                                     <div class="form-group">
-                                        <label for="repeat_password">Mot de passe</label>
-                                        <input type="password" class="form-control" id="repeat_password" name="repeat_password">
+                                        <label for="repeat_password">Répetez mot de passe *</label>
+                                        <input type="password" class="form-control" id="password_repeat" name="repeat_password">
                                     </div>
                                     
                                 </div>
@@ -63,34 +66,39 @@
                                 <div class="col-md-6 col-xs-12">
                                     
                                     <div class="form-group">
-                                        <label for="mail">Email</label>
+                                        <label for="mail">Email *</label>
                                         <input type="email" class="form-control" id="mail" name="mail" placeholder="de la forme votre-nom@nom.fr">
                                     </div>
                                     <div class="form-group">
-                                        <label for="tel">Tél.</label>
+                                        <label for="tel">Tél. *</label>
                                         <input type="text" class="form-control" id="mail" name="tel">
                                     </div>
                                     <div class="form-group">
                                     
 						                <div class="coloc_title">Vous êtes :</div>
                                         <label class="coloc_button coloc_genre0 c_femme first" for="c_femme_0" id="sexe">
-                                        <input name="sexe" value="femme" id="c_femme_0" type="radio">
+                                        <input name="sex" value="femme" id="c_femme_0" type="radio">
                                         <span></span>Une femme</label>
                                         <label class="coloc_button coloc_genre0 c_homme" for="c_homme_0" id="sexe">
-                                        <input name="sexe" value="homme" id="c_homme_0" type="radio">
+                                        <input name="sex" value="homme" id="c_homme_0" type="radio">
                                         <span></span>Un homme</label>
                                         <div class="clear"></div>
-                                        
+
 		                            </div>
-                                    <select class="form-control">
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+
+                                    <label for="password">Activité</label>
+                                    <select class="form-control" name="activity">
+                                        <option value="activité pro">salarié</option>
+                                        <option value="retraité">retraité</option>
+                                        <option value="sans activité">sans-emploie</option>
+                                        <option value="étudiant">étudiant</option>
                                     </select>
+
+                                    <input type="hidden" name="status" value="inactif">
+
                                     <div class="form-group">
-                                        <label for="password">Activité</label>
-                                        <input type="password" class="form-control" id="password">
+                                        <label for="condtitions">Accepter les conditions d'utilisation* </label>
+                                        <input type="checkbox" class="form-control" id="conditions" name="conditions" value="1">
                                     </div>
                                     {# ajout de la photo #}
                                     {# par défaut user est inactif tant que le compte n'est pas vérifié par le token d'inscription #}
