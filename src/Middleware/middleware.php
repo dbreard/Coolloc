@@ -1,4 +1,5 @@
 <?php
+
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +25,11 @@ return array("error" => $error, "message" => $messageError) ;
 }
 
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
-$verifParamRegister = function (Request $request)
+$verifParamRegister = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
+<<<<<<< HEAD
                         return  $app->redirect("/login");
                       };
 
@@ -40,3 +42,7 @@ $verifParamAnnonce = function (Request $request)
                       if($retour["error"])
                       return  $app->redirect("/connected/ajout_annonce");
                     };
+=======
+                        return  $app->redirect("/Coolloc/public/inscription");
+                      };
+>>>>>>> dev_clonemaster
