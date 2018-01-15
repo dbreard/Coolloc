@@ -14,7 +14,7 @@
     
     require __DIR__.'/../src/register.php';
     // require __DIR__.'/../src/function.php';
-    // require __DIR__.'/../src/Middleware/middleware.php';
+    require __DIR__.'/../src/Middleware/middleware.php';
 
     // require __DIR__.'/../src/model/TokensDAO.php';
 
