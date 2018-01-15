@@ -13,6 +13,7 @@
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
+
 <div class="page-head">
     <div class="container">
         <div class="row">
@@ -64,19 +65,19 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Nom de la colocation</label>
-                                            <input name="name_coloc" type="text" class="form-control" placeholder="Super villa ...">
+                                            <input name="name_coloc" type="text" class="form-control" placeholder="Super villa ..." value="{% if name_coloc is defined %}{{ name_coloc }}{% endif %}">
                                         </div>
                                         <div class="form-group">
                                             <label>Loyer (€)</label>
-                                            <input name="rent" type="text" class="form-control" placeholder="3330000">
+                                            <input name="rent" type="number" class="form-control" placeholder="3330000" value="{% if rent is defined %}{{ rent }}{% endif %}">
                                         </div>
                                         <div class="form-group">
-                                            <label>Téléphone <small>(vide si vous avez le même que sur votre profil)</small></label>
-                                            <input name="tel_annonce" type="text" class="form-control" placeholder="+33 6 47 84 74 36">
+                                            <label>Téléphone <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
+                                            <input name="tel_annonce" type="number" class="form-control" placeholder="+33 6 47 84 74 36" value="{% if tel_annonce is defined %}{{ tel_annonce }}{% endif %}">
                                         </div>
                                         <div class="form-group">
-                                            <label>Mail de contact <small>(vide si vous avez le même que sur votre profil)</small></label>
-                                            <input name="mail_annonce" type="text" class="form-control" placeholder="contact@mail.com">
+                                            <label>Mail de contact <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
+                                            <input name="mail_annonce" type="mail" class="form-control" placeholder="contact@mail.com" value="{% if mail_annonce is defined %}{{ mail_annonce }}{% endif %}">
                                         </div>
                                     </div>
                                 </div>
@@ -90,16 +91,16 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description :</label>
-                                                <textarea style="line-height: 82px;" name="description" class="form-control" ></textarea>
+                                                <textarea name="description" class="form-control" >{% if description is defined %}{{ description }}{% endif %}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Adresse :</label>
-                                                <input name="city" type="text" class="form-control" placeholder="Ville *">
-                                                <input name="adress" type="text" class="form-control" class="float-left" placeholder="Adresse *">
-                                                <input name="postal_code" type="number" class="form-control" placeholder="Code postal *">
-                                                <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse">
+                                                <input name="city" type="text" class="form-control" placeholder="Ville *" value="{% if city is defined %}{{ city }}{% endif %}">
+                                                <input name="adress" type="text" class="form-control" class="float-left" placeholder="Adresse *" value="{% if adress is defined %}{{ adress }}{% endif %}">
+                                                <input name="postal_code" type="number" class="form-control" placeholder="Code postal *" value="{% if postal_code is defined %}{{ postal_code }}{% endif %}">
+                                                <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse" value="{% if adress_details is defined %}{{ adress_details }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -120,13 +121,13 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Surface générale (m²):</label>
-                                                <input name="surface" type="number" class="form-control" placeholder="Surface moyenne *">
+                                                <input name="surface" type="number" class="form-control" placeholder="Surface moyenne *" value="{% if surface is defined %}{{ surface }}{% endif %}">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Nombre de pièces :</label>
-                                                <input name="nb_room" type="number" class="form-control" placeholder="3 *">
+                                                <input name="nb_room" type="number" class="form-control" placeholder="3 *" value="{% if nb_room is defined %}{{ nb_room }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -134,13 +135,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Date de disponibilité :</label>
-                                                <input name="date_dispo" type="date" class="form-control" placeholder="">
+                                                <input name="date_dispo" type="date" class="form-control" placeholder="" value="{% if date_dispo is defined %}{{ date_dispo }}{% endif %}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Nombre de colocataires (max 7):</label>
-                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7 *">
+                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7 *" value="{% if nb_roommates is defined %}{{ nb_roommates }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -226,35 +227,35 @@
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="district" value="Proche de commerces"> Proche de commerces
+                                                            <input type="checkbox" name="district[]" value="Proche de commerces"> Proche de commerces
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="district" value="Proche d'écoles"> Proche d'écoles
+                                                            <input type="checkbox" name="district[]" value="Proche d'écoles"> Proche d'écoles
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="district" value="Proche de transports"> Proche de transports
+                                                            <input type="checkbox" name="district[]" value="Proche de transports"> Proche de transports
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="district" value="Calme"> Calme
+                                                            <input type="checkbox" name="district[]" value="Calme"> Calme
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="district" value="Animé"> Animé
+                                                            <input type="checkbox" name="district[]" value="Animé"> Animé
                                                         </label>
                                                     </div>
                                                 </div>
@@ -266,42 +267,42 @@
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="equipments" value="TV"> TV
+                                                            <input type="checkbox" name="equipments[]" value="TV"> TV
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="equipments" value="Hifi"> Hifi
+                                                            <input type="checkbox" name="equipments[]" value="Hifi"> Hifi
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="equipments" value="Wifi"> Wifi
+                                                            <input type="checkbox" name="equipments[]" value="Wifi"> Wifi
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="equipments" value="Fibre optique"> Fibre optique
+                                                            <input type="checkbox" name="equipments[]" value="Fibre optique"> Fibre optique
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="equipments" value="Salle de jeux"> Salle de jeux
+                                                            <input type="checkbox" name="equipments[]" value="Salle de jeux"> Salle de jeux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="equipments" value="Machine à laver"> Machine à laver
+                                                            <input type="checkbox" name="equipments[]" value="Machine à laver"> Machine à laver
                                                         </label>
                                                     </div>
                                                 </div>
@@ -313,112 +314,112 @@
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Timide"> Timide
+                                                            <input type="checkbox" name="member_profil[]" value="Timide"> Timide
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Bavard"> Bavard
+                                                            <input type="checkbox" name="member_profil[]" value="Bavard"> Bavard
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Solitaire"> Solitaire
+                                                            <input type="checkbox" name="member_profil[]" value="Solitaire"> Solitaire
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Casanier"> Casanier
+                                                            <input type="checkbox" name="member_profil[]" value="Casanier"> Casanier
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Discret"> Discret
+                                                            <input type="checkbox" name="member_profil[]" value="Discret"> Discret
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Convivial"> Convivial
+                                                            <input type="checkbox" name="member_profil[]" value="Convivial"> Convivial
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Cool"> Cool
+                                                            <input type="checkbox" name="member_profil[]" value="Cool"> Cool
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Extraverti"> Extraverti
+                                                            <input type="checkbox" name="member_profil[]" value="Extraverti"> Extraverti
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Ordonné"> Ordonné
+                                                            <input type="checkbox" name="member_profil[]" value="Ordonné"> Ordonné
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Tolérant"> Tolérant
+                                                            <input type="checkbox" name="member_profil[]" value="Tolérant"> Tolérant
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Sportif"> Sportif
+                                                            <input type="checkbox" name="member_profil[]" value="Sportif"> Sportif
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Fétard"> Fétard
+                                                            <input type="checkbox" name="member_profil[]" value="Fétard"> Fétard
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Studieux"> Studieux
+                                                            <input type="checkbox" name="member_profil[]" value="Studieux"> Studieux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Curieux"> Curieux
+                                                            <input type="checkbox" name="member_profil[]" value="Curieux"> Curieux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Joyeux"> Joyeux
+                                                            <input type="checkbox" name="member_profil[]" value="Joyeux"> Joyeux
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="member_profil" value="Respectueux"> Respectueux
+                                                            <input type="checkbox" name="member_profil[]" value="Respectueux"> Respectueux
                                                         </label>
                                                     </div>
                                                 </div>
@@ -430,84 +431,84 @@
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Ciné - TV - Série"> Ciné - TV - Série
+                                                            <input type="checkbox" name="hobbies[]" value="Ciné - TV - Série"> Ciné - TV - Série
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Littérature"> Littérature
+                                                            <input type="checkbox" name="hobbies[]" value="Littérature"> Littérature
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Musique"> Musique
+                                                            <input type="checkbox" name="hobbies[]" value="Musique"> Musique
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Jeux vidéo"> Jeux vidéo
+                                                            <input type="checkbox" name="hobbies[]" value="Jeux vidéo"> Jeux vidéo
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Jeux plateau - Société"> Jeux plateau - Société
+                                                            <input type="checkbox" name="hobbies[]" value="Jeux plateau - Société"> Jeux plateau - Société
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Mode"> Mode
+                                                            <input type="checkbox" name="hobbies[]" value="Mode"> Mode
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Shopping"> Shopping
+                                                            <input type="checkbox" name="hobbies[]" value="Shopping"> Shopping
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Sport"> Sport
+                                                            <input type="checkbox" name="hobbies[]" value="Sport"> Sport
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Cuisine - Pâtisserie"> Cuisine - Pâtisserie
+                                                            <input type="checkbox" name="hobbies[]" value="Cuisine - Pâtisserie"> Cuisine - Pâtisserie
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Sorties culturelles"> Sorties culturelles (musée, expo, théâtre ...)
+                                                            <input type="checkbox" name="hobbies[]" value="Sorties culturelles"> Sorties culturelles (musée, expo, théâtre ...)
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Voyages"> Voyages
+                                                            <input type="checkbox" name="hobbies[]" value="Voyages"> Voyages
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="hobbies" value="Autres"> Autres
+                                                            <input type="checkbox" name="hobbies[]" value="Autres"> Autres
                                                         </label>
                                                     </div>
                                                 </div>
