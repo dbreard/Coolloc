@@ -4,7 +4,6 @@ namespace Coolloc\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-//use Webforce\Model\TokensDAO;
 
 
 
