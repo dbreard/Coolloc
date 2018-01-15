@@ -24,9 +24,17 @@ return array("error" => $error, "message" => $messageError) ;
 }
 
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
-$verifParamRegister = function (Request $request)
+$verifParamRegister = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-                        return  $app->redirect("/login");
+                          return  $app->redirect("/login");
+                      };
+
+//----------------- MiddleWare du formulaire de CONTACT-----------------------//
+$verifContact = function (Request $request, Application $app)
+                      {
+                        $retour = verifParam($request->request, array("email","subject","message"));
+                        if($retour["error"])
+                          return  $app->redirect("/contact");
                       };

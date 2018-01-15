@@ -87,9 +87,7 @@ $app->get('/contact', function () use ($app) {
     return $app['twig']->render('formulaires/contact.html.twig', array());
 })
     ->bind('contact');
-$app->post('/contact', function () use ($app) {
-    //controleur
-});
+$app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->before($verifContact);
 
 //*** ROUTES GET ***//
 
