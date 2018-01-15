@@ -30,3 +30,13 @@ $verifParamRegister = function (Request $request)
                         if($retour["error"])
                         return  $app->redirect("/login");
                       };
+
+
+// VERIFICATION PARAMETRES D'ANNONCE
+// recéption des données et analyse pour savoir si elle sont existentes et remplis
+$verifParamAnnonce = function (Request $request)
+                    {
+                      $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
+                      if($retour["error"])
+                      return  $app->redirect("/login");
+                    };
