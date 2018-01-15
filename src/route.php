@@ -84,7 +84,7 @@ $app->post('/faq', function () use ($app) {
 
 //CONTACT
 $app->get('/contact', function () use ($app) {
-    return $app['twig']->render('contact.html.twig', array());
+    return $app['twig']->render('formulaires/contact.html.twig', array());
 })
     ->bind('contact');
 $app->post('/contact', function () use ($app) {
