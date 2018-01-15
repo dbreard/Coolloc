@@ -24,27 +24,27 @@ return array("error" => $error, "message" => $messageError) ;
 }
 
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
-$verifParamRegister = function (Request $request)
+$verifParamRegister = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-                        return  $app->redirect("/login");
+                        return $app->redirect("/login");
                       };
 $verifParamLogin = function (Request $request)
                       {
                         $retour = verifParam($request->request, array("mail","password"));
                         if($retour["error"])
-                        return  $app->redirect("/login");
+                        return $app->redirect("/home");
                       };
 $verifParamForgotPass = function (Request $request)
                       {
                         $retour = verifParam($request->request, array("mail"));
                         if($retour["error"])
-                        return  $app->redirect("/home(special connecté)");
+                        return $app->redirect("/check-mail");
                       };
 $verifParamChangePass = function (Request $request)
                       {
-                        $retour = verifParam($request->request, array("mail"));
+                        $retour = verifParam($request->request, array("password", "repeat_password"));
                         if($retour["error"])
-                        return  $app->redirect("/verifemail");
+                        return $app->redirect("/change-password-ok");
 };
