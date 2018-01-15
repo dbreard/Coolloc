@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 
-class registerController extends Controller
+class RegisterController extends Controller
 {
 
     //fonction d'analise des champs saisie
