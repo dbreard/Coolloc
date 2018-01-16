@@ -19,7 +19,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="{{ asset('assets/favicon.ico') }}" type="image/x-icon">
 
         
         <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
@@ -48,9 +48,8 @@
     </head>
         {# fin du head #}
 
-       
+    
 
-    </head>
     <body>
     {#  récupération de la nav #}
 
@@ -59,41 +58,13 @@
         </div>
         <!-- Body content -->
 
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> +33 1 10 10 10 10</span>
-                                <span><i class="pe-7s-mail"></i> coolloc[at]coolloc.com</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                {# <li><a href="#"><i class="fa fa-twitter"></i></a></li> #}
-                                {# <li><a href="#"><i class="fa fa-vine"></i></a></li> #}
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                {# <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li> #}
-                                <li><a href="{{ path ('login') }}" class="">Se connecter</a></li>
-                            </ul>
-                            <div class="button navbar-right">
-                            </div>
-                        </div>
-                        
-                    </div>
-                {# </div> #}
-            </div>
-        </div>
-        <!--End top header -->
+        {% block header %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+        {% endblock %} 
 
         {# bloc de navigation / nav différente en fonction de connexion ou pas #}
 
-        {% block navigation%}{% endblock %}
+        {% block navigation %}{% endblock %}
 
         {# fin de navigation  #}
 

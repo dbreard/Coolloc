@@ -60,6 +60,7 @@ $(document).ready(function () {
         readURL(this);
     });
 
+
     $('[data-toggle="wizard-radio"]').click(function () {
         wizard = $(this).closest('.wizard-card');
         wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
@@ -80,7 +81,6 @@ $(document).ready(function () {
 
     $height = $(document).height();
     $('.set-full-height').css('height', $height);
-
 
 });
 
@@ -188,16 +188,3 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
