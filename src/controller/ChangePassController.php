@@ -22,8 +22,8 @@ class ChangePassController extends Controller
         //mdp : mdp 1 = mdp 2
         //mdp : UPDATE en BDD
 
-        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur .= 'Les mots de passe ne correspondent pas ';
-        ($this->verifMdp($password)) ?  : $this->erreur .= 'Format du mot de passe incorrect  ';
+        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : array_push($this->erreur, 'Les mots de passe ne correspondent pas ');
+        ($this->verifMdp($password)) ?  : array_push($this->erreur, 'Format du mot de passe incorrect  ');
 
 
         if (!empty($this->erreur)) {
@@ -31,17 +31,15 @@ class ChangePassController extends Controller
                 "error" => $this->erreur,
             ));
         }
-        /*
         else
         {
             $resultat = new UserModelDAO($app['db']);
             $userChangeMdp = $resultat->changeMdpBdd($password);
-            ($userChangeMdp) ?  : $this->erreur .= 'mdp pas changé ';
+            ($userChangeMdp) ?  : array_push($this->erreur, 'mdp pas changé ');
             return $app['twig']->render('basic/change-password.html.twig', array(
                 "error" => $this->erreur,
             ));
         }
-        */
     }
 
 }

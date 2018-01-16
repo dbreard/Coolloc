@@ -23,6 +23,16 @@ class RegisterController extends Controller
         $password = strip_tags(trim($request->get("password")));
         $password_repeat = strip_tags(trim($request->get("password_repeat")));
         $email = strip_tags(trim($request->get("mail")));
+        $birthdate = strip_tags(trim($request->get("birthdate")));
+        $birthdateFormatage = str_replace("-", "", $birthdate);
+        $date = date("Ymd"); // date du jour
+        $first_name = strip_tags(trim($request->get("firstname")));
+        $last_name = strip_tags(trim($request->get("lastname")));
+        $tel = strip_tags(trim($request->get("tel")));
+        $sexe = strip_tags(trim($request->get("sex")));
+        $activite = strip_tags(trim($request->get("activity")));
+        $condition = strip_tags(trim($request->get("conditions")));
+        $status = strip_tags(trim($request->get("status")));
 
         //prénom : supérieur ou = a 2 inférieur a 50
         (iconv_strlen($first_name) >= 2 && iconv_strlen($first_name) <= 50) ?: array_push($this->erreur, 'Votre prénom doit être compris entre 2 et 50 caractères');

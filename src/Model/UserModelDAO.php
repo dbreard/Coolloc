@@ -35,14 +35,13 @@ class UserModelDAO {
     }
 
     // CHANGEMENT DE MOT DE PASSE
-    /*
     function changeMdpBdd(string $password)
     {
             $sql = "UPDATE user SET password = ?";
             $resultat = $this->getDb()->fetchAssoc($sql, array((string) $password));
             return $resultat;
     }
-    */
+    
       
     public function insertUSer(string $first_name,string $last_name,string $birthdate,string $password,string $email,string $tel,string $sexe,string $activite,int     $condition){
 
@@ -84,20 +83,6 @@ class UserModelDAO {
 
     }
 
-
-    public function verifEmailBdd(string $email){
-        $sql = "SELECT mail FROM user WHERE mail = ?";
-        $resultat = $this->getDb()->fetchAssoc($sql, array((string) $email));
-
-        return $resultat;
-    }
-
-
-    //******** GETTER ********//
-
-    public function getDb(){
-        return $this->db;
-    }
 
 
 }

@@ -30,12 +30,6 @@ class Controller {
            return $resultat;
     }
 
-    //VERIFICATION DE LA CORRESPONDANCE DES MOT DE PASSE
-    public function verifCorrespondanceMdp(string $password,string $password_repeat) : bool
-    {
-        $resultat = ($password == $password_repeat) ? true : false;
-        return $resultat;
-    }
 
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
     public function modifyTel(string $tel){
