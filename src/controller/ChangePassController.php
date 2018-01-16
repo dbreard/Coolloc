@@ -6,34 +6,42 @@ use Silex\Application;
 use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-
+use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
 
 class ChangePassController extends Controller
 {
 
-    //fonction d'analise des champs saisie
+    //fonction d'analyse des champs saisie
     public function changePassAction(Application $app, Request $request)
     {
-        //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
-        (!$this->verifCorrespondanceMdp($password, $password_repeat)) ? $this->erreur .= 'Les mot de passe ne correspondent pas' :
-            ($this->verifMdp($password)) ?  : $this->erreur .= 'Format mot de passe incorrect';
+        $password = strip_tags(trim($request->get("password")));
+        $password_repeat = strip_tags(trim($request->get("password_repeat")));
+
+        //mdp : doit faire entre 6 et 20 caractères
+        //mdp : mdp 1 = mdp 2
+        //mdp : UPDATE en BDD
+
+        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur .= 'Les mots de passe ne correspondent pas ';
+        ($this->verifMdp($password)) ?  : $this->erreur .= 'Format du mot de passe incorrect  ';
+
 
         if (!empty($this->erreur)) {
-            return $app['twig']->render('formulaires/change-password.html.twig', array(
+            return $app['twig']->render('basic/change-password.html.twig', array(
                 "error" => $this->erreur,
             ));
         }
+        /*
+        else
+        {
+            $resultat = new UserModelDAO($app['db']);
+            $userChangeMdp = $resultat->changeMdpBdd($password);
+            ($userChangeMdp) ?  : $this->erreur .= 'mdp pas changé ';
+            return $app['twig']->render('basic/change-password.html.twig', array(
+                "error" => $this->erreur,
+            ));
+        }
+        */
     }
-
-    
-    public function verifCorrespondanceMdp(string $password,string $password_repeat)
-    {
-        ($password === $password_repeat) ? false : $this->verifMdp($password);
-    }
-
-    public function changePass() {
-         
-     }
 
 }

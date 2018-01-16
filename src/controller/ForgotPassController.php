@@ -6,22 +6,36 @@ use Silex\Application;
 use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-
+use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
 
 class ForgotPassController extends Controller
 {
 
-    //fonction d'analise des champs saisie
+    //fonction d'analyse des champs saisie
     public function forgotPassAction(Application $app, Request $request)
     {
-        //email : filter var et doit être égal à un email register
+        $email = strip_tags(trim($request->get("mail")));
 
-        ($this->verifEmail($email)) ?  : $this->erreur .= 'Email invalide';
-        // et email = email register
+        //email : filter var
+        //email : doit être égal à un email register
+        //email : envoie email
+
+        ($this->verifEmail($email)) ?  : $this->erreur .= 'Format de l\'email incorrect ';
+
 
         if (!empty($this->erreur)) {
-            return $app['twig']->render('formulaires/forgotten-password.html.twig', array(
+            return $app['twig']->render('basic/forgotten-password.html.twig', array(
+                "error" => $this->erreur,
+            ));
+        }
+
+        else
+        {
+            $resultat = new UserModelDAO($app['db']);
+            $userVerifEmail = $resultat->verifEmailBdd($email);
+            ($userVerifEmail) ?  : $this->erreur .= 'L\'email n\'est pas associé à un compte ';
+            return $app['twig']->render('basic/forgotten-password.html.twig', array(
                 "error" => $this->erreur,
             ));
         }

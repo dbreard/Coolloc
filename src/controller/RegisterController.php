@@ -26,8 +26,8 @@ class RegisterController extends Controller
         //date de naissance : avoir au moin 18ans
 
         //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
-        (!$this->verifCorrespondanceMdp($password, $password_repeat)) ? $this->erreur .= 'Les mot de passe ne correspondent pas' :
-            ($this->verifMdp($password)) ?  : $this->erreur .= 'Format mot de passe incorrect';
+        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur .= 'Les mots de passe ne correspondent pas';
+        ($this->verifMdp($password)) ?  : $this->erreur .= 'Format mot de passe incorrect';
 
         //Vérification d'email :
         ($this->verifEmail($email)) ?  : $this->erreur .= 'Email invalide';
@@ -45,11 +45,5 @@ class RegisterController extends Controller
         }
 
     }
-
-    public function verifCorrespondanceMdp(string $password,string $password_repeat)
-    {
-        ($password === $password_repeat) ? false : $this->verifMdp($password);
-    }
-
 
 }

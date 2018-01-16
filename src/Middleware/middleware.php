@@ -29,25 +29,23 @@ $verifParamRegister = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-                        return $app->redirect("/Projet-final/Coolloc/public/inscription");
+                        return $app->redirect("/Coolloc/public/inscription");
                       };
 $verifParamLogin = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail","password"));
                         if($retour["error"])
-                        return $app->redirect("/Projet-final/Coolloc/public/login");
+                        return $app->redirect("/Coolloc/public/login");
                       };
-                      /*
 $verifParamForgotPass = function (Request $request)
                       {
                         $retour = verifParam($request->request, array("mail"));
                         if($retour["error"])
-                        return $app->redirect("/check-mail");
+                        return $app->redirect("/Coolloc/public/forgotten-password");
                       };
 $verifParamChangePass = function (Request $request)
                       {
-                        $retour = verifParam($request->request, array("password", "repeat_password"));
+                        $retour = verifParam($request->request, array("password", "password_repeat"));
                         if($retour["error"])
-                        return $app->redirect("/change-password-ok");
+                        return $app->redirect("/Coolloc/public/change-password");
 };
-*/
