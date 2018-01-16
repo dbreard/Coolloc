@@ -55,10 +55,9 @@ $(document).ready(function () {
         }
     });
 
-    // Prepare the preview for profile picture
-    $("#wizard-picture").change(function () {
-        readURL(this);
-    });
+    
+
+
 
 
     $('[data-toggle="wizard-radio"]').click(function () {
@@ -176,15 +175,49 @@ function validateThirdStep() {
 
 }
 
-//Function to show image before upload
 
-function readURL(input) {
+// faire une boucle en jquery
+for (var i=1, i<14, i++) {
+
+// Prepare the preview for profile picture
+$("#wizard-picture"+i).change(function () {
+    readURL+i(this);
+    
+});
+
+
+
+function readURL+i(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+            $('#wizardPicturePreview'+i).attr('src', e.target.result).fadeIn('slow');
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+// fin de la boucle for
+}
+
+// Prepare the preview for profile picture
+// $("#wizard-picture").change(function () {
+//     readURL(this);
+// });
+
+
+//Function to show image before upload
+
+// function readURL(input) {
+//     if (input.files && input.files[0]) {
+//         var reader = new FileReader();
+
+//         reader.onload = function (e) {
+//             $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+//         }
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// }
+
+

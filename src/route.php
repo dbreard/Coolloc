@@ -45,6 +45,8 @@ $app->post('/details-annonce-non-connecter', function () use ($app) {
     //controleur
 });
 
+
+
 //LOGIN
 $app->get('/login', function () use ($app) {
     return $app['twig']->render('formulaires/login.html.twig', array());
@@ -61,6 +63,14 @@ $app->get('/inscription', function () use ($app) {
 })
     ->bind('inscription');
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
+
+
+// confirmation mail
+$app->get('/confirmation-email', function () use ($app) {
+    return $app['twig']->render('confirmation.html.twig', array());
+})
+    ->bind('confirmation');
+
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {

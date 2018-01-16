@@ -1,6 +1,7 @@
 {% extends"layout-class-nojs.html.twig" %}
 
- 
+
+
 
 {% block headTitle %}
     Ajouter une colocation | CoolLoc, la colocation cool !
@@ -14,6 +15,8 @@
 {% endblock %}
 {% block content %}
 
+
+
 <div class="page-head">
     <div class="container">
         <div class="row">
@@ -23,6 +26,16 @@
         </div>
     </div>
 </div>
+
+
+{% block fonction %}
+
+
+    {% include 'required/membre.php' ignore missing  %}
+
+
+
+{% endblock %}
 <!-- End page header -->
 
 <!-- property area -->
@@ -68,7 +81,7 @@
                                         <div class="col-sm-12">
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview2" title=""/>
 
                                                 <input type="file" id="wizard-picture2" name="photo2">
                                                 </div>
@@ -634,7 +647,7 @@
                                                 <div class="picture">
                                                 <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo12">
+                                                <input type="file" id="wizard-picture" name="photo12">
                                                 </div>
                                             </div>
 
@@ -642,7 +655,8 @@
                                                 <div class="picture">
                                                 <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo13">
+                                                <input type="file" id="wizard-picture1
+                                                " name="photo13">
                                                 </div>
                                             </div>
                                             
@@ -659,12 +673,12 @@
 
                                         <h4>Remontez votre annonce en tête de liste</h4>
                                         <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros 
-                                        <label class="checkbox-inline"> 
-                                            <input type="radio" id="inlineCheckbox1" value="yes"> oui
+                                        <label class="radio-inline"> 
+                                            <input type="radio" id="Top de liste" value="yes" name="Top de liste"> oui
                                         </label>
 
-                                        <label class="checkbox-inline">
-                                            <input type="radio" id="inlineCheckbox1" value="no"> non
+                                        <label class="radio-inline">
+                                            <input type="radio" id="Top de liste2" value="no" checked name="Top de liste"> non
                                         </label>
                                         </p>
 
@@ -673,12 +687,12 @@
                                         <h4>Le pack options</h4>
                                         <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
                                         <p>Je choisis le pack option
-                                        <label class="checkbox-inline"> 
-                                            <input type="radio" id="inlineCheckbox1" value="yes"> oui
+                                        <label class="radio-inline"> 
+                                            <input type="radio" id="pack option" value="yes" name="pack option"> oui
                                         </label>
 
-                                        <label class="checkbox-inline">
-                                            <input type="radio" id="inlineCheckbox1" value="no"> non
+                                        <label class="radio-inline">
+                                            <input type="radio" id="pack option2" value="no" name="pack option" checked> non
                                         </label>
                                         </p>
 
