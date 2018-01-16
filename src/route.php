@@ -59,6 +59,11 @@ $app->get('/inscription', function () use ($app) {
     ->bind('inscription');
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
+
+//VERIFICATION DU TOKEN
+$app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
+
+
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
     return $app['twig']->render('basic/forgotten-password.html.twig', array());
@@ -87,9 +92,7 @@ $app->get('/contact', function () use ($app) {
     return $app['twig']->render('contact.html.twig', array());
 })
     ->bind('contact');
-$app->post('/contact', function () use ($app) {
-    //controleur
-});
+$app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->before($verifContact);
 
 //*** ROUTES GET ***//
 
@@ -138,18 +141,18 @@ $app->post('/connected/profil', function () use ($app) {
 
 //AJOUT ANNONCE
 
-$app->get('connected/ajout-annonce', function () use ($app) {
-
-    return $app['twig']->render('connected/ajout-annonce.html.twig', array());
+$app->get('/connected/ajout-annonce', function () use ($app) {
+    
+    return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
 })
     ->bind('ajout-annonce');
-$app->post('/connected/ajout-annonce', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/ajout-annonce', 'Coolloc\Controller\AnnonceController::annonceAction')->before($verifParamAnnonce);
 
-//GERER ANNONCE
+// GERER ANNONCE
 $app->get('/connected/gerer-annonce', function () use ($app) {
+    
     return $app['twig']->render('gerer-annonce.html.twig', array());
+
 })
     ->bind('gerer-annonce');
 $app->post('/connected/gerer-annonce', function () use ($app) {
@@ -158,9 +161,9 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 //*** ROUTES GET ***//
 
-//GERER ANNONCE
+//GERER DECONNEXION
 $app->get('/connected/deconnexion', function () use ($app) {
-    return $app['twig']->render('gerer-annonce.html.twig', array());
+    return $app['twig']->render('index.html.twig', array());
 })
     ->bind('deconnexion');
 
