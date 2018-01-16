@@ -54,5 +54,7 @@ class Controller {
         return false;
       }
     }
+    // --------------------- fin envoi mail ----------------------- //
+
 
 }
