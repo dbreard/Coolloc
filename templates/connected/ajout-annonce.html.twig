@@ -1,7 +1,5 @@
 {% extends"layout-class-nojs.html.twig" %}
 
-
-
 {% block headTitle %}
     Ajouter une colocation | CoolLoc, la colocation cool !
 {% endblock %}
@@ -9,6 +7,7 @@
 {# Bloc nav #}
 
 {% block navigation %}
+    {% include 'required/navigation_nc.html.twig' ignore missing  %}
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
@@ -51,8 +50,6 @@
                             <li><a href="#step3" data-toggle="tab">Étape 3</a></li>
                             <li><a href="#step4" data-toggle="tab">Terminé</a></li>
                         </ul>
-
-
 
                         <div class="tab-content">
 
@@ -103,11 +100,7 @@
                                                 </div>
                                             </div>
 
-                                            
-                                            
-
                                         </div>
-
 
                                     </div>
                                     <div class="col-sm-6">
@@ -130,10 +123,10 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <h4>Média vidéo</h4>
-                                                <div class="form-group">
-                                                    <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
+                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video" type="text">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -580,26 +573,10 @@
                                 <h4 class="info-text">Choississez vos options</h4>
                                 <div class="row">
                                     <div class="col-sm-6">
-<<<<<<< HEAD
-                                        <label for="photo-images">Choisis tes images :</label>
-                                        <div>
-                                            <div class="form-group">
-                                                <div class="picture form-annonce">
-                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" name="coolloc-ph2" title=""/>
-                                                    <input type="file" id="wizard-picture">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="picture form-annonce">
-                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" name="coolloc-ph3" title=""/>
-                                                    <input type="file" id="wizard-picture">
-                                                </div>
-                                            </div>
-=======
                                         <div class="form-group">
                                             <h4>Des photos supplémentaires</h4>
                                             <p>Ajoutez jusqu'à 8 photos supplémentaires contre paiement de 10 euros</p>
-                                            
+
                                             <div class="col-sm-3">
                                                 <div class="picture">
                                                 <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
@@ -663,23 +640,13 @@
                                                 <input type="file" id="wizard-picture5" name="photo13">
                                                 </div>
                                             </div>
-                                            
-
-
->>>>>>> dev_clonemaster
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-<<<<<<< HEAD
-                                        <div class="form-group">
-                                            <label for="videos">Choisis tes vidéos :</label>
-                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
-                                        </div>
-=======
 
                                         <h4>Remontez votre annonce en tête de liste</h4>
-                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros 
-                                        <label class="checkbox-inline"> 
+                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros
+                                        <label class="checkbox-inline">
                                             <input type="radio" id="inlineCheckbox1" value="yes"> oui
                                         </label>
 
@@ -693,7 +660,7 @@
                                         <h4>Le pack options</h4>
                                         <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
                                         <p>Je choisis le pack option
-                                        <label class="checkbox-inline"> 
+                                        <label class="checkbox-inline">
                                             <input type="radio" id="inlineCheckbox1" value="yes"> oui
                                         </label>
 
@@ -701,9 +668,6 @@
                                             <input type="radio" id="inlineCheckbox1" value="no"> non
                                         </label>
                                         </p>
-
-                                        
->>>>>>> dev_clonemaster
                                     </div>
                                 </div>
                             </div>

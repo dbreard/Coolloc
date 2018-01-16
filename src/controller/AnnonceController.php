@@ -35,9 +35,9 @@ class AnnonceController extends Controller
         $conditions = strip_tags(trim($request->get('conditions')));
 
         // CHAMPS OBLIGATOIRES && saisie FACULTATIVES --- SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
+        // EMAIL
+        // $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
         // if (!empty($mail_annonce)) {
-        //     $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
-        //
         //     ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email invalide');
         // }else {
         //     charger l'email du profil de l'utilisateur
@@ -45,10 +45,9 @@ class AnnonceController extends Controller
         //     $annonceMail->searchMail($_SESSION['id']);
         // }
 
+        // TEL
+        // $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
         // if (!empty($tel_annonce)) {
-        //      $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
-        //
-        //
         //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone invalide');
         // }else {
         //         charger le numéro de téléphone du profil de l'utilisateur
@@ -58,95 +57,99 @@ class AnnonceController extends Controller
 
         // CHAMPS FACULTATIFS
         // ADRESSE DETAILLES
-        (empty($adress_details)) ? : $adress_details = strip_tags(trim($request->get('adress_details'))) ;
+        $adress_details = strip_tags(trim($request->get('adress_details')));
+        if (!empty($adress_details)) {
+            if (iconv_strlen($adress_details) >= 300) {
+                array_push($this->erreur, 'Adresse détaillée invalide');
+            }
+        }
+
 
         // SURFACE
+        $surface = strip_tags(trim($request->get('surface')));
         if (!empty($surface)) {
             if (!is_numeric($surface) || $surface <= 0) {
                 array_push($this->erreur, 'Surface saisie invalide');
-            }else {
-                $surface = strip_tags(trim($request->get('surface')));
             }
         }
 
         // NB_ROOM
+        $nb_room = strip_tags(trim($request->get('nb_room')));
         if (!empty($nb_room)) {
-            if (!is_integer($nb_room) || $nb_room <= 0) {
+            if (!is_numeric($nb_room) || $nb_room <= 0) {
                 array_push($this->erreur, 'Nombre de pièces saisie invalide');
-            }else {
-                $nb_room = strip_tags(trim($request->get('nb_room')));
             }
         }
 
         // HANDICAP_ACCESS
+        $handicap_access = strip_tags(trim($request->get('handicap_access')));
         if (!empty($handicap_access)) {
             if ($handicap_access != 'oui' || $handicap_access != 'non' || $handicap_access != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Accés handicapé'");
-            }else {
-                $handicap_access = strip_tags(trim($request->get('handicap_access')));
             }
         }
 
         // SMOKING
+        $smoking = strip_tags(trim($request->get('smoking')));
         if (!empty($smoking)) {
             if ($smoking != 'oui' || $smoking != 'non' || $smoking != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Fumeur'");
-            }else {
-                $smoking = strip_tags(trim($request->get('smoking')));
             }
         }
 
         // ANIMALS
+        $animals = strip_tags(trim($request->get('animals')));
         if (!empty($animals)) {
             if ($animals != 'oui' || $animals != 'non' || $animals != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Animaux'");
-            }else {
-                $animals = strip_tags(trim($request->get('animals')));
             }
         }
 
         // SEX_ROOMMATES
+        $sex_roommates = strip_tags(trim($request->get('sex_roommates')));
         if (!empty($sex_roommates)) {
             if ($sex_roommates != 'homme' || $sex_roommates != 'femme' || $sex_roommates != 'mixte') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Sexe'");
-            }else {
-                $sex_roommates = strip_tags(trim($request->get('sex_roommates')));
             }
         }
 
         // FURNITURE
+        $furniture = strip_tags(trim($request->get('furniture')));
         if (!empty($furniture)) {
             if ($furniture != 'oui' || $furniture != 'non' || $furniture != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Meublé'");
-            }else {
-                $furniture = strip_tags(trim($request->get('furniture')));
             }
         }
 
         // GARDEN
+        $garden = strip_tags(trim($request->get('garden')));
         if (!empty($garden)) {
             if ($garden != 'oui' || $garden != 'non' || $garden != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Garden'");
-            }else {
-                $garden = strip_tags(trim($request->get('garden')));
             }
         }
 
         // BALCONY
+        $balcony = strip_tags(trim($request->get('balcony')));
         if (!empty($balcony)) {
             if ($balcony != 'oui' || $balcony != 'non' || $balcony != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Balcon'");
-            }else {
-                $balcony = strip_tags(trim($request->get('balcony')));
             }
         }
 
         // PARKING
+        $parking = strip_tags(trim($request->get('parking')));
         if (!empty($parking)) {
             if ($parking != 'oui' || $parking != 'non' || $parking != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Parking'");
-            }else {
-                $parking = strip_tags(trim($request->get('parking')));
+            }
+        }
+
+        // VIDEOS
+        $video = strip_tags(trim($request->get('video')));
+        if (!empty($video)) {
+            if ( !preg_match(" #youtube.com|vimeo.com# " , $video) ){
+                array_push($this->erreur, "l'URL de la vidéo est invalide");
             }
         }
 
@@ -225,7 +228,7 @@ class AnnonceController extends Controller
         (iconv_strlen($description) <= 600) ? : array_push($this->erreur, 'Longueur de la description incorrect');
 
         // VERIF STRUCTURE DU CODE POSTAL
-        (iconv_strlen($postal_code) != 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
+/*/!\*/ (iconv_strlen($postal_code) != 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
 
         // VERIF DATE DE DISPO VALIDE
         // (($this->getDate() - $dateFormatage) <= 0) ? : array_push($this->erreur, 'La date de disponibilité est invalide');
