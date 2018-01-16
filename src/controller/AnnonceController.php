@@ -17,6 +17,10 @@ class AnnonceController extends Controller
             return  $app['twig']->render('/connected/ajout-annonce.html.twig', $app["formulaire"]["verifParamAnnonce"]["value_form"]);
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
+        $district = array();
+        $equipments = array();
+        $memberProfil = array();
+        $hobbies = array();
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
         $arrayEquipments = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
         $arrayMemberProfil = array('Timide', 'Bavard', 'Solitaire', 'Casanier', 'Discret', 'Convivial', 'Cool', 'Extraverti', 'Ordonné', 'Tolérant', 'Sportif', 'Fétard', 'Studieux', 'Curieux', 'Joyeux', 'Respectueux');
@@ -30,7 +34,7 @@ class AnnonceController extends Controller
         $adress = strip_tags(trim($request->get('adress')));
         $city = strip_tags(trim($request->get('city')));
         $date_dispo = strip_tags(trim($request->get('date_dispo')));
-        $dateFormatage = str_replace("-", "", $date_dispo);
+            $dateFormatage = str_replace("-", "", $date_dispo);
         $nb_roommates = strip_tags(trim($request->get('nb_roommates')));
         $conditions = strip_tags(trim($request->get('conditions')));
 
@@ -41,8 +45,7 @@ class AnnonceController extends Controller
         //     ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email invalide');
         // }else {
         //     charger l'email du profil de l'utilisateur
-        //     $annonceMail = new AnnonceModel($app['db']);
-        //     $annonceMail->searchMail($_SESSION['id']);
+        //     $mail_annonce = $_SESSION['membre']['mail'];
         // }
 
         // TEL
@@ -50,9 +53,8 @@ class AnnonceController extends Controller
         // if (!empty($tel_annonce)) {
         //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone invalide');
         // }else {
-        //         charger le numéro de téléphone du profil de l'utilisateur
-        //         $annonceTel = new AnnonceModel($app['db']);
-        //         $annonceTel->searchTel($_SESSION['id']);
+        //     charger le numéro de téléphone du profil de l'utilisateur
+        //     $tel_annonce = $_SESSION['membre']['tel'];
         // }
 
         // CHAMPS FACULTATIFS
@@ -63,7 +65,6 @@ class AnnonceController extends Controller
                 array_push($this->erreur, 'Adresse détaillée invalide');
             }
         }
-
 
         // SURFACE
         $surface = strip_tags(trim($request->get('surface')));
@@ -167,6 +168,8 @@ class AnnonceController extends Controller
             }
             if (count($arrayDistrictCheck) != count($request->get('district'))) {
                 array_push($this->erreur, "Problème de selection dans 'Quartier'");
+            }else {
+                $district = serialize($request->get('district'));
             }
         }
 
@@ -183,6 +186,8 @@ class AnnonceController extends Controller
             }
             if (count($arrayEquipmentsCheck) != count($request->get('equipments'))) {
                 array_push($this->erreur, "Problème de selection dans 'Equipements'");
+            }else {
+                $equipments = serialize($request->get('equipments'));
             }
         }
 
@@ -199,6 +204,8 @@ class AnnonceController extends Controller
             }
             if (count($arrayMemberProfilCheck) != count($request->get('member_profil'))) {
                 array_push($this->erreur, "Problème de selection dans 'Profil de colocataire recherché'");
+            }else {
+                $memberProfil = serialize($request->get('memberProfil'));
             }
         }
 
@@ -215,6 +222,8 @@ class AnnonceController extends Controller
             }
             if (count($arrayHobbiesCheck) != count($request->get('hobbies'))) {
                 array_push($this->erreur, "Problème de selection dans 'Centre d'intérêts'");
+            }else {
+                $hobbies = serialize($request->get('hobbies'));
             }
         }
 
@@ -228,10 +237,33 @@ class AnnonceController extends Controller
         (iconv_strlen($description) <= 600) ? : array_push($this->erreur, 'Longueur de la description incorrect');
 
         // VERIF STRUCTURE DU CODE POSTAL
-/*/!\*/ (iconv_strlen($postal_code) != 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
+        (iconv_strlen($postal_code) == 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
 
         // VERIF DATE DE DISPO VALIDE
         // (($this->getDate() - $dateFormatage) <= 0) ? : array_push($this->erreur, 'La date de disponibilité est invalide');
+
+        //-------------- PHOTOS ---------------
+        // for ($i = 1; $i < 13; $i++) {
+        //   $photo = 'photo' . $i;
+        //   if (!empty($_FILES["photo$i"]['name'])) {
+        //
+        //     $photo_name_coloc = str_replace(' ', '_', $name_coloc);
+        //
+        //     $nom_photo = $photo_name_coloc . '-' . $_FILES["photo$i"]['name'];
+        //
+        //     // debug($nom_photo);
+        //     $photo_bdd = URL . "photos/$nom_photo";
+        //     // debug ($photo1_bdd);
+        //     $photo_dossier = __DIR__ . "/../../public/photos/$nom_photo";
+        //     // debug($photo_dossier);
+        //     if (!empty($_FILES["photo$i"]['tmp_name'])) {
+        //       copy($_FILES["photo$i"]['tmp_name'], $photo_dossier);
+        //     }
+        //     else {
+        //       $erreur .= '<div class="alert alert-danger col-md-6 col-md-offset-3 text-center">Il manque un paramètre important sur la photo numéro ' . $i . ', veuillez choisir une autre photo</div>';
+        //     }
+        //   }
+        // }
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
@@ -239,6 +271,44 @@ class AnnonceController extends Controller
                 "error" => $this->erreur,
                 "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"]
             ));
+        }else {
+            $arrayAnnonce = array(
+                "name_coloc" => $name_coloc,
+                "rent" => $rent,
+                "description" => $description,
+                "postal_code" => $postal_code,
+                "adress" => $adress,
+                "city" => $city,
+                "date_dispo" => $date_dispo,
+                "nb_roommates" => $nb_roommates,
+                "conditions" => $conditions,
+                "mail_annonce" => $mail_annonce,
+                "tel_annonce" => $tel_annonce,
+                "adress_details" => $adress_details,
+                "surface" => $surface,
+                "nb_room" => $nb_room,
+                "handicap_access" => $handicap_access,
+                "smoking" => $smoking,
+                "sex_roommates" => $sex_roommates,
+                "furniture" => $furniture,
+                "garden" => $garden,
+                "balcony" => $balcony,
+                "parking" => $parking,
+                "video" => $video,
+                "district" => $district,
+                "equipments" => $equipments,
+                "memberProfil" => $memberProfil,
+                "hobbies" => $hobbies,
+            );
+
+            echo "<pre>";
+            var_dump($arrayAnnonce);
+            echo "</pre>";
+            die();
+
+            $annonce = new AnnonceModelDAO($app['db']);
+            $createAnnonce = $annonce->createAnnonce($arrayAnnonce);
+            // $createAnnonce = $annonce->createAnnonce(string $name_coloc, float $rent, string $description, int $postal_code, string $adress, string $city, string $date_dispo, int $nb_roommates, bool $conditions, string $mail_annonce, int $tel_annonce, string $adress_details, float $surface, int $nb_room, string $handicap_access, string $smoking, string $sex_roommates, string $furniture, string $garden, string $balcony, string $parking, string $video, string $district, string $equipments, string $memberProfil, string $hobbies);
         }
     }
 }
