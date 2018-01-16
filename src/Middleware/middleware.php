@@ -29,5 +29,5 @@ $verifParamRegister = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","password_repeat","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-                        return  $app->redirect("/Coolloc/public/inscription");
+                        return $app->redirect("/Coolloc/public/inscription");
                       };

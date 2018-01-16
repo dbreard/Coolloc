@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Controller {
 
-    protected $erreur;
+    protected $erreur = array();
 
     // VERIFICATION DU FORMAT EMAIL
     public function verifEmail(string $email) :bool
@@ -67,6 +67,18 @@ class Controller {
     {
         $resultat = ($password == $password_repeat) ? true : false;
         return $resultat;
+    }
+
+    //CREATION DE TOKEN
+    public function generateToken() {
+        return substr( md5( uniqid().mt_rand() ), 0, 22 );
+    }
+
+
+    //********** GETTER ***********//
+
+    public function getDate(){
+        return date("d-m-Y ");
     }
 
 }
