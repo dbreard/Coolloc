@@ -9,7 +9,6 @@
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_nc.html.twig' ignore missing  %}
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
@@ -59,16 +58,57 @@
 
                             <div class="tab-pane" id="step1">
                                 <div class="row p-b-15  ">
-                                    <h4 class="info-text">Commençez par les informations de base</h4>
+                                    <h4 class="info-text">Commençons par les informations de base</h4>
                                     <div class="col-sm-4 col-sm-offset-1">
+
                                         <div class="picture-container">
                                             <div class="picture">
                                                 <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
 
-                                                <input type="file" id="wizard-picture">
+                                                <input type="file" id="wizard-picture" name="photo1">
                                             </div>
 
                                         </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture2" name="photo2">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture3" name="photo3">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture4" name="photo4">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture5" name="photo5">
+                                                </div>
+                                            </div>
+
+                                            
+                                            
+
+                                        </div>
+
+
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -87,6 +127,13 @@
                                             <label>Mail de contact <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
                                             <input name="mail_annonce" type="mail" class="form-control" placeholder="contact@mail.com" value="{% if value.mail_annonce is defined %}{{ value.mail_annonce }}{% endif %}">
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4>Média vidéo</h4>
+                                                <div class="form-group">
+                                                    <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
+                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
+                                                </div>
                                     </div>
                                 </div>
                             </div>
@@ -530,9 +577,10 @@
                             <!-- End step 2 -->
 
                             <div class="tab-pane" id="step3">
-                                <h4 class="info-text">Donnez-nous quelques images et/ou vidéos</h4>
+                                <h4 class="info-text">Choississez vos options</h4>
                                 <div class="row">
                                     <div class="col-sm-6">
+<<<<<<< HEAD
                                         <label for="photo-images">Choisis tes images :</label>
                                         <div>
                                             <div class="form-group">
@@ -547,13 +595,115 @@
                                                     <input type="file" id="wizard-picture">
                                                 </div>
                                             </div>
+=======
+                                        <div class="form-group">
+                                            <h4>Des photos supplémentaires</h4>
+                                            <p>Ajoutez jusqu'à 8 photos supplémentaires contre paiement de 10 euros</p>
+                                            
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture2" name="photo6">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture3" name="photo7">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture4" name="photo8">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture5" name="photo9">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture5" name="photo10">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture5" name="photo11">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture5" name="photo12">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
+                                                <input type="file" id="wizard-picture5" name="photo13">
+                                                </div>
+                                            </div>
+                                            
+
+
+>>>>>>> dev_clonemaster
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
+<<<<<<< HEAD
                                         <div class="form-group">
                                             <label for="videos">Choisis tes vidéos :</label>
                                             <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
                                         </div>
+=======
+
+                                        <h4>Remontez votre annonce en tête de liste</h4>
+                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros 
+                                        <label class="checkbox-inline"> 
+                                            <input type="radio" id="inlineCheckbox1" value="yes"> oui
+                                        </label>
+
+                                        <label class="checkbox-inline">
+                                            <input type="radio" id="inlineCheckbox1" value="no"> non
+                                        </label>
+                                        </p>
+
+                                        <hr>
+
+                                        <h4>Le pack options</h4>
+                                        <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
+                                        <p>Je choisis le pack option
+                                        <label class="checkbox-inline"> 
+                                            <input type="radio" id="inlineCheckbox1" value="yes"> oui
+                                        </label>
+
+                                        <label class="checkbox-inline">
+                                            <input type="radio" id="inlineCheckbox1" value="no"> non
+                                        </label>
+                                        </p>
+
+                                        
+>>>>>>> dev_clonemaster
                                     </div>
                                 </div>
                             </div>

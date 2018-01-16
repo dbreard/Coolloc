@@ -23,9 +23,12 @@ span.exposant {
     margin: 5px;
     height: 20%;
 
-
 }
 
+.wizard-card .picture {
+    width: 100%;
+    height: auto;
+}
 
 /* page accueil */
 
