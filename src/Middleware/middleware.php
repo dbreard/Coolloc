@@ -42,6 +42,7 @@ $verifContact = function (Request $request, Application $app)
                         // var_dump($request->get("email"));
                         // var_dump($request->get("subject"));
                         // var_dump($request->get("message"));
+                        // var_dump($retour);
                         // die();
                         if($retour["error"])
                           return  $app->redirect("/projet_soutenance/Coolloc/public/contact"); // /!\ enlever projet soutenance /!\

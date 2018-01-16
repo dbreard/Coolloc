@@ -5,8 +5,7 @@
     require_once __DIR__.'/../vendor/autoload.php';
 
     use Silex\Application;
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
+
 
     $app = new Application();
 
@@ -15,7 +14,7 @@
     //----------------------------------------------------------------------------------------------------------------------
 
     require __DIR__.'/../src/register.php';
-    // require __DIR__.'/../src/function.php';
+  
     require __DIR__.'/../src/Middleware/middleware.php';
 
     // require __DIR__.'/../src/model/TokensDAO.php';
