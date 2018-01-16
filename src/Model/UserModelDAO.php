@@ -1,10 +1,9 @@
 <?php
-
 namespace Coolloc\Model;
 
 use Doctrine\DBAL\Connection;
 
-class UserModel {
+class UserModelDAO{
 
     private $db;
 
@@ -32,9 +31,33 @@ class UserModel {
         ));
 
         return $this->db->lastInsertId();
+    }
+
+    public function selectUserFromToken(string $token) :array{
+
+        $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
+        $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));
+
+        return $idUser;
 
     }
 
+    public function updateUserFromToken(array $idUser) :int{
+
+        $sql = "UPDATE user SET account = 'actif' WHERE id_user = ? ";
+        $rowAffected = $this->getDb()->executeUpdate( $sql, array((int) $idUser["user_id"]) );
+
+        return $rowAffected;
+
+    }
+
+
+    public function verifEmailBdd(string $email){
+        $sql = "SELECT mail FROM user WHERE mail = ?";
+        $resultat = $this->getDb()->fetchAssoc($sql, array((string) $email));
+
+        return $resultat;
+    }
 
 
     //******** GETTER ********//

@@ -5,6 +5,7 @@ namespace Coolloc\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use \DateTime;
 
 
 
@@ -74,11 +75,52 @@ class Controller {
         return substr( md5( uniqid().mt_rand() ), 0, 22 );
     }
 
+    // FONCTION DE DATE LIMITE DU TOKEN
+    public function expireToken(){
+        $dateNow = new DateTime();
+        $dateNow->modify("+ 1 day");
+        return $dateNow->format("Y-m-d H:i:s");
+    }
+
+    // FONCTION D'ENVOIE DE MAIL DE TOKEN
+    public function sendMailToken(array $user,array $message = array()) {
+        global $app;
+        try {
+            //Server settings
+            $mail = $app['mail'];
+            $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+            $mail->isSMTP();                                      // Set mailer to use SMTP
+            $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->Username = 'coollocstaff@outlook.fr';                 // SMTP username
+            $mail->Password = 'azerty1234';                           // SMTP password
+            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 587;                                    // TCP port to connect to
+
+            //Recipients
+            $mail->setFrom('coollocstaff@outlook.fr', 'Coolloc Staff');
+            $mail->addAddress($user["adress"], $user["name"]);
+
+            //Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $message["subject"];
+            $mail->Body    = $message["body"];
+
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+
+
+
 
     //********** GETTER ***********//
 
     public function getDate(){
-        return date("d-m-Y ");
+        return date("Ymd");
     }
 
 }

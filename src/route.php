@@ -62,6 +62,11 @@ $app->get('/inscription', function () use ($app) {
     ->bind('inscription');
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
+
+//VERIFICATION DU TOKEN
+$app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
+
+
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
     return $app['twig']->render('forgotten-password.html.twig', array());
@@ -156,7 +161,7 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 //*** ROUTES GET ***//
 
-//GERER ANNONCE
+//GERER DECONNEXION
 $app->get('/connected/deconnexion', function () use ($app) {
     return $app['twig']->render('gerer-annonce.html.twig', array());
 })
