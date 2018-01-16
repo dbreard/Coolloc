@@ -32,7 +32,7 @@ $verifParamRegister = function (Request $request, Application $app)
                         if($retour["error"])
 
 
-                        return  $app->redirect("/Coolloc/public/inscription");
+                        return  $app->redirect("/public/inscription");
                       };
 
 //----------------- MiddleWare du formulaire de CONTACT-----------------------//
@@ -47,7 +47,7 @@ $verifContact = function (Request $request, Application $app)
                         // var_dump($retour);
                         // die();
                         if($retour["error"])
-                          return  $app->redirect("/Coolloc/public/contact"); 
+                          return  $app->redirect("/public/contact"); 
                       };
 
 //------------------fin middleware form contact ------------------------------//

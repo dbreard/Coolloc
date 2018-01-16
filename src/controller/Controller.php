@@ -28,7 +28,7 @@ class Controller {
         global $app;
         $mail = $app['mail'];
         //Server settings
-        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->SMTPDebug = 1;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp-mail.outlook.com';                       // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication

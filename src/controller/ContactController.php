@@ -35,7 +35,7 @@ class ContactController extends Controller
       }
 
       if ($this->sendMailStaff($username, array("body" => "De: ".$username." -- < ".$email." ><hr>".$message, "subject" => $subject))){
-        return $app['twig']->render('formulaires/contact.html.twig');
+        return $app['twig']->render('contact.html.twig');
       }
       else{
         array_push($this->erreur, 'Erreur envoi email');
