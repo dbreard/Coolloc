@@ -12,23 +12,51 @@ class AnnonceController extends Controller
 {
     public function annonceAction(Application $app, Request $request) {
 
+        // Si il y a des erreurs enregistré par le middleware on redirige vers la page ajout-annonce
         if ($app["formulaire"]["verifParamAnnonce"]["error"])
             return  $app['twig']->render('/connected/ajout-annonce.html.twig', $app["formulaire"]["verifParamAnnonce"]["value_form"]);
 
-        // SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
+        // CHAMPS OBLIGATOIRES --- SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
         $name_coloc = strip_tags(trim($request->get('name_coloc')));
         $rent = strip_tags(trim($request->get('rent')));
-        $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
-        $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
         $description = strip_tags(trim($request->get('description')));
-        $city = strip_tags(trim($request->get('city')));
-        $adress = strip_tags(trim($request->get('adress')));
         $postal_code = strip_tags(trim($request->get('postal_code')));
-        $adress_details = strip_tags(trim($request->get('adress_details')));
-        $surface = strip_tags(trim($request->get('surface')));
-        $nb_room = strip_tags(trim($request->get('nb_room')));
+        $adress = strip_tags(trim($request->get('adress')));
+        $city = strip_tags(trim($request->get('city')));
         $date_dispo = strip_tags(trim($request->get('date_dispo')));
         $nb_roommates = strip_tags(trim($request->get('nb_roommates')));
+        $conditions = strip_tags(trim($request->get('conditions')));
+
+        // CHAMPS OBLIGATOIRES && SAISI FACULTATIVES --- SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
+        if (!empty($mail_annonce)) {
+            $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
+
+            ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email invalide');
+        }else {
+            // charger l'email du profil de l'utilisateur
+            // $annonceMail = new AnnonceModel($app['db']);
+            // $annonceMail->searchMail($_SESSION['id']);
+        }
+
+        // if (!empty($tel_annonce)) {
+        //      $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
+        //
+        //
+        //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone invalide');
+        // }else {
+        //         charger le numéro de téléphone du profil de l'utilisateur
+        //         $annonceTel = new AnnonceModel($app['db']);
+        //         $annonceTel->searchTel($_SESSION['id']);
+        // }
+
+        // CHAMPS FACULTATIFS --- SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
+
+        // (!empty($adress_details)) ? $adress_details = strip_tags(trim($request->get('adress_details'))) : ;
+        //
+        // (!empty($surface) && is_numeric($surface) && $surface > 0) ? $surface = strip_tags(trim($request->get('surface'))) : ;
+        //
+        // (!empty($nb_room) && is_integer($nb_room) && $nb_room > 0) ? $nb_room = strip_tags(trim($request->get('nb_room'))) : ;
+
         $handicap_access = strip_tags(trim($request->get('handicap_access')));
         $smoking = strip_tags(trim($request->get('smoking')));
         $animals = strip_tags(trim($request->get('animals')));
@@ -52,23 +80,18 @@ class AnnonceController extends Controller
             $value = strip_tags(trim($value));
         }
 
-        if (!empty($mail_annonce)) {
-            ($this->verifEmail($mail_annonce)) ? : $this->erreur .= 'Email invalide';
-        }else {
-            // charger l'email du profil de l'utilisateur
-            // $annonceMail = new AnnonceModel($app['db']);
-            // $annonceMail->searchMail($_SESSION['id']);
-        }
+        (iconv_strlen($name_coloc) > 2 || iconv_strlen($name_coloc) <= 40) ? : array_push($this->erreur, 'Nom de coloc invalide');
 
-        // if (!empty($tel_annonce)) {
-        //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : $this->erreur .= 'Numéro de téléphone invalide';
-        // }else {
-        //         charger le numéro de téléphone du profil de l'utilisateur
-        //         $annonceTel = new AnnonceModel($app['db']);
-        //         $annonceTel->searchTel($_SESSION['id']);
-        // }
+        ($rent > 0 && is_numeric($rent)) ? : array_push($this->erreur, 'Loyer saisi incorrect');
 
-        var_dump($_FILES);
+        (iconv_strlen($description) <= 600) ? : array_push($this->erreur, 'Longueur de la description incorrect');
+
+        (iconv_strlen($postal_code) == 5 && is_integer($postal_code) && preg_match('#^[0-9]{1}[1-7]{1}[0-9]{3}$#',$postal_code)) ? : array_push($this->erreur, 'Longueur de la description incorrect');
+
+        ($date_dispo >= $this->getDate()) ? : array_push($this->erreur, 'Longueur de la description incorrect');
+        $date_dispo = strip_tags(trim($request->get('date_dispo')));
+
+        // var_dump($_FILES);
 
         if (!empty($this->erreur)) {
             return $app['twig']->render('connected/ajout-annonce.html.twig', array(

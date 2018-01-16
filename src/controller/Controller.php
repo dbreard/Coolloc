@@ -5,7 +5,7 @@ namespace Coolloc\Controller;
 
 class Controller {
 
-    protected $erreur;
+    protected $erreur = array();
 
 
     public function verifEmail(string $email) :bool
