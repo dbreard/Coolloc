@@ -7,6 +7,7 @@
 
     use Silex\Application;
 
+
     $app = new Application();
 
     //----------------------------------------------------------------------------------------------------------------------
@@ -14,14 +15,20 @@
     //----------------------------------------------------------------------------------------------------------------------
 
     require __DIR__.'/../src/register.php';
-    // require __DIR__.'/../src/function.php';
+  
     require __DIR__.'/../src/Middleware/middleware.php';
 
     // require __DIR__.'/../src/model/TokensDAO.php';
-
     require __DIR__.'/../src/controller/Controller.php';
     require __DIR__.'/../src/controller/RegisterController.php';
+
+
+    require __DIR__.'/../src/controller/ContactController.php';
+
+    // require __DIR__.'/../src/controller/IndexController.php';
+
     require __DIR__.'/../src/controller/AnnonceController.php';
+
 
     require __DIR__.'/../src/route.php';
 

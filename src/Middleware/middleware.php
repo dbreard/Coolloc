@@ -30,8 +30,28 @@ $verifParamRegister = function (Request $request, Application $app)
                         $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
 
                         if($retour["error"])
-                            return  $app->redirect("/Coolloc/public/inscription");
+
+
+                        return  $app->redirect("/Coolloc/public/inscription");
                       };
+
+//----------------- MiddleWare du formulaire de CONTACT-----------------------//
+$verifContact = function (Request $request, Application $app)
+                      {
+                        $retour = verifParam($request->request, array("firstname", "lastname", "email", "subject", "message"));
+                        // var_dump($request->get("firstname"));
+                        // var_dump($request->get("lastname"));
+                        // var_dump($request->get("email"));
+                        // var_dump($request->get("subject"));
+                        // var_dump($request->get("message"));
+                        // var_dump($retour);
+                        // die();
+                        if($retour["error"])
+                          return  $app->redirect("/Coolloc/public/contact"); 
+                      };
+
+//------------------fin middleware form contact ------------------------------//
+
 
 // VERIFICATION PARAMETRES D'ANNONCE
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
@@ -63,3 +83,4 @@ $verifParamAnnonce = function (Request $request, Application $app)
                           );
                       }
                     };
+
