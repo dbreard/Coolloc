@@ -55,8 +55,28 @@ $(document).ready(function () {
         }
     });
 
+    // Prepare the preview for profile picture
+    $("#wizard-picture").change(function () {
+        readURL(this);
+    });
+
     
 
+    //Function to show image before upload
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+
+        reader.onload = function (e) {
+            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    
+    }
 
 
 
@@ -80,6 +100,7 @@ $(document).ready(function () {
 
     $height = $(document).height();
     $('.set-full-height').css('height', $height);
+
 
 });
 
@@ -176,46 +197,16 @@ function validateThirdStep() {
 }
 
 
-// faire une boucle en jquery
-for (var i=1, i<14, i++) {
-
-// Prepare the preview for profile picture
-$("#wizard-picture"+i).change(function () {
-    readURL+i(this);
-    
-});
-
-function readURL+i(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview'+i).attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-// fin de la boucle for
-}
-
-// Prepare the preview for profile picture
-// $("#wizard-picture").change(function () {
-//     readURL(this);
-// });
 
 
-//Function to show image before upload
 
-// function readURL(input) {
-//     if (input.files && input.files[0]) {
-//         var reader = new FileReader();
 
-//         reader.onload = function (e) {
-//             $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-//         }
-//         reader.readAsDataURL(input.files[0]);
-//     }
-// }
+
+
+
+
+
+
+
 
 
