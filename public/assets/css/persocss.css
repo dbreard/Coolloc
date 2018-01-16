@@ -1,0 +1,58 @@
+/* Personnalisation */
+/* page contact */
+
+/* exposant */
+span.exposant {
+    vertical-align: text-bottom;
+    font-size: .7em;
+}
+
+
+/* page ajout annonce */
+/* text area en mode desktop */
+.form-control.textarea-annonce {
+    min-height: 190px;
+}
+/* input de class adresse */
+.form-control.adresse {
+    margin-bottom: 5px;
+}
+
+.picture.form-annonce{
+    width: 20%;
+    margin: 5px;
+    height: 20%;
+    float: left;
+
+}
+
+#wizard-picture {
+    width:20%;
+}
+.wizard-card .picture input[type="file"]{
+    width:20%;
+}
+
+/* page accueil */
+
+@media (min-width: 768px) and (max-width: 979px){
+
+    .search-form .form-inline .form-group {
+        width: 145px !important;
+    }
+
+}
+@media (min-width: 980px) and (max-width: 1450px){
+
+    .search-form .form-inline .form-group {
+        width: 165px !important;
+    }
+
+}
+@media (min-width: 1451px) {
+
+    .search-form .form-inline .form-group {
+        width: 195px !important;
+    }
+
+}
