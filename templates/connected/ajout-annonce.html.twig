@@ -63,9 +63,8 @@
                                     <div class="col-sm-4 col-sm-offset-1">
                                         <div class="picture-container">
                                             <div class="picture">
-                                                <img src="{{ asset ('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
 
-                                                <input type="file" id="wizard-picture" name="photo">
+                                                <input type="file" id="wizard-picture">
                                             </div>
 
                                         </div>
@@ -73,6 +72,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Nom de la colocation</label>
+<<<<<<< HEAD
                                         <input name="name_coloc" type="text" class="form-control" placeholder="Super villa ..." value="{% if value.name_coloc is defined %}{{ value.name_coloc }}{% endif %}">
                                         </div>
                                         <div class="form-group">
@@ -86,6 +86,21 @@
                                         <div class="form-group">
                                             <label>Mail de contact <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
                                             <input name="mail_annonce" type="mail" class="form-control" placeholder="contact@mail.com" value="{% if value.mail_annonce is defined %}{{ value.mail_annonce }}{% endif %}">
+=======
+                                            <input name="name_coloc" type="text" class="form-control " placeholder="Super villa ..." value="{% if name_coloc is defined %}{{ name_coloc }}{% endif %}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Loyer (€)</label>
+                                            <input name="rent" type="number" class="form-control " placeholder="3330000" value="{% if rent is defined %}{{ rent }}{% endif %}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Téléphone <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
+                                            <input name="tel_annonce" type="number" class="form-control " placeholder="+33 6 47 84 74 36" value="{% if tel_annonce is defined %}{{ tel_annonce }}{% endif %}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mail de contact <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
+                                            <input name="mail_annonce" type="mail" class="form-control " placeholder="contact@mail.com" value="{% if mail_annonce is defined %}{{ mail_annonce }}{% endif %}">
+>>>>>>> dev_clonemaster
                                         </div>
                                     </div>
                                 </div>
@@ -99,17 +114,31 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description :</label>
+<<<<<<< HEAD
                                                 <textarea name="description" class="form-control" >{% if value.description is defined %}{{ value.description }}{% endif %}</textarea>
+=======
+
+                                                <textarea name="description" class="form-control textarea-annonce" >{% if description is defined %}{{ description }}{% endif %}</textarea>
+>>>>>>> dev_clonemaster
                                             </div>
 
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Adresse :</label>
+<<<<<<< HEAD
                                                 <input name="city" type="text" class="form-control" placeholder="Ville *" value="{% if value.city is defined %}{{ value.city }}{% endif %}">
                                                 <input name="adress" type="text" class="form-control" class="float-left" placeholder="Adresse *" value="{% if value.adress is defined %}{{ value.adress }}{% endif %}">
                                                 <input name="postal_code" type="number" class="form-control" placeholder="Code postal *" value="{% if value.postal_code is defined %}{{ value.postal_code }}{% endif %}">
                                                 <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse" value="{% if value.adress_details is defined %}{{ value.adress_details }}{% endif %}">
+=======
+
+                                                <input name="city" type="text" class="form-control adresse" placeholder="Ville *" value="{% if city is defined %}{{ city }}{% endif %}">
+                                                <input name="adress" type="text" class="form-control adresse" class="float-left" placeholder="Adresse *" value="{% if adress is defined %}{{ adress }}{% endif %}">
+                                                <input name="postal_code" type="number" class="form-control adresse" placeholder="Code postal *" value="{% if postal_code is defined %}{{ postal_code }}{% endif %}">
+                                                <input name="adress_details" type="text" class="form-control adresse" placeholder="Complément d'adresse" value="{% if adress_details is defined %}{{ adress_details }}{% endif %}">
+
+>>>>>>> dev_clonemaster
                                             </div>
                                         </div>
                                     </div>
@@ -533,6 +562,7 @@
                                 <h4 class="info-text">Donnez-nous quelques images et/ou vidéos</h4>
                                 <div class="row">
                                     <div class="col-sm-6">
+<<<<<<< HEAD
                                         <label for="photo-images">Choisis tes images :</label>
 
                                             <div>
@@ -548,6 +578,8 @@
                                                 <input type="file" id="wizard-picture">
                                                  </div>
                                         </div>
+=======
+>>>>>>> dev_clonemaster
                                         <div class="form-group">
 
                                             <label for="photo-images">Choisis tes images :</label>
@@ -558,9 +590,12 @@
                                             <p class="help-block">Sélectionne plusieurs images de ta colocation. (jusqu'à 5 gratuites)</p>
 
                                         </div>
+<<<<<<< HEAD
                                             </div>
+=======
+>>>>>>> dev_clonemaster
 
-                                        <p class="help-block">Sélectionne plusieurs images de ta colocation.</p>
+                                        
 
 
 

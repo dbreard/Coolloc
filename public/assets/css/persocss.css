@@ -22,16 +22,10 @@ span.exposant {
     width: 20%;
     margin: 5px;
     height: 20%;
-    float: left;
+
 
 }
 
-#wizard-picture {
-    width:20%;
-}
-.wizard-card .picture input[type="file"]{
-    width:20%;
-}
 
 /* page accueil */
 
