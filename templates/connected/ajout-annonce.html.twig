@@ -58,8 +58,10 @@
                                         <div class="picture-container">
                                             <div class="picture">
                                                 <img src="{{ asset ('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+
                                                 <input type="file" id="wizard-picture" name="photo">
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -91,16 +93,20 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description :</label>
+
                                                 <textarea name="description" class="form-control" >{% if description is defined %}{{ description }}{% endif %}</textarea>
                                             </div>
+
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Adresse :</label>
+
                                                 <input name="city" type="text" class="form-control" placeholder="Ville *" value="{% if city is defined %}{{ city }}{% endif %}">
                                                 <input name="adress" type="text" class="form-control" class="float-left" placeholder="Adresse *" value="{% if adress is defined %}{{ adress }}{% endif %}">
                                                 <input name="postal_code" type="number" class="form-control" placeholder="Code postal *" value="{% if postal_code is defined %}{{ postal_code }}{% endif %}">
                                                 <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse" value="{% if adress_details is defined %}{{ adress_details }}{% endif %}">
+
                                             </div>
                                         </div>
                                     </div>
@@ -524,14 +530,37 @@
                                 <h4 class="info-text">Donnez-nous quelques images et/ou vidéos</h4>
                                 <div class="row">
                                     <div class="col-sm-6">
+                                        <label for="photo-images">Choisis tes images :</label>
+                                        
+                                            <div>
+                                                <div class="form-group">
+                                                <div class="picture form-annonce">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" name="coolloc-ph2" title=""/>
+                                                <input type="file" id="wizard-picture">
+                                                 </div> 
+                                        </div>
                                         <div class="form-group">
+                                                 <div class="picture form-annonce">
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" name="coolloc-ph3" title=""/>
+                                                <input type="file" id="wizard-picture">
+                                                 </div> 
+                                        </div>
+                                        <div class="form-group">
+
                                             <label for="photo-images">Choisis tes images :</label>
                                             <input class="form-control" type="file" class="photo" name="photo2">
                                             <input class="form-control" type="file" class="photo" name="photo3">
                                             <input class="form-control" type="file" class="photo" name="photo4">
                                             <input class="form-control" type="file" class="photo" name="photo5">
                                             <p class="help-block">Sélectionne plusieurs images de ta colocation. (jusqu'à 5 gratuites)</p>
+
                                         </div>
+                                            </div>    
+
+                                        <p class="help-block">Sélectionne plusieurs images de ta colocation.</p>
+
+                                            
+                                        
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -539,13 +568,7 @@
                                             <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
                                         </div>
 
-                                        <div class="form-group">
-                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video2" type="text">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video3" type="text">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -554,8 +577,10 @@
 
                             <div class="tab-pane" id="step4">
                                 <h4 class="info-text"> Terminer et poster l'annonce </h4>
-                                <div class="row">
-                                    <div class="col-sm-12">
+
+                                <div class="row">  
+                                    <div class="col-sm-8 col-sm-offset-2" >
+
                                         <p>
                                             Les présentes <strong>Conditions Générales</strong> ont pour objet de définir les modalités de mise à disposition des services du site coolloc.com et les conditions d'utilisation du Service par l'Utilisateur.
                                             Tout accès et/ou Utilisation du site coolloc.com suppose l'acceptation et le respect de l'ensemble des termes des présentes Conditions et leur acceptation inconditionnelle. Elles constituent donc un contrat entre le Service et l'Utilisateur.
