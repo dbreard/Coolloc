@@ -27,13 +27,12 @@ function verifParam($request , $verifRequest = array()) :array
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
 $verifParamRegister = function (Request $request, Application $app)
                       {
-                        $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
 
+                        $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","password_repeat","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-
-
-                        return  $app->redirect("/public/inscription");
+                        return $app->redirect("/Coolloc/public/inscription");
                       };
+
 
 //----------------- MiddleWare du formulaire de CONTACT-----------------------//
 $verifContact = function (Request $request, Application $app)
