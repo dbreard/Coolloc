@@ -39,14 +39,14 @@ $verifParamAnnonce = function (Request $request, Application $app)
                     {
                       $retour = verifParam($request->request, array("name_coloc", "rent", "description", "city", "adress", "postal_code", "housing_type", "date_dispo", "nb_roommates", "conditions"));
 
-                      echo "<pre>";
-                          var_dump($request->request);
-                      echo "</pre>";
-
+                      // echo "<pre>";
+                      //     var_dump($request->request);
+                      // echo "</pre>";
+                      // echo $retour['error'];
                       //die();
+                      $value_form = $request->request->all();
 
                       if($retour["error"]){
-                          $value_form = $request->request->all();
 
                           $app["formulaire"] = array(
                               "verifParamAnnonce" => array(
@@ -55,10 +55,10 @@ $verifParamAnnonce = function (Request $request, Application $app)
                               )
                           );
                       }else{
-
                           $app["formulaire"] = array(
                               "verifParamAnnonce" => array(
-                                  "error" => false
+                                  "error" => false,
+                                  "value_form" => $value_form,
                               )
                           );
                       }
