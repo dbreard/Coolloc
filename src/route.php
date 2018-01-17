@@ -65,11 +65,16 @@ $app->get('/inscription', function () use ($app) {
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
 
+
+//VERIFICATION DU TOKEN D'INSCRIPTION
+$app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
+
 // confirmation mail
 $app->get('/confirmation-email', function () use ($app) {
     return $app['twig']->render('confirmation.html.twig', array());
 })
     ->bind('confirmation');
+
 
 
 //MDP OUBLIER
