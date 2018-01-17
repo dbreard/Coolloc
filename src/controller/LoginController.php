@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         ($this->verifEmail($email)) ?  : array_push($this->erreur,'Format de l\'email incorrect ');
         ($this->verifMdp($password)) ?  : array_push($this->erreur, 'Format du mot de passe incorrect ');
-        
+
 
         if (!empty($this->erreur))
         { // si il y a des erreurs lors de la connexion, on les affiche
@@ -41,7 +41,7 @@ class LoginController extends Controller
                 ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : array_push($this->erreur, 'Email ou mot de passe incorrect');
                 // Vérifie si l'email de connexion correspond en BDD
                 if (!empty($user)){
-                    if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 ))) 
+                    if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 )))
                     { // si les mot de passe cryptés correspondent
                         $tokenUser = new TokensDAO($app['db']);
                         $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
@@ -49,21 +49,21 @@ class LoginController extends Controller
                         if (!empty ($resultatToken))
                         { // si le token existe, on récupère sa valeur dans la session
                             $_SESSION['membre'] = array(
-                                'zoubida' => $resultatToken, 
-                                'status' => $user['status'],                         
+                                'zoubida' => $resultatToken,
+                                'status' => $user['status'],
                             );
                         }
                         else
                         {
                             array_push($this->erreur, 'Erreur lors de la connexion');
-                        }                 
+                        }
                     }
                     else
                     {
                         array_push($this->erreur, 'Email ou mot de passe incorrect');
                     }
-                    
-                }        
+
+                }
         }
 
         if (empty($this->erreur)){
