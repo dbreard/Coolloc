@@ -29,7 +29,6 @@ class ContactController extends Controller
       if (!$this->verifEmail($email)){
         $this->erreur['email'] = 'Votre format email n\'est pas valide';
       }
-
       if (iconv_strlen($subject) < 3 || iconv_strlen($subject) > 50){
         $this->erreur['subject'] = 'Le sujet doit etre compris entre 3 et 50 caractère';
       }
@@ -47,7 +46,7 @@ class ContactController extends Controller
       }
       else { // SI IL N'Y A PAS D'ERREUR
         if ($this->sendMailStaff($username, array("body" => "De: ".$username." -- < ".$email." ><hr>".$message, "subject" => $subject))){
-          return $app['twig']->render('contact.html.twig');
+          return $app['twig']->render('contact.html.twig', array("success" => "Votre message a bien été envoyé, merci pour votre participation :-)"));
         }
         else{
           array_push($this->erreur, 'Erreur envoi email');
