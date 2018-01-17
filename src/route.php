@@ -77,14 +77,14 @@ $app->get('/confirmation-email', function () use ($app) {
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
-    return $app['twig']->render('connected/forgotten-password.html.twig', array());
+    return $app['twig']->render('basic/forgotten-password.html.twig', array());
 })
     ->bind('forgotten-password');
 $app->post('/forgotten-password', "Coolloc\Controller\ForgotPassController::forgotPassAction")->before($verifParamForgotPass);
 
 //CHANGER MDP
 $app->get('/change-password', function () use ($app) {
-    return $app['twig']->render('connected/change-password.html.twig', array());
+    return $app['twig']->render('basic/change-password.html.twig', array());
 })
     ->bind('change-password');
 $app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePass);
