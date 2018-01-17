@@ -1,19 +1,11 @@
 <div class="search-form wow pulse" data-wow-delay="0.8s">
-                    
+
 
                     <form action="" class=" form-inline">
-                        <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
+                        <button class="btn toggle-btn" type="button"><i class="fa fa-bars"></i></button>
 
                         <div class="form-group">
-                            <select id="lunchBegins" name="city" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Ville">
-
-                                <option>New york, CA</option>
-                                <option>Paris</option>
-                                <option>Casablanca</option>
-                                <option>Tokyo</option>
-                                <option>Marraekch</option>
-                                <option>kyoto , shibua</option>
-                            </select>
+                            <input type="text" name="city" class="form-control" placeholder="Ville">
                         </div>
 
                         <div class="form-group">
@@ -39,34 +31,33 @@
                             <div style="display: none; width: 100%;" class="search-toggle2">
 
                                 <div class="form-group">
-                                    <select id="housing_type" name="housing_type" class="selectpicker show-tick form-control">
-                                        <option selected> Type votre bien </option>
-                                        <option>Maison</option>
-                                        <option>Appartement</option>
-                                        <option>Loft</option>
-                                        <option>Hotel particulier</option>
-                                        <option>Corps de ferme</option>
+                                    <select id="housing_type" name="housing_type" class="selectpicker show-tick form-control" title="Type de bien recherché">
+                                        <option value="maison">Maison</option>
+                                        <option value="appartement">Appartement</option>
+                                        <option value="loft">Loft</option>
+                                        <option value="hotel particulier">Hotel particulier</option>
+                                        <option value="corps de ferme">Corps de ferme</option>
+                                        <option value="autre">Autre</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <select id="nb_roommates" name="nb_roommates" class="selectpicker show-tick form-control">
-                                        <option selected> Selectionnez le nombre de colloc </option>
-                                        <option>0-2</option>
-                                        <option>0-4</option>
-                                        <option>0-6</option>
-                                        <option>0-8</option>
-                                        <option>0-...</option>
+                                    <select id="nb_roommates" name="nb_roommates" class="selectpicker show-tick form-control" title="Selectionnez le nombre de colloc">
+                                        <option value="0">0-2</option>
+                                        <option value="1">0-4</option>
+                                        <option value="2">0-6</option>
+                                        <option value="3">0-8</option>
+                                        <option value="4">0-...</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="number" class="form-control" placeholder="Surface m2">
+                                    <input type="number" name="surface" class="form-control" placeholder="Surface en m2">
                                 </div>
 
                                 <div class="form-check">
                                     <label class="form-check-label label-sexe" for="sexe">
-                                        Composition :
+                                        Composition de la coloc :
                                     </label>
                                     <input class="form-check-input" type="radio" name="sex_roommates" id="sexe" value="homme">
                                     <label class="form-check-label label-sexe" for="sexe">
@@ -85,31 +76,31 @@
                                 <label for="equipement">Quartier : </label><br>
                                 <div class="form-check filtreSup">
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="proche commerces" id="quartier">
+                                        <input class="form-check-input" name="district" type="checkbox" value="Proche de commerces" id="quartier">
                                         <label class="form-check-label" for="quartier">
-                                            Proche commerces
+                                            Proche de commerces
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="proche ecoles" id="quartier2">
+                                        <input class="form-check-input" name="district" type="checkbox" value="Proche d'écoles" id="quartier2">
                                         <label class="form-check-label" for="quartier2">
-                                            Proche écoles
+                                            Proche d'écoles
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="proche transports" id="quartier3">
+                                        <input class="form-check-input" name="district" type="checkbox" value="Proche de transports" id="quartier3">
                                         <label class="form-check-label" for="quartier3">
-                                            Proche transports
+                                            Proche de transports
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="calme" id="quartier4">
+                                        <input class="form-check-input" name="district" type="checkbox" value="Calme" id="quartier4">
                                         <label class="form-check-label" for="quartier4">
                                             Calme
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="anime" id="quartier5">
+                                        <input class="form-check-input" name="district" type="checkbox" value="Animé" id="quartier5">
                                         <label class="form-check-label" for="quartier5">
                                             Animé
                                         </label>
@@ -119,7 +110,7 @@
 
                             <div style="display: none;" class="search-toggle">
                                 <button class="btn toggle-btn3" type="button">
-                                    <h3 style="display: inline-block; margin: 0;">Option colloc </h3>
+                                    <h3 style="display: inline-block; margin: 0;">Options colloc </h3>
                                     <i class="fa fa-bars"></i>
                                 </button>
 
