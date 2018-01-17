@@ -46,7 +46,7 @@ class AnnonceModelDAO{
         if ($ajoutOption) {
             $optionId = $this->db->lastInsertId();
 
-            $user = Model::userByTokenSession($_SESSION['membre']['zoubida']);
+            $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             // $user['id']
             $sql = "SELECT ville_id FROM city WHERE ville_code_postal = ?";
 

@@ -6,6 +6,7 @@ use Silex\Application;
 use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Model\Model;
 use Coolloc\Model\AnnonceModelDAO;
 
 
@@ -51,7 +52,8 @@ class AnnonceController extends Controller
         $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
         if (!empty($mail_annonce)) {
             ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email saisi invalide');
-        }else if (Model::userByTokenSession($_SESSION['membre']['zoubida'])){
+        }else if ($_SESSION['membre']['zoubida']){
+            $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             // charger l'email du profil de l'utilisateur
             $mail_annonce = $user['Email'];
         }else {
@@ -62,7 +64,8 @@ class AnnonceController extends Controller
         $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
         if (!empty($tel_annonce)) {
             ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone saisi invalide');
-        }else if (Model::userByTokenSession($_SESSION['membre']['zoubida'])){
+        }else if ($_SESSION['membre']['zoubida']){
+            $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             //charger le numéro de téléphone du profil de l'utilisateur
             $tel_annonce = $user['Téléphone'];
         }else {

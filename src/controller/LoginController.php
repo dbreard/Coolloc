@@ -24,8 +24,10 @@ class LoginController extends Controller
         //mdp : doit faire entre 6 et 20 caractères
         //mdp : doit être égal au mdp register lié à l'email register
 
+
         ($this->verifEmail($email)) ?  : $this->erreur['email'] = 'Format de l\'email incorrect ';
         ($this->verifMdp($password)) ?  : $this->erreur['password'] = 'Format du mot de passe incorrect ';
+
 
 
         if (!empty($this->erreur))
@@ -55,7 +57,9 @@ class LoginController extends Controller
                         }
                         else
                         {
+
                             $this->erreur['failed_connexion'] = 'Erreur lors de la connexion';
+
                         }
                     }
                     else
