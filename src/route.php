@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Coolloc\Model\Model;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
@@ -155,7 +156,8 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
-    return $app['twig']->render('profil.html.twig', array());
+    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+    return $app['twig']->render('connected/profil.html.twig', array("profilInfo" => $profilInfo));
 })
     ->bind('profil');
 $app->post('/connected/profil', function () use ($app) {
