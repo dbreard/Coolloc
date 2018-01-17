@@ -106,6 +106,7 @@ class RegisterController extends Controller
 
     }
 
+    // FONCTIOON DE VERIFICATION EMAIL POUR INSCRIPTION
     public function verifEmailAction (Application $app, Request $request){
         $token = strip_tags(trim($request->get("token"))); // ON RECUPERE LE TOKEN DANS L'URL
 
