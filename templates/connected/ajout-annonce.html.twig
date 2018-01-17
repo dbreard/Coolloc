@@ -1,8 +1,5 @@
 {% extends"layout-class-nojs.html.twig" %}
 
-
-
-
 {% block headTitle %}
     Ajouter une colocation | CoolLoc, la colocation cool !
 {% endblock %}
@@ -10,11 +7,17 @@
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_c.html.twig' ignore missing  %}
+    {% include 'required/navigation_nc.html.twig' ignore missing  %}
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
 
+
+{% if error is defined %}
+    {% for errors in error %}
+        <div>{{ errors }}</div>
+    {%  endfor %}
+{% endif %}
 
 
 <div class="page-head">
@@ -59,8 +62,6 @@
                             <li><a href="#step3" data-toggle="tab">Étape 3</a></li>
                             <li><a href="#step4" data-toggle="tab">Terminé</a></li>
                         </ul>
-
-
 
                         <div class="tab-content">
 
@@ -111,37 +112,33 @@
                                                 </div>
                                             </div>
 
-                                            
-                                            
-
                                         </div>
-
 
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Nom de la colocation</label>
-                                            <input name="name_coloc" type="text" class="form-control " placeholder="Super villa ..." value="{% if name_coloc is defined %}{{ name_coloc }}{% endif %}">
+                                        <input name="name_coloc" type="text" class="form-control" placeholder="Super villa ..." value="{% if value.name_coloc is defined %}{{ value.name_coloc }}{% endif %}">
                                         </div>
                                         <div class="form-group">
                                             <label>Loyer (€)</label>
-                                            <input name="rent" type="number" class="form-control " placeholder="3330000" value="{% if rent is defined %}{{ rent }}{% endif %}">
+                                            <input name="rent" type="number" class="form-control" placeholder="3330000" value="{% if value.rent is defined %}{{ value.rent }}{% endif %}">
                                         </div>
                                         <div class="form-group">
                                             <label>Téléphone <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
-                                            <input name="tel_annonce" type="number" class="form-control " placeholder="+33 6 47 84 74 36" value="{% if tel_annonce is defined %}{{ tel_annonce }}{% endif %}">
+                                            <input name="tel_annonce" type="number" class="form-control" placeholder="+33 6 47 84 74 36" value="{% if value.tel_annonce is defined %}{{ value.tel_annonce }}{% endif %}">
                                         </div>
                                         <div class="form-group">
                                             <label>Mail de contact <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
-                                            <input name="mail_annonce" type="mail" class="form-control " placeholder="contact@mail.com" value="{% if mail_annonce is defined %}{{ mail_annonce }}{% endif %}">
+                                            <input name="mail_annonce" type="mail" class="form-control" placeholder="contact@mail.com" value="{% if value.mail_annonce is defined %}{{ value.mail_annonce }}{% endif %}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <h4>Média vidéo</h4>
-                                                <div class="form-group">
-                                                    <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video1" type="text">
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
+                                        <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% endif %}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -154,20 +151,16 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description :</label>
-
-                                                <textarea name="description" class="form-control textarea-annonce" >{% if description is defined %}{{ description }}{% endif %}</textarea>
+                                                <textarea name="description" class="form-control" >{% if value.description is defined %}{{ value.description }}{% endif %}</textarea>
                                             </div>
 
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Adresse :</label>
-
-                                                <input name="city" type="text" class="form-control adresse" placeholder="Ville *" value="{% if city is defined %}{{ city }}{% endif %}">
-                                                <input name="adress" type="text" class="form-control adresse" class="float-left" placeholder="Adresse *" value="{% if adress is defined %}{{ adress }}{% endif %}">
-                                                <input name="postal_code" type="number" class="form-control adresse" placeholder="Code postal *" value="{% if postal_code is defined %}{{ postal_code }}{% endif %}">
-                                                <input name="adress_details" type="text" class="form-control adresse" placeholder="Complément d'adresse" value="{% if adress_details is defined %}{{ adress_details }}{% endif %}">
-
+                                                <input name="postal_code" type="number" class="form-control" placeholder="Code postal *" value="{% if value.postal_code is defined %}{{ value.postal_code }}{% endif %}">
+                                                <input name="adress" type="text" class="form-control" class="float-left" placeholder="Adresse *" value="{% if value.adress is defined %}{{ value.adress }}{% endif %}">
+                                                <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse" value="{% if value.adress_details is defined %}{{ value.adress_details }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -188,13 +181,13 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Surface générale (m²):</label>
-                                                <input name="surface" type="number" class="form-control" placeholder="Surface moyenne *" value="{% if surface is defined %}{{ surface }}{% endif %}">
+                                                <input name="surface" type="number" class="form-control" placeholder="Surface moyenne *" value="{% if value.surface is defined %}{{ value.surface }}{% endif %}">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Nombre de pièces :</label>
-                                                <input name="nb_room" type="number" class="form-control" placeholder="3 *" value="{% if nb_room is defined %}{{ nb_room }}{% endif %}">
+                                                <input name="nb_room" type="number" class="form-control" placeholder="3 *" value="{% if value.nb_room is defined %}{{ value.nb_room }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -202,13 +195,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Date de disponibilité :</label>
-                                                <input name="date_dispo" type="date" class="form-control" placeholder="" value="{% if date_dispo is defined %}{{ date_dispo }}{% endif %}">
+                                                <input name="date_dispo" type="date" class="form-control" placeholder="" value="{% if value.date_dispo is defined %}{{ value.date_dispo }}{% endif %}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Nombre de colocataires (max 7):</label>
-                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7 *" value="{% if nb_roommates is defined %}{{ nb_roommates }}{% endif %}">
+                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7 *" value="{% if value.nb_roommates is defined %}{{ value.nb_roommates }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +241,7 @@
                                                 <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
                                                     <option value="homme">Homme</option>
                                                     <option value="femme">Femme</option>
-                                                    <option value="peu importe">Mixte</option>
+                                                    <option value="mixte">Mixte</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -594,7 +587,7 @@
                                         <div class="form-group">
                                             <h4>Des photos supplémentaires</h4>
                                             <p>Ajoutez jusqu'à 8 photos supplémentaires contre paiement de 10 euros</p>
-                                            
+
                                             <div class="col-sm-3">
                                                 <div class="picture">
                                                 <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview6" title=""/>
@@ -659,22 +652,16 @@
                                                 " name="photo13">
                                                 </div>
                                             </div>
-                                            
-
-
                                         </div>
-
-                                        
-
-                                            
-                                        
                                     </div>
                                     <div class="col-sm-6">
 
                                         <h4>Remontez votre annonce en tête de liste</h4>
+
                                         <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros 
                                         <label class="radio-inline"> 
                                             <input type="radio" id="Top de liste" value="yes" name="Top de liste"> oui
+
                                         </label>
 
                                         <label class="radio-inline">
@@ -687,16 +674,16 @@
                                         <h4>Le pack options</h4>
                                         <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
                                         <p>Je choisis le pack option
+
                                         <label class="radio-inline"> 
                                             <input type="radio" id="pack option" value="yes" name="pack option"> oui
+
                                         </label>
 
                                         <label class="radio-inline">
                                             <input type="radio" id="pack option2" value="no" name="pack option" checked> non
                                         </label>
                                         </p>
-
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -706,7 +693,7 @@
                             <div class="tab-pane" id="step4">
                                 <h4 class="info-text"> Terminer et poster l'annonce </h4>
 
-                                <div class="row">  
+                                <div class="row">
                                     <div class="col-sm-8 col-sm-offset-2" >
 
                                         <p>

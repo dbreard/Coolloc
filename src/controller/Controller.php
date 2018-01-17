@@ -14,6 +14,7 @@ use \DateTime;
 
 class Controller {
 
+    public $URL = 'http://localhost/Coolloc/public/';
     protected $erreur = array();
 
     // VERIFICATION DU FORMAT EMAIL
