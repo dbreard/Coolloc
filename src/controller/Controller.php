@@ -9,7 +9,7 @@ use \DateTime;
 
 
 
-    
+
 
 
 class Controller {
@@ -138,7 +138,7 @@ class Controller {
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = 'coollocstaff@outlook.fr';           // SMTP username
         $mail->Password = 'azerty1234';                    // SMTP password
-        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;                                    // TCP port to connect to
 
         //Recipients

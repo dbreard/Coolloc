@@ -46,7 +46,7 @@ $verifContact = function (Request $request, Application $app)
                         // var_dump($retour);
                         // die();
                         if($retour["error"])
-                          return  $app->redirect("/public/contact"); 
+                          return  $app->redirect("/Coolloc/public/contact");
                       };
 
 //------------------fin middleware form contact ------------------------------//
@@ -82,4 +82,3 @@ $verifParamAnnonce = function (Request $request, Application $app)
                           );
                       }
                     };
-

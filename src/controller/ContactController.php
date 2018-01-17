@@ -34,11 +34,24 @@ class ContactController extends Controller
         array_push($this->erreur, 'veuillez préciser un message valide');
       }
 
-      if ($this->sendMailStaff($username, array("body" => "De: ".$username." -- < ".$email." ><hr>".$message, "subject" => $subject))){
-        return $app['twig']->render('contact.html.twig');
+
+
+      // SI IL Y A DES ERREURS
+      if (!empty($this->erreur)) {
+          return $app['twig']->render('contact.html.twig', array(
+              "error" => $this->erreur,
+          ));
       }
-      else{
-        array_push($this->erreur, 'Erreur envoi email');
+      else { // SI IL N'Y A PAS D'ERREUR
+        if ($this->sendMailStaff($username, array("body" => "De: ".$username." -- < ".$email." ><hr>".$message, "subject" => $subject))){
+          return $app['twig']->render('contact.html.twig');
+        }
+        else{
+          array_push($this->erreur, 'Erreur envoi email');
+          return $app['twig']->render('contact.html.twig', array(
+              "error" => $this->erreur,
+          ));
+        }
       }
     }
   }

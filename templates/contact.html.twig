@@ -12,11 +12,11 @@
 {% endblock %}
 {% block content %}
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Contact page</h1>               
+                        <h1 class="page-title">Contact page</h1>
                     </div>
                 </div>
             </div>
@@ -25,24 +25,31 @@
 
         <!-- property area -->
         <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
-            <div class="container">  
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2"> 
-                        <div class="" id="contact1">                        
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="" id="contact1">
                             <div class="row">
                                 <div class="col-sm-6 col-sm-offset-3 text-center">
                                     <h3><i class="fa fa-map-marker"></i> Adresse</h3>
                                     <p>74 avenue Denfert-Rochereau
-                                        <br>14<span class="exposant">e</span> arrondissement 
+                                        <br>14<span class="exposant">e</span> arrondissement
                                         <br>Paris <strong>France</strong>
                                     </p>
                                 </div>
-                                
-                                
+
+
                             </div>
                             <!-- /.row -->
+                            <!-- AFFICHAGE DES ERREURS -->
+                            {% if error is defined %}
+                                {% for errors in error %}
+                                <div class="text-danger text-center">{{ errors }}</div>
+                                {%  endfor %}
+                            {% endif %}
+                            <!--FIN D'AFFICHAGE DES ERREURS -->
                             <hr>
-                            
+
                             <h2 class="text-center">Formulaire de contact</h2>
                             <form method="post">
                                 <div class="row">
@@ -83,12 +90,12 @@
                                 <!-- /.row -->
                             </form>
                         </div>
-                    </div>    
+                    </div>
                 </div>
 
             </div>
         </div>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.101380641156!2d2.332652515673623!3d48.83720487928541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671c771516af1%3A0xa0fe0f70515f5564!2s74+Avenue+Denfert-Rochereau%2C+75014+Paris!5e0!3m2!1sfr!2sfr!4v1516026041356" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
-        
+
 
 {% endblock %}
