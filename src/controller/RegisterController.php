@@ -130,7 +130,7 @@ class registerController extends Controller
 
 
         if ($rowAffectedDeleteToken == 1){ // SI LE TOKEN A BIEN ETE SUPPRIMER
-            return $app['twig']->redirect('/login');
+            return $app->redirect('/Coolloc/public/login');
         }
     }
 

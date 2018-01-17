@@ -119,7 +119,7 @@ class Controller {
     // VERIFIE SI L'UTILISATEUR EST CONNECTER
     public function verifConnected(Application $app, Request $request){
         $pageName = strip_tags(trim($request->get("pagename")));
-        if (isset($_SESSION['membre']) && !empty($_SESSION['membre'])) {
+        if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida'])) {
             return $app->redirect('/connected/' . $pageName);
         }else {
             return $app->redirect('/Coolloc/public/login');
@@ -127,6 +127,16 @@ class Controller {
 
     }
 
+    // VERIFIE SI L'UTILISATEUR EST CONNECTER ET ADMIN
+    public function verifConnectedAdmin(Application $app, Request $request){
+        $pageName = strip_tags(trim($request->get("pagename")));
+        if (isset($_SESSION['membre']) && !empty($_SESSION['membre']) && $_SESSION['membre']['status'] ) {
+            return $app->redirect('/connected/admin/' . $pageName);
+        }else {
+            return $app->redirect('/Coolloc/public/login');
+        }
+
+    }
 
 
 
@@ -171,6 +181,7 @@ class Controller {
       }
     }
     // --------------------- fin envoi mail ----------------------- //
+
 
 
 }
