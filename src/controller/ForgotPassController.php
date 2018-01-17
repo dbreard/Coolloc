@@ -35,10 +35,20 @@ class ForgotPassController extends Controller
             $resultat = new UserModelDAO($app['db']);
             $userVerifEmail = $resultat->verifEmailBdd($email);
             ($userVerifEmail) ?  : array_push($this->erreur, 'L\'email n\'est pas associé à un compte ');
+        }
+
+        if(empty($this->erreur))
+        {
+            $this->envoiEmail();
+            return $app->redirect('\Coolloc\public\emailenvoyé');
+        }
+        else
+        {
             return $app['twig']->render('basic/forgotten-password.html.twig', array(
                 "error" => $this->erreur,
             ));
         }
+
     }
 
 }
