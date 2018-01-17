@@ -69,6 +69,7 @@ $app->post('/inscription', "Coolloc\Controller\RegisterController::registerActio
 //VERIFICATION DU TOKEN D'INSCRIPTION
 $app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
 
+
 // confirmation mail
 $app->get('/confirmation-email', function () use ($app) {
     return $app['twig']->render('confirmation.html.twig', array());
@@ -104,6 +105,12 @@ $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->b
 
 //*** ROUTES GET ***//
 
+//confirmation
+$app->get('/confirmation', function () use ($app) {
+    return $app['twig']->render('confirmation.html.twig', array());
+})
+    ->bind('confirmation');
+
 //MENTIONS LEGALES
 $app->get('/mentions-legales', function () use ($app) {
     return $app['twig']->render('mentions-legales.html.twig', array());
@@ -128,7 +135,9 @@ $app->get('/a-propos', function () use ($app) {
 //*****************************//
 
 // verification si user connecté
+
 $app->get('/verif-connected/{pagename}/', 'Coolloc\Controller\Controller::verifConnected')->bind('verif-connected');
+
 
 
 //*** ROUTES GET/POST ***//
@@ -151,13 +160,16 @@ $app->post('/connected/profil', function () use ($app) {
     //controleur
 });
 
+
 //AJOUT ANNONCE
 
 $app->get('/connected/ajout-annonce', function () use ($app) {
     
+
     return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
 })
     ->bind('ajout-annonce');
+
 $app->post('/connected/ajout-annonce', 'Coolloc\Controller\AnnonceController::annonceAction')->before($verifParamAnnonce);
 
 // GERER ANNONCE
@@ -173,7 +185,7 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 //*** ROUTES GET ***//
 
-//GERER ANNONCE
+// deconnexion
 $app->get('/connected/deconnexion', function () use ($app) {
     return $app['twig']->render('index.html.twig', array());
 })
