@@ -24,8 +24,10 @@ class LoginController extends Controller
         //mdp : doit faire entre 6 et 20 caractères
         //mdp : doit être égal au mdp register lié à l'email register
 
-        ($this->verifEmail($email)) ?  : array_push($this->erreur,'Format de l\'email incorrect ');
-        ($this->verifMdp($password)) ?  : array_push($this->erreur, 'Format du mot de passe incorrect ');
+
+        ($this->verifEmail($email)) ?  : $this->erreur['email'] = 'Format de l\'email incorrect ';
+        ($this->verifMdp($password)) ?  : $this->erreur['password'] = 'Format du mot de passe incorrect ';
+
 
 
         if (!empty($this->erreur))
@@ -38,7 +40,7 @@ class LoginController extends Controller
         { // si les formats d'email et mdp sont bons, l'user se connecte et crée un token
             $resultat = new UserModelDAO($app['db']);
             $userVerifEmail = $resultat->verifEmailBdd($email);
-                ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : array_push($this->erreur, 'Email ou mot de passe incorrect');
+                ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : $this->erreur['email_error'] = 'Email ou mot de passe incorrect';
                 // Vérifie si l'email de connexion correspond en BDD
                 if (!empty($user)){
                     if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 )))
@@ -55,12 +57,14 @@ class LoginController extends Controller
                         }
                         else
                         {
-                            array_push($this->erreur, 'Erreur lors de la connexion');
+
+                            $this->erreur['failed_connexion'] = 'Erreur lors de la connexion';
+
                         }
                     }
                     else
                     {
-                        array_push($this->erreur, 'Email ou mot de passe incorrect');
+                        $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
                     }
 
                 }

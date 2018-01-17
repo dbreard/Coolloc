@@ -15,6 +15,7 @@
     //----------------------------------------------------------------------------------------------------------------------
 
     require __DIR__.'/../src/register.php';
+
     require __DIR__.'/../src/Middleware/middleware.php';
 
     require __DIR__.'/../src/controller/Controller.php';
@@ -33,5 +34,7 @@
     require __DIR__.'/../src/Model/TokensDAO.php';
 
     require __DIR__.'/../src/route.php';
+
+
 
     $app->run();
