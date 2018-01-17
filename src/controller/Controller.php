@@ -132,13 +132,13 @@ class Controller {
         global $app;
         $mail = $app['mail'];
         //Server settings
-        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->SMTPDebug = 2    ;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp-mail.outlook.com';                       // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = 'coollocstaff@outlook.fr';           // SMTP username
         $mail->Password = 'azerty1234';                    // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;                                    // TCP port to connect to
 
         //Recipients
