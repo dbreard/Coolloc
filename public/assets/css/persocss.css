@@ -3,6 +3,11 @@
 /* Générales */
     span.red {color:red;}
 
+    .alert.alert-danger {
+        padding: 5px;
+    }
+
+
     /* Inputs               */
 .form-control {
     display: block;

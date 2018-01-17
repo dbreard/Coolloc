@@ -62,8 +62,7 @@ class LoginController extends Controller
                     {
                         array_push($this->erreur, 'Email ou mot de passe incorrect');
                     }
-                     var_dump($_SESSION['membre']);
-                     die();
+                    
                 }        
         }
 

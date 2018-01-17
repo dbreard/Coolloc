@@ -46,11 +46,13 @@
                               <div class="alert alert-success text-center">{{ success }}</div>
                             {% endif %}
                             <h2 class="text-center">Formulaire de contact</h2>
+                            <p class="text-center col-sm-12">Tous les champs suvis d'une <span class="red">*</span> sont requis</p>
+
                             <form method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="firstname">Prénom*</label>
+                                            <label for="firstname">Prénom<span class="red">*</span></label>
                                             {% if error.firstname is defined %}
                                               {# {{ dump(error) }} #}
                                               <div class="alert alert-danger text-center">{{ error.firstname }}</div>
@@ -60,7 +62,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="lastname">Nom*</label>
+                                            <label for="lastname">Nom<span class="red">*</span></label>
                                             {% if error.lastname is defined %}
                                               {# {{ dump(error) }} #}
                                               <div class="alert alert-danger text-center">{{ error.lastname }}</div>
@@ -70,7 +72,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="email">Email*</label>
+                                            <label for="email">Email<span class="red">*</span></label>
                                             {% if error.email is defined %}
                                               {# {{ dump(error) }} #}
                                               <div class="alert alert-danger text-center">{{ error.email }}</div>
@@ -80,7 +82,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="subject">Sujet*</label>
+                                            <label for="subject">Sujet<span class="red">*</span></label>
                                             {% if error.subject is defined %}
                                               {# {{ dump(error) }} #}
                                               <div class="alert alert-danger text-center">{{ error.subject }}</div>
@@ -90,7 +92,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="message">Message*</label>
+                                            <label for="message">Message<span class="red">*</span></label>
                                             {% if error.message is defined %}
                                               {# {{ dump(error) }} #}
                                               <div class="alert alert-danger text-center">{{ error.message }}</div>
@@ -99,7 +101,6 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
-                                        <small class="text-center col-sm-12">Tous les champs suvis de * sont requis</small>
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Envoyer</button>
                                     </div>
                                 </div>
