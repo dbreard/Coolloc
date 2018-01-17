@@ -74,6 +74,9 @@ $app->get('/confirmation-email', function () use ($app) {
     ->bind('confirmation');
 
 
+//VERIFICATION DU TOKEN DE CHANGEMENT DE MOT DE PASSE
+$app->get('/verifPassword/{token}/', 'Coolloc\Controller\ForgotPassController::verifEmailForgotAction');
+
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
@@ -82,12 +85,14 @@ $app->get('/forgotten-password', function () use ($app) {
     ->bind('forgotten-password');
 $app->post('/forgotten-password', "Coolloc\Controller\ForgotPassController::forgotPassAction")->before($verifParamForgotPass);
 
+
 //CHANGER MDP
 $app->get('/change-password', function () use ($app) {
     return $app['twig']->render('basic/change-password.html.twig', array());
 })
     ->bind('change-password');
 $app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePass);
+
 
 //FAQ
 $app->get('/faq', function () use ($app) {

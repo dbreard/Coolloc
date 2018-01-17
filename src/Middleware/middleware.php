@@ -38,13 +38,13 @@ $verifParamLogin = function (Request $request, Application $app)
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/login");
                       };
-$verifParamForgotPass = function (Request $request)
+$verifParamForgotPass = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail"));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/forgotten-password");
                       };
-$verifParamChangePass = function (Request $request)
+$verifParamChangePass = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("password", "password_repeat"));
                         if($retour["error"])

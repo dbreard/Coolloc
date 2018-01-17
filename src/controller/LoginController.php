@@ -40,7 +40,8 @@ class LoginController extends Controller
             $userVerifEmail = $resultat->verifEmailBdd($email);
                 ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : array_push($this->erreur, 'Email ou mot de passe incorrect');
                 // Vérifie si l'email de connexion correspond en BDD
-                if (!empty($user)){
+                if (!empty($user))
+                { // Si la selection s'est bien passée
                     if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 ))) 
                     { // si les mot de passe cryptés correspondent
                         $tokenUser = new TokensDAO($app['db']);

@@ -15,6 +15,7 @@ use \DateTime;
 class Controller {
 
     protected $erreur = array();
+    private $token;
 
     // VERIFICATION DU FORMAT EMAIL
     public function verifEmail(string $email) :bool
@@ -90,7 +91,7 @@ class Controller {
         try {
             //Server settings
             $mail = $app['mail'];
-            $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+            $mail->SMTPDebug = 0;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp-mail.outlook.com';              // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
@@ -147,6 +148,18 @@ class Controller {
         return date("Ymd");
     }
 
+        //*********** GETTER ****************//
+
+        public function getToken(){
+            return $this->token;
+        }
+    
+        //*********** SETTER ****************//
+    
+        public function setToken($token){
+            $this->token = $token;
+        }
+
     //-----------------------ENVOI DE MAILS AU STAFF--------------------------//
 
     public function sendMailStaff(string $user, array $message): bool{
@@ -156,7 +169,7 @@ class Controller {
         global $app;
         $mail = $app['mail'];
         //Server settings
-        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp-mail.outlook.com';                       // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
