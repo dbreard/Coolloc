@@ -35,15 +35,15 @@ class RegisterController extends Controller
         $status = strip_tags(trim($request->get("status")));
 
         //prénom : supérieur ou = a 2 inférieur a 50
-        (iconv_strlen($first_name) >= 2 && iconv_strlen($first_name) <= 50) ?: array_push($this->erreur, 'Votre prénom doit être compris entre 2 et 50 caractères');
+        (iconv_strlen($first_name) >= 2 && iconv_strlen($first_name) <= 50) ?: $this->erreur['firstname'] = 'Votre prénom doit être compris entre 2 et 50 caractères';
 
 
         //nom : supérieur ou = a 2 inférieur a 50
-        (iconv_strlen($last_name) >= 2 && iconv_strlen($last_name) <= 50) ?: array_push($this->erreur, 'Votre nom doit être compris entre 2 et 50 caractères');
+        (iconv_strlen($last_name) >= 2 && iconv_strlen($last_name) <= 50) ?: $this->erreur['lastname'] = 'Votre nom doit être compris entre 2 et 50 caractères';
 
 
         //date de naissance : avoir au moin 18ans
-        (($date - $birthdateFormatage) > 180000) ?: array_push($this->erreur, 'Vous êtes trop jeune');
+        (($date - $birthdateFormatage) > 180000) ?: array_push($this->erreur['younger'] = 'Vous êtes trop jeune';
 
 
         //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
