@@ -109,7 +109,7 @@ class registerController extends Controller
     }
 
     public function verifEmailAction (Application $app, Request $request){
-        $token = strip_tags(trim($request->get("token"))); // ON RECUPERE LE TOKEN
+        $token = strip_tags(trim($request->get("token"))); // ON RECUPERE LE TOKEN DANS L'URL
 
         $selectUser = new UserModelDAO($app['db']);
         $idUser = $selectUser->selectUserFromToken($token);
@@ -130,7 +130,7 @@ class registerController extends Controller
 
 
         if ($rowAffectedDeleteToken == 1){ // SI LE TOKEN A BIEN ETE SUPPRIMER
-            return $app['twig']->render('formulaires/login.html.twig');
+            return $app['twig']->redirect('/login');
         }
     }
 

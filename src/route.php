@@ -117,6 +117,10 @@ $app->get('/a-propos', function () use ($app) {
 //*** ROUTE AVEC CONNECTION ***//
 //*****************************//
 
+// verification si user connecté
+$app->get('/verif-connected/{pagename}/', 'Coolloc\Controller\Controller::verifConnected')->bind('verif-connected');
+
+
 //*** ROUTES GET/POST ***//
 
 //DETAILS ANNONCE CONNECTER
