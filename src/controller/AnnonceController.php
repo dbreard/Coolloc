@@ -11,6 +11,17 @@ use Coolloc\Model\AnnonceModelDAO;
 
 class AnnonceController extends Controller
 {
+    // public function callVille(Application $app) {
+    //     $listeVille = new AnnonceModelDAO($app['db']);
+    //     $ville = $listeVille->listeVille();
+    //
+    //     if (!empty($ville)) {
+    //         return $app['twig']->render('/connected/ajout-annonce.html.twig', array('ville' => $ville));
+    //     }else {
+    //         return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
+    //     }
+    // }
+
     public function annonceAction(Application $app, Request $request) {
 
         // Si il y a des erreurs enregistré par le middleware on redirige vers la page ajout-annonce
@@ -18,10 +29,6 @@ class AnnonceController extends Controller
             return  $app['twig']->render('/connected/ajout-annonce.html.twig', $app["formulaire"]["verifParamAnnonce"]["value_form"]);
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
-        $district = array();
-        $equipments = array();
-        $memberProfil = array();
-        $hobbies = array();
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
         $arrayEquipments = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
         $arrayMemberProfil = array('Timide', 'Bavard', 'Solitaire', 'Casanier', 'Discret', 'Convivial', 'Cool', 'Extraverti', 'Ordonné', 'Tolérant', 'Sportif', 'Fétard', 'Studieux', 'Curieux', 'Joyeux', 'Respectueux');
@@ -42,25 +49,25 @@ class AnnonceController extends Controller
         // CHAMPS OBLIGATOIRES && saisie FACULTATIVES --- SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
         // EMAIL
         $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
-        // if (!empty($mail_annonce)) {
-        //     ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email saisi invalide');
-        // }else if (isset($_SESSION['membre']['mail'])){
-        //     // charger l'email du profil de l'utilisateur
-        //     $mail_annonce = $_SESSION['membre']['mail'];
-        // }else {
-        //     array_push($this->erreur, 'Problème lors de la vérification de l\'Email, veuillez vérifier');
-        // }
+        if (!empty($mail_annonce)) {
+            ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email saisi invalide');
+        }else if (Model::userByTokenSession($_SESSION['membre']['zoubida'])){
+            // charger l'email du profil de l'utilisateur
+            $mail_annonce = $user['Email'];
+        }else {
+            array_push($this->erreur, 'Problème lors de la vérification de l\'Email, veuillez vérifier');
+        }
 
         // TEL
         $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
-        // if (!empty($tel_annonce)) {
-        //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone saisi invalide');
-        // }else if ($_SESSION['membre']['tel']){
-        //     //charger le numéro de téléphone du profil de l'utilisateur
-        //     $tel_annonce = $_SESSION['membre']['tel'];
-        // }else {
-        //     array_push($this->erreur, 'Problème lors de la vérification du téléphone, veuillez vérifier');
-        // }
+        if (!empty($tel_annonce)) {
+            ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone saisi invalide');
+        }else if (Model::userByTokenSession($_SESSION['membre']['zoubida'])){
+            //charger le numéro de téléphone du profil de l'utilisateur
+            $tel_annonce = $user['Téléphone'];
+        }else {
+            array_push($this->erreur, 'Problème lors de la vérification du téléphone, veuillez vérifier');
+        }
 
         // CHAMPS FACULTATIFS
         // ADRESSE DETAILLES
@@ -68,6 +75,14 @@ class AnnonceController extends Controller
         if (!empty($adress_details)) {
             if (iconv_strlen($adress_details) >= 300) {
                 array_push($this->erreur, 'Adresse détaillée invalide');
+            }
+        }
+
+        // ADRESSE DETAILLES
+        $housing_type = strip_tags(trim($request->get('housing_type')));
+        if (!empty($housing_type)) {
+            if ($housing_type != 'maison' && $housing_type != 'appartement' && $housing_type != 'loft' && $housing_type != 'hotel particulier' && $housing_type != 'corps de ferme' && $housing_type != 'autre') {
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Type de bien immobilier'");
             }
         }
 
@@ -91,7 +106,7 @@ class AnnonceController extends Controller
         $handicap_access = strip_tags(trim($request->get('handicap_access')));
         if (!empty($handicap_access)) {
             if ($handicap_access != 'oui' && $handicap_access != 'non' && $handicap_access != 'peu importe') {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Accés handicapé'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Accés handicapé'");
             }
         }
 
@@ -99,7 +114,7 @@ class AnnonceController extends Controller
         $smoking = strip_tags(trim($request->get('smoking')));
         if (!empty($smoking)) {
             if ($smoking != 'oui' && $smoking != 'non' && $smoking != "peu importe") {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Fumeur'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Fumeur'");
             }
         }
 
@@ -107,7 +122,7 @@ class AnnonceController extends Controller
         $animals = strip_tags(trim($request->get('animals')));
         if (!empty($animals)) {
             if ($animals != 'oui' && $animals != 'non' && $animals != 'peu importe') {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Animaux'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Animaux'");
             }
         }
 
@@ -115,7 +130,7 @@ class AnnonceController extends Controller
         $sex_roommates = strip_tags(trim($request->get('sex_roommates')));
         if (!empty($sex_roommates)) {
             if ($sex_roommates != 'homme' && $sex_roommates != 'femme' && $sex_roommates != 'mixte') {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Sexe'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Sexe'");
             }
         }
 
@@ -123,7 +138,7 @@ class AnnonceController extends Controller
         $furniture = strip_tags(trim($request->get('furniture')));
         if (!empty($furniture)) {
             if ($furniture != 'oui' && $furniture != 'non' && $furniture != 'peu importe') {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Meublé'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Meublé'");
             }
         }
 
@@ -131,7 +146,7 @@ class AnnonceController extends Controller
         $garden = strip_tags(trim($request->get('garden')));
         if (!empty($garden)) {
             if ($garden != 'oui' && $garden != 'non' && $garden != 'peu importe') {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Garden'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Garden'");
             }
         }
 
@@ -139,7 +154,7 @@ class AnnonceController extends Controller
         $balcony = strip_tags(trim($request->get('balcony')));
         if (!empty($balcony)) {
             if ($balcony != 'oui' && $balcony != 'non' && $balcony != 'peu importe') {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Balcon'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Balcon'");
             }
         }
 
@@ -147,31 +162,43 @@ class AnnonceController extends Controller
         $parking = strip_tags(trim($request->get('parking')));
         if (!empty($parking)) {
             if ($parking != 'oui' && $parking != 'non' && $parking != "peu importe") {
-                array_push($this->erreur, "saisie incorrect sur le champs 'Parking'");
+                array_push($this->erreur, "Saisie incorrect sur le champs 'Parking'");
             }
         }
 
         // SECURITE DES VALEURS DES TABLEAUX
         // DISTRICT
+        // Si district est défini
         if ($request->request->has('district')) {
+            // on créer un tableau de réception
+            $district = array();
+            // on créer un tableau pour faire le comparatif
             $arrayDistrictCheck = array();
+            // boucle sur l'ensemble des données
             foreach ($request->get('district') as $key => $value) {
+                // on nettoi chaque valeur
                 $value = strip_tags(trim($value));
+                // pour chaque valeur on vérifie si elle est valide
                 foreach ($arrayDistrict as $key2 => $value2) {
+                    // Si oui on check
                     if ($value == $value2) {
                         array_push($arrayDistrictCheck, "check");
                     }
                 }
             }
+            // Si le nombre de valeur ne correspond pas au nombre de check erreur
             if (count($arrayDistrictCheck) != count($request->get('district'))) {
                 array_push($this->erreur, "Problème de selection dans 'Quartier'");
-            }else {
+            }else { // Sinon on serialize notre tableau en string
                 $district = serialize($request->get('district'));
             }
+        }else {// si il n'est pas défini
+            $district = "";
         }
 
         // EQUIPMENTS
         if ($request->request->has('equipments')) {
+            $equipment = array();
             $arrayEquipmentsCheck = array();
             foreach ($request->get('equipments') as $key => $value) {
                 $value = strip_tags(trim($value));
@@ -184,12 +211,15 @@ class AnnonceController extends Controller
             if (count($arrayEquipmentsCheck) != count($request->get('equipments'))) {
                 array_push($this->erreur, "Problème de selection dans 'Equipements'");
             }else {
-                $equipments = serialize($request->get('equipments'));
+                $equipment = serialize($request->get('equipments'));
             }
+        }else {
+            $equipment = "";
         }
 
         // MEMBER PROFIL
         if ($request->request->has('member_profil')) {
+            $memberProfil = array();
             $arrayMemberProfilCheck = array();
             foreach ($request->get('member_profil') as $key => $value) {
                 $value = strip_tags(trim($value));
@@ -204,10 +234,13 @@ class AnnonceController extends Controller
             }else {
                 $memberProfil = serialize($request->get('member_profil'));
             }
+        }else {
+            $memberProfil = "";
         }
 
         // HOBBIES
         if ($request->request->has('hobbies')) {
+            $hobbies = array();
             $arrayHobbiesCheck = array();
             foreach ($request->get('hobbies') as $key => $value) {
                 $value = strip_tags(trim($value));
@@ -222,6 +255,8 @@ class AnnonceController extends Controller
             }else {
                 $hobbies = serialize($request->get('hobbies'));
             }
+        }else {
+            $hobbies = "";
         }
 
         // VERIF LONGUEUR NOM DE COLOC
@@ -237,7 +272,7 @@ class AnnonceController extends Controller
         (iconv_strlen($postal_code) == 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
 
         // VERIF DATE DE DISPO VALIDE
-        // (($this->getDate() - $dateFormatage) <= 0) ? : array_push($this->erreur, 'La date de disponibilité est invalide');
+        (($this->getDate() - $dateFormatage) <= 0) ? : array_push($this->erreur, 'La date de disponibilité est invalide');
 
         // TABLEAU DES MEDIAS
         $arrayMedia = array();
@@ -302,6 +337,16 @@ class AnnonceController extends Controller
             }
         }
 
+        // CONDITIONS
+        $conditions = strip_tags(trim($request->get('conditions')));
+        if (!empty($conditions)) {
+            if ($conditions != 'on') {
+                array_push($this->erreur, "Vous devez accepter les conditions pour pouvoir poster votre annonce");
+            }else {
+                $conditions = true;
+            }
+        }
+
         // echo "<pre>";
         // var_dump($arrayMedia);
         // echo "</pre>";
@@ -319,7 +364,7 @@ class AnnonceController extends Controller
                 "description" => $description,
                 "postal_code" => $postal_code,
                 "adress" => $adress,
-                "city" => $city,
+                "housing_type" => $housing_type,
                 "date_dispo" => $date_dispo,
                 "nb_roommates" => $nb_roommates,
                 "conditions" => $conditions,
@@ -330,13 +375,14 @@ class AnnonceController extends Controller
                 "nb_room" => $nb_room,
                 "handicap_access" => $handicap_access,
                 "smoking" => $smoking,
+                "animals" => $animals,
                 "sex_roommates" => $sex_roommates,
                 "furniture" => $furniture,
                 "garden" => $garden,
                 "balcony" => $balcony,
                 "parking" => $parking,
                 "district" => $district,
-                "equipments" => $equipments,
+                "equipment" => $equipment,
                 "member_profil" => $memberProfil,
                 "hobbies" => $hobbies,
             );
@@ -347,8 +393,8 @@ class AnnonceController extends Controller
             // die();
 
             $annonce = new AnnonceModelDAO($app['db']);
-            $annonce->createAnnonce($arrayAnnonce, $arrayMedia);
-            // $createAnnonce = $annonce->createAnnonce(string $name_coloc, float $rent, string $description, int $postal_code, string $adress, string $city, string $date_dispo, int $nb_roommates, bool $conditions, string $mail_annonce, int $tel_annonce, string $adress_details, float $surface, int $nb_room, string $handicap_access, string $smoking, string $sex_roommates, string $furniture, string $garden, string $balcony, string $parking, string $video, string $district, string $equipments, string $memberProfil, string $hobbies);
+            $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
+            // $createAnnonce = $annonce->createAnnonce(string $name_coloc, float $rent, string $description, int $postal_code, string $adress, string $city, string $date_dispo, int $nb_roommates, bool $conditions, string $mail_annonce, int $tel_annonce, string $adress_details, float $surface, int $nb_room, string $handicap_access, string $smoking, string $sex_roommates, string $furniture, string $garden, string $balcony, string $parking, string $video, string $district, string $equipment, string $memberProfil, string $hobbies);
         }
     }
 }
