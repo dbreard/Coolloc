@@ -6,6 +6,7 @@ use Silex\Application;
 use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Model\AnnonceModelDAO;
 
 
 class AnnonceController extends Controller
@@ -40,21 +41,25 @@ class AnnonceController extends Controller
 
         // CHAMPS OBLIGATOIRES && saisie FACULTATIVES --- SUPPRESSIONS DES BALISES PHP ET DES ESPACES FORCER
         // EMAIL
-        // $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
+        $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
         // if (!empty($mail_annonce)) {
-        //     ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email invalide');
-        // }else {
-        //     charger l'email du profil de l'utilisateur
+        //     ($this->verifEmail($mail_annonce)) ? : array_push($this->erreur, 'Email saisi invalide');
+        // }else if (isset($_SESSION['membre']['mail'])){
+        //     // charger l'email du profil de l'utilisateur
         //     $mail_annonce = $_SESSION['membre']['mail'];
+        // }else {
+        //     array_push($this->erreur, 'Problème lors de la vérification de l\'Email, veuillez vérifier');
         // }
 
         // TEL
-        // $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
+        $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
         // if (!empty($tel_annonce)) {
-        //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone invalide');
-        // }else {
-        //     charger le numéro de téléphone du profil de l'utilisateur
+        //     ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : array_push($this->erreur, 'Numéro de téléphone saisi invalide');
+        // }else if ($_SESSION['membre']['tel']){
+        //     //charger le numéro de téléphone du profil de l'utilisateur
         //     $tel_annonce = $_SESSION['membre']['tel'];
+        // }else {
+        //     array_push($this->erreur, 'Problème lors de la vérification du téléphone, veuillez vérifier');
         // }
 
         // CHAMPS FACULTATIFS
@@ -78,14 +83,14 @@ class AnnonceController extends Controller
         $nb_room = strip_tags(trim($request->get('nb_room')));
         if (!empty($nb_room)) {
             if (!is_numeric($nb_room) || $nb_room <= 0) {
-                array_push($this->erreur, 'Nombre de pièces saisie invalide');
+                array_push($this->erreur, 'Nombre de pièces saisies invalide');
             }
         }
 
         // HANDICAP_ACCESS
         $handicap_access = strip_tags(trim($request->get('handicap_access')));
         if (!empty($handicap_access)) {
-            if ($handicap_access != 'oui' || $handicap_access != 'non' || $handicap_access != 'peu importe') {
+            if ($handicap_access != 'oui' && $handicap_access != 'non' && $handicap_access != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Accés handicapé'");
             }
         }
@@ -93,7 +98,7 @@ class AnnonceController extends Controller
         // SMOKING
         $smoking = strip_tags(trim($request->get('smoking')));
         if (!empty($smoking)) {
-            if ($smoking != 'oui' || $smoking != 'non' || $smoking != 'peu importe') {
+            if ($smoking != 'oui' && $smoking != 'non' && $smoking != "peu importe") {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Fumeur'");
             }
         }
@@ -101,7 +106,7 @@ class AnnonceController extends Controller
         // ANIMALS
         $animals = strip_tags(trim($request->get('animals')));
         if (!empty($animals)) {
-            if ($animals != 'oui' || $animals != 'non' || $animals != 'peu importe') {
+            if ($animals != 'oui' && $animals != 'non' && $animals != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Animaux'");
             }
         }
@@ -109,7 +114,7 @@ class AnnonceController extends Controller
         // SEX_ROOMMATES
         $sex_roommates = strip_tags(trim($request->get('sex_roommates')));
         if (!empty($sex_roommates)) {
-            if ($sex_roommates != 'homme' || $sex_roommates != 'femme' || $sex_roommates != 'mixte') {
+            if ($sex_roommates != 'homme' && $sex_roommates != 'femme' && $sex_roommates != 'mixte') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Sexe'");
             }
         }
@@ -117,7 +122,7 @@ class AnnonceController extends Controller
         // FURNITURE
         $furniture = strip_tags(trim($request->get('furniture')));
         if (!empty($furniture)) {
-            if ($furniture != 'oui' || $furniture != 'non' || $furniture != 'peu importe') {
+            if ($furniture != 'oui' && $furniture != 'non' && $furniture != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Meublé'");
             }
         }
@@ -125,7 +130,7 @@ class AnnonceController extends Controller
         // GARDEN
         $garden = strip_tags(trim($request->get('garden')));
         if (!empty($garden)) {
-            if ($garden != 'oui' || $garden != 'non' || $garden != 'peu importe') {
+            if ($garden != 'oui' && $garden != 'non' && $garden != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Garden'");
             }
         }
@@ -133,7 +138,7 @@ class AnnonceController extends Controller
         // BALCONY
         $balcony = strip_tags(trim($request->get('balcony')));
         if (!empty($balcony)) {
-            if ($balcony != 'oui' || $balcony != 'non' || $balcony != 'peu importe') {
+            if ($balcony != 'oui' && $balcony != 'non' && $balcony != 'peu importe') {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Balcon'");
             }
         }
@@ -141,16 +146,8 @@ class AnnonceController extends Controller
         // PARKING
         $parking = strip_tags(trim($request->get('parking')));
         if (!empty($parking)) {
-            if ($parking != 'oui' || $parking != 'non' || $parking != 'peu importe') {
+            if ($parking != 'oui' && $parking != 'non' && $parking != "peu importe") {
                 array_push($this->erreur, "saisie incorrect sur le champs 'Parking'");
-            }
-        }
-
-        // VIDEOS
-        $video = strip_tags(trim($request->get('video')));
-        if (!empty($video)) {
-            if ( !preg_match(" #youtube.com|vimeo.com# " , $video) ){
-                array_push($this->erreur, "l'URL de la vidéo est invalide");
             }
         }
 
@@ -205,7 +202,7 @@ class AnnonceController extends Controller
             if (count($arrayMemberProfilCheck) != count($request->get('member_profil'))) {
                 array_push($this->erreur, "Problème de selection dans 'Profil de colocataire recherché'");
             }else {
-                $memberProfil = serialize($request->get('memberProfil'));
+                $memberProfil = serialize($request->get('member_profil'));
             }
         }
 
@@ -242,28 +239,72 @@ class AnnonceController extends Controller
         // VERIF DATE DE DISPO VALIDE
         // (($this->getDate() - $dateFormatage) <= 0) ? : array_push($this->erreur, 'La date de disponibilité est invalide');
 
+        // TABLEAU DES MEDIAS
+        $arrayMedia = array();
+
+        //-------------- VIDEO ---------------
+        $video = strip_tags(trim($request->get('video')));
+        if (!empty($video)) {
+            if ( !preg_match(" #youtube.com|vimeo.com# " , $video) ){
+                array_push($this->erreur, "l'URL de la vidéo est invalide");
+            }else {
+                $arrayMedia['video'] = $video;
+            }
+        }
+
         //-------------- PHOTOS ---------------
-        // for ($i = 1; $i < 13; $i++) {
-        //   $photo = 'photo' . $i;
-        //   if (!empty($_FILES["photo$i"]['name'])) {
-        //
-        //     $photo_name_coloc = str_replace(' ', '_', $name_coloc);
-        //
-        //     $nom_photo = $photo_name_coloc . '-' . $_FILES["photo$i"]['name'];
-        //
-        //     // debug($nom_photo);
-        //     $photo_bdd = URL . "photos/$nom_photo";
-        //     // debug ($photo1_bdd);
-        //     $photo_dossier = __DIR__ . "/../../public/photos/$nom_photo";
-        //     // debug($photo_dossier);
-        //     if (!empty($_FILES["photo$i"]['tmp_name'])) {
-        //       copy($_FILES["photo$i"]['tmp_name'], $photo_dossier);
-        //     }
-        //     else {
-        //       $erreur .= '<div class="alert alert-danger col-md-6 col-md-offset-3 text-center">Il manque un paramètre important sur la photo numéro ' . $i . ', veuillez choisir une autre photo</div>';
-        //     }
-        //   }
-        // }
+        // Boucle sur les photos
+        for ($i = 1; $i < 13; $i++) {
+
+            $photo = "photo" . $i;
+            // Si photo 1
+            if ($i == 1) {
+                // Si elle n'est pas vide
+                if (!empty($_FILES["photo$i"]['name'])) {
+                    // Je créer un préfixe pour mon image
+                    $photo_name_coloc = str_replace(' ', '_', $name_coloc);
+                    // Je créer le nom de la photo
+                    $nom_photo = $photo_name_coloc . '-' . $_FILES["photo$i"]['name'];
+                    // Je créer l'URL a insérer dans la BDD
+                    $photo_bdd = $this->URL . "photos/$nom_photo";
+                    // Je créer le chemin d'accés pour aller copier la photo dans le dossier "photos"
+                    $photo_dossier = __DIR__ . "/../../public/photos/$nom_photo";
+                    // Si elle à un nom temporaire
+                    if (!empty($_FILES["photo$i"]['tmp_name'])) {
+                        // Je copie la photo dans le dossier
+                        copy($_FILES["photo$i"]['tmp_name'], $photo_dossier);
+                        // J'ajoute la photo dans mon tableau pour la BDD
+                        $arrayMedia["$photo"] = $photo_bdd;
+                    }else { // sinon erreur
+                        array_push($this->erreur, "Il manque un paramètre important sur la photo N°$i, veuillez choisir une autre photo");
+                    }
+                }else {// si elle est vide erreur
+                    array_push($this->erreur, "La photo N°$i doit être définie obligatoirement, veuillez choisir une photo");
+                }
+            }else if (!empty($_FILES["photo$i"]['name'])) {
+                // Je créer un préfixe pour mon image
+                $photo_name_coloc = str_replace(' ', '_', $name_coloc);
+                // Je créer le nom de la photo
+                $nom_photo = $photo_name_coloc . '-' . $_FILES["photo$i"]['name'];
+                // Je créer l'URL a insérer dans la BDD
+                $photo_bdd = $this->URL . "photos/$nom_photo";
+                // Je créer le chemin d'accés pour aller copier la photo dans le dossier "photos"
+                $photo_dossier = __DIR__ . "/../../public/photos/$nom_photo";
+                // Si elle à un nom temporaire
+                if (!empty($_FILES["photo$i"]['tmp_name'])) {
+                    // Je copie la photo dans le dossier
+                    copy($_FILES["photo$i"]['tmp_name'], $photo_dossier);
+                    // J'ajoute la photo dans mon tableau pour la BDD
+                    $arrayMedia["$photo"] = $photo_bdd;
+                }else {// sinon erreur
+                    array_push($this->erreur, "Il manque un paramètre important sur la photo N°$i, veuillez choisir une autre photo");
+                }
+            }
+        }
+
+        // echo "<pre>";
+        // var_dump($arrayMedia);
+        // echo "</pre>";
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
@@ -294,20 +335,19 @@ class AnnonceController extends Controller
                 "garden" => $garden,
                 "balcony" => $balcony,
                 "parking" => $parking,
-                "video" => $video,
                 "district" => $district,
                 "equipments" => $equipments,
-                "memberProfil" => $memberProfil,
+                "member_profil" => $memberProfil,
                 "hobbies" => $hobbies,
             );
 
-            echo "<pre>";
-            var_dump($arrayAnnonce);
-            echo "</pre>";
-            die();
+            // echo "<pre>";
+            // var_dump($arrayAnnonce);
+            // echo "</pre>";
+            // die();
 
             $annonce = new AnnonceModelDAO($app['db']);
-            $createAnnonce = $annonce->createAnnonce($arrayAnnonce);
+            $annonce->createAnnonce($arrayAnnonce, $arrayMedia);
             // $createAnnonce = $annonce->createAnnonce(string $name_coloc, float $rent, string $description, int $postal_code, string $adress, string $city, string $date_dispo, int $nb_roommates, bool $conditions, string $mail_annonce, int $tel_annonce, string $adress_details, float $surface, int $nb_room, string $handicap_access, string $smoking, string $sex_roommates, string $furniture, string $garden, string $balcony, string $parking, string $video, string $district, string $equipments, string $memberProfil, string $hobbies);
         }
     }

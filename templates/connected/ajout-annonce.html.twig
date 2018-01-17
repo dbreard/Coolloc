@@ -125,7 +125,7 @@
                                         <h4>Média vidéo</h4>
                                         <div class="form-group">
                                             <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
-                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video" type="text">
+                                        <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% endif %}">
                                         </div>
                                     </div>
                                 </div>
@@ -230,7 +230,7 @@
                                                 <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
                                                     <option value="homme">Homme</option>
                                                     <option value="femme">Femme</option>
-                                                    <option value="peu importe">Mixte</option>
+                                                    <option value="mixte">Mixte</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -5,6 +5,7 @@ namespace Coolloc\Controller;
 
 class Controller {
 
+    public $URL = 'http://localhost/Coolloc/public/';
     protected $erreur = array();
 
 

@@ -4,7 +4,7 @@ namespace Coolloc\Model;
 
 use Doctrine\DBAL\Connection;
 
-class AnnonceModelDAO {
+class AnnonceModelDAO extends Model {
 
     private $db;
 
@@ -16,18 +16,15 @@ class AnnonceModelDAO {
         return $this->db;
     }
 
-    public function createAnnonce(array $arrayAnnonce): ?string{
+    public function createAnnonce(array $arrayAnnonce, array $arrayMedia): ?bool{
 
-        $token = substr( md5( uniqid().mt_rand() ), 0, 22 );
-
-        $this->getDb()->insert('tokens', array(
-            'token' => $token,
-            'type' => $type,
-            'dateEnd' => $dateExpire,
-            'user_id' => $id,
+        $this->getDb()->insert('annonce', array(
+            foreach ($arrayAnnonce as $key => $value) {
+                $key => $value,
+            }
         ));
 
-        return $token;
+        return true;
 
     }
 
