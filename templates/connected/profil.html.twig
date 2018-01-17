@@ -13,11 +13,20 @@
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
-<hr class="">
+<div class="page-head">
+    <div class="container">
+        <div class="row">
+            <div class="page-head-content">
+                <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.Prénom }}</span>{% else %}Ma bite{% endif %}</h1>
+                <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="http://www.rlsandbox.com/img/profile.jpg" width="10" height="10">
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 <div class="container target">
     <div class="row">
       <div class="col-sm-10">
-    <h1 class="">Bonjour {% if profilInfo is defined %}{{ profilInfo.Prénom }}{% else %}Ma bite{% endif %}</h1>
           <div class="buttons col-sm-12">
             <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes préférences</button>
             <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes annonces</button>
@@ -25,7 +34,6 @@
           <br>
       </div>
       <div class="col-sm-2">
-        <img title="profile image" class="img-circle img-responsive col-xs-12" src="http://www.rlsandbox.com/img/profile.jpg">
         <button type="button" class="btn btn-default col-xs-12">Témoigner</button>
       </div>
     </div>

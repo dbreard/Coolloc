@@ -80,8 +80,8 @@ span.exposant {
     }
 
 
-    
-    
+
+
 
 }
 @media (min-width: 980px) and (max-width: 1450px){
@@ -99,5 +99,9 @@ span.exposant {
 
 }
 
-
-
+/* PAGE PROFIL */
+img.profile_img{
+  max-width: 200px;
+  max-height: 200px;
+  margin-bottom: 10px;
+}
