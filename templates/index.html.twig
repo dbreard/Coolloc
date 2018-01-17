@@ -9,13 +9,13 @@
 
 {% block navigation %}
     
-    {% if  is defined %}
-        <p>connecté</p>
-        {% include 'required/navigation_c.html.twig' ignore missing  %}
+    {# {% if  is defined %}
+        <p>connecté</p> #}
+        {# {% include 'required/navigation_c.html.twig' ignore missing  %}
     {% else %}
-        <p>non connecté</p>
+        <p>non connecté</p> #}
         {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {% endif %}
+    {# {% endif %} #}
     
 {% endblock %}
 
