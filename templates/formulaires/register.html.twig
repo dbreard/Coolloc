@@ -12,19 +12,12 @@
 {% endblock %}
 
 {% block content %}
-    
-
-    {% if error is defined %}
-        {% for errors in error %}
-        <div>{{ errors }}</div>
-        {%  endfor %}
-    {% endif %}
 
         <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Créer votre compte / Inscrivez-vous </h1>               
+                        <h1 class="page-title">Créer votre compte / Inscrivez-vous </h1>
                     </div>
                 </div>
             </div>
@@ -37,54 +30,82 @@
                 <div class="col-md-12">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
-                            <h2 class="col-md-12 text-center">Nouveau compte : </h2> 
+                            <h2 class="col-md-12 text-center">Nouveau compte : </h2>
                             <p class="text-center">Rappel : Les champs précédés d'une <span class="red">*</span> sont obligatoires
 
 
                             <form action="" method="post">
                                 <div class="row">
-                                    <div class="col-md-6 col-xs-12">    
+                                    <div class="col-md-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="firstname">Prénom *</label>
-                                        <input type="text" class="form-control" id="firstanme" name="firstname">
+                                            {% if error.firstname is defined %}
+                                                <div class="alert alert-danger text-center">{{ error.firstname }}</div>
+                                            {% endif %}
+                                        <input type="text" class="form-control" id="firstanme" name="firstname" required value="{% if error.firstname is defined %}{% elseif firstname is defined %}{{ firstname }}{% endif %}">
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Nom *</label>
-                                        <input type="text" class="form-control" id="lastname" name="lastname">
+                                        {% if error.lastname is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.lastname }}</div>
+                                        {% endif %}
+                                      <input type="text" class="form-control" id="lastname" name="lastname" required value="{% if error.lastname is defined %}{% elseif lastname is defined %}{{ lastname }}{% endif %}">
                                     </div>
                                     <div class="form-group">
                                         <label for="birthdate">Date de naissance *</label>
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate">
+                                        {% if error.younger is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.younger }}</div>
+                                        {% endif %}
+                                      <input type="date" class="form-control" id="birthdate" name="birthdate" required value="{% if error.younger is defined %}{% elseif birthdate is defined %}{{ birthdate }}{% endif %}">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Mot de passe *</label>
-                                        <input type="password" class="form-control" id="password" name="password">
+                                        {% if error.password is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.password }}</div>
+                                        {% elseif error.password_correspondance is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.password_correspondance }}</div>
+                                        {% endif %}
+                                      <input type="password" class="form-control" id="password" name="password" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="password_repeat">Répetez mot de passe *</label>
-                                        <input type="password" class="form-control" id="password_repeat" name="password_repeat">
+                                        {% if error.password_correspondance is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.password_correspondance }}</div>
+                                        {% endif %}
+                                        <input type="password" class="form-control" id="password_repeat" name="password_repeat" required>
                                     </div>
-                                    
+
                                 </div>
                 {# "firstname","lastname","birthdate","password","repeat_password", "mail","tel","activity","sex","status","conditions" #}
                 {# status cherche colocation ou cherche colocataire #}
-                
+
 
                                 <div class="col-md-6 col-xs-12">
-                                    
+
                                     <div class="form-group">
                                         <label for="mail">Email *</label>
-                                        <input type="email" class="form-control" id="mail" name="mail" placeholder="de la forme votre-nom@nom.fr">
+                                        {% if error.invalid_email is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.invalid_email }}</div>
+                                        {% elseif error.email_already_exist is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.email_already_exist }}</div>
+                                        {% endif %}
+                                      <input type="email" class="form-control" id="mail" name="mail" placeholder="de la forme votre-nom@nom.fr" required value="{% if error.email is defined %}{% elseif error.email_already_exist is defined %}{% elseif email is defined %}{{ email }}{% endif %}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="tel">Tél. *</label>
-                                        <input type="text" class="form-control" id="mail" name="tel">
+                                        {% if error.incorrect_phone is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.incorrect_phone }}</div>
+                                        {% endif %}
+                                      <input type="text" class="form-control" id="mail" name="tel" required value="{% if error.incorrect_phone is defined %}{% elseif tel is defined %}{{ tel }}{% endif %}">
                                     </div>
                                     <div class="form-group">
-                                    
-						                <div class="coloc_title">Vous êtes :</div>
+
+						                <div class="coloc_title">Vous êtes : *</div>
+                            {% if error.sex_error is defined %}
+                                <div class="alert alert-danger text-center">{{ error.sex_error }}</div>
+                            {% endif %}
                                         <label class="coloc_button coloc_genre0 c_femme first" for="c_femme_0" id="sexe">
-                                        <input class="sex-radio" name="sex" value="femme" id="c_femme_0" type="radio">
+                                        <input class="sex-radio" name="sex" value="femme" id="c_femme_0" type="radio" required>
                                         <span></span>Une femme</label>
                                         <label class="coloc_button coloc_genre0 c_homme" for="c_homme_0" id="sexe">
                                         <input class="sex-radio" name="sex" value="homme" id="c_homme_0" type="radio"><img src="" alt="" />
@@ -93,11 +114,14 @@
 
 		                            </div>
 
-                                    <label for="password">Activité</label>
+                                    <label for="password">Activité *</label>
+                                    {% if error.activity_error is defined %}
+                                        <div class="alert alert-danger text-center">{{ error.activity_error }}</div>
+                                    {% endif %}
                                     <select class="form-control" name="activity">
                                         <option value="activité pro">salarié</option>
                                         <option value="retraité">retraité</option>
-                                        <option value="sans activité">sans-emploie</option>
+                                        <option value="sans activité">sans-emploi</option>
                                         <option value="étudiant">étudiant</option>
                                     </select>
 
@@ -106,12 +130,15 @@
 
                                     <div class="form-group">
                                         <label for="condtitions">Accepter les conditions d'utilisation* </label>
-                                        <input type="checkbox" class="form-control" id="conditions" name="conditions" value="1">
+                                        {% if error.no_condition is defined %}
+                                            <div class="alert alert-danger text-center">{{ error.no_condition }}</div>
+                                        {% endif %}
+                                        <input type="checkbox" class="form-control" id="conditions" name="conditions" value="1" required>
                                     </div>
                                     {# ajout de la photo #}
                                     {# par défaut user est inactif tant que le compte n'est pas vérifié par le token d'inscription #}
                                 </div>
-                                </div>    
+                                </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default">S'inscrire</button>
                                     </div>
@@ -121,6 +148,6 @@
                 </div>
 
             </div>
-        </div> 
+        </div>
 
 {% endblock %}
