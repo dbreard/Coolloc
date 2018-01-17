@@ -53,7 +53,7 @@
                                             <label for="firstname">Prénom*</label>
                                             {% if error.firstname is defined %}
                                               {# {{ dump(error) }} #}
-                                              <div class="text-danger text-center">{{ error.firstname }}</div>
+                                              <div class="alert alert-danger text-center">{{ error.firstname }}</div>
                                             {% endif %}
                                           <input type="text" class="form-control" id="firstname" name="firstname" value="{% if error.firstname is defined %}{% elseif firstname is defined %}{{ firstname }}{% endif %}" required>
                                         </div>
@@ -63,7 +63,7 @@
                                             <label for="lastname">Nom*</label>
                                             {% if error.lastname is defined %}
                                               {# {{ dump(error) }} #}
-                                              <div class="text-danger text-center">{{ error.lastname }}</div>
+                                              <div class="alert alert-danger text-center">{{ error.lastname }}</div>
                                             {% endif %}
                                           <input type="text" class="form-control" id="lastname" name="lastname" value="{% if error.lastname is defined %}{% elseif lastname is defined %}{{ lastname }}{% endif %}" required>
                                         </div>
@@ -73,7 +73,7 @@
                                             <label for="email">Email*</label>
                                             {% if error.email is defined %}
                                               {# {{ dump(error) }} #}
-                                              <div class="text-danger text-center">{{ error.email }}</div>
+                                              <div class="alert alert-danger text-center">{{ error.email }}</div>
                                             {% endif %}
                                           <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com" value="{% if error.email is defined %}{% elseif email is defined %}{{ email }}{% endif %}" required>
                                         </div>
@@ -83,7 +83,7 @@
                                             <label for="subject">Sujet*</label>
                                             {% if error.subject is defined %}
                                               {# {{ dump(error) }} #}
-                                              <div class="text-danger text-center">{{ error.subject }}</div>
+                                              <div class="alert alert-danger text-center">{{ error.subject }}</div>
                                             {% endif %}
                                           <input type="text" class="form-control" id="subject" name="subject" value="{% if error.subject is defined %}{% elseif subject is defined %}{{ subject }}{% endif %}" required>
                                         </div>
@@ -93,7 +93,7 @@
                                             <label for="message">Message*</label>
                                             {% if error.message is defined %}
                                               {# {{ dump(error) }} #}
-                                              <div class="text-danger text-center">{{ error.message }}</div>
+                                              <div class="alert alert-danger text-center">{{ error.message }}</div>
                                             {% endif %}
                                           <textarea id="message" class="form-control" name="message" placeholder="20 caractères minimum" required>{% if error.message is defined %}{% elseif message is defined %}{{ message }}{% endif %}</textarea>
                                         </div>
