@@ -41,13 +41,6 @@
 
                             </div>
                             <!-- /.row -->
-                            <!-- AFFICHAGE DES ERREURS -->
-                            {% if error is defined %}
-                                {% for errors in error %}
-                                <div class="text-danger text-center">{{ errors }}</div>
-                                {%  endfor %}
-                            {% endif %}
-                            <!--FIN D'AFFICHAGE DES ERREURS -->
                             <hr>
 
                             <h2 class="text-center">Formulaire de contact</h2>
@@ -56,31 +49,51 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="firstname">Prénom</label>
-                                            <input type="text" class="form-control" id="firstname" name="firstname">
+                                            {% if error.firstname is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="text-danger text-center">{{ error.firstname }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="firstname" name="firstname" value="{% if error.firstname is defined %}{% elseif firstname is defined %}{{ firstname }}{% endif %}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="lastname">Nom</label>
-                                            <input type="text" class="form-control" id="lastname" name="lastname">
+                                            {% if error.lastname is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="text-danger text-center">{{ error.lastname }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="lastname" name="lastname" value="{% if error.lastname is defined %}{% elseif lastname is defined %}{{ lastname }}{% endif %}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email">
+                                            {% if error.email is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="text-danger text-center">{{ error.email }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="email" name="email" value="{% if error.email is defined %}{% elseif email is defined %}{{ email }}{% endif %}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="subject">Sujet</label>
-                                            <input type="text" class="form-control" id="subject" name="subject">
+                                            {% if error.subject is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="text-danger text-center">{{ error.subject }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="subject" name="subject" value="{% if error.subject is defined %}{% elseif subject is defined %}{{ subject }}{% endif %}">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="message">Message</label>
-                                            <textarea id="message" class="form-control" name="message"></textarea>
+                                            {% if error.message is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="text-danger text-center">{{ error.message }}</div>
+                                            {% endif %}
+                                          <textarea id="message" class="form-control" name="message">{% if error.message is defined %}{% elseif message is defined %}{{ message }}{% endif %}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">

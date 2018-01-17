@@ -20,18 +20,21 @@ class ContactController extends Controller
       $subject = strip_tags(trim($request->get("subject")));
       $message = strip_tags(trim($request->get("message")));
 
-
+      if ((iconv_strlen($firstname) < 3 || iconv_strlen($firstname) > 50)){
+        $this->erreur['firstname'] = 'Le prénom n\'est pas valide';
+      }
+      if ((iconv_strlen($lastname) < 3 || iconv_strlen($lastname) > 50)){
+        $this->erreur['lastname'] = 'Le nom doit être compris entre 3 et 50 caractères';
+      }
       if (!$this->verifEmail($email)){
-        array_push($this->erreur, 'veuillez préciser un email valide');
+        $this->erreur['email'] = 'Votre format email n\'est pas valide';
       }
 
       if (iconv_strlen($subject) < 3 || iconv_strlen($subject) > 50){
-        array_push($this->erreur, 'veuillez préciser un sujet valide');
+        $this->erreur['subject'] = 'Le sujet doit etre compris entre 3 et 50 caractère';
       }
-
-
       if (iconv_strlen($message) < 20){
-        array_push($this->erreur, 'veuillez préciser un message valide');
+        $this->erreur['message'] = 'Votre message doit faire au minimum 20 caractères';
       }
 
 
@@ -39,7 +42,7 @@ class ContactController extends Controller
       // SI IL Y A DES ERREURS
       if (!empty($this->erreur)) {
           return $app['twig']->render('contact.html.twig', array(
-              "error" => $this->erreur,
+              "error" => $this->erreur, "firstname" => $firstname, "lastname" => $lastname, "email" => $email, "subject" => $subject, "message" => $message,
           ));
       }
       else { // SI IL N'Y A PAS D'ERREUR
