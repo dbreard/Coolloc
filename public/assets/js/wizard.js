@@ -60,6 +60,25 @@ $(document).ready(function () {
         readURL(this);
     });
 
+    
+
+    //Function to show image before upload
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+
+        reader.onload = function (e) {
+            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    
+    }
+
+
 
     $('[data-toggle="wizard-radio"]').click(function () {
         wizard = $(this).closest('.wizard-card');
@@ -81,6 +100,7 @@ $(document).ready(function () {
 
     $height = $(document).height();
     $('.set-full-height').css('height', $height);
+
 
 });
 
@@ -176,15 +196,17 @@ function validateThirdStep() {
 
 }
 
-//Function to show image before upload
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+

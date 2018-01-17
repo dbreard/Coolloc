@@ -45,6 +45,8 @@ $app->post('/details-annonce-non-connecter', function () use ($app) {
     //controleur
 });
 
+
+
 //LOGIN
 $app->get('/login', function () use ($app) {
     return $app['twig']->render('formulaires/login.html.twig', array());
@@ -63,8 +65,11 @@ $app->get('/inscription', function () use ($app) {
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
 
-//VERIFICATION DU TOKEN
-$app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
+// confirmation mail
+$app->get('/confirmation-email', function () use ($app) {
+    return $app['twig']->render('confirmation.html.twig', array());
+})
+    ->bind('confirmation');
 
 
 //MDP OUBLIER
@@ -159,7 +164,7 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 //*** ROUTES GET ***//
 
-//GERER DECONNEXION
+//GERER ANNONCE
 $app->get('/connected/deconnexion', function () use ($app) {
     return $app['twig']->render('index.html.twig', array());
 })
