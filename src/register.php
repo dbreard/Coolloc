@@ -1,6 +1,5 @@
 <?php
 
-
     use Silex\Provider\AssetServiceProvider;
     use Silex\Provider\TwigServiceProvider;
     use Silex\Provider\ServiceControllerServiceProvider;
@@ -16,7 +15,6 @@
     $app->register(new TwigServiceProvider()); // Chargement de Twig
     $app->register(new HttpFragmentServiceProvider()); // Chargement des Fragment HTTP (Request, Response)
     $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-
         'dbs.options' => array (
             'mysql_read' => array(
                 'host'      => 'localhost',

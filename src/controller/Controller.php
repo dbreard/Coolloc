@@ -21,15 +21,15 @@ class Controller {
     {
         $resultat = (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false;
         return $resultat;
-
     }
 
-    // VERIFIACTION DU FORMAT MDP
+    // VERIFICATION DU FORMAT MDP
     public function verifMdp(string $password)
     {
        $resultat = (iconv_strlen($password) >= 6 && iconv_strlen($password) <= 20) ? true : false ;
            return $resultat;
     }
+
 
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
     public function modifyTel(string $tel){

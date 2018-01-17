@@ -15,11 +15,21 @@
     //----------------------------------------------------------------------------------------------------------------------
 
     require __DIR__.'/../src/register.php';
+    // require __DIR__.'/../src/function.php';
+
     require __DIR__.'/../src/Middleware/middleware.php';
+
+    require __DIR__.'/../src/Model/Model.php';
     require __DIR__.'/../src/Model/UserModelDAO.php';
-    require __DIR__.'/../src/Model/TokensDAO.php';
+    // require __DIR__.'/../src/model/TokensDAO.php';
+
     require __DIR__.'/../src/controller/Controller.php';
     require __DIR__.'/../src/controller/RegisterController.php';
+    require __DIR__.'/../src/controller/LoginController.php';
+    require __DIR__.'/../src/controller/ChangePassController.php';
+    require __DIR__.'/../src/controller/ForgotPassController.php';
+    // require __DIR__.'/../src/controller/IndexController.php';
+    require __DIR__.'/../src/Model/TokensDAO.php';
     require __DIR__.'/../src/controller/ContactController.php';
 
 // require __DIR__.'/../src/controller/IndexController.php';

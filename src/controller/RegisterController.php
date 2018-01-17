@@ -13,7 +13,7 @@ use Coolloc\Model\TokensDAO;
 
 
 
-class registerController extends Controller
+class RegisterController extends Controller
 {
 
     //fonction d'analyse des champs saisie
@@ -34,7 +34,6 @@ class registerController extends Controller
         $condition = strip_tags(trim($request->get("conditions")));
         $status = strip_tags(trim($request->get("status")));
 
-
         //prénom : supérieur ou = a 2 inférieur a 50
         (iconv_strlen($first_name) >= 2 && iconv_strlen($first_name) <= 50) ?: array_push($this->erreur, 'Votre prénom doit être compris entre 2 et 50 caractères');
 
@@ -48,9 +47,8 @@ class registerController extends Controller
 
 
         //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
-        (!$this->verifCorrespondanceMdp($password, $password_repeat)) ? array_push($this->erreur, 'Les mot de passe ne correspondent pas') :
-            ($this->verifMdp($password)) ? $password = md5(password_hash($password, PASSWORD_DEFAULT) . 'bruh') : array_push($this->erreur, 'Format mot de passe incorrect');
-
+        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur .= 'Les mots de passe ne correspondent pas';
+        ($this->verifMdp($password)) ? $password = password_hash($password, PASSWORD_DEFAULT) . md5('bruh') : $this->erreur .= 'Format mot de passe incorrect';
 
         //Vérification d'email :
         (!$this->verifEmail($email)) ? array_push($this->erreur, 'Email invalide') : $verifEmailBdd = new UserModelDAO($app['db']);

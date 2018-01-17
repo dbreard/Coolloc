@@ -52,10 +52,7 @@ $app->get('/login', function () use ($app) {
     return $app['twig']->render('formulaires/login.html.twig', array());
 })
     ->bind('login');
-$app->post('/login', function (Request $request) use ($app ) {
-    array ("post" => $request);
-});
-
+    $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
@@ -80,12 +77,17 @@ $app->get('/confirmation-email', function () use ($app) {
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
-    return $app['twig']->render('forgotten-password.html.twig', array());
+    return $app['twig']->render('basic/forgotten-password.html.twig', array());
 })
     ->bind('forgotten-password');
-$app->post('/forgotten-password', function () use ($app) {
-    //controleur
-});
+$app->post('/forgotten-password', "Coolloc\Controller\ForgotPassController::forgotPassAction")->before($verifParamForgotPass);
+
+//CHANGER MDP
+$app->get('/change-password', function () use ($app) {
+    return $app['twig']->render('basic/change-password.html.twig', array());
+})
+    ->bind('change-password');
+$app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePass);
 
 //FAQ
 $app->get('/faq', function () use ($app) {
