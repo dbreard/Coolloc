@@ -120,7 +120,7 @@ class Controller {
     public function verifConnected(Application $app, Request $request){
         $pageName = strip_tags(trim($request->get("pagename")));
         if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida'])) {
-            return $app->redirect('/connected/' . $pageName);
+            return $app->redirect('/Coolloc/public/connected/' . $pageName);
         }else {
             return $app->redirect('/Coolloc/public/login');
         }
