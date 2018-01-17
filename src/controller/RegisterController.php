@@ -48,7 +48,7 @@ class RegisterController extends Controller
 
         //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
         ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur .= 'Les mots de passe ne correspondent pas';
-        ($this->verifMdp($password)) ?  : $this->erreur .= 'Format mot de passe incorrect';
+        ($this->verifMdp($password)) ? $password = password_hash($password, PASSWORD_DEFAULT) . md5('bruh') : $this->erreur .= 'Format mot de passe incorrect';
 
         //Vérification d'email :
         (!$this->verifEmail($email)) ? array_push($this->erreur, 'Email invalide') : $verifEmailBdd = new UserModelDAO($app['db']);

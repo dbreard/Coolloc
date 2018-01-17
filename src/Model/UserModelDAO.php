@@ -26,14 +26,6 @@ class UserModelDAO {
             return $resultat;
     }
 
-    // COMPARAISON DU MDP AVEC L'USER EN BDD
-    function verifUserBdd(string $email)
-    {
-            $sql = "SELECT * FROM user WHERE mail = ?";
-            $resultat = $this->getDb()->fetchAssoc($sql, array((string) $email));
-            return $resultat;
-    }
-
     // CHANGEMENT DE MOT DE PASSE
     function changeMdpBdd(string $password)
     {

@@ -13,7 +13,11 @@
 {% block content %}
 
 {% if error is defined %}
-{{ error }}
+<ul>
+    {% for errors in error %}
+        <li>{{ errors }}</li>
+    {% endfor %}
+</ul>
 {% endif %}
 
         <div class="page-head"> 
