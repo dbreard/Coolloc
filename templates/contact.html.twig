@@ -12,11 +12,11 @@
 {% endblock %}
 {% block content %}
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Contact page</h1>               
+                        <h1 class="page-title">Contact page</h1>
                     </div>
                 </div>
             </div>
@@ -25,55 +25,79 @@
 
         <!-- property area -->
         <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
-            <div class="container">  
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2"> 
-                        <div class="" id="contact1">                        
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="" id="contact1">
                             <div class="row">
                                 <div class="col-sm-6 col-sm-offset-3 text-center">
                                     <h3><i class="fa fa-map-marker"></i> Adresse</h3>
                                     <p>74 avenue Denfert-Rochereau
-                                        <br>14<span class="exposant">e</span> arrondissement 
+                                        <br>14<span class="exposant">e</span> arrondissement
                                         <br>Paris <strong>France</strong>
                                     </p>
                                 </div>
-                                
-                                
+
+
                             </div>
                             <!-- /.row -->
                             <hr>
-                            
+                            {% if success is defined %}
+                              <div class="alert alert-success text-center">{{ success }}</div>
+                            {% endif %}
                             <h2 class="text-center">Formulaire de contact</h2>
+                            <p class="text-center col-sm-12">Tous les champs suvis d'une <span class="red">*</span> sont requis</p>
+
                             <form method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="firstname">Prénom</label>
-                                            <input type="text" class="form-control" id="firstname" name="firstname">
+                                            <label for="firstname">Prénom<span class="red">*</span></label>
+                                            {% if error.firstname is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="alert alert-danger text-center">{{ error.firstname }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="firstname" name="firstname" value="{% if error.firstname is defined %}{% elseif firstname is defined %}{{ firstname }}{% endif %}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="lastname">Nom</label>
-                                            <input type="text" class="form-control" id="lastname" name="lastname">
+                                            <label for="lastname">Nom<span class="red">*</span></label>
+                                            {% if error.lastname is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="alert alert-danger text-center">{{ error.lastname }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="lastname" name="lastname" value="{% if error.lastname is defined %}{% elseif lastname is defined %}{{ lastname }}{% endif %}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email">
+                                            <label for="email">Email<span class="red">*</span></label>
+                                            {% if error.email is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="alert alert-danger text-center">{{ error.email }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com" value="{% if error.email is defined %}{% elseif email is defined %}{{ email }}{% endif %}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="subject">Sujet</label>
-                                            <input type="text" class="form-control" id="subject" name="subject">
+                                            <label for="subject">Sujet<span class="red">*</span></label>
+                                            {% if error.subject is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="alert alert-danger text-center">{{ error.subject }}</div>
+                                            {% endif %}
+                                          <input type="text" class="form-control" id="subject" name="subject" value="{% if error.subject is defined %}{% elseif subject is defined %}{{ subject }}{% endif %}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="message">Message</label>
-                                            <textarea id="message" class="form-control" name="message"></textarea>
+                                            <label for="message">Message<span class="red">*</span></label>
+                                            {% if error.message is defined %}
+                                              {# {{ dump(error) }} #}
+                                              <div class="alert alert-danger text-center">{{ error.message }}</div>
+                                            {% endif %}
+                                          <textarea id="message" class="form-control" name="message" placeholder="20 caractères minimum" required>{% if error.message is defined %}{% elseif message is defined %}{{ message }}{% endif %}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
@@ -83,12 +107,12 @@
                                 <!-- /.row -->
                             </form>
                         </div>
-                    </div>    
+                    </div>
                 </div>
 
             </div>
         </div>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.101380641156!2d2.332652515673623!3d48.83720487928541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671c771516af1%3A0xa0fe0f70515f5564!2s74+Avenue+Denfert-Rochereau%2C+75014+Paris!5e0!3m2!1sfr!2sfr!4v1516026041356" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
-        
+
 
 {% endblock %}

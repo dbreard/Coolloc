@@ -45,15 +45,14 @@ $app->post('/details-annonce-non-connecter', function () use ($app) {
     //controleur
 });
 
+
+
 //LOGIN
 $app->get('/login', function () use ($app) {
     return $app['twig']->render('formulaires/login.html.twig', array());
 })
     ->bind('login');
-$app->post('/login', function (Request $request) use ($app ) {
-    array ("post" => $request);
-});
-
+    $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
@@ -62,14 +61,33 @@ $app->get('/inscription', function () use ($app) {
     ->bind('inscription');
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
+
+
+//VERIFICATION DU TOKEN D'INSCRIPTION
+$app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
+
+
+// confirmation mail
+$app->get('/confirmation-email', function () use ($app) {
+    return $app['twig']->render('confirmation.html.twig', array());
+})
+    ->bind('confirmation');
+
+
+
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
-    return $app['twig']->render('forgotten-password.html.twig', array());
+    return $app['twig']->render('basic/forgotten-password.html.twig', array());
 })
     ->bind('forgotten-password');
-$app->post('/forgotten-password', function () use ($app) {
-    //controleur
-});
+$app->post('/forgotten-password', "Coolloc\Controller\ForgotPassController::forgotPassAction")->before($verifParamForgotPass);
+
+//CHANGER MDP
+$app->get('/change-password', function () use ($app) {
+    return $app['twig']->render('basic/change-password.html.twig', array());
+})
+    ->bind('change-password');
+$app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePass);
 
 //FAQ
 $app->get('/faq', function () use ($app) {
@@ -88,6 +106,12 @@ $app->get('/contact', function () use ($app) {
 $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->before($verifContact);
 
 //*** ROUTES GET ***//
+
+//confirmation
+$app->get('/confirmation', function () use ($app) {
+    return $app['twig']->render('confirmation.html.twig', array());
+})
+    ->bind('confirmation');
 
 //MENTIONS LEGALES
 $app->get('/mentions-legales', function () use ($app) {
@@ -112,6 +136,12 @@ $app->get('/a-propos', function () use ($app) {
 //*** ROUTE AVEC CONNECTION ***//
 //*****************************//
 
+// verification si user connecté
+
+$app->get('/verif-connected/{pagename}/', 'Coolloc\Controller\Controller::verifConnected')->bind('verif-connected');
+
+
+
 //*** ROUTES GET/POST ***//
 
 //DETAILS ANNONCE CONNECTER
@@ -132,11 +162,14 @@ $app->post('/connected/profil', function () use ($app) {
     //controleur
 });
 
+
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
+
     return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
 })
     ->bind('ajout-annonce');
+
 $app->post('/connected/ajout-annonce', 'Coolloc\Controller\AnnonceController::annonceAction')->before($verifParamAnnonce);
 
 // GERER ANNONCE
@@ -152,7 +185,7 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 //*** ROUTES GET ***//
 
-//GERER ANNONCE
+// deconnexion
 $app->get('/connected/deconnexion', function () use ($app) {
     return $app['twig']->render('index.html.twig', array());
 })

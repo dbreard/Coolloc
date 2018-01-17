@@ -27,13 +27,30 @@ function verifParam($request , $verifRequest = array()) :array
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
 $verifParamRegister = function (Request $request, Application $app)
                       {
-                        $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","repeat_password","mail","tel","activity","sex","status","conditions"));
 
+                        $retour = verifParam($request->request, array("firstname","lastname","birthdate","password","password_repeat","mail","tel","activity","sex","status","conditions"));
                         if($retour["error"])
-
-
-                        return  $app->redirect("/public/inscription");
+                        return $app->redirect("/Coolloc/public/inscription");
                       };
+$verifParamLogin = function (Request $request, Application $app)
+                      {
+                        $retour = verifParam($request->request, array("mail","password"));
+                        if($retour["error"])
+                        return $app->redirect("/Coolloc/public/login");
+                      };
+$verifParamForgotPass = function (Request $request)
+                      {
+                        $retour = verifParam($request->request, array("mail"));
+                        if($retour["error"])
+                        return $app->redirect("/Coolloc/public/forgotten-password");
+                      };
+$verifParamChangePass = function (Request $request)
+                      {
+                        $retour = verifParam($request->request, array("password", "password_repeat"));
+                        if($retour["error"])
+                        return $app->redirect("/Coolloc/public/change-password");
+};
+
 
 //----------------- MiddleWare du formulaire de CONTACT-----------------------//
 $verifContact = function (Request $request, Application $app)
@@ -47,7 +64,9 @@ $verifContact = function (Request $request, Application $app)
                         // var_dump($retour);
                         // die();
                         if($retour["error"])
-                          return  $app->redirect("/public/contact");
+
+                          return  $app->redirect("/Coolloc/public/contact");
+
                       };
 
 //------------------fin middleware form contact ------------------------------//

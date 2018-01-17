@@ -1,4 +1,29 @@
 /* Personnalisation */
+
+/* Générales */
+    span.red {color:red;}
+
+    .alert.alert-danger {
+        padding: 5px;
+    }
+
+
+    /* Inputs               */
+.form-control {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857;
+    color: #2b2926;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #DADADA;
+    border-radius: 0px;
+    box-shadow: 0px 1px 1px rgba(179, 179, 179, 0.1) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
 /* page contact */
 
 /* exposant */
@@ -30,13 +55,33 @@ span.exposant {
     height: auto;
 }
 
+/* Page confirmation */
+
+
+
+.confirmation {
+    background-color: #F3F3F3;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
+
+
+
 /* page accueil */
+
 
 @media (min-width: 768px) and (max-width: 979px){
 
     .search-form .form-inline .form-group {
         width: 145px !important;
     }
+
+
+    
+    
 
 }
 @media (min-width: 980px) and (max-width: 1450px){
@@ -53,3 +98,6 @@ span.exposant {
     }
 
 }
+
+
+

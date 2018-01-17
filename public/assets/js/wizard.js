@@ -55,10 +55,322 @@ $(document).ready(function () {
         }
     });
 
+    
     // Prepare the preview for profile picture
     $("#wizard-picture").change(function () {
         readURL(this);
     });
+
+
+    // Prepare the preview for profile picture
+    $("#wizard-picture1").change(function () {
+        readURL1(this);
+    });
+
+    // Prepare the preview for profile picture
+    $("#wizard-picture2").change(function () {
+        readURL2(this);
+    });
+
+     // Prepare the preview for profile picture
+     $("#wizard-picture3").change(function () {
+        readURL3(this);
+    });
+
+     // Prepare the preview for profile picture
+     $("#wizard-picture4").change(function () {
+        readURL4(this);
+    });
+
+     // Prepare the preview for profile picture
+     $("#wizard-picture5").change(function () {
+        readURL5(this);
+    });
+
+     // Prepare the preview for profile picture
+     $("#wizard-picture6").change(function () {
+        readURL6(this);
+    });
+
+     // Prepare the preview for profile picture
+     $("#wizard-picture7").change(function () {
+        readURL7(this);
+    });
+
+    // Prepare the preview for profile picture
+    $("#wizard-picture8").change(function () {
+        readURL8(this);
+    });
+
+    // Prepare the preview for profile picture
+    $("#wizard-picture9").change(function () {
+        readURL9(this);
+    });
+    // Prepare the preview for profile picture
+    $("#wizard-picture10").change(function () {
+        readURL10(this);
+    });
+    // Prepare the preview for profile picture
+    $("#wizard-picture11").change(function () {
+        readURL11(this);
+    });
+    // Prepare the preview for profile picture
+    $("#wizard-picture12").change(function () {
+        readURL12(this);
+    });
+    // Prepare the preview for profile picture
+    $("#wizard-picture13").change(function () {
+        readURL13(this);
+    });
+    
+    
+    
+
+    //Function to show image before upload
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+
+        reader.onload = function (e) {
+            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    
+    }
+
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview1').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+        }
+    
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview1').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+        }
+    
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview2').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        
+            
+    }
+
+    function readURL3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview3').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+            
+                
+    function readURL4(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview4').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL5(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview5').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+                        
+    function readURL6(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview6').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+                            
+    function readURL7(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview7').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL8(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview8').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL9(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview9').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL10(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview10').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL11(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview11').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL12(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview12').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+    function readURL13(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview13').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+    }
+
+
+
+    //Function to show image before upload
+
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+    
+            reader.onload = function (e) {
+                $('#wizardPicturePreview1').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    
+        
+        }
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+        
+        
+                reader.onload = function (e) {
+                    $('#wizardPicturePreview2').attr('src', e.target.result).fadeIn('slow');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        
+            
+            }
+
+    
+
 
 
     $('[data-toggle="wizard-radio"]').click(function () {
@@ -81,6 +393,7 @@ $(document).ready(function () {
 
     $height = $(document).height();
     $('.set-full-height').css('height', $height);
+
 
 });
 
@@ -176,15 +489,17 @@ function validateThirdStep() {
 
 }
 
-//Function to show image before upload
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+

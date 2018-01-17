@@ -12,11 +12,13 @@
 {% endblock %}
 {% block content %}
 
+
 {% if error is defined %}
     {% for errors in error %}
         <div>{{ errors }}</div>
     {%  endfor %}
 {% endif %}
+
 
 <div class="page-head">
     <div class="container">
@@ -27,6 +29,16 @@
         </div>
     </div>
 </div>
+
+
+{% block fonction %}
+
+
+    {% include 'required/membre.php' ignore missing  %}
+
+
+
+{% endblock %}
 <!-- End page header -->
 
 <!-- property area -->
@@ -60,9 +72,9 @@
 
                                         <div class="picture-container">
                                             <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview1" title=""/>
 
-                                                <input type="file" id="wizard-picture" name="photo1">
+                                                <input type="file" id="wizard-picture1" name="photo1">
                                             </div>
 
                                         </div>
@@ -70,7 +82,7 @@
                                         <div class="col-sm-12">
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview2" title=""/>
 
                                                 <input type="file" id="wizard-picture2" name="photo2">
                                                 </div>
@@ -78,7 +90,7 @@
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview3" title=""/>
 
                                                 <input type="file" id="wizard-picture3" name="photo3">
                                                 </div>
@@ -86,7 +98,7 @@
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview4" title=""/>
 
                                                 <input type="file" id="wizard-picture4" name="photo4">
                                                 </div>
@@ -94,7 +106,7 @@
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview5" title=""/>
 
                                                 <input type="file" id="wizard-picture5" name="photo5">
                                                 </div>
@@ -578,65 +590,66 @@
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview6" title=""/>
 
-                                                <input type="file" id="wizard-picture2" name="photo6">
+                                                <input type="file" id="wizard-picture6" name="photo6">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview7" title=""/>
 
-                                                <input type="file" id="wizard-picture3" name="photo7">
+                                                <input type="file" id="wizard-picture7" name="photo7">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview8" title=""/>
 
-                                                <input type="file" id="wizard-picture4" name="photo8">
+                                                <input type="file" id="wizard-picture8" name="photo8">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview9" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo9">
+                                                <input type="file" id="wizard-picture9" name="photo9">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview10" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo10">
+                                                <input type="file" id="wizard-picture10" name="photo10">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview11" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo11">
+                                                <input type="file" id="wizard-picture11" name="photo11">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview12" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo12">
+                                                <input type="file" id="wizard-picture12" name="photo12">
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview13" title=""/>
 
-                                                <input type="file" id="wizard-picture5" name="photo13">
+                                                <input type="file" id="wizard-picture13
+                                                " name="photo13">
                                                 </div>
                                             </div>
                                         </div>
@@ -644,13 +657,15 @@
                                     <div class="col-sm-6">
 
                                         <h4>Remontez votre annonce en tête de liste</h4>
-                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros
-                                        <label class="checkbox-inline">
-                                            <input type="radio" id="inlineCheckbox1" value="yes"> oui
+
+                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros 
+                                        <label class="radio-inline"> 
+                                            <input type="radio" id="Top de liste" value="yes" name="Top de liste"> oui
+
                                         </label>
 
-                                        <label class="checkbox-inline">
-                                            <input type="radio" id="inlineCheckbox1" value="no"> non
+                                        <label class="radio-inline">
+                                            <input type="radio" id="Top de liste2" value="no" checked name="Top de liste"> non
                                         </label>
                                         </p>
 
@@ -659,12 +674,14 @@
                                         <h4>Le pack options</h4>
                                         <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
                                         <p>Je choisis le pack option
-                                        <label class="checkbox-inline">
-                                            <input type="radio" id="inlineCheckbox1" value="yes"> oui
+
+                                        <label class="radio-inline"> 
+                                            <input type="radio" id="pack option" value="yes" name="pack option"> oui
+
                                         </label>
 
-                                        <label class="checkbox-inline">
-                                            <input type="radio" id="inlineCheckbox1" value="no"> non
+                                        <label class="radio-inline">
+                                            <input type="radio" id="pack option2" value="no" name="pack option" checked> non
                                         </label>
                                         </p>
                                     </div>
