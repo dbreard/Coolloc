@@ -97,7 +97,7 @@
           <div class="buttons col-sm-12">
             {% if profilInfo.status == "cherche colocation" %}
               {% if success is defined %}
-                <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en clickant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
+                <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en cliquant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
                 <button type="button" class="btn btn-default col-xs-12 col-sm-4">Ajouter mes préférences</button>
               {% else %}
                 <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes préférences</button>
@@ -121,25 +121,25 @@
       <div class="col-sm-3 col-xs-12">
             <!--left col-->
         <ul class="list-group">
-          <li class="list-group-item text-muted" contenteditable="false">Profil</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.lastname }}{% endif %}</li>
-      <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.firstname }}{% endif %}</li>
-    <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.mail }}{% endif %}</li>
-  <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.tel }}{% endif %}</li>
-<li class="list-group-item text-right"><span class="pull-left"><strong class="">Statut</strong></span>{% if profilInfo is defined %}{{ profilInfo.status }}{% endif %}</li>
+          <li class="list-group-item text-muted text-center" contenteditable="false">Profil</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.lastname }}{% endif %}</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.firstname }}{% endif %}</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.mail }}{% endif %}</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.tel }}{% endif %}</li>
+          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Statut</strong></span>{% if profilInfo is defined %}{{ profilInfo.status }}{% endif %}</li>
         </ul>
         <button type="button" class="btn btn-default col-xs-12">Modifier mon Profil</button>
       </div>
         <!--/col-3-->
 
       <div class="col-sm-9 col-xs-12" style="" contenteditable="false">
-        {% if profilInfo.status == "cherche colocation" %}
+        {% if profilInfo.status == "cherche colocation" or profilInfo.status == "admin" %}
           <div class="panel panel-default">
             <div class="panel-heading">Vos préférences</div>
             <div class="panel-body"> A loOOooOoOOong request in db by souksay for my description.</div>
           </div>
         {% endif %}
-        {% if profilInfo.status == "cherche colocataire" %}
+        {% if profilInfo.status == "cherche colocataire" or profilInfo.status == "admin" %}
         <div class="panel panel-default target">
           <div class="panel-heading" contenteditable="false">Vos annonces publiées</div>
             <div class="panel-body">
