@@ -31,7 +31,7 @@ class CommentController extends Controller
         }
         else
         { // si les formats du message, 
-           
+        //    traitement de l'insertion - commentModelDAO
         }
 
         if (empty($this->erreur)){

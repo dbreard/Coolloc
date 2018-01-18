@@ -18,6 +18,9 @@ public function createComment(int $id_user,string $comment): ? string{
     $this->getDb()->insert('comments', array(
         'comment' => $comment,
         'user_id' => $id_user,
+    ));
+
+}
 
 public function DeleteComment(int $id_user,string $comment): ? string{
         $this->getDb()->insert('comments', array(
