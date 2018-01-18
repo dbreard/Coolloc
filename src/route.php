@@ -63,17 +63,40 @@ $app->post('/details-annonce-non-connecter', function () use ($app) {
 
 //LOGIN
 $app->get('/login', function () use ($app) {
-    return $app['twig']->render('formulaires/login.html.twig', array());
-})
+    $isconnected = Controller::ifConnected();
+
+    if (!$isconnected) {
+        return $app['twig']->render('formulaires/login.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app->redirect('/Coolloc/public/connected/profil') ;
+    }
+
+    
+    })
     ->bind('login');
     $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
-    return $app['twig']->render('formulaires/register.html.twig', array());
+    $isconnected = Controller::ifConnected();
+    $valueBind = "";
+    if ($isconnected) {
+        return $app->redirect('/') ;
+        
+
+    } else {
+        return $app['twig']->render('formulaires/register.html.twig', array());
+        
+        
+    }
+    
+
 })
     ->bind('inscription');
+    
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
 
@@ -128,8 +151,18 @@ $app->post('/faq', function () use ($app) {
 
 
 //CONTACT
+
 $app->get('/contact', function () use ($app) {
-    return $app['twig']->render('contact.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('contact.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('contact.html.twig', array()) ;
+    }
+   
 })
     ->bind('contact');
 $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->before($verifContact);
@@ -156,21 +189,46 @@ $app->get('connected/merci', function () use ($app) {
 
 //MENTIONS LEGALES
 $app->get('/mentions-legales', function () use ($app) {
-    return $app['twig']->render('mentions-legales.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('mentions-legales.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('mentions-legales.html.twig', array());
+    }
 })
     ->bind('mentions-legales');
 
 
 //CONDITIONS GENERALES DE VENTES
 $app->get('/conditions-generales-de-vente', function () use ($app) {
-    return $app['twig']->render('conditions-generales-de-vente.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('conditions-generales-de-vente.html.twig', array());
+    }
 })
     ->bind('conditions-generales-de-vente');
 
 
 //A PROPOS
 $app->get('/a-propos', function () use ($app) {
-    return $app['twig']->render('a-propos.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('a-propos.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('a-propos.html.twig', array());
+    }
+   
 })
     ->bind('a-propos');
 
@@ -236,8 +294,29 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 //ajout temoignage
 $app->get('connected/temoigner', function () use ($app) {
 
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('connected/temoigner.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } 
+    else 
+    {
+        return $app['twig']->render('connected/login.html.twig', array()) ;
+    }
+
+
+    // if ($isconnected) {
+    //     return $app['twig']->render('/connected/temoigner.html.twig', array("connected" => $isconnected,));
+     
+
+    // } else {
+    //     return $app->redirect('/Coolloc/formulaires/login') ;
+    // }
+
     
-    return $app['twig']->render('/connected/temoigner.html.twig', array());
+    
 })
     ->bind('temoigner');
 $app->post('/connected/temoigner', 'Coolloc\Controller\CommentController::commentAction')->before($verifParamComment);
