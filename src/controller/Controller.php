@@ -14,6 +14,7 @@ use \DateTime;
 
 class Controller {
 
+    public $URL = 'http://localhost/Coolloc/public/';
     protected $erreur = array();
     private $token;
 
@@ -31,41 +32,43 @@ class Controller {
            return $resultat;
     }
 
-
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
-    public function modifyTel(string $tel){
+       public function modifyTel(string $tel){
 
-        if (iconv_strlen($tel) == 10){
-            $tel = "+33" . (substr($tel, 1));
-        }
-        else if (iconv_strlen($tel) == 12){
-            $tel = "+33" . (substr($tel, 3));
-        }
-        else if (iconv_strlen($tel) == 9){
-            $tel = "+33" . (substr($tel, 0));
-        }
+           if (iconv_strlen($tel) == 10){
+               $tel = "+33" . (substr($tel, 1));
+           }
+           else if (iconv_strlen($tel) == 12){
+               $tel = "+33" . (substr($tel, 3));
+           }
+           else if (iconv_strlen($tel) == 9){
+               $tel = "+33" . (substr($tel, 0));
+           }
 
-        return $tel;
-    }
-    //VERIFICATION DU FORMAT DE NUMERO DE TELEPHONE
-    public function verifTel(string $tel) :bool
-    {
-        $tel = str_replace(" ", "", $tel);
-        $tel = str_replace("-", "", $tel);
-        $tel = str_replace("/", "", $tel);
+           return $tel;
+       }
+       //VERIFICATION DU FORMAT DE NUMERO DE TELEPHONE
+       public function verifTel(string $tel) :bool
+       {
+           $tel = str_replace(" ", "", $tel);
+           $tel = str_replace("-", "", $tel);
+           $tel = str_replace("/", "", $tel);
 
-        if (iconv_strlen($tel) == 10){
-            $resultat = (substr($tel, -10, 1) == 0) ? true : false;
-        }
-        if (iconv_strlen($tel) == 12){
-            $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
-        }
-        if (iconv_strlen($tel) == 9){
-            $resultat = (substr($tel, -9, 1) == 0) ? true : false;
-        }
-        return $resultat;
-    }
-
+           if (iconv_strlen($tel) == 10){
+               $resultat = (substr($tel, -10, 1) == 0) ? true : false;
+           }
+           else if (iconv_strlen($tel) == 12){
+               $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
+           }
+           else if (iconv_strlen($tel) == 9){
+               $resultat = (substr($tel, -9, 1) == 0) ? true : false;
+           }
+           else{
+               $resultat = false;
+           }
+           return $resultat;
+       }
+    
     //VERIFICATION DE LA CORRESPONDANCE DES MOT DE PASSE
     public function verifCorrespondanceMdp(string $password,string $password_repeat) : bool
     {
@@ -121,7 +124,7 @@ class Controller {
     public function verifConnected(Application $app, Request $request){
         $pageName = strip_tags(trim($request->get("pagename")));
         if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida'])) {
-            return $app->redirect('/connected/' . $pageName);
+            return $app->redirect('/Coolloc/public/connected/' . $pageName);
         }else {
             return $app->redirect('/Coolloc/public/login');
         }
@@ -164,7 +167,7 @@ class Controller {
 
     public function sendMailStaff(string $user, array $message): bool{
       try {
-        
+
 
         global $app;
         $mail = $app['mail'];

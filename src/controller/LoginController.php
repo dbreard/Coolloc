@@ -24,9 +24,11 @@ class LoginController extends Controller
         //mdp : doit faire entre 6 et 20 caractères
         //mdp : doit être égal au mdp register lié à l'email register
 
-        ($this->verifEmail($email)) ?  : array_push($this->erreur,'Format de l\'email incorrect ');
-        ($this->verifMdp($password)) ?  : array_push($this->erreur, 'Format du mot de passe incorrect ');
-        
+
+        ($this->verifEmail($email)) ?  : $this->erreur['email'] = 'Format de l\'email incorrect ';
+        ($this->verifMdp($password)) ?  : $this->erreur['password'] = 'Format du mot de passe incorrect ';
+
+
 
         if (!empty($this->erreur))
         { // si il y a des erreurs lors de la connexion, on les affiche
@@ -38,11 +40,16 @@ class LoginController extends Controller
         { // si les formats d'email et mdp sont bons, l'user se connecte et crée un token
             $resultat = new UserModelDAO($app['db']);
             $userVerifEmail = $resultat->verifEmailBdd($email);
-                ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : array_push($this->erreur, 'Email ou mot de passe incorrect');
+                ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : $this->erreur['email_error'] = 'Email ou mot de passe incorrect';
                 // Vérifie si l'email de connexion correspond en BDD
+<<<<<<< HEAD
                 if (!empty($user))
                 { // Si la selection s'est bien passée
                     if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 ))) 
+=======
+                if (!empty($user)){
+                    if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 )))
+>>>>>>> dev_clonemaster
                     { // si les mot de passe cryptés correspondent
                         $tokenUser = new TokensDAO($app['db']);
                         $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
@@ -50,21 +57,28 @@ class LoginController extends Controller
                         if (!empty ($resultatToken))
                         { // si le token existe, on récupère sa valeur dans la session
                             $_SESSION['membre'] = array(
-                                'zoubida' => $resultatToken, 
-                                'status' => $user['status'],                         
+                                'zoubida' => $resultatToken,
+                                'status' => $user['status'],
                             );
                         }
                         else
                         {
-                            array_push($this->erreur, 'Erreur lors de la connexion');
-                        }                 
+
+                            $this->erreur['failed_connexion'] = 'Erreur lors de la connexion';
+
+                        }
                     }
                     else
                     {
-                        array_push($this->erreur, 'Email ou mot de passe incorrect');
+                        $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
                     }
+<<<<<<< HEAD
                     // var_dump($_SESSION['membre']);
                 }        
+=======
+
+                }
+>>>>>>> dev_clonemaster
         }
 
         if (empty($this->erreur)){
