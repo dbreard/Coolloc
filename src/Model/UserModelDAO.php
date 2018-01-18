@@ -33,8 +33,8 @@ class UserModelDAO {
             $resultat = $this->getDb()->fetchAssoc($sql, array((string) $password));
             return $resultat;
     }
-    
-      
+
+
     public function insertUSer(string $first_name,string $last_name,string $birthdate,string $password,string $email,string $tel,string $sexe,string $activite,int     $condition){
 
         $this->getDb()->insert('options', array());
@@ -73,6 +73,13 @@ class UserModelDAO {
 
         return $rowAffected;
 
+    }
+
+    public function updateUserStatus(string $idUser, string $status): int{
+      $sql = "UPDATE user SET status = ? WHERE id_user = ? ";
+      $rowAffected = $this->getDb()->executeUpdate( $sql, array((string) $status, (int) $idUser));
+
+      return $rowAffected;
     }
 
 

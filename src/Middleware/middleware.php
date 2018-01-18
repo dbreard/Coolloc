@@ -102,3 +102,14 @@ $verifParamAnnonce = function (Request $request, Application $app)
                           );
                       }
                     };
+
+//-----------------Verification validation premiere connexion-----------------//
+$verifStatus = function (Request $request, Application $app)
+                      {
+                        $retour = verifParam($request->request, array("statut"));
+
+                        if($retour["error"])
+
+                          return  $app->redirect("/Coolloc/public/profil");
+
+                      };

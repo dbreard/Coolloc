@@ -12,12 +12,79 @@
     {% include 'required/navigation_nc.html.twig' ignore missing  %}
     {# modif de la nav #}
 {% endblock %}
+
 {% block content %}
+{% if profilInfo.status == 'première connexion' %}
+
+<div class="register-area" style="background-color: rgb(249, 249, 249);">
+    <div class="container">
+
+        <div class="col-md-12">
+            <div class="box-for overflow">
+                <div class="col-md-12 col-xs-12 register-blocks ">
+                    <h2 class="col-md-12 col-xs-12 text-center ">Bienvenue {{ profilInfo.firstname }} sur Coolloc  : </h2>
+                        <!-- ouverture du contenu textuel -->
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2" >
+                                    <div class="row">
+                                       <h5 class="text-center">Avant de commencer, dites-nous ce que vous reherchez:</h5>
+                                    </div>
+                                    <!--  recherche colocataire -->
+
+                                    <div class="row">
+                                        <!--  recherche colocataire -->
+                                        {% if error.incorrect_status is defined %}
+                                          <span class="alert alert-danger col-xs-12 text-center">{{ error.incorrect_status }}</span>
+                                        {% elseif error.wrong_status is defined %}
+                                          <span class="alert alert-danger col-xs-12 text-center">{{ error.wrong_status }}</span>
+                                        {% endif %}
+                                        <div class="col-md-5 col-xs-12 choice ">
+                                        <h6 class="text-center">Vous êtes en recherche de colocation</h6>
+                                        <ul>
+                                            <Li>Accèdez aux coordonnées des colocations qui vous intéressent
+                                            <li>Affinez votre profil utilisateur en ajoutant des préférences</li>
+                                            <li>Publiez votre profil pour augmenter vos chances de trouver une colocation qui vous corresponde</li>
+                                        </ul>
+                                        <form method="post">
+                                          <input type="hidden" name="statut" value="cherche_colocation"/>
+                                          <button class="col-xs-10 col-xs-offset-1 navbar-btn nav-button wow bounceInRight login text-center" type="submit" data-wow-delay="0.45s">Continuer</button>
+                                        </form>
+                                        </div>
+                                        <!--  fin de bloc -->
+                                        <!--  recherche colocataire -->
+                                        <div class="col-md-5  col-md-offset-2  col-xs-12 choice " >
+                                        <h6 class="text-center">Vous êtes en recherche de colocataire</h6>
+                                        Propriétaire ou actuellement colocataire, une place dans votre colocation est disponible
+                                        <ul>
+                                            <li>Postez votre annonce en ligne</li>
+                                            <li>Utilisez les outils dédiés, tirelire participative pour le budget, gestion du frigo, emploi du temps de chacun... (prochainement)</li>
+                                        </ul>
+                                        <form method="post">
+                                          <input type="hidden" name="statut" value="cherche_colocataire"/>
+                                          <button class="col-xs-10 col-xs-offset-1  navbar-btn nav-button wow bounceInRight login text-center" type="submit" data-wow-delay="0.45s">Continuer</button>
+                                        </form>
+                                        </div>
+                                        <!--  fin de bloc -->
+                                    </div>
+                                    <!--  fin de row -->
+                                </p>
+                            </div>
+                        </div>
+                        <!-- fermeture du contenu textuel-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% else %}
+
 <div class="page-head">
     <div class="container">
         <div class="row">
             <div class="page-head-content">
-                <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.Prénom }}</span>{% else %}Ma bite{% endif %}</h1>
+          <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.firstname }}</span>{% else %}Ma bite{% endif %}</h1>
                 <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="http://www.rlsandbox.com/img/profile.jpg" width="10" height="10">
             </div>
         </div>
@@ -28,13 +95,25 @@
     <div class="row">
       <div class="col-sm-10">
           <div class="buttons col-sm-12">
-            <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes préférences</button>
-            <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes annonces</button>
+            {% if profilInfo.status == "cherche colocation" %}
+              {% if success is defined %}
+                <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en clickant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
+                <button type="button" class="btn btn-default col-xs-12 col-sm-4">Ajouter mes préférences</button>
+              {% else %}
+                <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes préférences</button>
+              {% endif %}
+            {% elseif profilInfo.status == "cherche colocataire" %}
+              <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes annonces</button>
+            {% elseif profilInfo.status == "admin" %}
+              <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes préférences</button>
+              <button type="button" class="btn btn-default col-xs-12 col-sm-4">Modifier mes annonces</button>
+            {% else %}
+            {% endif %}
           </div>
           <br>
       </div>
       <div class="col-sm-2">
-        <button type="button" class="btn btn-default col-xs-12">Témoigner</button>
+        <a type="button" href="" class="btn btn-default col-xs-12">Témoigner</a> <!-- RAJOUTER path ('temoigner') dans le href -->
       </div>
     </div>
     <br>
@@ -43,20 +122,24 @@
             <!--left col-->
         <ul class="list-group">
           <li class="list-group-item text-muted" contenteditable="false">Profil</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.Nom }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.Prénom }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.Email }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.Téléphone }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Statut</strong></span>{% if profilInfo is defined %}{{ profilInfo.Statut }}{% endif %}</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.lastname }}{% endif %}</li>
+      <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.firstname }}{% endif %}</li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.mail }}{% endif %}</li>
+  <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.tel }}{% endif %}</li>
+<li class="list-group-item text-right"><span class="pull-left"><strong class="">Statut</strong></span>{% if profilInfo is defined %}{{ profilInfo.status }}{% endif %}</li>
         </ul>
         <button type="button" class="btn btn-default col-xs-12">Modifier mon Profil</button>
       </div>
         <!--/col-3-->
+
       <div class="col-sm-9 col-xs-12" style="" contenteditable="false">
-        <div class="panel panel-default">
-          <div class="panel-heading">Vos préférences</div>
-          <div class="panel-body"> A loOOooOoOOong request in db by souksay for my description.</div>
-        </div>
+        {% if profilInfo.status == "cherche colocation" %}
+          <div class="panel panel-default">
+            <div class="panel-heading">Vos préférences</div>
+            <div class="panel-body"> A loOOooOoOOong request in db by souksay for my description.</div>
+          </div>
+        {% endif %}
+        {% if profilInfo.status == "cherche colocataire" %}
         <div class="panel panel-default target">
           <div class="panel-heading" contenteditable="false">Vos annonces publiées</div>
             <div class="panel-body">
@@ -91,9 +174,11 @@
               </div>
             </div>
           </div>
+        {% endif %}
         </div>
       <div id="push"></div>
     </div>
   <script src="/plugins/bootstrap-pager.js"></script>
 </div>
+{% endif %}
 {% endblock %}

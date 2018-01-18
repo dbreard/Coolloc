@@ -27,6 +27,7 @@
     // require __DIR__.'/../src/controller/IndexController.php';
     require __DIR__.'/../src/controller/ContactController.php';
     require __DIR__.'/../src/controller/AnnonceController.php';
+    require __DIR__.'/../src/controller/StatusController.php';
 
     require __DIR__.'/../src/Model/Model.php';
     require __DIR__.'/../src/Model/UserModelDAO.php';

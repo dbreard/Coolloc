@@ -160,9 +160,7 @@ $app->get('/connected/profil', function () use ($app) {
     return $app['twig']->render('connected/profil.html.twig', array("profilInfo" => $profilInfo));
 })
     ->bind('profil');
-$app->post('/connected/profil', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStatusAction')->before($verifStatus);
 
 
 //AJOUT ANNONCE
