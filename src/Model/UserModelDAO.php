@@ -70,8 +70,8 @@ class UserModelDAO {
     // CHANGEMENT DE MOT DE PASSE
     public function modifyPasswordFromToken(int $idUser, string $password) {
         
-        $sql = "UPDATE user SET password = ? WHERE id_user = ? ";
-        $rowAffected = $this->getDb()->executeUpdate( $sql, array((int) $idUser["user_id"]), array((string)$password["password"]) );
+        $sql = "UPDATE user SET password = :password WHERE id_user = :id ";
+        $rowAffected = $this->getDb()->executeUpdate( $sql, array('password' => $password, 'id' => $idUser ));
 
         return $rowAffected;
 
