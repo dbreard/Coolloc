@@ -229,10 +229,18 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 });
 
 
+//AJOUT DETAILS PROFIL
+$app->get('/connected/ajout-details-profil', function () use ($app) {
+    return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
+})
+    ->bind('ajout-details-profil');
+$app->post('/connected/ajout-details-profil', function () use ($app) {
+    //controleur
+});
+
+
 //ajout temoignage
 $app->get('connected/temoigner', function () use ($app) {
-
-    
     return $app['twig']->render('/connected/temoigner.html.twig', array());
 })
     ->bind('temoigner');
