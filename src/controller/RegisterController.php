@@ -56,7 +56,7 @@ class RegisterController extends Controller
         (!$this->verifEmail($email)) ?  : $verifEmailBdd = new UserModelDAO($app['db']);
         (isset($verifEmailBdd))? $resultat = $verifEmailBdd->verifEmailBdd($email) : $this->erreur['invalid_email'] = 'Email invalide' ;
 
-        (!empty($resultat)) ? : $this->erreur['email_already_exist'] = 'L\'Email est deja utilisé';
+        (empty($resultat)) ?  : $this->erreur['email_already_exist'] = 'L\'Email est deja utilisé';
 
 
         //tel : type number et 10 caractère et rajouter +33 et si 9 chiffre ne rien suppr si 10 suppr le 1er
