@@ -42,15 +42,15 @@ class LoginController extends Controller
             $userVerifEmail = $resultat->verifEmailBdd($email);
                 ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : $this->erreur['email_error'] = 'Email ou mot de passe incorrect';
                 // Vérifie si l'email de connexion correspond en BDD
-<<<<<<< HEAD
+
                 if (!empty($user))
                 { // Si la selection s'est bien passée
                     if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 ))) 
-=======
-                if (!empty($user)){
-                    if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 )))
->>>>>>> dev_clonemaster
+
                     { // si les mot de passe cryptés correspondent
+
+                        // vérifier si l'utilisateur est actif ou non
+
                         $tokenUser = new TokensDAO($app['db']);
                         $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
                         // générer le token en fonction de id_user
@@ -72,17 +72,13 @@ class LoginController extends Controller
                     {
                         $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
                     }
-<<<<<<< HEAD
-                    // var_dump($_SESSION['membre']);
-                }        
-=======
+
 
                 }
->>>>>>> dev_clonemaster
-        }
 
+        }
         if (empty($this->erreur)){
-            return $app->redirect('\Coolloc\public\connected\profil');
+            return $app->redirect('/Coolloc/public/connected/profil');
         }
         else
         {

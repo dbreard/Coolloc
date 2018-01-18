@@ -21,6 +21,11 @@ class ChangePassController extends Controller
         $password_repeat = strip_tags(trim($request->get("password_repeat")));
 
 
+
+        //mdp : doit faire entre 6 et 20 caractères
+        //mdp : mdp 1 = mdp 2
+        //mdp : UPDATE en BDD
+
         ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : array_push($this->erreur, 'Les mots de passe ne correspondent pas ');
         ($this->verifMdp($password)) ?  : array_push($this->erreur, 'Format du mot de passe incorrect  ');
 
@@ -36,28 +41,31 @@ class ChangePassController extends Controller
             $resultat = new UserModelDAO($app['db']);
             $idUser = $resultat->selectUserFromToken($token);
 
+
             if(!$idUser) // SI AUCUN UTILISATEUR NE CORRESPOND AU TOKEN
-                return $app['twig']->render('basic/change-password.html.twig', array(
+                return $app['twig']->render('formulaires/change-password.html.twig', array(
                     "error" => 'Erreur lors du changement de mot de passe veuillez réessayer',
                 ));
             else
             {
-                $updateUser = new UserModelDAO($app['db']); // MODIFICATION DU MDP DE L'UTILISATEUR
+
+                $updateUser = new UserModelDAO($app['db']); // MODIFICATION DU MDP UTILISATEUR
                 $rowAffected = $updateUser->modifyPasswordFromToken($password, $idUser['user_id']);
 
-                if($rowAffected == 1){ // SI LE MDP DE L'UTILISATEUR A BIEN ETE MODIFIER ON DELETE LE TOKEN
+
+                if($rowAffected == 1) { // SI LE MDP DE L'UTILISATEUR A BIEN ETE MODIFIER
                     $deleteToken = new TokensDAO($app['db']);
-                    $rowAffectedDeleteToken = $delete->deleteToken($token);
-                }else{ // SI LE TOKEN N'A PAS ETE SUPPRIMER 
-                    return $app['twig']->render('basic/change-password.html.twig', array(
-                        "error" => 'Erreur lors du changement de mot de passe veuilleza réssayer',
+                    $rowAffectedDeleteToken = $deleteToken->deleteToken($token);
+                }else{
+                    return $app['twig']->render('formulaires/change-password.html.twig', array(
+                        "error" => 'Erreur lors du changement de mot de passe veuillez réessayer',
                     ));
                 }
 
-                if ($rowAffectedDeleteToken == 1){
+
+                if($rowAffectedDeleteToken == 1) { // SI LE TOKEN A BIEN ETE SUPPRIMER
                     return $app->redirect('/Coolloc/public/login');
                 }
-                
             }
         }
     }

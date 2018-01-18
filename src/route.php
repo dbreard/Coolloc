@@ -83,6 +83,7 @@ $app->get('/forgotten-password', function () use ($app) {
 $app->post('/forgotten-password', "Coolloc\Controller\ForgotPassController::forgotPassAction")->before($verifParamForgotPass);
 
 
+
 //CHANGER MDP PAR LE PROFIL
 $app->get('/change-password', function () use ($app) {
     return $app['twig']->render('basic/change-password.html.twig', array());
@@ -91,13 +92,13 @@ $app->get('/change-password', function () use ($app) {
 $app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePass);
 
 
-
 //CHANGER MDP OUBLIER PAR EMAIL
 $app->get('/change-password/{token}', function ($token) use ($app) {
     return $app['twig']->render('basic/change-password.html.twig', array());
 })
     ->bind('change-password');
 $app->post('/change-password/{token}', "Coolloc\Controller\ChangePassController::changePassForgottenAction")->before($verifParamChangePass);
+
 
 
 //FAQ
