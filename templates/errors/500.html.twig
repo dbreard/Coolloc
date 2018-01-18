@@ -1,5 +1,38 @@
 {% extends "layout.html.twig" %}
 
+{% block headTitle %}
+    Erreur 500 | CoolLoc, la colocation cool !
+{% endblock %}
+
+{# Bloc nav #}
+
+{% block navigation %}
+    
+    {# {% if  is defined %}
+        <p>connecté</p> #}
+        {# {% include 'required/navigation_c.html.twig' ignore missing  %}
+    {% else %}
+        <p>non connecté</p> #}
+        {% include 'required/navigation_nc.html.twig' ignore missing  %}
+    {# {% endif %} #}
+    
+{% endblock %}
+
 {% block content %}
-    Internal server error.
+    <div class="content-area error-page" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <h2 class="error-title">Erreur 500</h2>
+                    <p>
+                        Cette page est temporairement indisponible en raison d'une erreur interne du serveur.
+                        <br />
+                        Nous vous prions de nous excuser pour la gêne occasionnée.
+                        <br />
+                        Nous vous invitons à revenir à la <a href="{{ path('accueil') }}">page d'acceuil</a> de notre site.
+                    </p>
+                </div>
+            </div> 
+        </div>
+    </div>
 {% endblock %}
