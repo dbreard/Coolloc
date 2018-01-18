@@ -64,7 +64,7 @@ class Controller {
            }
            return $resultat;
        }
-    
+
     //VERIFICATION DE LA CORRESPONDANCE DES MOT DE PASSE
     public function verifCorrespondanceMdp(string $password,string $password_repeat) : bool
     {
@@ -138,7 +138,60 @@ class Controller {
 
     }
 
+    // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
+    public function formatCity($city) {
+        $cityClean = strip_tags(trim($city));
+        $cityClean = ucwords ($cityClean);
+        $cityClean = str_replace(" ", "-", $cityClean);
+        $cityClean = str_replace("_", "-", $cityClean);
+        return $cityClean;
+    }
 
+    // VERIF DES CHAMPS EN OUI/NON/PEU IMPORTE
+    public function validSelect(string $champs, string $name) {
+
+        // $champs => le champs a vérifier ($request->get(''))
+        // $name => Pour personnalisé le message d'erreur
+
+        $champs = strip_tags(trim($champs));
+        if ($champs != 'oui' && $champs != 'non' && $champs != 'peu importe') {
+            array_push($this->erreur, "Saisie incorrecte sur le champs '" . $name . "'");
+        }else {
+            return $champs;
+        }
+    }
+
+    // VERIF DES TABLEAUX DISTRICT / EQUIPMENT / MEMBER_PROFIL / HOBBIES
+    public function validArray(array $arrayPost, array $arrayCompare, string $name) {
+        // $arrayPost => le tableau envoyé par le formulaire
+        // $arrayCompare => le tableau de comparaison
+        // $name => nom du talbeau pour l'erreur
+        if (!empty($arrayPost)) {
+            // on créer une variable de réception
+            $stringRetour = "";
+            // on créer un tableau pour faire le comparatif
+            $arrayCheck = array();
+            // boucle sur l'ensemble des données
+            foreach ($arrayPost as $key => $value) {
+                // on nettoi chaque valeur
+                $value = strip_tags(trim($value));
+                // pour chaque valeur on vérifie si elle est valide
+                foreach ($arrayCompare as $key2 => $value2) {
+                    // Si oui on check
+                    if ($value == $value2) {
+                        array_push($arrayCheck, "check");
+                    }
+                }
+            }
+            // Si le nombre de valeur ne correspond pas au nombre de check erreur
+            if (count($arrayCheck) != count($arrayPost)) {
+                array_push($this->erreur, "Problème de selection dans '" . $name . "'");
+            }else { // Sinon on serialize notre tableau en string
+                $stringRetour = serialize($arrayPost);
+                return $stringRetour;
+            }
+        }
+    }
 
 
     //********** GETTER ***********//

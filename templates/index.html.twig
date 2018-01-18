@@ -14,11 +14,14 @@
 {% block content %}
 <div class="slider-area">
 
+    {% if error is defined %}
+        <div>{{ error }}</div>
+    {% endif %}
+
     {% block slider %}
         {# insertion des images du slideshow #}
         {% include 'required/slider.html.twig' ignore missing  %}
     {% endblock %}
-    
 
     {# fin de slider #}
 
@@ -27,13 +30,13 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                 <h2>CoolLoc </h2>
                 <p>La façon la plus cool de trouver une colocation qui vous ressemble !</p>
-                
+
                 {% block search %}
                     {# insertion du formulaire de recherche #}
                     {% include 'required/search.html.twig' ignore missing  %}
                 {% endblock %}
 
-                
+
             </div>
         </div>
     </div>

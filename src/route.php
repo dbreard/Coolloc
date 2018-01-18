@@ -23,18 +23,14 @@ $app->get('/', function () use ($app) {
 
 })
 ->bind('accueil');
-$app->post('/', function () use ($app) {
-    //controleur
-});
+$app->post('/', "Coolloc\Controller\SearchController::searchAction");
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {
     return $app['twig']->render('details-annonce.html.twig', array());
 })
     ->bind('resultat-recherche');
-$app->post('/resultat-recherche', function () use ($app) {
-    //controleur
-});
+
 
 //DETAILS ANNONCE NON CONNECTER
 $app->get('/details-annonce-non-connecter', function () use ($app) {

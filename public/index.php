@@ -21,10 +21,10 @@
     require __DIR__.'/../src/controller/Controller.php';
     require __DIR__.'/../src/controller/RegisterController.php';
 
+    require __DIR__.'/../src/controller/SearchController.php';
     require __DIR__.'/../src/controller/LoginController.php';
     require __DIR__.'/../src/controller/ChangePassController.php';
     require __DIR__.'/../src/controller/ForgotPassController.php';
-    // require __DIR__.'/../src/controller/IndexController.php';
     require __DIR__.'/../src/controller/ContactController.php';
     require __DIR__.'/../src/controller/AnnonceController.php';
 
@@ -32,6 +32,7 @@
     require __DIR__.'/../src/Model/UserModelDAO.php';
     require __DIR__.'/../src/Model/AnnonceModelDAO.php';
     require __DIR__.'/../src/Model/TokensDAO.php';
+    require __DIR__.'/../src/Model/SearchAnnonceModelDAO.php';
 
     require __DIR__.'/../src/route.php';
 

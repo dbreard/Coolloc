@@ -81,7 +81,7 @@ class AnnonceController extends Controller
             }
         }
 
-        // ADRESSE DETAILLES
+        // TYPE DE BIEN
         $housing_type = strip_tags(trim($request->get('housing_type')));
         if (!empty($housing_type)) {
             if ($housing_type != 'maison' && $housing_type != 'appartement' && $housing_type != 'loft' && $housing_type != 'hotel particulier' && $housing_type != 'corps de ferme' && $housing_type != 'autre') {
@@ -396,8 +396,12 @@ class AnnonceController extends Controller
             // die();
 
             $annonce = new AnnonceModelDAO($app['db']);
-            $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
-            // $createAnnonce = $annonce->createAnnonce(string $name_coloc, float $rent, string $description, int $postal_code, string $adress, string $city, string $date_dispo, int $nb_roommates, bool $conditions, string $mail_annonce, int $tel_annonce, string $adress_details, float $surface, int $nb_room, string $handicap_access, string $smoking, string $sex_roommates, string $furniture, string $garden, string $balcony, string $parking, string $video, string $district, string $equipment, string $memberProfil, string $hobbies);
+
+            if ($annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app)) {
+                return $app['twig']->render('/connected/fiche-annonce.html.twig', array());
+            }else {
+                return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
+            }
         }
     }
 }
