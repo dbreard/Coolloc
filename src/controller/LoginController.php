@@ -49,7 +49,10 @@ class LoginController extends Controller
 
                     { // si les mot de passe cryptés correspondent
 
+
+                        // vérifier le account actif-inactif
                         // vérifier si l'utilisateur est actif ou non
+
 
                         $tokenUser = new TokensDAO($app['db']);
                         $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
@@ -72,6 +75,11 @@ class LoginController extends Controller
                     {
                         $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
                     }
+
+
+                }        
+        }
+
 
 
                 }

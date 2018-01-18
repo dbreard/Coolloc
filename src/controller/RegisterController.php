@@ -48,8 +48,10 @@ class RegisterController extends Controller
 
         //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
 
+
         ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur['password_correspondance'] = 'Les mots de passe ne correspondent pas';
         ($this->verifMdp($password)) ? $password = password_hash($password, PASSWORD_DEFAULT) . md5('bruh') : $this->erreur['password'] = 'Format mot de passe incorrect';
+
 
 
         //Vérification d'email :
@@ -109,6 +111,7 @@ class RegisterController extends Controller
 
     }
 
+    // FONCTIOON DE VERIFICATION EMAIL POUR INSCRIPTION
     public function verifEmailAction (Application $app, Request $request){
         $token = strip_tags(trim($request->get("token"))); // ON RECUPERE LE TOKEN DANS L'URL
 
