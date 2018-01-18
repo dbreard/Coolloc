@@ -43,6 +43,9 @@ class LoginController extends Controller
                 if (!empty($user)){
                     if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 ))) 
                     { // si les mot de passe cryptés correspondent
+
+                        // vérifier le account actif-inactif
+
                         $tokenUser = new TokensDAO($app['db']);
                         $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
                         // générer le token en fonction de id_user

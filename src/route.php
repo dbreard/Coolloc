@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Coolloc\Controller\Controller;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
@@ -17,9 +18,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 //ROUTE HOME
 $app->get('/', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('index.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('index.html.twig', array()) ;
+    }
 
     // si internaute non connecté rdv vers index-nc.html.twig autrement rdv vers index-c.html.twig
-    return $app['twig']->render('index.html.twig', array());
+    // return $app['twig']->render('index.html.twig', array());
 
 })
 ->bind('accueil');

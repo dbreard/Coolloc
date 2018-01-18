@@ -131,6 +131,14 @@ class Controller {
 
     }
 
+    public static function ifConnected(){
+        if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida'])) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     // VERIFIE SI L'UTILISATEUR EST CONNECTER ET ADMIN
     public function verifConnectedAdmin(Application $app, Request $request){
         $pageName = strip_tags(trim($request->get("pagename")));
