@@ -56,11 +56,14 @@ class Controller {
            if (iconv_strlen($tel) == 10){
                $resultat = (substr($tel, -10, 1) == 0) ? true : false;
            }
-           if (iconv_strlen($tel) == 12){
+           else if (iconv_strlen($tel) == 12){
                $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
            }
-           if (iconv_strlen($tel) == 9){
+           else if (iconv_strlen($tel) == 9){
                $resultat = (substr($tel, -9, 1) == 0) ? true : false;
+           }
+           else{
+               $resultat = false;
            }
            return $resultat;
        }
