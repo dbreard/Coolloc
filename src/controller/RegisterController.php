@@ -35,50 +35,55 @@ class RegisterController extends Controller
         $status = strip_tags(trim($request->get("status")));
 
         //prénom : supérieur ou = a 2 inférieur a 50
-        (iconv_strlen($first_name) >= 2 && iconv_strlen($first_name) <= 50) ?: array_push($this->erreur, 'Votre prénom doit être compris entre 2 et 50 caractères');
+        (iconv_strlen($first_name) >= 2 && iconv_strlen($first_name) <= 50) ?: $this->erreur['firstname'] = 'Votre prénom doit être compris entre 2 et 50 caractères';
 
 
         //nom : supérieur ou = a 2 inférieur a 50
-        (iconv_strlen($last_name) >= 2 && iconv_strlen($last_name) <= 50) ?: array_push($this->erreur, 'Votre nom doit être compris entre 2 et 50 caractères');
+        (iconv_strlen($last_name) >= 2 && iconv_strlen($last_name) <= 50) ?: $this->erreur['lastname'] = 'Votre nom doit être compris entre 2 et 50 caractères';
 
 
         //date de naissance : avoir au moin 18ans
-        (($date - $birthdateFormatage) > 180000) ?: array_push($this->erreur, 'Vous êtes trop jeune');
+        (($date - $birthdateFormatage) > 180000) ?: $this->erreur['younger'] = 'Vous êtes trop jeune';
 
 
         //mdp : entre 6 et 20 caractère et mdp 1 = mdp 2
-        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : array_push($this->erreur , 'Les mots de passe ne correspondent pas');
-        ($this->verifMdp($password)) ? $password = password_hash($password, PASSWORD_DEFAULT) . md5('bruh') : array_push($this->erreur , 'Format mot de passe incorrect');
+
+
+        ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur['password_correspondance'] = 'Les mots de passe ne correspondent pas';
+        ($this->verifMdp($password)) ? $password = password_hash($password, PASSWORD_DEFAULT) . md5('bruh') : $this->erreur['password'] = 'Format mot de passe incorrect';
+
+
 
         //Vérification d'email :
-        (!$this->verifEmail($email)) ? array_push($this->erreur, 'Email invalide') : $verifEmailBdd = new UserModelDAO($app['db']);
-        $resultat = $verifEmailBdd->verifEmailBdd($email);
-        (empty($resultat)) ?: array_push($this->erreur, 'L\'Email est deja utilisé');
+        (!$this->verifEmail($email)) ?  : $verifEmailBdd = new UserModelDAO($app['db']);
+        (isset($verifEmailBdd))? $resultat = $verifEmailBdd->verifEmailBdd($email) : $this->erreur['invalid_email'] = 'Email invalide' ;
+
+        (empty($resultat)) ?  : $this->erreur['email_already_exist'] = 'L\'Email est deja utilisé';
 
 
         //tel : type number et 10 caractère et rajouter +33 et si 9 chiffre ne rien suppr si 10 suppr le 1er
-        ($this->verifTel($tel)) ? $tel = $this->modifyTel($tel) : array_push($this->erreur, 'Format de téléphone incorect');
+        ($this->verifTel($tel)) ? $tel = $this->modifyTel($tel) : $this->erreur['incorrect_phone'] = 'Format de téléphone incorect';
 
 
         //sexe : une des 2 value (femme / homme)
-        ($sexe == 'femme' || $sexe == 'homme') ?: array_push($this->erreur, 'veuillez préciser un sexe valide');
+        ($sexe == 'femme' || $sexe == 'homme') ?: $this->erreur['sex_error'] = 'veuillez préciser un sexe valide';
 
 
         //activité : au moin 1 activité de choisie
-        ($activite == 'activité pro' || $activite == 'retraité' || $activite == 'sans activité' || $activite == 'étudiant') ?: array_push($this->erreur, 'veuillez préciser une activité valide');
+        ($activite == 'activité pro' || $activite == 'retraité' || $activite == 'sans activité' || $activite == 'étudiant') ?: $this->erreur['activity_error'] = 'veuillez préciser une activité valide';
 
 
         //condition : doit être égal a 1
-        ($condition == 1) ?: array_push($this->erreur, 'veuillez accepter les conditions d\'utilisation');
+        ($condition == 1) ?: $this->erreur['no_condition'] = 'veuillez accepter les conditions d\'utilisation';
 
         //Status égal à inactif
-        ($status == 'inactif') ?: array_push($this->erreur, 'veuillez accepter les conditions d\'utilisation');
+        ($status == 'inactif') ?: $this->erreur['accept_condition'] = 'veuillez accepter les conditions d\'utilisation';
 
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
             return $app['twig']->render('formulaires/register.html.twig', array(
-                "error" => $this->erreur,
+                "error" => $this->erreur, "email" => $email, "birthdate" => $birthdate, "firstname" => $first_name, "lastname" => $last_name, "tel" => $tel,
             ));
         } else { // SI IL N'Y A PAS D'ERREUR
             $insertUser = new UserModelDAO($app['db']);

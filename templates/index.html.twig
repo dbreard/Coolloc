@@ -8,11 +8,13 @@
 {# Bloc nav #}
 
 {% block navigation %}
+
     {% if connected is defined %}
     {% include 'required/navigation_c.html.twig' ignore missing  %}
         {% else %}
     {% include 'required/navigation_nc.html.twig' ignore missing  %}
     {% endif %}
+
 {% endblock %}
 
 {% block content %}

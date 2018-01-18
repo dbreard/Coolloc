@@ -13,14 +13,13 @@ class Model {
         $this->db = $connect;
     }
 
-
     public function verifEmailBdd(string $email){
         $sql = "SELECT email FROM user WHERE token = ? AND type LIKE 'email'";
         $idUser = $app['db']->fetchAssoc($sql, array((string) $token));
     }
 
-    public static function userByTokenSession(string $token): array {
-        $sql = "SELECT uo.* FROM user_options uo, token t WHERE t.token = ? AND t.user_id = uo.id_user";
+    public static function userByTokenSession(string $token, Application $app): array {
+        $sql = "SELECT user_options.* FROM user_options, tokens WHERE tokens.token = ? AND tokens.user_id = user_options.id";
         $user = $app['db']->fetchAssoc($sql, array((string) $token));
         return $user;
     }
