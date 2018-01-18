@@ -235,12 +235,10 @@ $app->post('/connected/admin/gerer-contenu', function () use ($app) {
 //*** ROUTE ERREUR***//
 //*******************//
 
-
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
     }
-
     // 404.html, or 40x.html, or 4xx.html, or error.html
     $templates = array(
         'errors/'.$code.'.html.twig',
@@ -251,3 +249,4 @@ $app->error(function (\Exception $e, Request $request, $code) use ($app) {
 
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
+

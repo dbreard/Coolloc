@@ -100,4 +100,16 @@ span.exposant {
 }
 
 
+/* page erreurs */
 
+.page-title h2.error-title {
+    font-size : 46px;
+    font-weight: bold;
+}
+
+.page-title p {
+    font-weight: bold;
+}
+.page-title p.retour-accueil{
+    font-weight: normal;
+}
