@@ -51,7 +51,7 @@ class CommentController extends Controller
         
             }
 
-            
+
 
         if (!empty($this->erreur))
         { // si il y a des erreurs lors de la connexion, on les affiche
