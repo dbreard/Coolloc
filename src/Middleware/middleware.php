@@ -42,16 +42,18 @@ $verifParamLogin = function (Request $request, Application $app)
                         return $app->redirect("/Coolloc/public/login");
                       };
 
-// Middleware pour mot de passe oublie
-$verifParamForgotPass = function (Request $request)
+                      
+$verifParamForgotPass = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail"));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/forgotten-password");
                       };
 
-// Middleware pour changer mot de passe                      
-$verifParamChangePass = function (Request $request)
+
+
+$verifParamChangePass = function (Request $request, Application $app)
+
                       {
                         $retour = verifParam($request->request, array("password", "password_repeat"));
                         if($retour["error"])
