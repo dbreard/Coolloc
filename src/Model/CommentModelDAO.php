@@ -14,21 +14,16 @@ class CommentModelDAO
 
 
 
-public function createComment(int $id_user,string $comment): ? string{
-    $this->getDb()->insert('comments', array(
-        'comment' => $comment,
+public function createComment(int $id_user, string $comment){
+   $rowAffected = $this->getDb()->insert('comments',  array(
         'user_id' => $id_user,
+        'comment' => $comment,
+        
     ));
 
-}
+return $rowAffected;
 
-public function DeleteComment(int $id_user,string $comment): ? string{
-        $this->getDb()->insert('comments', array(
-        'comment' => $comment,
-        'user_id' => $id_user,
 
-));
-    return $comment;
 }
 
     //******* GETTER *********//

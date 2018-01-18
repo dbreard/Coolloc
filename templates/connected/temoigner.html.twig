@@ -61,6 +61,7 @@
                                                 <br>Ce message ne doit contenir ni commentaire de type raciste, sexiste ou injurieux, nous nous réservons le droit de le supprimer avant parution</label>
                                                 <input name="comment" type="text" class="form-control">
                                             </div>
+                                            <input type="hidden" name="user_id" value="{% if profilInfo.id is defined %}{{profilInfo.id}}{% else %}Youloose{% endif %}"/>
                                             
                                             
                                             <div class="text-center">
