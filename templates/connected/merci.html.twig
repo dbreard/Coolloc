@@ -1,0 +1,63 @@
+{% extends"layout-connected.html.twig" %}
+
+
+{% block headTitle %}
+    Merci ! | CoolLoc, la colocation cool !
+{% endblock %}
+
+{# Bloc nav #}
+
+{% block navigation %}
+    {% include 'required/navigation_c.html.twig' ignore missing  %}
+{% endblock %}
+
+{% block content %}
+    {% if error is defined %}
+    {{ error }}
+    {% endif %}
+        <div class="page-head">
+            <div class="container">
+                <div class="row">
+                    <div class="page-head-content">
+                        <h1 class="page-title">Validation de votre inscription </h1>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page header -->
+
+        <div class="register-area" style="background-color: rgb(249, 249, 249);">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <div class="box-for overflow">
+                        <div class="col-md-12 col-xs-12 register-blocks ">
+                            <h2 class="col-md-12 col-xs-12 text-center ">Merci ! pour votre commentaire </h2>
+
+                                <!-- ouverture du contenu textuel -->
+                                <div class="row">  
+                                    <div class="col-sm-8 col-sm-offset-2" >
+
+                                        <p>
+                                        Bon ou mauvais, nous assumons. Nous vérifierons simplement que ce message n'est pas injurieux ou à caractère sexiste ou raciste, si tel était le cas nous nous autoriserons à le supprimer.
+                                        </p>
+
+                                            
+                                        
+                                        
+
+                                        
+                                    </div> 
+                                </div>
+                                <!-- fermeture du contenu textuel-->
+                            
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
+
+{% endblock %}

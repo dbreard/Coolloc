@@ -32,6 +32,8 @@
     require __DIR__.'/../src/Model/UserModelDAO.php';
     require __DIR__.'/../src/Model/AnnonceModelDAO.php';
     require __DIR__.'/../src/Model/TokensDAO.php';
+    require __DIR__.'/../src/Model/CommentModelDAO.php';
+
 
     require __DIR__.'/../src/route.php';
 
