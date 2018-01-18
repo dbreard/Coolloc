@@ -82,13 +82,17 @@ $app->post('/inscription', "Coolloc\Controller\RegisterController::registerActio
 $app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
 
 
-// confirmation mail
-$app->get('/confirmation-email', function () use ($app) {
+// confirmation mail inscription
+$app->get('/confirmation', function () use ($app) {
     return $app['twig']->render('confirmation.html.twig', array());
 })
     ->bind('confirmation');
 
-
+//confirmation mail mdp oublié
+$app->get('/confirmation-oublie', function () use ($app) {
+    return $app['twig']->render('confirmation-oublie.html.twig', array());
+})
+    ->bind('confirmation-oublie');
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
@@ -137,14 +141,6 @@ $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->b
 
 
 //*** ROUTES GET ***//
-
-
-
-//confirmation
-$app->get('/confirmation', function () use ($app) {
-    return $app['twig']->render('confirmation.html.twig', array());
-})
-    ->bind('confirmation');
 
 
 //MERCI

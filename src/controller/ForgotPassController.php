@@ -58,10 +58,7 @@ class ForgotPassController extends Controller
 
         if(empty($this->erreur))
         {
-            array_push($this->erreur, 'Email envoyé ');
-            return $app['twig']->render('basic/forgotten-password.html.twig', array(
-                "error" => $this->erreur,
-            ));
+            return $app['twig']->render('confirmation-oublie.html.twig');
         }
         else
         {
