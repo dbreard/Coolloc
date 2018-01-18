@@ -113,6 +113,12 @@ $app->get('/confirmation', function () use ($app) {
 })
     ->bind('confirmation');
 
+//MERCI
+$app->get('/merci', function () use ($app) {
+    return $app['twig']->render('connected/merci.html.twig', array());
+})
+    ->bind('merci');
+
 //MENTIONS LEGALES
 $app->get('/mentions-legales', function () use ($app) {
     return $app['twig']->render('mentions-legales.html.twig', array());
@@ -183,6 +189,14 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
     //controleur
 });
 
+//ajout temoignage
+$app->get('connected/temoigner', function () use ($app) {
+    return $app['twig']->render('/connected/temoigner.html.twig', array());
+})
+    ->bind('temoigner');
+$app->post('/connected/temoigner', 'Coolloc\Controller\CommentController::commentAction')->before($verifParamComment);
+
+
 //*** ROUTES GET ***//
 
 // deconnexion
@@ -194,6 +208,10 @@ $app->get('/connected/deconnexion', function () use ($app) {
 //*************************************//
 //*** ROUTE AVEC CONNECTION ET ADMIN***//
 //*************************************//
+
+
+
+
 
 //GERER USER
 $app->get('/connected/admin/gerer-user', function () use ($app) {

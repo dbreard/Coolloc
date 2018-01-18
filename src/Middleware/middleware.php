@@ -25,6 +25,7 @@ function verifParam($request , $verifRequest = array()) :array
 }
 
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
+// Middleware pour inscription
 $verifParamRegister = function (Request $request, Application $app)
                       {
 
@@ -32,18 +33,24 @@ $verifParamRegister = function (Request $request, Application $app)
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/inscription");
                       };
+
+// Middleware pour connexion
 $verifParamLogin = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail","password"));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/login");
                       };
+
+// Middleware pour mot de passe oublie
 $verifParamForgotPass = function (Request $request)
                       {
                         $retour = verifParam($request->request, array("mail"));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/forgotten-password");
                       };
+
+// Middleware pour changer mot de passe                      
 $verifParamChangePass = function (Request $request)
                       {
                         $retour = verifParam($request->request, array("password", "password_repeat"));
@@ -69,7 +76,6 @@ $verifContact = function (Request $request, Application $app)
 
                       };
 
-//------------------fin middleware form contact ------------------------------//
 
 
 // VERIFICATION PARAMETRES D'ANNONCE
@@ -102,3 +108,14 @@ $verifParamAnnonce = function (Request $request, Application $app)
                           );
                       }
                     };
+
+
+// Middleware pour commentaires utilisateurs / témoignages du site home page
+
+$verifParamComment = function (Request $request, Application $app)
+                      {
+
+                        $retour = verifParam($request->request, array("comment"));
+                        if($retour["error"])
+                        return $app->redirect("/Coolloc/public/connected/temoigner");
+                      };
