@@ -308,12 +308,6 @@ $app->post('/connected/admin/gerer-contenu', function () use ($app) {
 //*** ROUTE ERREUR***//
 //*******************//
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> dev_clonemaster
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
