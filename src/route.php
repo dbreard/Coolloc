@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Coolloc\Controller\Controller;
+use Coolloc\Model\Model;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
@@ -147,7 +148,7 @@ $app->get('/confirmation', function () use ($app) {
 
 
 //MERCI
-$app->get('/merci', function () use ($app) {
+$app->get('connected/merci', function () use ($app) {
     return $app['twig']->render('connected/merci.html.twig', array());
 })
     ->bind('merci');
@@ -234,6 +235,8 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 //ajout temoignage
 $app->get('connected/temoigner', function () use ($app) {
+
+    
     return $app['twig']->render('/connected/temoigner.html.twig', array());
 })
     ->bind('temoigner');
