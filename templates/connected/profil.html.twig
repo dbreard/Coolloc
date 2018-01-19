@@ -105,11 +105,8 @@
               {% else %}
                 <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil')}}">Modifier mes préférences</a>
               {% endif %}
-            {% elseif profilInfo.status == "cherche colocataire" %}
-              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
             {% elseif profilInfo.status == "admin" %}
               <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil') }}">Modifier mes préférences</a>
-              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
             {% else %}
             {% endif %}
           </div>
