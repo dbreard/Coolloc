@@ -43,7 +43,12 @@ class UpdateDetailsProfilModelDAO{
         (string) $arrayDetailsProfil['member_profil'],
         (string) $idOption['options_id']));
 
-      return true;
+      if ($rowAffected == 1){
+        return true;
+      }
+      else{
+        return false;
+      }
 
 
     }

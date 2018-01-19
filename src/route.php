@@ -333,7 +333,9 @@ $app->get('/connected/ajout-details-profil', function () use ($app) {
     if (!$isconnected) {
         return $app->redirect('/../Coolloc/public/login');
     } else {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
+        $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $options = Model::userOptionOnly($idUser['id_user'], $app);
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options));
     }
 })
     ->bind('ajout-details-profil');

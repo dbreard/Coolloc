@@ -145,23 +145,40 @@
             <div class="panel-body">
               {% if success is defined %}
                 <div class="alert alert-warning text-center">Vos préférences actuelles ont été définies par défaut. Pour les personnaliser, veuillez cliquer sur le bouton AJOUTER MES PREFERENCES</div>
-                <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="path ('ajout-details-profil')">Ajouter mes préférences</a>
+                <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="{{path ('ajout-details-profil')}}">Ajouter mes préférences</a>
               {% endif %}
               {% if userOption is defined %}
                 <ul>
                   {% if userOption == "" %}
                   {% else %}
-                    <li><b>J'ai besoin d'un acces handicapé&nbsp;: </b>{{userOption.handicap_access}}</li>
-                    <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
-                    <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
+                    {% if userOption.handicap_access != "" %}
+                      <li><b>J'ai besoin d'un acces handicapé&nbsp;: </b>{{userOption.handicap_access}}</li>
+                    {% endif %}
+                    {% if userOption.smoking != "" %}
+                      <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
+                    {% endif %}
+                    {% if userOption.animals != "" %}
+                      <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
+                    {% endif %}
                     {% if userOption.equipment != "" %}
                       <li><b>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
                     {% endif %}
-                    <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
-                    <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
-                    <li><b>Je veux un jardin&nbsp;: </b>{{userOption.garden}}</li>
-                    <li><b>Je veux un balcon&nbsp;: </b>{{userOption.balcony}}</li>
-                    <li><b>Je veux un parking&nbsp;: </b>{{userOption.parking}}</li>
+                    {% if userOption.sex_roommates != "" %}
+                      <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
+                    {% endif %}
+                    {% if userOption.furniture != "" %}
+                      <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
+                    {% endif %}
+                    {% if userOption.garden != "" %}
+                      <li><b>Je veux un jardin&nbsp;: </b>{{userOption.garden}}</li>
+                    {% endif %}
+                    {% if userOption.balcony != "" %}
+                      <li><b>Je veux un balcon&nbsp;: </b>{{userOption.balcony}}</li>
+                    {% endif %}
+                    {% if userOption.parking != "" %}
+                      <li><b>Je veux un parking&nbsp;: </b>{{userOption.parking}}</li>
+                    {% endif %}
+
                     {% if userOption.district != "" %}
                       <li><b>Je veux que le bien soit situé&nbsp;: </b>{{userOption.district}}</li>
                     {% endif %}
@@ -194,7 +211,6 @@
                         <img alt="300x200" src="{{ annonceUsers.url_media }}">
                         <div class="caption">
                           <h4>{{ annonceUsers.name_coloc }}</h4>
-                          <p>{{ annonceUsers.description }}</p>
                         </div>
                       </div>
                     </div>

@@ -22,6 +22,11 @@ class DetailsProfilController extends Controller{
     $parking = strip_tags(trim($request->get('parking')));
     $date_dispo = strip_tags(trim($request->get('date_dispo')));
 
+    if ($date_dispo == "")
+      $date_dispo = date('Y-m-d');
+    var_dump($date_dispo);
+
+
     // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
 
     $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
@@ -58,6 +63,8 @@ class DetailsProfilController extends Controller{
       "member_profil" => $member_profil,
       "hobbies" => $hobbies,
     );
+    // var_dump($arrayDetailsProfil['date_dispo']);
+    // die();
 
     $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
     $userId = $idUser['id_user'];
