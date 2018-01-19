@@ -117,7 +117,11 @@ div.choice:hover{
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Page à propos */
 
+.text-center.equipe {
+    margin-left: 15%;
+}
 
 
 
