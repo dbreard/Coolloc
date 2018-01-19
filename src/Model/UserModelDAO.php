@@ -25,8 +25,18 @@ class UserModelDAO {
             $resultat = $this->getDb()->fetchAssoc($sql, array((string) $email));
             return $resultat;
     }
-    
-      
+
+
+    // CHANGEMENT DE MOT DE PASSE
+    function changeMdpBdd(string $password)
+    {
+            $sql = "UPDATE user SET password = ?";
+            $resultat = $this->getDb()->fetchAssoc($sql, array((string) $password));
+            return $resultat;
+    }
+
+
+
     public function insertUSer(string $first_name,string $last_name,string $birthdate,string $password,string $email,string $tel,string $sexe,string $activite,int     $condition){
 
         $this->getDb()->insert('options', array());
@@ -67,6 +77,15 @@ class UserModelDAO {
 
     }
 
+
+    public function updateUserStatus(string $idUser, string $status): int{
+      $sql = "UPDATE user SET status = ? WHERE id_user = ? ";
+      $rowAffected = $this->getDb()->executeUpdate( $sql, array((string) $status, (int) $idUser));
+
+      return $rowAffected;
+     
+    }
+
     // CHANGEMENT DE MOT DE PASSE
     public function modifyPasswordFromToken( string $password, int $idUser ) {
         
@@ -74,8 +93,6 @@ class UserModelDAO {
         $rowAffected = $this->getDb()->executeUpdate( $sql, array('password' => $password, 'id' => $idUser ));
 
         return $rowAffected;
-
-
 
     }
 

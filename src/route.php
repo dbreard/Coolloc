@@ -271,13 +271,23 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
-    return $app['twig']->render('profil.html.twig', array());
+    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+    $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
+    $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
+    return $app['twig']->render('connected/profil.html.twig', array("profilInfo" => $profilInfo, "userOption" => $optionUser, "annonceUser" => $annonceUser));
 })
     ->bind('profil');
+$app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStatusAction')->before($verifStatus);
+
+//MODIFIER PROFIL
+$app->get('/connected/profil-modif', function () use ($app) {
+    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+    return $app['twig']->render('connected/profil-modif.html.twig', array("profilInfo" => $profilInfo));
+})
+    ->bind('profil-modif');
 $app->post('/connected/profil', function () use ($app) {
     //controleur
 });
-
 
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {

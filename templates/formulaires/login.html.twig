@@ -30,7 +30,7 @@
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 login-blocks">
 
-                            <h2>Connexion : </h2> 
+                            <h2>Connexion : </h2>
 
                             {% if error.email_error is defined %}
                                     <div class="alert alert-danger text-center">{{ error.email_error }}</div>
@@ -53,7 +53,7 @@
 
                                     <label for="password">Mot de passe</label>
 
-                                
+
                                     {% if error.password is defined %}
                                             <div class="alert alert-danger text-center">{{ error.password }}</div>
                                     {% endif %}
@@ -66,13 +66,13 @@
                                 </div>
                             </form>
                             <br>
-                            
-                            {# <h2>Social login :  </h2> 
-                            
+
+                            {# <h2>Social login :  </h2>
+
                             <p>
-                            <a class="login-social" href="#"><i class="fa fa-facebook"></i>&nbsp;Facebook</a> 
-                            <a class="login-social" href="#"><i class="fa fa-google-plus"></i>&nbsp;Gmail</a> 
-                            <a class="login-social" href="#"><i class="fa fa-twitter"></i>&nbsp;Twitter</a>  
+                            <a class="login-social" href="#"><i class="fa fa-facebook"></i>&nbsp;Facebook</a>
+                            <a class="login-social" href="#"><i class="fa fa-google-plus"></i>&nbsp;Gmail</a>
+                            <a class="login-social" href="#"><i class="fa fa-twitter"></i>&nbsp;Twitter</a>
                             </p>  #}
 
                         </div>

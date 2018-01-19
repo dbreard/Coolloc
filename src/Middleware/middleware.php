@@ -112,6 +112,18 @@ $verifParamAnnonce = function (Request $request, Application $app)
                     };
 
 
+//-----------------Verification validation premiere connexion-----------------//
+$verifStatus = function (Request $request, Application $app)
+                      {
+                        $retour = verifParam($request->request, array("statut"));
+
+                        if($retour["error"])
+
+                          return  $app->redirect("/Coolloc/public/profil");
+
+                      };
+
+
 // Middleware pour commentaires utilisateurs / témoignages du site home page
 
 $verifParamComment = function (Request $request, Application $app)
@@ -121,3 +133,4 @@ $verifParamComment = function (Request $request, Application $app)
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/connected/temoigner");
                       };
+
