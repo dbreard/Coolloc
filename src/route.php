@@ -309,7 +309,7 @@ $app->get('/connected/ajout-details-profil', function () use ($app) {
     $isconnected = Controller::ifConnected();
 
     if (!$isconnected) {
-        return $app['twig']->render('formulaires/login.html.twig', array(
+        return $app->redirect('Coolloc/public/formulaires/login.html.twig', array(
      "connected" => $isconnected,
     ));
     } else {
