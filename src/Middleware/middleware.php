@@ -133,4 +133,3 @@ $verifParamComment = function (Request $request, Application $app)
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/connected/temoigner");
                       };
-

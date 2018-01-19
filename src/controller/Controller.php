@@ -160,6 +160,17 @@ class Controller {
         }
     }
 
+    public function sessionDestroy() {
+
+        // Détruit toutes les variables de session
+        $_SESSION = array();
+
+        // Finalement, on détruit la session.
+        session_destroy();
+
+        // var_dump($_SESSION);
+    }
+
 
     // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
     public function formatCity($city) {
