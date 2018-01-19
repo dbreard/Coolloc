@@ -25,6 +25,10 @@
 {% endblock %}
 
 
+{% block content %}
+
+
+
 {% if error is defined %}
     {% for errors in error %}
         <div>{{ errors }}</div>
@@ -43,13 +47,13 @@
 </div>
 
 
-{% block fonction %}
 
-    {% include 'required/membre.php' ignore missing  %}
+    {% block fonction %}
 
-{% endblock %}
+        {% include 'required/membre.php' ignore missing  %}
 
-{% block content %}
+    {% endblock %}
+
     <body>
         <!-- property area -->
         <div class="properties-area recent-property" style="background-color: #FFF;">
@@ -143,5 +147,6 @@
                 </div>
             </div>
         </div>
+
 
 {% endblock %}
