@@ -53,7 +53,7 @@ class AnnonceModelDAO{
             $ville_id = $this->db->fetchAssoc($sql, array((int) $arrayAnnonce['postal_code']));
 
             $ajoutAnnonce = $this->db->insert('user_post_annonce', array(
-                'user_id' => $user['id'],
+                'user_id' => $user['id_user'],
                 'options_id' => $optionId,
                 'ville_id' => $ville_id['ville_id'],
                 'name_coloc' => $arrayAnnonce['name_coloc'],
