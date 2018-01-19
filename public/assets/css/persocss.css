@@ -73,6 +73,28 @@ img.profile_img{
   margin-bottom: 10px;
 }
 
+/* UNIQUEMENT SECTION ANNONCES DANS PROFIL*/
+div.annonce_miniature{
+  min-height: 249px;
+  transition: all 0.5s ease;
+}
+
+div.gerer{
+  opacity: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0;
+  transition: all 0.5s ease;
+}
+
+div.annonce_miniature:hover{
+  background-color: #DCDCDC;
+}
+
+div.annonce_miniature:hover div.gerer{
+  opacity: 1;
+}
+
 /* PAGE PREMIERE CONNEXION */
 div.choice{
   background-color: #F3F3F3;
