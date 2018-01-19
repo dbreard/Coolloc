@@ -23,12 +23,24 @@ use Coolloc\Model\UserModelDAO;
 //ROUTE HOME
 $app->get('/', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
         return $app['twig']->render('index.html.twig', array(
-     "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('index.html.twig', array(
+     "connected" => $isconnected, 
     ));
-    } else {
+    
+    } 
+
+    
+    else {
         return $app['twig']->render('index.html.twig', array()) ;
     }
 
