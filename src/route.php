@@ -309,7 +309,7 @@ $app->get('/connected/ajout-details-profil', function () use ($app) {
     $isconnected = Controller::ifConnected();
 
     if (!$isconnected) {
-        return $app->redirect('Coolloc/public/formulaires/login');
+        return $app->redirect('/../Coolloc/public/login');
     } else {
         return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
     }
@@ -333,7 +333,7 @@ $app->get('connected/temoigner', function () use ($app) {
     } 
     else 
     {
-        return $app['twig']->render('connected/login.html.twig', array()) ;
+        return $app->redirect('/../Coolloc/public/login') ;
     }
 
 })
