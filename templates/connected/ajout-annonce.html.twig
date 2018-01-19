@@ -5,22 +5,27 @@
 {% endblock %}
 
 {% block header %}
-        {% include 'required/header_c.html.twig' ignore missing  %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
 {% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {# modif de la nav #}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
-{% block content %}
 
 
-{% if error is defined %}
-    {% for errors in error %}
-        <div>{{ errors }}</div>
-    {%  endfor %}
-{% endif %}
+
 
 
 <div class="page-head">
@@ -33,14 +38,12 @@
     </div>
 </div>
 
-
 {% block fonction %}
-
     {% include 'functions/membre.php' ignore missing  %}
-
 {% endblock %}
-<!-- End page header -->
 
+<!-- End page header -->
+{% block content %}
 <!-- property area -->
 <div class="content-area submit-property" style="background-color: #FCFCFC;">&nbsp;
     <div class="container">

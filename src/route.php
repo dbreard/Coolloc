@@ -56,8 +56,16 @@ $app->post('/', "Coolloc\Controller\SearchController::searchAction");
 $app->get('/resultat-recherche', function () use ($app) {
 
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('serp-annonce.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('serp-annonce.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -74,8 +82,16 @@ $app->get('/resultat-recherche', function () use ($app) {
 //DETAILS ANNONCE NON CONNECTER
 $app->get('/details-annonce', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('details-annonce.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('details-annonce.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -93,8 +109,16 @@ $app->post('/details-annonce', function () use ($app) {
 //LOGIN
 $app->get('/login', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if (!$isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('formulaires/login.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif (!$isconnected) {
         return $app['twig']->render('formulaires/login.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -111,8 +135,14 @@ $app->get('/login', function () use ($app) {
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
     $isconnected = Controller::ifConnected();
-    $valueBind = "";
-    if ($isconnected) {
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+    if ($isConnectedAndAdmin){
+        return $app->redirect('/') ;
+ 
+    }
+    elseif ($isconnected) {
         return $app->redirect('/') ;
         
 
@@ -187,8 +217,16 @@ $app->post('/faq', function () use ($app) {
 
 $app->get('/contact', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('contact.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('contact.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -215,8 +253,16 @@ $app->get('connected/merci', function () use ($app) {
 //MENTIONS LEGALES
 $app->get('/mentions-legales', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('mentions-legales.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('mentions-legales.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -230,8 +276,16 @@ $app->get('/mentions-legales', function () use ($app) {
 //CONDITIONS GENERALES DE VENTES
 $app->get('/conditions-generales-de-vente', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -245,8 +299,16 @@ $app->get('/conditions-generales-de-vente', function () use ($app) {
 //A PROPOS
 $app->get('/a-propos', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('a-propos.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('a-propos.html.twig', array(
      "connected" => $isconnected,
     ));
@@ -329,11 +391,21 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 //AJOUT DETAILS PROFIL
 $app->get('/connected/ajout-details-profil', function () use ($app) {
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if (!$isconnected) {
-        return $app->redirect('/../Coolloc/public/login');
-    } else {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
+    } 
+
+    else {
+        return $app->redirect('/../Coolloc/public/login');
     }
 })
     ->bind('ajout-details-profil');
@@ -345,10 +417,17 @@ $app->post('/connected/ajout-details-profil', function () use ($app) {
 //ajout temoignage
 $app->get('connected/temoigner', function () use ($app) {
 
-
     $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isconnected) {
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('connected/temoigner.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
         return $app['twig']->render('connected/temoigner.html.twig', array(
      "connected" => $isconnected,
     ));
