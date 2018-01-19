@@ -41,7 +41,16 @@ $app->post('/', function () use ($app) {
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('serp-annonce.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('serp-annonce.html.twig', array());
+    }
+    
 })
     ->bind('resultat-recherche');
 $app->post('/resultat-recherche', function () use ($app) {
@@ -51,11 +60,19 @@ $app->post('/resultat-recherche', function () use ($app) {
 
 
 //DETAILS ANNONCE NON CONNECTER
-$app->get('/details-annonce-non-connecter', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
+$app->get('/details-annonce', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('details-annonce.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('details-annonce.html.twig', array());
+    }
 })
     ->bind('details-annonce');
-$app->post('/details-annonce-non-connecter', function () use ($app) {
+$app->post('/details-annonce', function () use ($app) {
     //controleur
 });
 
