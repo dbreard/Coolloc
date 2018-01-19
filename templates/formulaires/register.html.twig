@@ -5,10 +5,25 @@
     Inscription | CoolLoc, la colocation cool !
 {% endblock %}
 
+{# Bloc header #}
+{% block header %}
+    {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_nc.html.twig' ignore missing  %}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
 
 {% block content %}

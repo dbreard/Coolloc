@@ -10,6 +10,7 @@ use Coolloc\Controller\AdminController;
 use Coolloc\Model\Model;
 use Coolloc\Model\UserModelDAO;
 
+
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 //*****************************//
@@ -36,28 +37,42 @@ $app->get('/', function () use ($app) {
 
 })
 ->bind('accueil');
-$app->post('/', function () use ($app) {
-    //controleur
-});
+$app->post('/', "Coolloc\Controller\SearchController::searchAction");
 
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
+
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('serp-annonce.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('serp-annonce.html.twig', array());
+    }
+    
 })
     ->bind('resultat-recherche');
-$app->post('/resultat-recherche', function () use ($app) {
-    //controleur
-});
+
 
 
 
 //DETAILS ANNONCE NON CONNECTER
-$app->get('/details-annonce-non-connecter', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
+$app->get('/details-annonce', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('details-annonce.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('details-annonce.html.twig', array());
+    }
 })
     ->bind('details-annonce');
-$app->post('/details-annonce-non-connecter', function () use ($app) {
+$app->post('/details-annonce', function () use ($app) {
     //controleur
 });
 
@@ -65,17 +80,40 @@ $app->post('/details-annonce-non-connecter', function () use ($app) {
 
 //LOGIN
 $app->get('/login', function () use ($app) {
-    return $app['twig']->render('formulaires/login.html.twig', array());
-})
+    $isconnected = Controller::ifConnected();
+
+    if (!$isconnected) {
+        return $app['twig']->render('formulaires/login.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app->redirect('/Coolloc/public/connected/profil') ;
+    }
+
+    
+    })
     ->bind('login');
     $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
-    return $app['twig']->render('formulaires/register.html.twig', array());
+    $isconnected = Controller::ifConnected();
+    $valueBind = "";
+    if ($isconnected) {
+        return $app->redirect('/') ;
+        
+
+    } else {
+        return $app['twig']->render('formulaires/register.html.twig', array());
+        
+        
+    }
+    
+
 })
     ->bind('inscription');
+    
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
 
@@ -84,13 +122,17 @@ $app->post('/inscription', "Coolloc\Controller\RegisterController::registerActio
 $app->get('/verif/{token}/', 'Coolloc\Controller\RegisterController::verifEmailAction');
 
 
-// confirmation mail
-$app->get('/confirmation-email', function () use ($app) {
+// confirmation mail inscription
+$app->get('/confirmation', function () use ($app) {
     return $app['twig']->render('confirmation.html.twig', array());
 })
     ->bind('confirmation');
 
-
+//confirmation mail mdp oublié
+$app->get('/confirmation-oublie', function () use ($app) {
+    return $app['twig']->render('confirmation-oublie.html.twig', array());
+})
+    ->bind('confirmation-oublie');
 
 //MDP OUBLIER
 $app->get('/forgotten-password', function () use ($app) {
@@ -130,8 +172,18 @@ $app->post('/faq', function () use ($app) {
 
 
 //CONTACT
+
 $app->get('/contact', function () use ($app) {
-    return $app['twig']->render('contact.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('contact.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('contact.html.twig', array()) ;
+    }
+   
 })
     ->bind('contact');
 $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->before($verifContact);
@@ -141,31 +193,55 @@ $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->b
 //*** ROUTES GET ***//
 
 
-
-//confirmation
-$app->get('/confirmation', function () use ($app) {
-    return $app['twig']->render('confirmation.html.twig', array());
+//MERCI
+$app->get('connected/merci', function () use ($app) {
+    return $app['twig']->render('connected/merci.html.twig', array());
 })
-    ->bind('confirmation');
+    ->bind('merci');
 
 
 //MENTIONS LEGALES
 $app->get('/mentions-legales', function () use ($app) {
-    return $app['twig']->render('mentions-legales.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('mentions-legales.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('mentions-legales.html.twig', array());
+    }
 })
     ->bind('mentions-legales');
 
 
 //CONDITIONS GENERALES DE VENTES
 $app->get('/conditions-generales-de-vente', function () use ($app) {
-    return $app['twig']->render('conditions-generales-de-vente.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('conditions-generales-de-vente.html.twig', array());
+    }
 })
     ->bind('conditions-generales-de-vente');
 
 
 //A PROPOS
 $app->get('/a-propos', function () use ($app) {
-    return $app['twig']->render('a-propos.html.twig', array());
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('a-propos.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('a-propos.html.twig', array());
+    }
+   
 })
     ->bind('a-propos');
 
@@ -198,13 +274,23 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
-    return $app['twig']->render('profil.html.twig', array());
+    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+    $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
+    $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
+    return $app['twig']->render('connected/profil.html.twig', array("profilInfo" => $profilInfo, "userOption" => $optionUser, "annonceUser" => $annonceUser));
 })
     ->bind('profil');
+$app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStatusAction')->before($verifStatus);
+
+//MODIFIER PROFIL
+$app->get('/connected/profil-modif', function () use ($app) {
+    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+    return $app['twig']->render('connected/profil-modif.html.twig', array("profilInfo" => $profilInfo));
+})
+    ->bind('profil-modif');
 $app->post('/connected/profil', function () use ($app) {
     //controleur
 });
-
 
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
@@ -228,6 +314,43 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 });
 
 
+//AJOUT DETAILS PROFIL
+$app->get('/connected/ajout-details-profil', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+
+    if (!$isconnected) {
+        return $app->redirect('/../Coolloc/public/login');
+    } else {
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
+    }
+})
+    ->bind('ajout-details-profil');
+$app->post('/connected/ajout-details-profil', function () use ($app) {
+    //controleur
+});
+
+
+//ajout temoignage
+$app->get('connected/temoigner', function () use ($app) {
+
+
+    $isconnected = Controller::ifConnected();
+
+    if ($isconnected) {
+        return $app['twig']->render('connected/temoigner.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } 
+    else 
+    {
+        return $app->redirect('/../Coolloc/public/login') ;
+    }
+
+})
+    ->bind('temoigner');
+$app->post('/connected/temoigner', 'Coolloc\Controller\CommentController::commentAction')->before($verifParamComment);
+
+
 
 //*** ROUTES GET ***//
 
@@ -249,6 +372,7 @@ $app->get('/connected/deconnexion', function () use ($app) {
 $app->get('/connected/sabit','Coolloc\Controller\AdminController::selectedAdminInfos')-> bind('dashboard');
 
 
+
 //GERER USER CHERCHANT DES COLOCATIONS
 $app->get('/connected/sabit/gerer-user-colocations','Coolloc\Controller\AdminController::selectedUsersColocationsAndAdminInfos')-> bind('gerer-user-colocations');
 
@@ -264,6 +388,7 @@ $app->get('/connected/sabit/gerer-user/{id_user}/{page_actuelle}','Coolloc\Contr
 
 //AFFICHER DETAILS STATUT UTILISATEUR
 $app->get('/connected/sabit/details-profil/{id_user}','Coolloc\Controller\AdminController::detailsUser')-> bind('details-profil');
+
 
 
 
@@ -318,14 +443,10 @@ $app->post('/connected/admin/gerer-contenu', function () use ($app) {
 //*** ROUTE ERREUR***//
 //*******************//
 
-
-
-
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
     }
-
     // 404.html, or 40x.html, or 4xx.html, or error.html
     $templates = array(
         'errors/'.$code.'.html.twig',
@@ -336,3 +457,4 @@ $app->error(function (\Exception $e, Request $request, $code) use ($app) {
 
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
+

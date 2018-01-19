@@ -20,6 +20,7 @@ class ContactController extends Controller
       $subject = strip_tags(trim($request->get("subject")));
       $message = strip_tags(trim($request->get("message")));
 
+
       if ((iconv_strlen($firstname) < 3 || iconv_strlen($firstname) > 50)){
         $this->erreur['firstname'] = 'Le prénom n\'est pas valide';
       }
@@ -45,6 +46,7 @@ class ContactController extends Controller
           ));
       }
       else { // SI IL N'Y A PAS D'ERREUR
+        $message = utf8_encode($message);
         if ($this->sendMailStaff($username, array("body" => "De: ".$username." -- < ".$email." ><hr>".$message, "subject" => $subject))){
           return $app['twig']->render('contact.html.twig', array("success" => "Votre message a bien été envoyé, merci pour votre participation :-)"));
         }
