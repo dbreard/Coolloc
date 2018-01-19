@@ -68,13 +68,20 @@
         </div>
         <!-- Body content -->
 
+
         {% block header %}
-            {% include 'required/header_c.html.twig' ignore missing  %}
-        {% endblock %} 
+
+            {% if connected is defined %}
+                {% include 'required/header_c.html.twig' ignore missing  %}
+            {% else %}
+                {% include 'required/header.html.twig' ignore missing  %}
+            {% endif %}
+
+        {% endblock %}
 
         {# bloc de navigation / nav différente en fonction de connexion ou pas #}
 
-        {% block navigation_c %}{% endblock %}
+        {% block navigation %}{% endblock %}
 
         {# fin de navigation  #}
 
@@ -85,7 +92,7 @@
         {# footer #}
         {% block footer %}
             {% include 'required/footer.html.twig' ignore missing  %}
-        {% endblock%}
+        {% endblock %}
 
 
         <script src="{{ asset('assets/js/modernizr-2.6.2.min.js') }}"></script>

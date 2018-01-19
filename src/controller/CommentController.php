@@ -33,12 +33,11 @@ class CommentController extends Controller
           else {
             // on fait appel à la fonction statique dans model - qui permet de récupérer les infos du profil utilisateur connecté
              $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-            //  var_dump($profilInfo);
-            //  die();
+         
 
              if(!empty($profilInfo)){
                 $commentaire = new CommentModelDAO($app['db']);
-                $rowaffected = $commentaire->createComment($profilInfo['id'], $comment);
+                $rowaffected = $commentaire->createComment($profilInfo['id_user'], $comment);
 
                 if($rowaffected == 1){
                     return $app->redirect('/Coolloc/public/connected/merci');
