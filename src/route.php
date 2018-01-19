@@ -34,13 +34,12 @@ $app->get('/', function () use ($app) {
 
 })
 ->bind('accueil');
-$app->post('/', function () use ($app) {
-    //controleur
-});
+$app->post('/', "Coolloc\Controller\SearchController::searchAction");
 
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {
+
     $isconnected = Controller::ifConnected();
 
     if ($isconnected) {
@@ -53,9 +52,7 @@ $app->get('/resultat-recherche', function () use ($app) {
     
 })
     ->bind('resultat-recherche');
-$app->post('/resultat-recherche', function () use ($app) {
-    //controleur
-});
+
 
 
 
