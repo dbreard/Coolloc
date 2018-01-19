@@ -42,7 +42,7 @@ $verifParamLogin = function (Request $request, Application $app)
                         return $app->redirect("/Coolloc/public/login");
                       };
 
-                      
+
 $verifParamForgotPass = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail"));
@@ -133,4 +133,3 @@ $verifParamComment = function (Request $request, Application $app)
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/connected/temoigner");
                       };
-

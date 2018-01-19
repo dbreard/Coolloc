@@ -113,7 +113,7 @@
           <br>
       </div>
       <div class="col-sm-2">
-        <a type="button" href="path ('temoigner')" class="btn btn-default col-xs-12">Témoigner</a>
+        <a type="button" href="{{path ('temoigner')}}" class="btn btn-default col-xs-12">Témoigner</a>
       </div>
     </div>
     <br>
@@ -136,6 +136,12 @@
         {% if profilInfo.status == "cherche colocation" or profilInfo.status == "admin" %}
           <div class="panel panel-default">
             <div class="panel-heading text-center"><b>Vos préférences</b></div>
+            {% if error is defined %}
+              <div class="alert alert-danger text-center">{{ error }}</div>
+            {% endif %}
+            {% if modified is defined %}
+              <div class="alert alert-success text-center">{{ modified }}</div>
+            {% endif %}
             <div class="panel-body">
               {% if success is defined %}
                 <div class="alert alert-warning text-center">Vos préférences actuelles ont été définies par défaut. Pour les personnaliser, veuillez cliquer sur le bouton AJOUTER MES PREFERENCES</div>
@@ -149,7 +155,7 @@
                     <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
                     <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
                     {% if userOption.equipment != "" %}
-                      <li>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
+                      <li><b>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
                     {% endif %}
                     <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
                     <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
@@ -166,7 +172,7 @@
                       <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo}}</li>
                     {% endif %}
                     {% if userOption.member_profil != "" %}
-                      <li><b>Je recherche des collocataires du genre&nbsp;: </b>{{userOption.member_profil}}</li>
+                      <li><b>Je recherche des collocataires du type&nbsp;: </b>{{userOption.member_profil}}</li>
                     {% endif %}
                   {% endif %}
                 </ul>
