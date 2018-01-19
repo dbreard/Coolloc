@@ -4,6 +4,9 @@
     Ajouter une colocation | CoolLoc, la colocation cool !
 {% endblock %}
 
+{% block header %}
+        {% include 'required/header_c.html.twig' ignore missing  %}
+{% endblock %}
 {# Bloc nav #}
 
 {% block navigation %}
@@ -33,10 +36,7 @@
 
 {% block fonction %}
 
-
-    {% include 'required/membre.php' ignore missing  %}
-
-
+    {% include 'functions/membre.php' ignore missing  %}
 
 {% endblock %}
 <!-- End page header -->
@@ -151,16 +151,16 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description :</label>
-                                                <textarea name="description" class="form-control" >{% if value.description is defined %}{{ value.description }}{% endif %}</textarea>
+                                                <textarea name="description" class="form-control textarea-annonce" >{% if value.description is defined %}{{ value.description }}{% endif %}</textarea>
                                             </div>
 
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Adresse :</label>
-                                                <input name="postal_code" type="number" class="form-control" placeholder="Code postal *" value="{% if value.postal_code is defined %}{{ value.postal_code }}{% endif %}">
-                                                <input name="adress" type="text" class="form-control" class="float-left" placeholder="Adresse *" value="{% if value.adress is defined %}{{ value.adress }}{% endif %}">
-                                                <input name="adress_details" type="text" class="form-control" placeholder="Complément d'adresse" value="{% if value.adress_details is defined %}{{ value.adress_details }}{% endif %}">
+                                                <input name="postal_code" type="number" class="form-control adresse" placeholder="Code postal *" value="{% if value.postal_code is defined %}{{ value.postal_code }}{% endif %}">
+                                                <input name="adress" type="text" class="form-control adresse" placeholder="Adresse *" value="{% if value.adress is defined %}{{ value.adress }}{% endif %}">
+                                                <input name="adress_details" type="text" class="form-control adresse" placeholder="Complément d'adresse" value="{% if value.adress_details is defined %}{{ value.adress_details }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>
@@ -369,7 +369,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12 padding-top-15">
-                                            <label>Profil de colocataire recherché :</label>
+                                            <label>Profil des colocataires recherché :</label>
                                             <div>
                                                 <div class="col-sm-2">
                                                     <div class="checkbox">

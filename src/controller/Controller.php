@@ -16,6 +16,7 @@ class Controller {
 
     public $URL = 'http://localhost/Coolloc/public/';
     protected $erreur = array();
+    private $token;
 
     // VERIFICATION DU FORMAT EMAIL
     public function verifEmail(string $email) :bool
@@ -32,39 +33,45 @@ class Controller {
     }
 
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
-       public function modifyTel(string $tel){
 
-           if (iconv_strlen($tel) == 10){
-               $tel = "+33" . (substr($tel, 1));
-           }
-           else if (iconv_strlen($tel) == 12){
-               $tel = "+33" . (substr($tel, 3));
-           }
-           else if (iconv_strlen($tel) == 9){
-               $tel = "+33" . (substr($tel, 0));
-           }
 
-           return $tel;
-       }
-       //VERIFICATION DU FORMAT DE NUMERO DE TELEPHONE
-       public function verifTel(string $tel) :bool
-       {
-           $tel = str_replace(" ", "", $tel);
-           $tel = str_replace("-", "", $tel);
-           $tel = str_replace("/", "", $tel);
+    public function modifyTel(string $tel){
 
-           if (iconv_strlen($tel) == 10){
-               $resultat = (substr($tel, -10, 1) == 0) ? true : false;
-           }
-           if (iconv_strlen($tel) == 12){
-               $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
-           }
-           if (iconv_strlen($tel) == 9){
-               $resultat = (substr($tel, -9, 1) == 0) ? true : false;
-           }
-           return $resultat;
-       }
-    
+        if (iconv_strlen($tel) == 10){
+            $tel = "+33" . (substr($tel, 1));
+        }
+        else if (iconv_strlen($tel) == 12){
+            $tel = "+33" . (substr($tel, 3));
+        }
+        else if (iconv_strlen($tel) == 9){
+            $tel = "+33" . (substr($tel, 0));
+        }
+
+        return $tel;
+    }
+    //VERIFICATION DU FORMAT DE NUMERO DE TELEPHONE
+    public function verifTel(string $tel) :bool
+    {
+        $tel = str_replace(" ", "", $tel);
+        $tel = str_replace("-", "", $tel);
+        $tel = str_replace("/", "", $tel);
+
+        if (iconv_strlen($tel) == 10){
+            $resultat = (substr($tel, -10, 1) == 0) ? true : false;
+        }
+        elseif (iconv_strlen($tel) == 12){
+            $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
+        }
+        elseif (iconv_strlen($tel) == 9){
+            $resultat = (substr($tel, -9, 1) == 0) ? true : false;
+        }
+        else{
+            $resultat = false;
+        }
+        return $resultat;
+    }
+
+
     //VERIFICATION DE LA CORRESPONDANCE DES MOT DE PASSE
     public function verifCorrespondanceMdp(string $password,string $password_repeat) : bool
     {
@@ -127,11 +134,19 @@ class Controller {
 
     }
 
+    public static function ifConnected(){
+        if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida'])) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     // VERIFIE SI L'UTILISATEUR EST CONNECTER ET ADMIN
     public function verifConnectedAdmin(Application $app, Request $request){
         $pageName = strip_tags(trim($request->get("pagename")));
         if (isset($_SESSION['membre']) && !empty($_SESSION['membre']) && $_SESSION['membre']['status'] ) {
-            return $app->redirect('/connected/admin/' . $pageName);
+            return $app->redirect('/Coolloc/connected/admin/' . $pageName);
         }else {
             return $app->redirect('/Coolloc/public/login');
         }
@@ -139,6 +154,116 @@ class Controller {
     }
 
 
+    // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
+    public function formatCity($city) {
+        $cityClean = strip_tags(trim($city));
+        $cityClean = ucwords ($cityClean);
+        $cityClean = str_replace(" ", "-", $cityClean);
+        $cityClean = str_replace("_", "-", $cityClean);
+        return $cityClean;
+    }
+
+    // VERIF DES CHAMPS EN OUI/NON/PEU IMPORTE
+    public function validSelect(string $champs, string $name) {
+
+        // $champs => le champs a vérifier ($request->get(''))
+        // $name => Pour personnalisé le message d'erreur
+
+        $champs = strip_tags(trim($champs));
+        if ($champs != 'oui' && $champs != 'non' && $champs != 'peu importe') {
+            array_push($this->erreur, "Saisie incorrecte sur le champs '" . $name . "'");
+        }else {
+            return $champs;
+        }
+    }
+
+
+    // FONCTION POUR VERIFIER LA VALIDITE D'UN ARRAY ET FORMATER CELUI CI POUR LA BDD
+    public function verifArrayAndFormat(array $arrayTarget, array $arrayCompare, string $champs, string $mode) {
+        // on créer un tableau pour faire le comparatif
+        $arrayCheck = array();
+        // boucle sur l'ensemble des données
+        foreach ($arrayTarget as $key => $value) {
+            // on nettoi chaque valeur
+            $value = strip_tags(trim($value));
+            // pour chaque valeur on vérifie si elle est valide
+            foreach ($arrayCompare as $key2 => $value2) {
+                // Si oui on check
+                if ($value == $value2) {
+                    array_push($arrayCheck, "check");
+                }
+            }
+        }
+        // Si le nombre de valeur ne correspond pas au nombre de check erreur
+        if (count($arrayCheck) != count($arrayTarget)) {
+            array_push($this->erreur, "Problème de selection dans '" . $champs . "'");
+            return "";
+        }else { // Sinon on format notre tableau en string en fonction du mode choisi
+            // Si le mode est SELECT
+            if ($mode == "SELECT") {
+                // On vérifie le champs pour nommé le champsBDD
+                if ($champs == "Quartier") {
+                    // On appelle la fonction avec le champsBDD
+                    $response = $this->searchByArray($arrayTarget, "district");
+                }else if ($champs == "Equipement") {
+                    $response = $this->searchByArray($arrayTarget, "equipment");
+                }else if ($champs == "Profil colocataires") {
+                    $response = $this->searchByArray($arrayTarget, "member_profil");
+                }else if ($champs == "Centre d'intérêts") {
+                    $response = $this->searchByArray($arrayTarget, "hobbies");
+                }else {
+                    echo "Champs saisi " . $champs . " invalide dans la fonction verifArrayAndFormat()";
+                    die();
+                }
+                return $response;
+            }else if ($mode == "INSERT") {
+                $response = $this->formatArrayForBDD($arrayTarget);
+                return $response;
+            }else {
+                echo "Erreur de selection de mode dans la fonction verifArrayAndFormat() : 'SELECT' ou 'INSERT'";
+                die();
+            }
+        }
+    }
+
+    // FONCTION APPELER PAR verifArrayAndFormat() SI LE MODE CHOISI EST "SELECT" POUR CHERCHER EN BDD VIA UN TABLEAU
+    private function searchByArray(array $arrayTarget, string $champsBDD) {
+        // Je crée ma variable réponse
+        $response = "";
+        // Je vérifie que mon tableau n'es pas vide
+        if (count($arrayTarget) != 0) {
+            // Je boucle sur mes données
+            foreach ($arrayTarget as $key => $value) {
+                $response .= 'AND ' . $champsBDD . ' LIKE "%' . $value . '%" ';
+            }
+            return $response;
+        }else {
+            return $response;
+        }
+    }
+
+    // FONCTION APPELER PAR verifArrayAndFormat() SI LE MODE CHOISI EST "INSERT" POUR VALIDER ET FORMATER UN ARRAY EN STRING POUR l'INSERTION
+    private function formatArrayForBDD(array $arrayTarget) {
+        // Je créer ma variable de réponse
+        $response = "";
+        // Je vérifie que mon tableau n'est pas vide
+        if (count($arrayTarget) != 0) {
+            // Je boucle sur toutes les données
+            foreach ($arrayTarget as $key => $value) {
+                // Si c'est la première entrée
+                if ($key == 0) {
+                    $response .= $value;
+                }else { // Sinon
+                    $response .= ", " . $value;
+                }
+            }
+            // Je renvoie ma réponse avec le tableau traduit en string
+            return $response;
+        }else {
+            // sinon je renvoie ma réponse avec une string vide
+            return $response;
+        }
+    }
 
 
     //********** GETTER ***********//
@@ -146,6 +271,18 @@ class Controller {
     public function getDate(){
         return date("Ymd");
     }
+
+        //*********** GETTER ****************//
+
+        public function getToken(){
+            return $this->token;
+        }
+    
+        //*********** SETTER ****************//
+    
+        public function setToken($token){
+            $this->token = $token;
+        }
 
     //-----------------------ENVOI DE MAILS AU STAFF--------------------------//
 
@@ -156,7 +293,7 @@ class Controller {
         global $app;
         $mail = $app['mail'];
         //Server settings
-        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp-mail.outlook.com';                       // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication

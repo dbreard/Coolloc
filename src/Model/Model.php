@@ -18,11 +18,14 @@ class Model {
         $idUser = $app['db']->fetchAssoc($sql, array((string) $token));
     }
 
+
+
     public static function userByTokenSession(string $token, Application $app): array {
         $sql = "SELECT user_options.* FROM user_options, tokens WHERE tokens.token = ? AND tokens.user_id = user_options.id_user";
         $user = $app['db']->fetchAssoc($sql, array((string) $token));
         return $user;
     }
+
 
     // SELECTION DES OPTIONS DE L'UTILISATEUR EN RECHERCHE DE COLOCATAIRES (UNIQUEMENT LES OPTIONS)
     public static function userOptionOnly(string $idUser, Application $app){
@@ -38,6 +41,18 @@ class Model {
       var_dump($userAnnonce);
       die();
       return $userAnnonce;
+
+    // verification id_user
+    public static function verifIdUserExist(int $user, Application $app): bool {
+        $sql = "SELECT id_user FROM user WHERE id_user = ? ";
+        $userId = $app['db']->fetchAssoc($sql, array((int)$user));
+        if(count($userId) == 1 ){
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
 }

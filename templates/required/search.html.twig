@@ -1,19 +1,11 @@
 <div class="search-form wow pulse" data-wow-delay="0.8s">
-                    
 
-                    <form action="" class=" form-inline">
-                        <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
+
+                    <form action="" class="form-inline" method="POST">
+                        <button class="btn toggle-btn" type="button"><i class="fa fa-bars"></i></button>
 
                         <div class="form-group">
-                            <select id="lunchBegins" name="city" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Ville">
-
-                                <option>New york, CA</option>
-                                <option>Paris</option>
-                                <option>Casablanca</option>
-                                <option>Tokyo</option>
-                                <option>Marraekch</option>
-                                <option>kyoto , shibua</option>
-                            </select>
+                            <input type="text" name="city" class="form-control" placeholder="Ville">
                         </div>
 
                         <div class="form-group">
@@ -39,34 +31,33 @@
                             <div style="display: none; width: 100%;" class="search-toggle2">
 
                                 <div class="form-group">
-                                    <select id="housing_type" name="housing_type" class="selectpicker show-tick form-control">
-                                        <option selected> Type votre bien </option>
-                                        <option>Maison</option>
-                                        <option>Appartement</option>
-                                        <option>Loft</option>
-                                        <option>Hotel particulier</option>
-                                        <option>Corps de ferme</option>
+                                    <select id="housing_type" name="housing_type" class="selectpicker show-tick form-control" title="Type de bien recherché">
+                                        <option value="maison">Maison</option>
+                                        <option value="appartement">Appartement</option>
+                                        <option value="loft">Loft</option>
+                                        <option value="hotel particulier">Hotel particulier</option>
+                                        <option value="corps de ferme">Corps de ferme</option>
+                                        <option value="autre">Autre</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <select id="nb_roommates" name="nb_roommates" class="selectpicker show-tick form-control">
-                                        <option selected> Selectionnez le nombre de colloc </option>
-                                        <option>0-2</option>
-                                        <option>0-4</option>
-                                        <option>0-6</option>
-                                        <option>0-8</option>
-                                        <option>0-...</option>
+                                    <select id="nb_roommates" name="nb_roommates" class="selectpicker show-tick form-control" title="Nombre de colloc">
+                                        <option value="0">0-2</option>
+                                        <option value="1">0-4</option>
+                                        <option value="2">0-6</option>
+                                        <option value="3">0-8</option>
+                                        <option value="4">0-...</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="number" class="form-control" placeholder="Surface m2">
+                                    <input type="number" name="surface" class="form-control" placeholder="Surface en m2" title="Surface en m2">
                                 </div>
 
                                 <div class="form-check">
                                     <label class="form-check-label label-sexe" for="sexe">
-                                        Composition :
+                                        Composition de la coloc :
                                     </label>
                                     <input class="form-check-input" type="radio" name="sex_roommates" id="sexe" value="homme">
                                     <label class="form-check-label label-sexe" for="sexe">
@@ -85,31 +76,31 @@
                                 <label for="equipement">Quartier : </label><br>
                                 <div class="form-check filtreSup">
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="proche commerces" id="quartier">
+                                        <input class="form-check-input" name="district[]" type="checkbox" value="Proche de commerces" id="quartier">
                                         <label class="form-check-label" for="quartier">
-                                            Proche commerces
+                                            Proche de commerces
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="proche ecoles" id="quartier2">
+                                        <input class="form-check-input" name="district[]" type="checkbox" value="Proche d'écoles" id="quartier2">
                                         <label class="form-check-label" for="quartier2">
-                                            Proche écoles
+                                            Proche d'écoles
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="proche transports" id="quartier3">
+                                        <input class="form-check-input" name="district[]" type="checkbox" value="Proche de transports" id="quartier3">
                                         <label class="form-check-label" for="quartier3">
-                                            Proche transports
+                                            Proche de transports
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="calme" id="quartier4">
+                                        <input class="form-check-input" name="district[]" type="checkbox" value="Calme" id="quartier4">
                                         <label class="form-check-label" for="quartier4">
                                             Calme
                                         </label>
                                     </div>
                                     <div class="block-select">
-                                        <input class="form-check-input" name="district" type="checkbox" value="anime" id="quartier5">
+                                        <input class="form-check-input" name="district[]" type="checkbox" value="Animé" id="quartier5">
                                         <label class="form-check-label" for="quartier5">
                                             Animé
                                         </label>
@@ -118,8 +109,8 @@
                             </div>
 
                             <div style="display: none;" class="search-toggle">
-                                <button class="btn toggle-btn3" type="button">
-                                    <h3 style="display: inline-block; margin: 0;">Option colloc </h3>
+                                <button class="btn toggle-btn3" type="submit">
+                                    <h3 style="display: inline-block; margin: 0;">Options colloc </h3>
                                     <i class="fa fa-bars"></i>
                                 </button>
 
@@ -254,37 +245,37 @@
                                     <label for="equipement">Equipement : </label><br>
                                     <div class="form-check filtreSup">
                                         <div class="block-select">
-                                            <input class="form-check-input" name="equipment" type="checkbox" value="tv" id="equipment">
+                                            <input class="form-check-input" name="equipment[]" type="checkbox" value="TV" id="equipment">
                                             <label class="form-check-label" for="equipement">
                                                 TV
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="equipment" type="checkbox" value="hifi" id="equipment2">
+                                            <input class="form-check-input" name="equipment[]" type="checkbox" value="Hifi" id="equipment2">
                                             <label class="form-check-label" for="equipment2">
-                                                HIFI
+                                                Hifi
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="equipment" type="checkbox" value="wifi" id="equipment3">
+                                            <input class="form-check-input" name="equipment[]" type="checkbox" value="Wifi" id="equipment3">
                                             <label class="form-check-label" for="equipment3">
-                                                WIFI
+                                                Wifi
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="equipment" type="checkbox" value="hautDebit" id="equipment4">
+                                            <input class="form-check-input" name="equipment[]" type="checkbox" value="Fibre optique" id="equipment4">
                                             <label class="form-check-label" for="equipment4">
-                                                Fibre Haut-debit
+                                                Fibre optique
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="equipment" type="checkbox" value="salleDeJeu" id="equipment5">
+                                            <input class="form-check-input" name="equipment[]" type="checkbox" value="Salle de jeux" id="equipment5">
                                             <label class="form-check-label" for="equipment5">
-                                                Salle de jeu
+                                                Salle de jeux
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="equipment" type="checkbox" value="MachineALaver" id="equipment6">
+                                            <input class="form-check-input" name="equipment[]" type="checkbox" value="Machine à laver" id="equipment6">
                                             <label class="form-check-label" for="equipment6">
                                                 Machine à laver
                                             </label>
@@ -301,188 +292,187 @@
 
                                 <div style="display: none; width: 100%;" class="search-toggle4">
                                     <div class="form-group filtreSup">
-                                        <select id="selection_bien" name="activity" class="selectpicker show-tick form-control">
-                                            <option selected> Selectionnez votre acrtivité </option>
-                                            <option>Etudiant</option>
-                                            <option>Professionnel</option>
-                                            <option>retraité</option>
-                                            <option>Sans activité</option>
+                                        <select id="selection_bien" name="activity" class="selectpicker show-tick form-control" title="Choix d'activité">
+                                            <option value="étudiant">Etudiant</option>
+                                            <option value="activité pro">Professionnel</option>
+                                            <option value="retraité">Retraité</option>
+                                            <option value="sans activité">Sans activité</option>
                                         </select>
                                     </div>
-
-
-                                    <label for="equipement">Profil collocataires : </label><br>
-                                    <div class="form-check filtreSup">
-                                        <div class="block-select">
-                                            <input class="form-check-input" name="member_profil" type="checkbox" value="timide" id="member_profil">
-                                            <label class="form-check-label" for="member_profil">
-                                                Timide
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="bavard" id="member_profil2">
-                                            <label class="form-check-label" for="member_profil2">
-                                                Bavard
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="solitaire" id="member_profil3">
-                                            <label class="form-check-label" for="member_profil3">
-                                                Solitaire
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="casanier" id="member_profil4">
-                                            <label class="form-check-label" for="member_profil4">
-                                                Casanier
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="discret" id="member_profil5">
-                                            <label class="form-check-label" for="member_profil5">
-                                                Discret
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="convivial" id="member_profil6">
-                                            <label class="form-check-label" for="member_profil6">
-                                                Convivial
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="cool" id="member_profil7">
-                                            <label class="form-check-label" for="member_profil7">
-                                                Cool
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="extraverti" id="member_profil8">
-                                            <label class="form-check-label" for="profilColoc8">
-                                                Extraverti
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="ordonne" id="member_profil9">
-                                            <label class="form-check-label" for="member_profil9">
-                                                Ordonné
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="tolerant" id="member_profil10">
-                                            <label class="form-check-label" for="member_profil10">
-                                                Tolérant
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="sportif" id="member_profil11">
-                                            <label class="form-check-label" for="member_profil11">
-                                                Sportif
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="fetard" id="member_profil12">
-                                            <label class="form-check-label" for="member_profil12">
-                                                Fétard
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="studieux" id="member_profil13">
-                                            <label class="form-check-label" for="member_profil13">
-                                                Studieux
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="curieux" id="member_profil14">
-                                            <label class="form-check-label" for="member_profil14">
-                                                Curieux
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="joyeux" id="member_profil15">
-                                            <label class="form-check-label" for="member_profil15">
-                                                Joyeux
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input"  name="member_profil" type="checkbox" value="respectueux" id="member_profil16">
-                                            <label class="form-check-label" for="member_profil16">
-                                                Respectueux
-                                            </label>
+                                    <div class="">
+                                        <label for="equipement">Profil collocataires : </label><br>
+                                        <div class="form-check filtreSup">
+                                            <div class="block-select">
+                                                <input class="form-check-input" name="member_profil[]" type="checkbox" value="Timide" id="member_profil">
+                                                <label class="form-check-label" for="member_profil">
+                                                    Timide
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Bavard" id="member_profil2">
+                                                <label class="form-check-label" for="member_profil2">
+                                                    Bavard
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Solitaire" id="member_profil3">
+                                                <label class="form-check-label" for="member_profil3">
+                                                    Solitaire
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Casanier" id="member_profil4">
+                                                <label class="form-check-label" for="member_profil4">
+                                                    Casanier
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Discret" id="member_profil5">
+                                                <label class="form-check-label" for="member_profil5">
+                                                    Discret
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Convivial" id="member_profil6">
+                                                <label class="form-check-label" for="member_profil6">
+                                                    Convivial
+                                                </label>
+                                            </div>
+                                                <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Cool" id="member_profil7">
+                                                <label class="form-check-label" for="member_profil7">
+                                                    Cool
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Extraverti" id="member_profil8">
+                                                <label class="form-check-label" for="profilColoc8">
+                                                    Extraverti
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Ordonné" id="member_profil9">
+                                                <label class="form-check-label" for="member_profil9">
+                                                    Ordonné
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Tolérant" id="member_profil10">
+                                                <label class="form-check-label" for="member_profil10">
+                                                    Tolérant
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Sportif" id="member_profil11">
+                                                <label class="form-check-label" for="member_profil11">
+                                                    Sportif
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Fétard" id="member_profil12">
+                                                <label class="form-check-label" for="member_profil12">
+                                                    Fétard
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Studieux" id="member_profil13">
+                                                <label class="form-check-label" for="member_profil13">
+                                                    Studieux
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Curieux" id="member_profil14">
+                                                <label class="form-check-label" for="member_profil14">
+                                                    Curieux
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Joyeux" id="member_profil15">
+                                                <label class="form-check-label" for="member_profil15">
+                                                    Joyeux
+                                                </label>
+                                            </div>
+                                            <div class="block-select">
+                                                <input class="form-check-input"  name="member_profil[]" type="checkbox" value="Respectueux" id="member_profil16">
+                                                <label class="form-check-label" for="member_profil16">
+                                                    Respectueux
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <label for="equipement">Centre d'intéret : </label><br>
                                     <div class="form-check filtreSup">
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="cineTvSerie" id="hobbies">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Ciné - TV - Série" id="hobbies">
                                             <label class="form-check-label" for="hobbies">
                                                 Ciné - Tv - Série
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="littérature" id="hobbies2">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Littérature" id="hobbies2">
                                             <label class="form-check-label" for="hobbies2">
                                                 Littérature
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="musique" id="hobbies3">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Musique" id="hobbies3">
                                             <label class="form-check-label" for="hobbies3">
                                                 Musique
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="jeuxVideo" id="hobbies4">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Jeux vidéo" id="hobbies4">
                                             <label class="form-check-label" for="hobbies4">
                                                 Jeux vidéo
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="plateauSociete" id="hobbies5">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Jeux plateau - Société" id="hobbies5">
                                             <label class="form-check-label" for="hobbies5">
                                                 Jeux plateu - Société
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="mode" id="hobbies6">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Mode" id="hobbies6">
                                             <label class="form-check-label" for="hobbies6">
                                                 Mode
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="Shopping" id="hobbies7">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Shopping" id="hobbies7">
                                             <label class="form-check-label" for="hobbies7">
-                                                shopping
+                                                Shopping
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="sport" id="hobbies8">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Sport" id="hobbies8">
                                             <label class="form-check-label" for="hobbies8">
                                                 Sport
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="cuisine" id="hobbies9">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Cuisine - Pâtisserie" id="hobbies9">
                                             <label class="form-check-label" for="hobbies9">
-                                                Cuisine
+                                                Cuisine - Pâtisserie
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="sortieCulturelle" id="hobbies10">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Sorties culturelles" id="hobbies10">
                                             <label class="form-check-label" for="hobbies10">
-                                                Sortie culturelle
+                                                Sorties culturelles
                                             </label>
                                         </div>
                                         <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="sortie" id="hobbies11">
-                                            <label class="form-check-label" for="hobbies11">
-                                                Sortie
-                                            </label>
-                                        </div>
-                                        <div class="block-select">
-                                            <input class="form-check-input" name="hobbies" type="checkbox" value="voyage" id="hobbies12">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Voyages" id="hobbies12">
                                             <label class="form-check-label" for="hobbies12">
-                                                Voyage
+                                                Voyages
+                                            </label>
+                                        </div>
+                                        <div class="block-select">
+                                            <input class="form-check-input" name="hobbies[]" type="checkbox" value="Autres" id="hobbies11">
+                                            <label class="form-check-label" for="hobbies11">
+                                                Autres
                                             </label>
                                         </div>
                                     </div>

@@ -25,6 +25,7 @@ function verifParam($request , $verifRequest = array()) :array
 }
 
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
+// Middleware pour inscription
 $verifParamRegister = function (Request $request, Application $app)
                       {
 
@@ -32,19 +33,27 @@ $verifParamRegister = function (Request $request, Application $app)
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/inscription");
                       };
+
+// Middleware pour connexion
 $verifParamLogin = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail","password"));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/login");
                       };
-$verifParamForgotPass = function (Request $request)
+
+                      
+$verifParamForgotPass = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail"));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/forgotten-password");
                       };
-$verifParamChangePass = function (Request $request)
+
+
+
+$verifParamChangePass = function (Request $request, Application $app)
+
                       {
                         $retour = verifParam($request->request, array("password", "password_repeat"));
                         if($retour["error"])
@@ -69,7 +78,6 @@ $verifContact = function (Request $request, Application $app)
 
                       };
 
-//------------------fin middleware form contact ------------------------------//
 
 
 // VERIFICATION PARAMETRES D'ANNONCE
@@ -103,6 +111,7 @@ $verifParamAnnonce = function (Request $request, Application $app)
                       }
                     };
 
+
 //-----------------Verification validation premiere connexion-----------------//
 $verifStatus = function (Request $request, Application $app)
                       {
@@ -113,3 +122,15 @@ $verifStatus = function (Request $request, Application $app)
                           return  $app->redirect("/Coolloc/public/profil");
 
                       };
+
+
+// Middleware pour commentaires utilisateurs / témoignages du site home page
+
+$verifParamComment = function (Request $request, Application $app)
+                      {
+                        // on vérifie que le contenu du message et que le user existe et différent de vide
+                        $retour = verifParam($request->request, array("comment","user_id"));
+                        if($retour["error"])
+                        return $app->redirect("/Coolloc/public/connected/temoigner");
+                      };
+
