@@ -27,7 +27,7 @@ $app->post('/', "Coolloc\Controller\SearchController::searchAction");
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {
-    return $app['twig']->render('details-annonce.html.twig', array());
+    return $app['twig']->render('serp-annonce.html.twig', array());
 })
     ->bind('resultat-recherche');
 

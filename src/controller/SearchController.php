@@ -16,7 +16,7 @@ class SearchController extends Controller
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
-        $arrayEquipments = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
+        $arrayEquipment = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
         $arrayMemberProfil = array('Timide', 'Bavard', 'Solitaire', 'Casanier', 'Discret', 'Convivial', 'Cool', 'Extraverti', 'Ordonné', 'Tolérant', 'Sportif', 'Fétard', 'Studieux', 'Curieux', 'Joyeux', 'Respectueux');
         $arrayHobbies = array('Ciné - TV - Série', 'Littérature', 'Musique', 'Jeux vidéo', 'Jeux plateau - Société', 'Mode', 'Shopping', 'Sport', 'Cuisine - Pâtisserie', 'Sorties culturelles', 'Voyages', 'Autres');
 
@@ -104,21 +104,6 @@ class SearchController extends Controller
         // PARKING
         $parking = $this->validSelect($request->get('parking'), "Parking");
 
-        // DISTRICT[]
-        (!$request->request->has('district')) ? $district = "" : $district = $this->validArray($request->get('district'), $arrayDistrict, 'Quartier');
-
-        // EQUIPMENT[]
-        (!$request->request->has('equipment')) ? $equipment = "" : $equipment = $this->validArray($request->get('equipment'), $arrayEquipments, 'Equipements');
-
-        // EQUIPMENT[]
-        (!$request->request->has('equipment')) ? $equipment = "" : $equipment = $this->validArray($request->get('equipment'), $arrayEquipments, 'Equipements');
-
-        // MEMBER_PROFIL[]
-        (!$request->request->has('member_profil')) ? $memberProfil = "" : $memberProfil = $this->validArray($request->get('member_profil'), $arrayMemberProfil, 'Profil collocataires');
-
-        // HOBBIES[]
-        (!$request->request->has('hobbies')) ? $hobbies = "" : $hobbies = $this->validArray($request->get('hobbies'), $arrayHobbies, 'Centre d\'intérêts');
-
         // ACTIVITY
         if (!empty($request->get('activity'))) {
             $activity = strip_tags(trim($request->get('activity')));
@@ -129,6 +114,18 @@ class SearchController extends Controller
         }else {
             $activity = "";
         }
+
+        // Je vérifie l'éxistance du champs 'district' dans mon POST et s'il existe je le traite
+        ($request->request->has('district')) ? $district = $this->verifArrayAndFormat($request->get('district'), $arrayDistrict, 'Quartier', 'SELECT') : $district = "";
+
+        // Je vérifie l'éxistance du champs 'equipment' dans mon POST et s'il existe je le traite
+        ($request->request->has('equipment')) ? $equipment = $this->verifArrayAndFormat($request->get('equipment'), $arrayEquipment, 'Equipement', 'SELECT') : $equipment = "";
+
+        // Je vérifie l'éxistance du champs 'member_profil' dans mon POST et s'il existe je le traite
+        ($request->request->has('member_profil')) ? $member_profil = $this->verifArrayAndFormat($request->get('member_profil'), $arrayMemberProfil, 'Profil colocataires', 'SELECT') : $member_profil = "";
+
+        // Je vérifie l'éxistance du champs 'hobbies' dans mon POST et s'il existe je le traite
+        ($request->request->has('hobbies')) ? $hobbies = $this->verifArrayAndFormat($request->get('hobbies'), $arrayHobbies, "Centre d'intérêts", 'SELECT') : $hobbies = "";
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
@@ -155,7 +152,7 @@ class SearchController extends Controller
                 "activity" => $activity,
                 "district" => $district,
                 "equipment" => $equipment,
-                "member_profil" => $memberProfil,
+                "member_profil" => $member_profil,
                 "hobbies" => $hobbies,
             );
 
@@ -166,8 +163,10 @@ class SearchController extends Controller
 
             $searchAnnonce = new SearchAnnonceModelDAO($app['db']);
 
-            if ($searchAnnonce->searchAnnonce($arraySearch, $app)) {
-                return $app['twig']->render('details-annonce.html.twig');
+            $response = $searchAnnonce->searchAnnonce($arraySearch, $app);
+
+            if ($response != false) {
+                return $app['twig']->render('serp-annonce.html.twig', array("affichage" => $response));
             }else {
                 return $app['twig']->render('index.html.twig', array("error" => "Erreur lors de la recherche, veuillez réessayer"));
             }

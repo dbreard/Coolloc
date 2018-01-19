@@ -170,97 +170,17 @@ class AnnonceController extends Controller
         }
 
         // SECURITE DES VALEURS DES TABLEAUX
-        // DISTRICT
-        // Si district est défini
-        if ($request->request->has('district')) {
-            // on créer un tableau de réception
-            $district = array();
-            // on créer un tableau pour faire le comparatif
-            $arrayDistrictCheck = array();
-            // boucle sur l'ensemble des données
-            foreach ($request->get('district') as $key => $value) {
-                // on nettoi chaque valeur
-                $value = strip_tags(trim($value));
-                // pour chaque valeur on vérifie si elle est valide
-                foreach ($arrayDistrict as $key2 => $value2) {
-                    // Si oui on check
-                    if ($value == $value2) {
-                        array_push($arrayDistrictCheck, "check");
-                    }
-                }
-            }
-            // Si le nombre de valeur ne correspond pas au nombre de check erreur
-            if (count($arrayDistrictCheck) != count($request->get('district'))) {
-                array_push($this->erreur, "Problème de selection dans 'Quartier'");
-            }else { // Sinon on serialize notre tableau en string
-                $district = serialize($request->get('district'));
-            }
-        }else {// si il n'est pas défini
-            $district = "";
-        }
+        // Je vérifie l'éxistance du champs 'district' dans mon POST et s'il existe je le traite
+        ($request->request->has('district')) ? $district = $this->verifArrayAndFormat($request->get('district'), $arrayDistrict, 'Quartier', 'INSERT') : $district = "";
 
-        // EQUIPMENTS
-        if ($request->request->has('equipments')) {
-            $equipment = array();
-            $arrayEquipmentsCheck = array();
-            foreach ($request->get('equipments') as $key => $value) {
-                $value = strip_tags(trim($value));
-                foreach ($arrayEquipments as $key2 => $value2) {
-                    if ($value == $value2) {
-                        array_push($arrayEquipmentsCheck, "check");
-                    }
-                }
-            }
-            if (count($arrayEquipmentsCheck) != count($request->get('equipments'))) {
-                array_push($this->erreur, "Problème de selection dans 'Equipements'");
-            }else {
-                $equipment = serialize($request->get('equipments'));
-            }
-        }else {
-            $equipment = "";
-        }
+        // Je vérifie l'éxistance du champs 'equipment' dans mon POST et s'il existe je le traite
+        ($request->request->has('equipment')) ? $equipment = $this->verifArrayAndFormat($request->get('equipment'), $arrayEquipment, 'Equipement', 'INSERT') : $equipment = "";
 
-        // MEMBER PROFIL
-        if ($request->request->has('member_profil')) {
-            $memberProfil = array();
-            $arrayMemberProfilCheck = array();
-            foreach ($request->get('member_profil') as $key => $value) {
-                $value = strip_tags(trim($value));
-                foreach ($arrayMemberProfil as $key2 => $value2) {
-                    if ($value == $value2) {
-                        array_push($arrayMemberProfilCheck, "check");
-                    }
-                }
-            }
-            if (count($arrayMemberProfilCheck) != count($request->get('member_profil'))) {
-                array_push($this->erreur, "Problème de selection dans 'Profil de colocataire recherché'");
-            }else {
-                $memberProfil = serialize($request->get('member_profil'));
-            }
-        }else {
-            $memberProfil = "";
-        }
+        // Je vérifie l'éxistance du champs 'member_profil' dans mon POST et s'il existe je le traite
+        ($request->request->has('member_profil')) ? $member_profil = $this->verifArrayAndFormat($request->get('member_profil'), $arrayMemberProfil, 'Profil colocataires', 'INSERT') : $member_profil = "";
 
-        // HOBBIES
-        if ($request->request->has('hobbies')) {
-            $hobbies = array();
-            $arrayHobbiesCheck = array();
-            foreach ($request->get('hobbies') as $key => $value) {
-                $value = strip_tags(trim($value));
-                foreach ($arrayHobbies as $key2 => $value2) {
-                    if ($value == $value2) {
-                        array_push($arrayHobbiesCheck, "check");
-                    }
-                }
-            }
-            if (count($arrayHobbiesCheck) != count($request->get('hobbies'))) {
-                array_push($this->erreur, "Problème de selection dans 'Centre d'intérêts'");
-            }else {
-                $hobbies = serialize($request->get('hobbies'));
-            }
-        }else {
-            $hobbies = "";
-        }
+        // Je vérifie l'éxistance du champs 'hobbies' dans mon POST et s'il existe je le traite
+        ($request->request->has('hobbies')) ? $hobbies = $this->verifArrayAndFormat($request->get('hobbies'), $arrayHobbies, "Centre d'intérêts", 'INSERT') : $hobbies = "";
 
         // VERIF LONGUEUR NOM DE COLOC
         (iconv_strlen($name_coloc) > 2 || iconv_strlen($name_coloc) <= 40) ? : array_push($this->erreur, 'Nom de coloc invalide');
@@ -386,7 +306,7 @@ class AnnonceController extends Controller
                 "parking" => $parking,
                 "district" => $district,
                 "equipment" => $equipment,
-                "member_profil" => $memberProfil,
+                "member_profil" => $member_profil,
                 "hobbies" => $hobbies,
             );
 
