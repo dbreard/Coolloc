@@ -6,23 +6,31 @@
 
 
 {% block header %}
-        {% include 'required/header_c.html.twig' ignore missing  %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
 {% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_c.html.twig' ignore missing  %}
-    {# modif de la nav #}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
+
 {% block content %}
-
-
 {% if error is defined %}
     {% for errors in error %}
         <div>{{ errors }}</div>
     {%  endfor %}
 {% endif %}
-
 
 <div class="page-head">
     <div class="container">
@@ -34,13 +42,9 @@
     </div>
 </div>
 
-
 {% block fonction %}
 
-
     {% include 'required/membre.php' ignore missing  %}
-
-
 
 {% endblock %}
 <!-- End page header -->
