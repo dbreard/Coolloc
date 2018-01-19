@@ -246,52 +246,37 @@ $app->get('/connected/deconnexion', function () use ($app) {
 //*************************************//
 
 //DASHBOARD
-$app->get('/connected/admin','Coolloc\Controller\AdminController::selectedAdminInfos')-> bind('dashboard');
-
-
-//GERER USER
-$app->get('/connected/admin/gerer-user','Coolloc\Controller\AdminController::selectedUsersAndAdminInfos')-> bind('gerer-user');
-$app->post('/connected/admin/gerer-user', function () use ($app) {
-    //controleur
-});
+$app->get('/connected/sabit','Coolloc\Controller\AdminController::selectedAdminInfos')-> bind('dashboard');
 
 
 //GERER USER CHERCHANT DES COLOCATIONS
-$app->get('/connected/admin/gerer-user-colocations','Coolloc\Controller\AdminController::selectedUsersColocationsAndAdminInfos')-> bind('gerer-user-colocations');
-$app->post('/connected/admin/gerer-user-colocations', function () use ($app) {
-    //controleur
-});
+$app->get('/connected/sabit/gerer-user-colocations','Coolloc\Controller\AdminController::selectedUsersColocationsAndAdminInfos')-> bind('gerer-user-colocations');
 
 
 //GERER USER CHERCHANT DES COLOCATAIRES
-$app->get('/connected/admin/gerer-user-colocataires','Coolloc\Controller\AdminController::selectedUsersColocatairesAndAdminInfos')-> bind('gerer-user-colocataires');
+$app->get('/connected/sabit/gerer-user-colocataires','Coolloc\Controller\AdminController::selectedUsersColocatairesAndAdminInfos')-> bind('gerer-user-colocataires');
 
+
+
+//MODIFIER STATUT ACTIF/INACTIF D'UN USER
+$app->get('/connected/sabit/gerer-user/{id_user}/{page_actuelle}','Coolloc\Controller\AdminController::modifyUserStatus')-> bind('modify-status-user');
+
+
+//AFFICHER DETAILS STATUT UTILISATEUR
+$app->get('/connected/sabit/details-profil/{id_user}','Coolloc\Controller\AdminController::detailsUser')-> bind('details-profil');
 
 
 
 //GERER ANNONCE ADMIN
-$app->get('/connected/admin/gerer-annonce', function () use ($app) {
-    // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
-    $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
+$app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController::selectedAnnoncesAndAdminInfos')-> bind('gerer-annonces-admin');
 
-    if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
-        return $app['twig']->render('dashboard/annonce-dashboard.html.twig', array(
-            "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
-        ));
-    } else {// Si l'utilisateur n'est pas admin
-        return $app->redirect('/Coolloc/public');
-    }})
-    ->bind('gerer-annonce');
-$app->post('/connected/admin/gerer-annonce', function () use ($app) {
-    //controleur
-});
 
 
 
 
 
 //GERER FAQ
-$app->get('/connected/admin/gerer-faq', function () use ($app) {
+$app->get('/connected/sabit/gerer-faq', function () use ($app) {
     // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
     $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
@@ -310,7 +295,7 @@ $app->post('/connected/admin/gerer-faq', function () use ($app) {
 
 
 //GERER CONTENU
-$app->get('/connected/admin/gerer-contenu', function () use ($app) {
+$app->get('/connected/sabit/gerer-contenu', function () use ($app) {
     // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
     $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
 

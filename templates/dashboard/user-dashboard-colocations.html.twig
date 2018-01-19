@@ -45,16 +45,18 @@
                     <a href="{{ path ('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Acceuil Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ path ('gerer-user') }}"><i class="fa fa-fw fa-user"></i> Gestion utilisateurs</a>
-                </li>
-                <li class="active">
-                    <a href="{{ path ('gerer-user-colocations') }}"><i class="fa fa-fw fa-user"></i> Gestion utilisateurs cherchant une colocations</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user"></i> Gerer utilisateurs <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="{{ path ('gerer-user-colocations') }}">Cherchant une colocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('gerer-user-colocataires') }}">Cherchant des colocataires</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="{{ path ('gerer-user-colocataires') }}"><i class="fa fa-fw fa-user"></i> Gestion utilisateurs cherchant des colocataires</a>
-                </li>
-                <li>
-                    <a href="{{ path ('gerer-annonce') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
+                    <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
                 </li>
                 <li>
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
@@ -92,11 +94,12 @@
 
 {% block content %}
 
-    <h2 class="">Personnes recherchant des colocations : </h2>
+    <h2 class="">Personnes recherchant une colocation : </h2>
     <div class="table-responsive">
     <table class="table table-hover table-striped col-md-12">
         <thead>
             <tr>
+                <th class="text-center">Id utilisateur</th>
                 <th class="text-center">Prénom</th>
                 <th class="text-center">Nom</th>
                 <th class="text-center">Date de naissance</th>
@@ -108,12 +111,13 @@
                 <th class="text-center">Statut</th>
                 <th class="text-center">Etat du compte</th>
                 <th class="text-center">Détails</th>
-                <th class="text-center">Supprimer</th>
+                <th class="text-center">Rendre inactif</th>
             </tr>
         </thead>
         {% for users in usersInfo %}
             {% if users.status == 'cherche colocation' %}
                 <tr>
+                    <td class="text-center">{{ users.id_user }}</td>
                     <td class="text-center">{{ users.firstname }}</td>
                     <td class="text-center">{{ users.lastname }}</td>
                     <td class="text-center">{{ users.birthdate }}</td>
@@ -123,9 +127,13 @@
                     <td class="text-center">{{ users.sex }}</td>
                     <td class="text-center">{{ users.date_created }}</td>
                     <td class="text-center">{{ users.status }}</td>
-                    <td class="text-center">{{ users.account }}</td>
-                    <td class=""><a href=''><i class="glyphicon glyphicon-search"></i> Détails profil</a></td>
-                    <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment supprimer ?"))' href='' ><i class="glyphicon glyphicon-trash"></a></td>
+                    {% if users.account == 'actif' %}
+                        <td class="text-center text-success">{{ users.account }}</td>
+                    {% else %}
+                        <td class="text-center text-danger">{{ users.account }}</td>
+                    {% endif %}
+                    <td class=""><a href='{{ path("details-profil", {"id_user" : users.id_user}) }}'><i class="glyphicon glyphicon-search"></i> Détails profil </a></td>
+                    <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><i class="fa fa-times"></a></td>
                 </tr>
             {% endif %}
     {% endfor %}

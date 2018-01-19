@@ -42,20 +42,21 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="{{ path ('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Acceuil Dashboard</a>
+                    <a href="{{ path ('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Accueil Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ path ('gerer-user') }}"><i class="fa fa-fw fa-user"></i> Gestion utilisateurs</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user"></i> Gerer utilisateurs <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="{{ path ('gerer-user-colocations') }}">Cherchant une colocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('gerer-user-colocataires') }}">Cherchant des colocataires</a>
+                        </li>
+                    </ul>
                 </li>
-
                 <li>
-                    <a href="{{ path ('gerer-user-colocations') }}"><i class="fa fa-fw fa-user"></i> Gestion utilisateurs cherchant une colocations</a>
-                </li>
-                <li>
-                    <a href="{{ path ('gerer-user-colocataires') }}"><i class="fa fa-fw fa-user"></i> Gestion utilisateurs cherchant des colocataires</a>
-                </li>
-                <li>
-                    <a href="{{ path ('gerer-annonce') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
+                    <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
                 </li>
                 <li>
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
@@ -96,7 +97,7 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
@@ -118,7 +119,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
@@ -140,7 +141,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="panel panel-yellow">
                 <div class="panel-heading">
                     <div class="row">
@@ -149,11 +150,33 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">124</div>
-                            <div>Utilisateurs</div>
+                            <div>Utilisateurs cherchant une colocation</div>
                         </div>
                     </div>
                 </div>
-                <a href="{{ path ('gerer-user') }}">
+                <a href="{{ path ('gerer-user-colocations') }}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Voir les détails</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-user fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">124</div>
+                            <div>Utilisateurs cherchant des colocataires</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ path ('gerer-user-colocataires') }}">
                     <div class="panel-footer">
                         <span class="pull-left">Voir les détails</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -164,8 +187,5 @@
         </div>
     </div>
     <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
 
-</div>
 {% endblock %}

@@ -55,7 +55,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
                 </li>
                 <li>
@@ -94,54 +94,44 @@
 
 {% block content %}
 
-    {% if error is defined %}
-        <div class="col-md-offset-3 col-md-6 alert alert-danger">{{ error }}</div>
-    {% endif %}
-
-    <h2 class="">Personnes recherchant des colocataires : </h2>
+    <h2 class="">Gestion des annonces : </h2>
     <div class="table-responsive">
         <table class="table table-hover table-striped col-md-12">
             <thead>
             <tr>
+                <th class="text-center">Id annonce</th>
                 <th class="text-center">Id utilisateur</th>
-                <th class="text-center">Prénom</th>
-                <th class="text-center">Nom</th>
-                <th class="text-center">Date de naissance</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Téléphone</th>
-                <th class="text-center">Activité</th>
-                <th class="text-center">Sexe</th>
+                <th class="text-center">Nom de la coloc</th>
+                <th class="text-center">Adresse</th>
+                <th class="text-center">Details adresse</th>
+                <th class="text-center">Code postal</th>
+                <th class="text-center">Ville</th>
+                <th class="text-center">Mail de la colloc</th>
+                <th class="text-center">Tel de la coloc</th>
                 <th class="text-center">Date de création</th>
-                <th class="text-center">Statut</th>
-                <th class="text-center">Etat du compte</th>
-                <th class="text-center">Afficher son annonce</th>
-                <th class="text-center">Rendre inactif</th>
+                <th class="text-center">Date de dispo</th>
+                <th class="text-center">Détails de l'annonce</th>
+                <th class="text-center">Supprimer annonce</th>
             </tr>
             </thead>
 
             <tbody>
-            {% for users in usersInfo %}
-                {% if users.status == 'cherche colocataire' %}
+            {% for annonce in annoncesInfo %}
                     <tr>
-                        <td class="text-center">{{ users.firstname }}</td>
-                        <td class="text-center">{{ users.id_user }}</td>
-                        <td class="text-center">{{ users.lastname }}</td>
-                        <td class="text-center">{{ users.birthdate }}</td>
-                        <td class="text-center">{{ users.mail }}</td>
-                        <td class="text-center">{{ users.tel }}</td>
-                        <td class="text-center">{{ users.activity }}</td>
-                        <td class="text-center">{{ users.sex }}</td>
-                        <td class="text-center">{{ users.date_created }}</td>
-                        <td class="text-center">{{ users.status }}</td>
-                        {% if users.account == 'actif' %}
-                            <td class="text-center text-success">{{ users.account }}</td>
-                        {% else %}
-                            <td class="text-center text-danger">{{ users.account }}</td>
-                        {% endif %}
-                            <td class="text-center"><a href=''><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
-                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocataires'}) }}' ><i class="fa fa-times"></a></td>
+                        <td class="text-center">{{ annonce.id_user_post_annonce }}</td>
+                        <td class="text-center">{{ annonce.user_id }}</td>
+                        <td class="text-center">{{ annonce.name_coloc }}</td>
+                        <td class="text-center">{{ annonce.adress }}</td>
+                        <td class="text-center">{{ annonce.adress_details }}</td>
+                        <td class="text-center">{{ annonce.postal_code }}</td>
+                        <td class="text-center">{{ annonce.ville_nom_reel }}</td>
+                        <td class="text-center">{{ annonce.mail_annonce }}</td>
+                        <td class="text-center">{{ annonce.tel_annonce }}</td>
+                        <td class="text-center">{{ annonce.date_created }}</td>
+                        <td class="text-center">{{ annonce.date_dispo }}</td>
+                        <td class="text-center"><a href=''><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
+                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment supprimer l\'annonce ?"))' href='' ><i class="glyphicon glyphicon-trash"></a></td>
                     </tr>
-                {% endif %}
             {% endfor %}
             </tbody>
 

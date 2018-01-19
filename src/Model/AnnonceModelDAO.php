@@ -100,4 +100,12 @@ class AnnonceModelDAO{
             return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
         }
     }
+
+    public function allAnnoncesSelected(){
+
+        $sql = "SELECT * FROM annonce_options_city";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+    }
 }

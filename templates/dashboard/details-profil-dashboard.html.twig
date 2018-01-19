@@ -82,7 +82,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Dashboard / Gestion utilisateurs cherchant des colocataires
+                    <i class="fa fa-dashboard"></i> Dashboard / Gestion utilisateurs cherchant une colocation
                 </li>
             </ol>
         </div>
@@ -94,59 +94,83 @@
 
 {% block content %}
 
-    {% if error is defined %}
-        <div class="col-md-offset-3 col-md-6 alert alert-danger">{{ error }}</div>
-    {% endif %}
+    <a href="{{ path ('gerer-user-colocations') }}" class="btn btn-warning"><i class="fa fa-reply"></i> Retour</a>
 
-    <h2 class="">Personnes recherchant des colocataires : </h2>
+    <h2 class="">Détail du profil<small> options de l'utilisateur :</small> </h2>
+
     <div class="table-responsive">
         <table class="table table-hover table-striped col-md-12">
             <thead>
             <tr>
-                <th class="text-center">Id utilisateur</th>
                 <th class="text-center">Prénom</th>
                 <th class="text-center">Nom</th>
-                <th class="text-center">Date de naissance</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Téléphone</th>
-                <th class="text-center">Activité</th>
-                <th class="text-center">Sexe</th>
-                <th class="text-center">Date de création</th>
-                <th class="text-center">Statut</th>
-                <th class="text-center">Etat du compte</th>
-                <th class="text-center">Afficher son annonce</th>
-                <th class="text-center">Rendre inactif</th>
+                <th class="text-center">Photo</th>
+                <th class="text-center">Acces handicapé</th>
+                <th class="text-center">Fumeur</th>
+                <th class="text-center">Animal</th>
+                <th class="text-center">Composition</th>
+                <th class="text-center">Meublé</th>
+                <th class="text-center">Jardin</th>
+                <th class="text-center">Balcon</th>
+                <th class="text-center">parking</th>
             </tr>
             </thead>
+                <tr>
 
-            <tbody>
-            {% for users in usersInfo %}
-                {% if users.status == 'cherche colocataire' %}
-                    <tr>
-                        <td class="text-center">{{ users.firstname }}</td>
-                        <td class="text-center">{{ users.id_user }}</td>
-                        <td class="text-center">{{ users.lastname }}</td>
-                        <td class="text-center">{{ users.birthdate }}</td>
-                        <td class="text-center">{{ users.mail }}</td>
-                        <td class="text-center">{{ users.tel }}</td>
-                        <td class="text-center">{{ users.activity }}</td>
-                        <td class="text-center">{{ users.sex }}</td>
-                        <td class="text-center">{{ users.date_created }}</td>
-                        <td class="text-center">{{ users.status }}</td>
-                        {% if users.account == 'actif' %}
-                            <td class="text-center text-success">{{ users.account }}</td>
-                        {% else %}
-                            <td class="text-center text-danger">{{ users.account }}</td>
-                        {% endif %}
-                            <td class="text-center"><a href=''><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
-                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocataires'}) }}' ><i class="fa fa-times"></a></td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-
-
+                        <td class="text-center">{{ detailsUser.firstname }}</td>
+                        <td class="text-center">{{ detailsUser.lastname }}</td>
+                        <td class="text-center"><img src="{{ detailsUser.profil_picture }}" alt="Miniature photo de profil"></td>
+                        <td class="text-center">{{ detailsUser.handicap_access }}</td>
+                        <td class="text-center">{{ detailsUser.smoking }}</td>
+                        <td class="text-center">{{ detailsUser.animals }}</td>
+                        <td class="text-center">{{ detailsUser.sex_roommates }}</td>
+                        <td class="text-center">{{ detailsUser.furniture }}</td>
+                        <td class="text-center">{{ detailsUser.garden }}</td>
+                        <td class="text-center">{{ detailsUser.balcony }}</td>
+                        <td class="text-center">{{ detailsUser.parking }}</td>
+                 </tr>
         </table>
     </div>
+
+    <h2><small> Choix de l'utilisateur :</small> </h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped col-md-12">
+            <tr>
+                <th class="col-md-2">Equipement</th>
+                {% if detailsUser.equipment == '' %}
+                    <td>Non définie par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.equipment }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Quartier</th>
+                {% if detailsUser.district == '' %}
+                    <td>Non définie par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.district }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Centres d'interet</th>
+                {% if detailsUser.hobbies == '' %}
+                    <td>Non définie par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.hobbies }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Profil du membre</th>
+                {% if detailsUser.member_profil == '' %}
+                    <td>Non définie par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.member_profil }}</td>
+                {% endif %}
+            </tr>
+        </table>
+    </div>
+
+
 
 {% endblock %}
