@@ -27,7 +27,11 @@
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-menu">
                                     <li><a href="{{ path('resultat-recherche') }}">A propos de CoolLoc </a>  </li>
-                                    <li><a href="{{ path('inscription') }}">Vous inscrire</a>  </li>
+                                    {% if connected is defined %}
+
+                                    {% else %}
+                                        <li><a href="{{ path('inscription') }}">Vous inscrire</a>  </li>
+                                    {% endif %}
                                     <li><a href="{{ path('resultat-recherche') }}">Nos annonces</a>  </li>
                                     <li><a href="{{ path('contact') }}">Nous contacter</a></li>
                                     <li><a href="{{ path('faq') }}">Questions fréquentes (FAQ)</a>  </li>

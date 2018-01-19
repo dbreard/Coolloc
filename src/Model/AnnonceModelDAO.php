@@ -3,6 +3,7 @@
 namespace Coolloc\Model;
 
 use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
 use Doctrine\DBAL\Connection;
 use Silex\Application;
 
@@ -92,12 +93,33 @@ class AnnonceModelDAO{
                     }
                 }
 
-                if ($ajoutAnnonce) {
-                    return $app['twig']->render('/connected/fiche-annonce.html.twig', array());
+                if ($ajoutMedia) {
+                    $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+
+                    $updateStatus = new UserModelDAO($app['db']);
+
+                    if ($user['status'] == "première connexion") {
+                        $rowAffected = $updateStatus->updateUserStatus($user['id_user'], "cherche colocataire");
+
+                        if ($rowAffected == 1) {
+                            return true;
+                        }
+                    }else {
+                        return true;
+                    }
+
                 }
             }
         }else {
-            return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
+            return false;
         }
+    }
+
+    public function allAnnoncesSelected(){
+
+        $sql = "SELECT * FROM annonce_options_city";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
     }
 }

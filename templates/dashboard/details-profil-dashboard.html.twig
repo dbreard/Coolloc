@@ -1,0 +1,176 @@
+{% extends"dashboard/layout-dashboard.html.twig" %}
+
+
+
+{% block headtitle %}
+    Gestion Users | CoolLoc, la colocation cool !
+{% endblock%}
+
+
+
+{% block nav %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Coolloc Admin</a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>{{ userAdmin.firstname }} {{ userAdmin.lastname }}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Deconnexion</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li>
+                    <a href="{{ path ('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Acceuil Dashboard</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user"></i> Gerer utilisateurs <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="{{ path ('gerer-user-colocations') }}">Cherchant une colocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('gerer-user-colocataires') }}">Cherchant des colocataires</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
+                </li>
+                <li>
+                    <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
+                </li>
+                <li>
+                    <a href="{{ path ('gerer-contenu') }}"><i class="fa fa-fw fa-desktop"></i> Gestion du contenue</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+{% endblock %}
+
+
+
+{% block title %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Gestion Utilisateurs
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Dashboard / Gestion utilisateurs cherchant une colocation
+                </li>
+            </ol>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <a href="{{ path ('gerer-user-colocations') }}" class="btn btn-warning"><i class="fa fa-reply"></i> Retour</a>
+
+    <h2 class="">Détail du profil<small> options de l'utilisateur :</small> </h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped col-md-12">
+            <thead>
+            <tr>
+                <th class="text-center">Prénom</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Photo</th>
+                <th class="text-center">Acces handicapé</th>
+                <th class="text-center">Fumeur</th>
+                <th class="text-center">Animal</th>
+                <th class="text-center">Composition</th>
+                <th class="text-center">Meublé</th>
+                <th class="text-center">Jardin</th>
+                <th class="text-center">Balcon</th>
+                <th class="text-center">parking</th>
+            </tr>
+            </thead>
+                <tr>
+
+                        <td class="text-center">{{ detailsUser.firstname }}</td>
+                        <td class="text-center">{{ detailsUser.lastname }}</td>
+                        <td class="text-center"><img src="{{ detailsUser.profil_picture }}" alt="Miniature photo de profil"></td>
+                        <td class="text-center">{{ detailsUser.handicap_access }}</td>
+                        <td class="text-center">{{ detailsUser.smoking }}</td>
+                        <td class="text-center">{{ detailsUser.animals }}</td>
+                        <td class="text-center">{{ detailsUser.sex_roommates }}</td>
+                        <td class="text-center">{{ detailsUser.furniture }}</td>
+                        <td class="text-center">{{ detailsUser.garden }}</td>
+                        <td class="text-center">{{ detailsUser.balcony }}</td>
+                        <td class="text-center">{{ detailsUser.parking }}</td>
+                 </tr>
+        </table>
+    </div>
+
+    <h2><small> Choix de l'utilisateur :</small> </h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped col-md-12">
+            <tr>
+                <th class="col-md-2">Equipement</th>
+                {% if detailsUser.equipment == '' %}
+                    <td>Non défini par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.equipment }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Quartier</th>
+                {% if detailsUser.district == '' %}
+                    <td>Non défini par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.district }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Centres d'interet</th>
+                {% if detailsUser.hobbies == '' %}
+                    <td>Non défini par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.hobbies }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Profil du membre</th>
+                {% if detailsUser.member_profil == '' %}
+                    <td>Non défini par l'utilisateur</td>
+                {% else %}
+                    <td>{{ detailsUser.member_profil }}</td>
+                {% endif %}
+            </tr>
+        </table>
+    </div>
+
+
+
+{% endblock %}

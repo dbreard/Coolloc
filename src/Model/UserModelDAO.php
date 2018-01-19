@@ -26,6 +26,7 @@ class UserModelDAO {
             return $resultat;
     }
 
+
     // CHANGEMENT DE MOT DE PASSE
     function changeMdpBdd(string $password)
     {
@@ -33,6 +34,7 @@ class UserModelDAO {
             $resultat = $this->getDb()->fetchAssoc($sql, array((string) $password));
             return $resultat;
     }
+
 
 
     public function insertUSer(string $first_name,string $last_name,string $birthdate,string $password,string $email,string $tel,string $sexe,string $activite,int     $condition){
@@ -57,12 +59,23 @@ class UserModelDAO {
         return $this->db->lastInsertId();
     }
 
+    // SELECTION D'UN USER PAR SON TOKEN
     public function selectUserFromToken(string $token) :array{
 
         $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
         $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));
 
         return $idUser;
+
+    }
+
+    // SELECTION D'UN USER PAR SON ID
+    public function selectUserFromId(int $idUser){
+
+        $sql = "SELECT * FROM user_options WHERE id_user = ?";
+        $user = $this->getDb()->fetchAssoc( $sql, array((int) $idUser) );
+
+        return $user;
 
     }
 
@@ -75,11 +88,45 @@ class UserModelDAO {
 
     }
 
+
     public function updateUserStatus(string $idUser, string $status): int{
       $sql = "UPDATE user SET status = ? WHERE id_user = ? ";
       $rowAffected = $this->getDb()->executeUpdate( $sql, array((string) $status, (int) $idUser));
 
       return $rowAffected;
+     
+    }
+
+    // CHANGEMENT DE MOT DE PASSE
+    public function modifyPasswordFromToken( string $password, int $idUser ) {
+        
+        $sql = "UPDATE user SET password = :password WHERE id_user = :id ";
+        $rowAffected = $this->getDb()->executeUpdate( $sql, array('password' => $password, 'id' => $idUser ));
+
+        return $rowAffected;
+
+
+    }
+
+    //SELECTION DE TOUT LES USERS EN BDD
+    public function allUsersSelected(){
+
+        $sql = "SELECT * FROM user_options";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+
+    public function modifyUserStatus( $idUser ){
+
+        $sql = "UPDATE user SET account = 'inactif' WHERE id_user = ? ";
+        $rowAffected = $this->getDb()->executeUpdate( $sql, array((int) $idUser) );
+
+        return $rowAffected;
+
+
     }
 
 
