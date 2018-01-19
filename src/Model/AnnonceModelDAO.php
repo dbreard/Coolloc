@@ -122,4 +122,25 @@ class AnnonceModelDAO{
 
         return $users;
     }
+
+    public function selectAnnonceById(int $id_annonce) {
+
+        $sql = "SELECT * FROM user, user_post_annonce, options, city WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options AND user_post_annonce.id_user_post_annonce = ? GROUP BY user_post_annonce.id_user_post_annonce";
+        $responseAnnonce = $this->getDb()->fetchAssoc($sql, array((int) $id_annonce));
+
+        $sql = "SELECT media.url_media FROM user_post_annonce, media WHERE user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND user_post_annonce.id_user_post_annonce = ? AND type = 'photo'";
+        $responsePhoto = $this->getDb()->fetchAll($sql, array((int) $id_annonce));
+
+        $sql = "SELECT media.url_media FROM user_post_annonce, media WHERE user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND user_post_annonce.id_user_post_annonce = ? AND type = 'video'";
+        $responseVideo = $this->getDb()->fetchAll($sql, array((int) $id_annonce));
+
+        $response = array();
+
+        $response['annonce'] = $responseAnnonce;
+        $response['photo'] = $responsePhoto;
+        $response['video'] = $responseVideo;
+
+        return $response;
+
+    }
 }

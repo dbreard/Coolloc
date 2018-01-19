@@ -327,25 +327,49 @@ class AnnonceController extends Controller
 
     public function detailAnnonceAction(Application $app, Request $request) {
 
-
-
-
-
-
-
-
-
-
-
         $isconnected = Controller::ifConnected();
+
+        $id_annonce = strip_tags(trim($request->get("id_annonce")));
+
+        if (!filter_var($id_annonce, FILTER_VALIDATE_INT)) {
+            if ($isconnected) {
+                return $app['twig']->render('details-annonce.html.twig', array(
+                    "connected" => $isconnected,
+                    "error" => "l'URL à été corrompu.",
+                ));
+            }else {
+                return $app['twig']->render('details-annonce.html.twig', array(
+                    "error" => "l'URL à été corrompu.",
+                ));
+            }
+        }
+
+        $annonce = new AnnonceModelDAO($app['db']);
+
+        $infoAnnonce = $annonce->selectAnnonceById($id_annonce);
+
+        echo "<pre>";
+        var_dump($infoAnnonce);
+        echo "</pre>";
+
+        $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
+        (($this->getDate() - $dateDispoAnnonce) <= 0) ? $dispoAnnonce = 'non' : $dispoAnnonce = 'oui';
 
         if ($isconnected) {
             return $app['twig']->render('details-annonce.html.twig', array(
-         "connected" => $isconnected,
-
+                "connected" => $isconnected,
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "dispo_annonce" => $dispoAnnonce,
         ));
         } else {
-            return $app['twig']->render('details-annonce.html.twig', array());
+            return $app['twig']->render('details-annonce.html.twig', array(
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "dispo_annonce" => $dispoAnnonce,
+        ));
         }
     }
 }
