@@ -7,7 +7,7 @@
 
 {# Bloc header #}
 {% block header %}
-    {% if connected is defined %}
+       {% if connected is defined %}
             {% include 'required/header_c.html.twig' ignore missing  %}
                 {% else %}
             {% include 'required/header.html.twig' ignore missing  %}
