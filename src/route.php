@@ -92,7 +92,6 @@ $app->get('/login', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-
     if ($isConnectedAndAdmin){
         return $app['twig']->render('formulaires/login.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
@@ -101,10 +100,14 @@ $app->get('/login', function () use ($app) {
 
     elseif (!$isconnected) {
         return $app['twig']->render('formulaires/login.html.twig', array(
-     "connected" => $isconnected,
-    ));
+            "connected" => $isconnected,
+
+           ));
+
     } else {
-        return $app->redirect('/Coolloc/public/connected/profil') ;
+        
+           return $app->redirect('/Coolloc/public/connected/profil') ;
+
     }
 
 
