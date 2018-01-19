@@ -131,6 +131,16 @@ class Controller {
         }else {
             return $app->redirect('/Coolloc/public/login');
         }
+    }
+
+    // VERIFIE SI L'UTILISATEUR EST CONNECTER ET ADMIN
+    public function verifConnectedAdmin(Application $app, Request $request){
+        $pageName = strip_tags(trim($request->get("pagename")));
+        if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida']) && $_SESSION['membre']['status'] == 'admin' ) {
+            return $app->redirect('/Coolloc/connected/admin/' . $pageName);
+        }else {
+            return $app->redirect('/Coolloc/public/login');
+        }
 
     }
 
@@ -142,15 +152,12 @@ class Controller {
         }
     }
 
-    // VERIFIE SI L'UTILISATEUR EST CONNECTER ET ADMIN
-    public function verifConnectedAdmin(Application $app, Request $request){
-        $pageName = strip_tags(trim($request->get("pagename")));
-        if (isset($_SESSION['membre']) && !empty($_SESSION['membre']) && $_SESSION['membre']['status'] ) {
-            return $app->redirect('/Coolloc/connected/admin/' . $pageName);
+    public static function ifConnectedAndAdmin(){
+        if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida']) && $_SESSION['membre']['status'] == 'admin') {
+            return true;
         }else {
-            return $app->redirect('/Coolloc/public/login');
+            return false;
         }
-
     }
 
 

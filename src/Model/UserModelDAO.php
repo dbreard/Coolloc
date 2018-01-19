@@ -59,12 +59,23 @@ class UserModelDAO {
         return $this->db->lastInsertId();
     }
 
+    // SELECTION D'UN USER PAR SON TOKEN
     public function selectUserFromToken(string $token) :array{
 
         $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
         $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));
 
         return $idUser;
+
+    }
+
+    // SELECTION D'UN USER PAR SON ID
+    public function selectUserFromId(int $idUser){
+
+        $sql = "SELECT * FROM user_options WHERE id_user = ?";
+        $user = $this->getDb()->fetchAssoc( $sql, array((int) $idUser) );
+
+        return $user;
 
     }
 
@@ -93,6 +104,28 @@ class UserModelDAO {
         $rowAffected = $this->getDb()->executeUpdate( $sql, array('password' => $password, 'id' => $idUser ));
 
         return $rowAffected;
+
+
+    }
+
+    //SELECTION DE TOUT LES USERS EN BDD
+    public function allUsersSelected(){
+
+        $sql = "SELECT * FROM user_options";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+
+    public function modifyUserStatus( $idUser ){
+
+        $sql = "UPDATE user SET account = 'inactif' WHERE id_user = ? ";
+        $rowAffected = $this->getDb()->executeUpdate( $sql, array((int) $idUser) );
+
+        return $rowAffected;
+
 
     }
 

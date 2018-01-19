@@ -25,34 +25,30 @@ class LoginController extends Controller
         //mdp : doit être égal au mdp register lié à l'email register
 
 
-        ($this->verifEmail($email)) ?  : $this->erreur['email'] = 'Format de l\'email incorrect ';
-        ($this->verifMdp($password)) ?  : $this->erreur['password'] = 'Format du mot de passe incorrect ';
+        ($this->verifEmail($email)) ?: $this->erreur['email'] = 'Format de l\'email incorrect ';
+        ($this->verifMdp($password)) ?: $this->erreur['password'] = 'Format du mot de passe incorrect ';
 
 
-
-        if (!empty($this->erreur))
+        if (!empty($this->erreur)) 
         { // si il y a des erreurs lors de la connexion, on les affiche
             return $app['twig']->render('formulaires/login.html.twig', array(
                 "error" => $this->erreur,
             ));
-        }
-        else
+        } 
+        else 
+        
         { // si les formats d'email et mdp sont bons, l'user se connecte et crée un token
             $resultat = new UserModelDAO($app['db']);
             $userVerifEmail = $resultat->verifEmailBdd($email);
-                ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : $this->erreur['email_error'] = 'Email ou mot de passe incorrect';
-                // Vérifie si l'email de connexion correspond en BDD
+            ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : $this->erreur['email_error'] = 'Email ou mot de passe incorrect';
+            // Vérifie si l'email de connexion correspond en BDD
 
-                if (!empty($user))
-                { // Si la selection s'est bien passée
-                    if ($user['password'] == password_verify($password , substr($user['password'], 0, -32 ))) 
-
-                    { // si les mot de passe cryptés correspondent
-
-
-                        // vérifier le account actif-inactif
-                        // vérifier si l'utilisateur est actif ou non
-
+            if (!empty($user)) 
+            { // Si la selection s'est bien passée
+                if ($user['password'] == password_verify($password, substr($user['password'], 0, -32))) 
+                { // si les mot de passe cryptés correspondent
+                    if($user['account'] === 'actif')
+                    { // SI LE COMPTE DE L'UTILISATEUR EST BIEN ACTIF
 
                         $tokenUser = new TokensDAO($app['db']);
                         $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
@@ -63,31 +59,43 @@ class LoginController extends Controller
                                 'zoubida' => $resultatToken,
                                 'status' => $user['status'],
                             );
-                        }
-                        else
-                        {
+                        } 
+                      else 
+                      {
 
                             $this->erreur['failed_connexion'] = 'Erreur lors de la connexion';
 
                         }
                     }
-                    else
-                    {
-                        $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
-                    }
+                  else
+                  {
+                        $this->erreur['failed_connexion'] = 'Ce compte n\'est pas actif';
+                   }
 
 
+                } 
+              else 
+              {
+                    $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
                 }
 
-        }
-        if (empty($this->erreur)){
-            return $app->redirect('/Coolloc/public/connected/profil');
-        }
-        else
-        {
-            return $app['twig']->render('formulaires/login.html.twig', array(
-                "error" => $this->erreur,
-            ));
+            }
+            if (empty($this->erreur))
+            {
+                return $app->redirect('/Coolloc/public/connected/profil');
+            } 
+          else
+          {
+                return $app['twig']->render('formulaires/login.html.twig', array(
+                    "error" => $this->erreur,
+                ));
+            }
+
+
         }
     }
+
 }
+
+
+

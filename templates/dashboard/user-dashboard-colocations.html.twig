@@ -1,0 +1,145 @@
+{% extends"dashboard/layout-dashboard.html.twig" %}
+
+
+
+{% block headtitle %}
+    Gestion Users | CoolLoc, la colocation cool !
+{% endblock%}
+
+
+
+{% block nav %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Coolloc Admin</a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>{{ userAdmin.firstname }} {{ userAdmin.lastname }}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Deconnexion</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li>
+                    <a href="{{ path ('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Acceuil Dashboard</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user"></i> Gerer utilisateurs <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="{{ path ('gerer-user-colocations') }}">Cherchant une colocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('gerer-user-colocataires') }}">Cherchant des colocataires</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
+                </li>
+                <li>
+                    <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
+                </li>
+                <li>
+                    <a href="{{ path ('gerer-contenu') }}"><i class="fa fa-fw fa-desktop"></i> Gestion du contenue</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+{% endblock %}
+
+
+
+{% block title %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Gestion Utilisateurs
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Dashboard / Gestion utilisateurs cherchant une colocation
+                </li>
+            </ol>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <h2 class="">Personnes recherchant une colocation : </h2>
+    <div class="table-responsive">
+    <table class="table table-hover table-striped col-md-12">
+        <thead>
+            <tr>
+                <th class="text-center">Id utilisateur</th>
+                <th class="text-center">Prénom</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Date de naissance</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Téléphone</th>
+                <th class="text-center">Activité</th>
+                <th class="text-center">Sexe</th>
+                <th class="text-center">Date de création</th>
+                <th class="text-center">Statut</th>
+                <th class="text-center">Etat du compte</th>
+                <th class="text-center">Détails</th>
+                <th class="text-center">Rendre inactif</th>
+            </tr>
+        </thead>
+        {% for users in usersInfo %}
+            {% if users.status == 'cherche colocation' %}
+                <tr>
+                    <td class="text-center">{{ users.id_user }}</td>
+                    <td class="text-center">{{ users.firstname }}</td>
+                    <td class="text-center">{{ users.lastname }}</td>
+                    <td class="text-center">{{ users.birthdate }}</td>
+                    <td class="text-center">{{ users.mail }}</td>
+                    <td class="text-center">{{ users.tel }}</td>
+                    <td class="text-center">{{ users.activity }}</td>
+                    <td class="text-center">{{ users.sex }}</td>
+                    <td class="text-center">{{ users.date_created }}</td>
+                    <td class="text-center">{{ users.status }}</td>
+                    {% if users.account == 'actif' %}
+                        <td class="text-center text-success">{{ users.account }}</td>
+                    {% else %}
+                        <td class="text-center text-danger">{{ users.account }}</td>
+                    {% endif %}
+                    <td class=""><a href='{{ path("details-profil", {"id_user" : users.id_user}) }}'><i class="glyphicon glyphicon-search"></i> Détails profil </a></td>
+                    <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><i class="fa fa-times"></a></td>
+                </tr>
+            {% endif %}
+    {% endfor %}
+
+    </table>
+    </div>
+
+
+{% endblock %}

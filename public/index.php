@@ -27,6 +27,7 @@
     require __DIR__.'/../src/controller/ForgotPassController.php';
     require __DIR__.'/../src/controller/ContactController.php';
     require __DIR__.'/../src/controller/AnnonceController.php';
+    require __DIR__.'/../src/controller/AdminController.php';
     require __DIR__.'/../src/controller/StatusController.php';
     require __DIR__.'/../src/controller/CommentController.php';
 

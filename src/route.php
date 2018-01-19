@@ -6,7 +6,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Coolloc\Controller\Controller;
+use Coolloc\Controller\AdminController;
 use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
+
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
@@ -365,35 +368,50 @@ $app->get('/connected/deconnexion', function () use ($app) {
 //*** ROUTE AVEC CONNECTION ET ADMIN***//
 //*************************************//
 
+//DASHBOARD
+$app->get('/connected/sabit','Coolloc\Controller\AdminController::selectedAdminInfos')-> bind('dashboard');
 
 
 
-//GERER USER
-$app->get('/connected/admin/gerer-user', function () use ($app) {
-    return $app['twig']->render('gerer-annonce-admin.html.twig', array());
-})
-    ->bind('gerer-user');
-$app->post('/connected/admin/gerer-user', function () use ($app) {
-    //controleur
-});
+//GERER USER CHERCHANT DES COLOCATIONS
+$app->get('/connected/sabit/gerer-user-colocations','Coolloc\Controller\AdminController::selectedUsersColocationsAndAdminInfos')-> bind('gerer-user-colocations');
+
+
+//GERER USER CHERCHANT DES COLOCATAIRES
+$app->get('/connected/sabit/gerer-user-colocataires','Coolloc\Controller\AdminController::selectedUsersColocatairesAndAdminInfos')-> bind('gerer-user-colocataires');
+
+
+
+//MODIFIER STATUT ACTIF/INACTIF D'UN USER
+$app->get('/connected/sabit/gerer-user/{id_user}/{page_actuelle}','Coolloc\Controller\AdminController::modifyUserStatus')-> bind('modify-status-user');
+
+
+//AFFICHER DETAILS STATUT UTILISATEUR
+$app->get('/connected/sabit/details-profil/{id_user}','Coolloc\Controller\AdminController::detailsUser')-> bind('details-profil');
+
 
 
 
 //GERER ANNONCE ADMIN
-$app->get('/connected/admin/gerer-annonce', function () use ($app) {
-    return $app['twig']->render('gerer-annonce-admin.html.twig', array());
-})
-    ->bind('gerer-annonce');
-$app->post('/connected/admin/gerer-annonce', function () use ($app) {
-    //controleur
-});
+$app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController::selectedAnnoncesAndAdminInfos')-> bind('gerer-annonces-admin');
+
+
+
 
 
 
 //GERER FAQ
-$app->get('/connected/admin/gerer-faq', function () use ($app) {
-    return $app['twig']->render('gerer-faq-admin.html.twig', array());
-})
+$app->get('/connected/sabit/gerer-faq', function () use ($app) {
+    // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
+    $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+    if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
+        return $app['twig']->render('dashboard/index-dashboard.html.twig', array(
+            "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
+        ));
+    } else {// Si l'utilisateur n'est pas admin
+        return $app->redirect('/Coolloc/public');
+    }})
     ->bind('gerer-faq');
 $app->post('/connected/admin/gerer-faq', function () use ($app) {
     //controleur
@@ -402,9 +420,18 @@ $app->post('/connected/admin/gerer-faq', function () use ($app) {
 
 
 //GERER CONTENU
-$app->get('/connected/admin/gerer-contenu', function () use ($app) {
-    return $app['twig']->render('gerer-contenu-admin.html.twig', array());
-})
+$app->get('/connected/sabit/gerer-contenu', function () use ($app) {
+    // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
+    $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+    if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
+        $adminDonnes = new AdminController();
+        return $app['twig']->render('dashboard/index-dashboard.html.twig', array(
+            "userAdmin" => $adminDonnes,
+        ));
+    } else {// Si l'utilisateur n'est pas admin
+        return $app->redirect('/Coolloc/public');
+    }})
     ->bind('gerer-contenu');
 $app->post('/connected/admin/gerer-contenu', function () use ($app) {
     //controleur

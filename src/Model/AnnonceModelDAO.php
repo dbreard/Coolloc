@@ -114,4 +114,12 @@ class AnnonceModelDAO{
             return false;
         }
     }
+
+    public function allAnnoncesSelected(){
+
+        $sql = "SELECT * FROM annonce_options_city";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+    }
 }
