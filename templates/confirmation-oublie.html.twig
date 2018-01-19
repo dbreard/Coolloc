@@ -1,0 +1,54 @@
+{% extends"layout.html.twig" %}
+
+
+{% block headTitle %}
+    Validation mail | CoolLoc, la colocation cool !
+{% endblock %}
+
+{# Bloc nav #}
+
+{% block navigation %}
+    {% include 'required/navigation_nc.html.twig' ignore missing  %}
+{% endblock %}
+
+{% block content %}
+    {% if error is defined %}
+    {{ error }}
+    {% endif %}
+        <div class="page-head">
+            <div class="container">
+                <div class="row">
+                    <div class="page-head-content">
+                        <h1 class="page-title">Mot de passe oublié</h1>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page header -->
+
+        <div class="register-area" style="background-color: rgb(249, 249, 249);">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <div class="box-for overflow">
+                        <div class="col-md-12 col-xs-12 register-blocks ">
+                            <h2 class="col-md-12 col-xs-12 text-center ">Réinitialisation de votre mot de passe : </h2>
+
+                                <!-- ouverture du contenu textuel -->
+                                <div class="row">  
+                                    <div class="col-sm-8 col-sm-offset-2" >
+                                        <p>
+                                            Pour réinitialiser votre mot de passe, il vous reste à confirmer que le compte vous appartient. Pour cela, merci de vous rendre sur la boite email que vous avez renseigné et de cliquer sur le lien présent dans l'email que vous aurez reçu de :
+                                            <strong>coollocstaff[at]outlook.fr</strong>.
+                                        </p>                                    
+                                    </div> 
+                                </div>
+                                <!-- fermeture du contenu textuel-->                
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
+
+{% endblock %}

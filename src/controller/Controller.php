@@ -16,6 +16,7 @@ class Controller {
 
     public $URL = 'http://localhost/Coolloc/public/';
     protected $erreur = array();
+    private $token;
 
     // VERIFICATION DU FORMAT EMAIL
     public function verifEmail(string $email) :bool
@@ -32,38 +33,44 @@ class Controller {
     }
 
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
-       public function modifyTel(string $tel){
 
-           if (iconv_strlen($tel) == 10){
-               $tel = "+33" . (substr($tel, 1));
-           }
-           else if (iconv_strlen($tel) == 12){
-               $tel = "+33" . (substr($tel, 3));
-           }
-           else if (iconv_strlen($tel) == 9){
-               $tel = "+33" . (substr($tel, 0));
-           }
 
-           return $tel;
-       }
-       //VERIFICATION DU FORMAT DE NUMERO DE TELEPHONE
-       public function verifTel(string $tel) :bool
-       {
-           $tel = str_replace(" ", "", $tel);
-           $tel = str_replace("-", "", $tel);
-           $tel = str_replace("/", "", $tel);
+    public function modifyTel(string $tel){
 
-           if (iconv_strlen($tel) == 10){
-               $resultat = (substr($tel, -10, 1) == 0) ? true : false;
-           }
-           if (iconv_strlen($tel) == 12){
-               $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
-           }
-           if (iconv_strlen($tel) == 9){
-               $resultat = (substr($tel, -9, 1) == 0) ? true : false;
-           }
-           return $resultat;
-       }
+        if (iconv_strlen($tel) == 10){
+            $tel = "+33" . (substr($tel, 1));
+        }
+        else if (iconv_strlen($tel) == 12){
+            $tel = "+33" . (substr($tel, 3));
+        }
+        else if (iconv_strlen($tel) == 9){
+            $tel = "+33" . (substr($tel, 0));
+        }
+
+        return $tel;
+    }
+    //VERIFICATION DU FORMAT DE NUMERO DE TELEPHONE
+    public function verifTel(string $tel) :bool
+    {
+        $tel = str_replace(" ", "", $tel);
+        $tel = str_replace("-", "", $tel);
+        $tel = str_replace("/", "", $tel);
+
+        if (iconv_strlen($tel) == 10){
+            $resultat = (substr($tel, -10, 1) == 0) ? true : false;
+        }
+        elseif (iconv_strlen($tel) == 12){
+            $resultat = (substr($tel, -12, 3) == "+33") ? true : false;
+        }
+        elseif (iconv_strlen($tel) == 9){
+            $resultat = (substr($tel, -9, 1) == 0) ? true : false;
+        }
+        else{
+            $resultat = false;
+        }
+        return $resultat;
+    }
+
 
     //VERIFICATION DE LA CORRESPONDANCE DES MOT DE PASSE
     public function verifCorrespondanceMdp(string $password,string $password_repeat) : bool
@@ -127,16 +134,25 @@ class Controller {
 
     }
 
+    public static function ifConnected(){
+        if (isset($_SESSION['membre']['zoubida']) && !empty($_SESSION['membre']['zoubida'])) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     // VERIFIE SI L'UTILISATEUR EST CONNECTER ET ADMIN
     public function verifConnectedAdmin(Application $app, Request $request){
         $pageName = strip_tags(trim($request->get("pagename")));
         if (isset($_SESSION['membre']) && !empty($_SESSION['membre']) && $_SESSION['membre']['status'] ) {
-            return $app->redirect('/connected/admin/' . $pageName);
+            return $app->redirect('/Coolloc/connected/admin/' . $pageName);
         }else {
             return $app->redirect('/Coolloc/public/login');
         }
 
     }
+
 
     // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
     public function formatCity($city) {
@@ -160,6 +176,7 @@ class Controller {
             return $champs;
         }
     }
+
 
     // FONCTION POUR VERIFIER LA VALIDITE D'UN ARRAY ET FORMATER CELUI CI POUR LA BDD
     public function verifArrayAndFormat(array $arrayTarget, array $arrayCompare, string $champs, string $mode) {
@@ -255,6 +272,18 @@ class Controller {
         return date("Ymd");
     }
 
+        //*********** GETTER ****************//
+
+        public function getToken(){
+            return $this->token;
+        }
+    
+        //*********** SETTER ****************//
+    
+        public function setToken($token){
+            $this->token = $token;
+        }
+
     //-----------------------ENVOI DE MAILS AU STAFF--------------------------//
 
     public function sendMailStaff(string $user, array $message): bool{
@@ -264,7 +293,7 @@ class Controller {
         global $app;
         $mail = $app['mail'];
         //Server settings
-        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp-mail.outlook.com';                       // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication

@@ -7,7 +7,15 @@
         padding: 5px;
     }
 
-
+/* page ajout annonce */
+/* text area en mode desktop */
+.form-control.textarea-annonce {
+    min-height: 142px;
+}
+/* input de class adresse */
+.form-control.adresse {
+    margin-bottom: 5px;
+}
     /* Inputs               */
 .form-control {
     display: block;
@@ -33,15 +41,7 @@ span.exposant {
 }
 
 
-/* page ajout annonce */
-/* text area en mode desktop */
-.form-control.textarea-annonce {
-    min-height: 190px;
-}
-/* input de class adresse */
-.form-control.adresse {
-    margin-bottom: 5px;
-}
+
 
 .picture.form-annonce{
     width: 20%;
@@ -100,4 +100,16 @@ span.exposant {
 }
 
 
+/* page erreurs */
 
+.page-title h2.error-title {
+    font-size : 46px;
+    font-weight: bold;
+}
+
+.page-title p {
+    font-weight: bold;
+}
+.page-title p.retour-accueil{
+    font-weight: normal;
+}
