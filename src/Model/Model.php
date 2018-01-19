@@ -33,8 +33,10 @@ class Model {
 
     //SELECTION DES ANNONCES CORRESPONDANT A SON PROPRIETAIRE (INFOS DE BASE)
     public static function annonceByUser(string $idUser, Application $app){
-      $sql = "SELECT a.name_coloc, a.description, m.url_media FROM user_post_annonce a, user u, media m WHERE a.user_id = u.id_user AND m.user_post_annonce_id = a.id_user_post_annonce AND u.id_user = ?";
-      $userAnnonce = $app['db']->fetchAssoc($sql, array((string) $idUser));
+      $sql = "SELECT name_coloc, description FROM annonce_options_city WHERE user_id = ?";
+      $userAnnonce = $app['db']->fetchAll($sql, array((string) $idUser));
+      var_dump($userAnnonce);
+      die();
       return $userAnnonce;
     }
 

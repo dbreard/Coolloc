@@ -179,17 +179,19 @@
             <div class="panel-body">
               <div class="row">
               {% if annonceUser is defined%}
-              {% for annonceUsers in annonceUser %}
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                    <img alt="300x200" src="">
-                    <div class="caption">
-                      <h3>{{ annonceUsers }}</h3>
-                      <p>Description de l'annonce 1</p>
+                {% for annonceUsers in annonceUser %}
+                  {% for annonceUserss in annonceUsers %}
+                    <div class="col-md-4">
+                      <div class="thumbnail">
+                        <img alt="300x200" src="">
+                        <div class="caption">
+                          <h3>{{ annonceUserss }}</h3>
+                          <p>Description de l'annonce 1</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              {% endfor %}
+                  {% endfor %}
+                {% endfor %}
               {% endif %}
               </div>
             </div>
