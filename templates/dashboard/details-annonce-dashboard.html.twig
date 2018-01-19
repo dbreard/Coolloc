@@ -82,7 +82,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Dashboard / Gestion utilisateurs cherchant une colocation
+                    <i class="fa fa-dashboard"></i> Dashboard / Gestion annonce / détail de l'annonce {{ detailsAnnonces.id_user_post_annonce }}
                 </li>
             </ol>
         </div>
@@ -94,78 +94,97 @@
 
 {% block content %}
 
-    <a href="{{ path ('gerer-user-colocations') }}" class="btn btn-warning"><i class="fa fa-reply"></i> Retour</a>
+    <a href="{{ path ('gerer-annonces-admin') }}" class="btn btn-warning"><i class="fa fa-reply"></i> Retour</a>
 
-    <h2 class="">Détail du profil<small> options de l'utilisateur :</small> </h2>
+    <h2 class="">Détail de l'annonce<small> options de l'annonce :</small> </h2>
 
     <div class="table-responsive">
         <table class="table table-hover table-striped col-md-12">
             <thead>
             <tr>
-                <th class="text-center">Prénom</th>
-                <th class="text-center">Nom</th>
-                <th class="text-center">Photo</th>
+                <th class="text-center">Prix du loyer</th>
+                <th class="text-center">Surface</th>
+                <th class="text-center">Nombre de pièces</th>
+                <th class="text-center">Type de maison</th>
+                <th class="text-center">Nbr de colocataires</th>
                 <th class="text-center">Acces handicapé</th>
                 <th class="text-center">Fumeur</th>
-                <th class="text-center">Animal</th>
+                <th class="text-center">Animaux</th>
                 <th class="text-center">Composition</th>
                 <th class="text-center">Meublé</th>
                 <th class="text-center">Jardin</th>
                 <th class="text-center">Balcon</th>
-                <th class="text-center">parking</th>
+                <th class="text-center">Parking</th>
             </tr>
             </thead>
-                <tr>
-
-                        <td class="text-center">{{ detailsUser.firstname }}</td>
-                        <td class="text-center">{{ detailsUser.lastname }}</td>
-                        <td class="text-center"><img src="{{ detailsUser.profil_picture }}" alt="Miniature photo de profil"></td>
-                        <td class="text-center">{{ detailsUser.handicap_access }}</td>
-                        <td class="text-center">{{ detailsUser.smoking }}</td>
-                        <td class="text-center">{{ detailsUser.animals }}</td>
-                        <td class="text-center">{{ detailsUser.sex_roommates }}</td>
-                        <td class="text-center">{{ detailsUser.furniture }}</td>
-                        <td class="text-center">{{ detailsUser.garden }}</td>
-                        <td class="text-center">{{ detailsUser.balcony }}</td>
-                        <td class="text-center">{{ detailsUser.parking }}</td>
-                 </tr>
+            <tr>
+                <td class="text-center">{{ detailsAnnonces.rent }}</td>
+                <td class="text-center">{{ detailsAnnonces.surface }}</td>
+                <td class="text-center">{{ detailsAnnonces.nb_room }}</td>
+                <td class="text-center">{{ detailsAnnonces.housing_type }}</td>
+                <td class="text-center">{{ detailsAnnonces.nb_roommates }}</td>
+                <td class="text-center">{{ detailsAnnonces.handicap_access }}</td>
+                <td class="text-center">{{ detailsAnnonces.smoking }}</td>
+                <td class="text-center">{{ detailsAnnonces.animals }}</td>
+                <td class="text-center">{{ detailsAnnonces.sex_roommates }}</td>
+                <td class="text-center">{{ detailsAnnonces.furniture }}</td>
+                <td class="text-center">{{ detailsAnnonces.garden }}</td>
+                <td class="text-center">{{ detailsAnnonces.balcony }}</td>
+                <td class="text-center">{{ detailsAnnonces.parking }}</td>
+            </tr>
         </table>
     </div>
 
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Description : </h4>
+                </div>
+                    <div>
+                        <p class="text-center">{{ detailsAnnonces.description }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
     <h2><small> Choix de l'utilisateur :</small> </h2>
+
 
     <div class="table-responsive">
         <table class="table table-hover table-striped col-md-12">
             <tr>
                 <th class="col-md-2">Equipement</th>
-                {% if detailsUser.equipment == '' %}
+                {% if detailsAnnonces.equipment == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.equipment }}</td>
+                    <td>{{ detailsAnnonces.equipment }}</td>
                 {% endif %}
             </tr>
             <tr>
                 <th>Quartier</th>
-                {% if detailsUser.district == '' %}
+                {% if detailsAnnonces.district == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.district }}</td>
+                    <td>{{ detailsAnnonces.district }}</td>
                 {% endif %}
             </tr>
             <tr>
                 <th>Centres d'interet</th>
-                {% if detailsUser.hobbies == '' %}
+                {% if detailsAnnonces.hobbies == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.hobbies }}</td>
+                    <td>{{ detailsAnnonces.hobbies }}</td>
                 {% endif %}
             </tr>
             <tr>
-                <th>Profil du membre</th>
-                {% if detailsUser.member_profil == '' %}
+                <th>Profil de memebre rechercher</th>
+                {% if detailsAnnonces.member_profil == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.member_profil }}</td>
+                    <td>{{ detailsAnnonces.member_profil }}</td>
                 {% endif %}
             </tr>
         </table>

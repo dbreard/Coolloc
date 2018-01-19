@@ -3,7 +3,7 @@
 
 
 {% block headtitle %}
-    Gestion Users | CoolLoc, la colocation cool !
+    Dashboard | CoolLoc, la colocation cool !
 {% endblock%}
 
 
@@ -29,11 +29,11 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>{{ userAdmin.firstname }} {{ userAdmin.lastname }}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="{{ path('profil') }}"><i class="fa fa-fw fa-user"></i> Profil</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Deconnexion</a>
+                        <a href="{{ path('deconnexion') }}"><i class="fa fa-fw fa-power-off"></i> Deconnexion</a>
                     </li>
                 </ul>
             </li>
@@ -55,13 +55,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
                 </li>
                 <li>
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="{{ path ('accueil') }}"><i class="fa fa-home"></i> Retour à la Home</a>
                 </li>
 
@@ -78,11 +78,11 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Gestion Annonces
+                Gestion F.A.Q
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Dashboard / Gestion annonces
+                    <i class="fa fa-dashboard"></i> Dashboard
                 </li>
             </ol>
         </div>
@@ -93,46 +93,56 @@
 
 
 {% block content %}
+    {% if error is defined %}
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 alert alert-danger text-center">{{ error }}</div>
+        </div>
+    {% endif %}
+    {% if succes is defined %}
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4 alert alert-success text-center">{{ succes }}</div>
+        </div>
+    {% endif %}
 
-    <h2 class="">Nombre d'annonces : {{ annoncesInfo | length }}</h2>
+    <form class="col-md-3" method="post">
+
+        <div class="form-group">
+            <label for="question">Votre question : </label>
+            <textarea class="form-control" name="question" rows="2" cols="80" style="resize: none"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="reponse">Votre réponse : </label>
+            <textarea class="form-control" name="reponse" rows="10" cols="80" style="resize: none"></textarea>
+        </div>
+
+        <input class="btn btn-primary col-md-4" type="submit" name="send" value="Envoyer">
+    </form>
+
     <div class="table-responsive">
         <table class="table table-hover table-striped col-md-12">
             <thead>
             <tr>
-                <th class="text-center">Id annonce</th>
-                <th class="text-center">Id utilisateur</th>
-                <th class="text-center">Nom de la coloc</th>
-                <th class="text-center">Adresse</th>
-                <th class="text-center">Details adresse</th>
-                <th class="text-center">Code postal</th>
-                <th class="text-center">Ville</th>
-                <th class="text-center">Mail de la colloc</th>
-                <th class="text-center">Tel de la coloc</th>
-                <th class="text-center">Date de création</th>
-                <th class="text-center">Date de dispo</th>
-                <th class="text-center">Détails de l'annonce</th>
-                <th class="text-center">Supprimer annonce</th>
+                <th class="text-center">Id F.A.Q</th>
+                <th class="text-center">Question</th>
+                <th class="text-center">Réponse</th>
+                <th class="text-center">Editer</th>
+                <th class="text-center">Supprimer</th>
             </tr>
             </thead>
 
             <tbody>
-            {% for annonce in annoncesInfo %}
-                    <tr>
-                        <td class="text-center">{{ annonce.id_user_post_annonce }}</td>
-                        <td class="text-center">{{ annonce.user_id }}</td>
-                        <td class="text-center">{{ annonce.name_coloc }}</td>
-                        <td class="text-center">{{ annonce.adress }}</td>
-                        <td class="text-center">{{ annonce.adress_details }}</td>
-                        <td class="text-center">{{ annonce.postal_code }}</td>
-                        <td class="text-center">{{ annonce.ville_nom_reel }}</td>
-                        <td class="text-center">{{ annonce.mail_annonce }}</td>
-                        <td class="text-center">{{ annonce.tel_annonce }}</td>
-                        <td class="text-center">{{ annonce.date_created }}</td>
-                        <td class="text-center">{{ annonce.date_dispo }}</td>
-                        <td class="text-center"><a href='{{ path("details-annonce-admin", {"id_annonce" : annonce.id_user_post_annonce}) }}'><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
-                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment supprimer l\'annonce ?"))' href='' ><i class="glyphicon glyphicon-trash"></a></td>
-                    </tr>
+            {% if faqs is defined %}
+            {% for faq in faqs %}
+                <tr>
+                    <td class="text-center">{{ faq.id }}</td>
+                    <td class="text-center">{{ faq.question }}</td>
+                    <td class="text-center">{{ faq.reponse }}</td>
+                    <td class="text-center"><a href=""><i class="fa fa-pencil"></i></a></td>
+                    <td class="text-center"><a href=""><i class="fa fa-trash"></i></a></td>
+                </tr>
             {% endfor %}
+                {% endif %}
             </tbody>
 
 

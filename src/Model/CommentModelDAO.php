@@ -13,18 +13,26 @@ class CommentModelDAO
     }
 
 
+        // Insert un commentaire
+        public function createComment(int $id_user, string $comment){
+            $rowAffected = $this->getDb()->insert('comments',  array(
+                'user_id' => $id_user,
+                'comment' => $comment,
 
-public function createComment(int $id_user, string $comment){
-   $rowAffected = $this->getDb()->insert('comments',  array(
-        'user_id' => $id_user,
-        'comment' => $comment,
-        
-    ));
+            ));
 
-return $rowAffected;
+        return $rowAffected;
 
+        }
 
-}
+        // selectionne tout les commentaires
+        public function selectComment(){
+            $sql = "SELECT * FROM comments";
+            $comments = $this->getDb()->fetchAll($sql, array());
+
+            return $comments;
+
+        }
 
     //******* GETTER *********//
 

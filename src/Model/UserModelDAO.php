@@ -79,6 +79,7 @@ class UserModelDAO {
 
     }
 
+    // CHANGE LE STATUT DE L'ADMIN EN ACTIF APRES RECEPTION DU TOKEN PAR MAIL
     public function updateUserFromToken(array $idUser) :int{
 
         $sql = "UPDATE user SET account = 'actif' WHERE id_user = ? ";
@@ -88,7 +89,7 @@ class UserModelDAO {
 
     }
 
-
+    // MODIFICATION DU STATUS UTILISATEUR
     public function updateUserStatus(string $idUser, string $status): int{
       $sql = "UPDATE user SET status = ? WHERE id_user = ? ";
       $rowAffected = $this->getDb()->executeUpdate( $sql, array((string) $status, (int) $idUser));
@@ -117,6 +118,28 @@ class UserModelDAO {
         return $users;
 
     }
+
+    //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
+    public function UsersColocationSelected(){
+
+        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation'";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+    //SELECTION DES UTILISATEURS CHERCHANT DES COLOCATAIRES
+    public function UsersColocataireSelected(){
+
+        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocataire'";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+
 
 
     public function modifyUserStatus( $idUser ){

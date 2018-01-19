@@ -134,3 +134,13 @@ $verifParamComment = function (Request $request, Application $app)
                         return $app->redirect("/Coolloc/public/connected/temoigner");
                       };
 
+//Middleware pour la F.A.Q
+
+$verifParamComment = function (Request $request, Application $app)
+{
+                    // on vérifie que le contenu du message et de la réponse et qu'ils ne soient pas vide
+                    $retour = verifParam($request->request, array("question","reponse"));
+                    if($retour["error"])
+                        return $app->redirect("/Coolloc/public/connected/temoigner");
+};
+

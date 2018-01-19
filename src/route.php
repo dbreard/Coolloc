@@ -272,6 +272,7 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 });
 
 
+
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
     $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
@@ -282,6 +283,8 @@ $app->get('/connected/profil', function () use ($app) {
     ->bind('profil');
 $app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStatusAction')->before($verifStatus);
 
+
+
 //MODIFIER PROFIL
 $app->get('/connected/profil-modif', function () use ($app) {
     $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
@@ -291,6 +294,8 @@ $app->get('/connected/profil-modif', function () use ($app) {
 $app->post('/connected/profil', function () use ($app) {
     //controleur
 });
+
+
 
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
@@ -314,8 +319,10 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 });
 
 
+
 //AJOUT DETAILS PROFIL
 $app->get('/connected/ajout-details-profil', function () use ($app) {
+
     $isconnected = Controller::ifConnected();
 
     if (!$isconnected) {
@@ -328,6 +335,7 @@ $app->get('/connected/ajout-details-profil', function () use ($app) {
 $app->post('/connected/ajout-details-profil', function () use ($app) {
     //controleur
 });
+
 
 
 //ajout temoignage
@@ -372,7 +380,6 @@ $app->get('/connected/deconnexion', function () use ($app) {
 $app->get('/connected/sabit','Coolloc\Controller\AdminController::selectedAdminInfos')-> bind('dashboard');
 
 
-
 //GERER USER CHERCHANT DES COLOCATIONS
 $app->get('/connected/sabit/gerer-user-colocations','Coolloc\Controller\AdminController::selectedUsersColocationsAndAdminInfos')-> bind('gerer-user-colocations');
 
@@ -381,63 +388,27 @@ $app->get('/connected/sabit/gerer-user-colocations','Coolloc\Controller\AdminCon
 $app->get('/connected/sabit/gerer-user-colocataires','Coolloc\Controller\AdminController::selectedUsersColocatairesAndAdminInfos')-> bind('gerer-user-colocataires');
 
 
-
 //MODIFIER STATUT ACTIF/INACTIF D'UN USER
 $app->get('/connected/sabit/gerer-user/{id_user}/{page_actuelle}','Coolloc\Controller\AdminController::modifyUserStatus')-> bind('modify-status-user');
 
 
-//AFFICHER DETAILS STATUT UTILISATEUR
+//AFFICHER DETAILS PROFIL UTILISATEUR
 $app->get('/connected/sabit/details-profil/{id_user}','Coolloc\Controller\AdminController::detailsUser')-> bind('details-profil');
 
 
+//AFFICHER DETAILS ANNONCE
+$app->get('/connected/sabit/details-annonce-admin/{id_annonce}','Coolloc\Controller\AdminController::detailsAnnonces')-> bind('details-annonce-admin');
 
 
 //GERER ANNONCE ADMIN
-$app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController::selectedAnnoncesAndAdminInfos')-> bind('gerer-annonces-admin');
-
-
-
-
+$app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController::selectedAnnoncesAndAdminInfos')->bind('gerer-annonces-admin');
 
 
 //GERER FAQ
-$app->get('/connected/sabit/gerer-faq', function () use ($app) {
-    // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
-    $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-    if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
-        return $app['twig']->render('dashboard/index-dashboard.html.twig', array(
-            "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
-        ));
-    } else {// Si l'utilisateur n'est pas admin
-        return $app->redirect('/Coolloc/public');
-    }})
-    ->bind('gerer-faq');
-$app->post('/connected/admin/gerer-faq', function () use ($app) {
-    //controleur
-});
+$app->get('/connected/sabit/gerer-faq', 'Coolloc\Controller\FaqController::selectedFaqAndAdminInfo') ->bind('gerer-faq');
 
 
-
-//GERER CONTENU
-$app->get('/connected/sabit/gerer-contenu', function () use ($app) {
-    // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
-    $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-    if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
-        $adminDonnes = new AdminController();
-        return $app['twig']->render('dashboard/index-dashboard.html.twig', array(
-            "userAdmin" => $adminDonnes,
-        ));
-    } else {// Si l'utilisateur n'est pas admin
-        return $app->redirect('/Coolloc/public');
-    }})
-    ->bind('gerer-contenu');
-$app->post('/connected/admin/gerer-contenu', function () use ($app) {
-    //controleur
-});
-
-
+$app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamComment);
 
 //*******************//
 //*** ROUTE ERREUR***//

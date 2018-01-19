@@ -21,7 +21,7 @@
         </div>
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="">Coolloc Admin</a>
+            <a class="navbar-brand" href="{{ path ('dashboard') }}">Coolloc Admin</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -62,8 +62,6 @@
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
                 </li>
                 <li>
-                    <a href="{{ path ('gerer-contenu') }}"><i class="fa fa-fw fa-desktop"></i> Gestion du contenue</a>
-                </li>  <li>
                     <a href="{{ path ('accueil') }}"><i class="fa fa-home"></i> Retour à la Home</a>
                 </li>
 
@@ -105,7 +103,7 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
+                            <div class="huge">{{  commentaires | length }}</div>
                             <div>Témoignages</div>
                         </div>
                     </div>
@@ -127,12 +125,12 @@
                             <i class="fa fa-tasks fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
+                            <div class="huge">{{  annonces | length }}</div>
                             <div>Annonces</div>
                         </div>
                     </div>
                 </div>
-                <a href="{#{{ path ('gerer-annonces') }}#}">
+                <a href="{{ path ('gerer-annonces-admin') }}">
                     <div class="panel-footer">
                         <span class="pull-left">Voir les détails</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -149,7 +147,7 @@
                             <i class="fa fa-user fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
+                            <div class="huge">{{  usersColocations | length }}</div>
                             <div>Utilisateurs cherchant une colocation</div>
                         </div>
                     </div>
@@ -171,7 +169,7 @@
                             <i class="fa fa-user fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
+                            <div class="huge">{{  usersColocataires | length }}</div>
                             <div>Utilisateurs cherchant des colocataires</div>
                         </div>
                     </div>

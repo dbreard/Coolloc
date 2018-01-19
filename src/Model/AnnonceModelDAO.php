@@ -115,11 +115,24 @@ class AnnonceModelDAO{
         }
     }
 
-    public function allAnnoncesSelected(){
+
+    // SELECTION DE TOUTES LES ANNONCES
+    public function allAnnoncesSelected() : array{
 
         $sql = "SELECT * FROM annonce_options_city";
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
+    }
+
+
+    // SELECTION D'UNE ANNONCE EN FONCTION DE SON ID
+    public function selectAnnonceFromId(int $idAnnonce){
+
+        $sql = "SELECT * FROM annonce_options_city WHERE id_user_post_annonce = ?";
+        $annonce = $this->getDb()->fetchAssoc($sql, array( (int) $idAnnonce));
+
+
+        return $annonce;
     }
 }
