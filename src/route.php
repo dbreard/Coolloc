@@ -195,9 +195,26 @@ $app->post('/change-password/{token}', "Coolloc\Controller\ChangePassController:
 
 //FAQ
 $app->get('/faq', function () use ($app) {
-    return $app['twig']->render('faq.html.twig', array());
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('faq.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+    elseif ($isconnected) {
+        return $app['twig']->render('faq.html.twig', array(
+     "connected" => $isconnected, 
+    ));
+    } 
+    else {
+        return $app['twig']->render('faq.html.twig', array());
+    }
+    
 })
     ->bind('faq');
+
 $app->post('/faq', function () use ($app) {
     //controleur
 });
