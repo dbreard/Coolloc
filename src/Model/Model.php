@@ -38,9 +38,10 @@ class Model {
     public static function annonceByUser(string $idUser, Application $app){
       $sql = "SELECT name_coloc, description FROM annonce_options_city WHERE user_id = ?";
       $userAnnonce = $app['db']->fetchAll($sql, array((string) $idUser));
-      var_dump($userAnnonce);
-      die();
+    //   var_dump($userAnnonce);
+    //   die();
       return $userAnnonce;
+    }
 
     // verification id_user
     public static function verifIdUserExist(int $user, Application $app): bool {
