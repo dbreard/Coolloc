@@ -84,8 +84,12 @@
     <div class="container">
         <div class="row">
             <div class="page-head-content">
-          <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.firstname }}</span>{% else %}Ma bite{% endif %}</h1>
+              <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.firstname }}</span>{% else %}Ma bite{% endif %}</h1>
+              {% if profilInfo.profil_picture != NULL %}
+                <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="{{ profilInfo.profil_picture }}" width="10" height="10">
+              {% else %}
                 <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="http://www.rlsandbox.com/img/profile.jpg" width="10" height="10">
+              {% endif %}
             </div>
         </div>
     </div>
@@ -99,12 +103,12 @@
               {% if success is defined %}
                 <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en cliquant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
               {% else %}
-                <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil')}}">Modifier mes préférences</a>
+                <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="path ('ajout-details-profil')">Modifier mes préférences</a>
               {% endif %}
             {% elseif profilInfo.status == "cherche colocataire" %}
               <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce')}}">Modifier mes annonces</a>
             {% elseif profilInfo.status == "admin" %}
-              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil')}}">Modifier mes préférences</a>
+              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="path ('ajout-details-profil')">Modifier mes préférences</a>
               <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce')}}">Modifier mes annonces</a>
             {% else %}
             {% endif %}
@@ -112,7 +116,7 @@
           <br>
       </div>
       <div class="col-sm-2">
-        <a type="button" href="{{path ('temoigner')}}" class="btn btn-default col-xs-12">Témoigner</a>
+        <a type="button" href="path ('temoigner')" class="btn btn-default col-xs-12">Témoigner</a>
       </div>
     </div>
     <br>
@@ -180,18 +184,18 @@
               <div class="row">
               {% if annonceUser is defined%}
                 {% for annonceUsers in annonceUser %}
-                <a  href="{{path ('gerer-annonce')}}">
-                  <div class="col-md-4">
-                    <div class="thumbnail annonce_miniature">
-                      <div class="gerer col-xs-12 text-center" type="button"><p>Gérer annonce<p></div>
-                      <img alt="300x200" src="{{ annonceUsers.url_media }}">
-                      <div class="caption">
-                        <h4>{{ annonceUsers.name_coloc }}</h4>
-                        <p>{{ annonceUsers.description }}</p>
+                  <a  href="{{path ('gerer-annonce')}}">
+                    <div class="col-md-4">
+                      <div class="thumbnail annonce_miniature">
+                        <div class="gerer col-xs-12 text-center" type="button"><p>Gérer annonce<p></div>
+                        <img alt="300x200" src="{{ annonceUsers.url_media }}">
+                        <div class="caption">
+                          <h4>{{ annonceUsers.name_coloc }}</h4>
+                          <p>{{ annonceUsers.description }}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
                 {% endfor %}
               {% endif %}
               </div>
