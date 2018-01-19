@@ -4,10 +4,14 @@
     Affiner votre profil | CoolLoc, la colocation cool !
 {% endblock %}
 
+
+{% block header %}
+        {% include 'required/header_c.html.twig' ignore missing  %}
+{% endblock %}
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_nc.html.twig' ignore missing  %}
+    {% include 'required/navigation_c.html.twig' ignore missing  %}
     {# modif de la nav #}
 {% endblock %}
 {% block content %}
