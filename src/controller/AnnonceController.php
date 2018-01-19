@@ -55,7 +55,7 @@ class AnnonceController extends Controller
         }else if ($_SESSION['membre']['zoubida']){
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             // charger l'email du profil de l'utilisateur
-            $mail_annonce = $user['Email'];
+            $mail_annonce = $user['mail'];
         }else {
             array_push($this->erreur, 'Problème lors de la vérification de l\'Email, veuillez vérifier');
         }
@@ -67,7 +67,7 @@ class AnnonceController extends Controller
         }else if ($_SESSION['membre']['zoubida']){
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             //charger le numéro de téléphone du profil de l'utilisateur
-            $tel_annonce = $user['Téléphone'];
+            $tel_annonce = $user['tel'];
         }else {
             array_push($this->erreur, 'Problème lors de la vérification du téléphone, veuillez vérifier');
         }
@@ -322,6 +322,30 @@ class AnnonceController extends Controller
             }else {
                 return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
             }
+        }
+    }
+
+    public function detailAnnonceAction(Application $app, Request $request) {
+
+
+
+
+
+
+
+
+
+
+
+        $isconnected = Controller::ifConnected();
+
+        if ($isconnected) {
+            return $app['twig']->render('details-annonce.html.twig', array(
+         "connected" => $isconnected,
+
+        ));
+        } else {
+            return $app['twig']->render('details-annonce.html.twig', array());
         }
     }
 }
