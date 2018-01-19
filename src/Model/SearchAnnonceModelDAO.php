@@ -128,7 +128,7 @@ class SearchAnnonceModelDAO{
             $conditionWhere = "$city $minRent $maxRent $date_dispo $housing_type $nb_roommates $surface $sex_roommates $handicap_access $smoking $animals $furniture $garden $balcony $parking $activity " . $arraySearch['district'] . $arraySearch['equipment'] . $arraySearch['member_profil'] . $arraySearch['hobbies'];
 
             // REQUETE DE SELECTION
-            $sql = "SELECT * FROM user, user_post_annonce, options, city WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options " . $conditionWhere;
+            $sql = "SELECT * FROM user, user_post_annonce, options, city, media WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options AND user_post_annonce.id_user_post_annonce = media.user_post_annonce_id " . $conditionWhere . " GROUP BY user_post_annonce.id_user_post_annonce";
             $response = $app['db']->fetchAll($sql);
 
             // echo $conditionWhere;
