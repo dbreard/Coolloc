@@ -72,7 +72,7 @@ $app->get('/resultat-recherche', function () use ($app) {
     } else {
         return $app['twig']->render('serp-annonce.html.twig', array());
     }
-    
+
 })
     ->bind('resultat-recherche');
 
@@ -80,26 +80,7 @@ $app->get('/resultat-recherche', function () use ($app) {
 
 
 //DETAILS ANNONCE NON CONNECTER
-$app->get('/details-annonce', function () use ($app) {
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('details-annonce.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('details-annonce.html.twig', array(
-     "connected" => $isconnected,
-    ));
-    } else {
-        return $app['twig']->render('details-annonce.html.twig', array());
-    }
-})
-    ->bind('details-annonce');
+$app->get('/details-annonce/{id_annonce}', "Coolloc\Controller\AnnonceController::detailAnnonceAction")->bind('details-annonce');
 $app->post('/details-annonce', function () use ($app) {
     //controleur
 });
@@ -126,7 +107,7 @@ $app->get('/login', function () use ($app) {
         return $app->redirect('/Coolloc/public/connected/profil') ;
     }
 
-    
+
     })
     ->bind('login');
     $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
@@ -144,18 +125,15 @@ $app->get('/inscription', function () use ($app) {
     }
     elseif ($isconnected) {
         return $app->redirect('/') ;
-        
 
     } else {
         return $app['twig']->render('formulaires/register.html.twig', array());
-        
-        
+
     }
-    
 
 })
     ->bind('inscription');
-    
+
 $app->post('/inscription', "Coolloc\Controller\RegisterController::registerAction")->before($verifParamRegister);
 
 
@@ -233,7 +211,7 @@ $app->get('/contact', function () use ($app) {
     } else {
         return $app['twig']->render('contact.html.twig', array()) ;
     }
-   
+
 })
     ->bind('contact');
 $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->before($verifContact);
@@ -315,7 +293,7 @@ $app->get('/a-propos', function () use ($app) {
     } else {
         return $app['twig']->render('a-propos.html.twig', array());
     }
-   
+
 })
     ->bind('a-propos');
 
@@ -431,8 +409,8 @@ $app->get('connected/temoigner', function () use ($app) {
         return $app['twig']->render('connected/temoigner.html.twig', array(
      "connected" => $isconnected,
     ));
-    } 
-    else 
+    }
+    else
     {
         return $app->redirect('/../Coolloc/public/login') ;
     }
@@ -548,4 +526,3 @@ $app->error(function (\Exception $e, Request $request, $code) use ($app) {
 
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
-

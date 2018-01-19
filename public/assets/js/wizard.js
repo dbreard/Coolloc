@@ -119,8 +119,8 @@ $(document).ready(function () {
         readURL12(this);
     });
     // Prepare the preview for profile picture
-    $("#wizard-picture13").change(function () {
-        readURL13(this);
+    $("#wizard-picture13a").change(function () {
+        readURL13a(this);
     });
     
     
@@ -323,13 +323,13 @@ $(document).ready(function () {
         
     }
 
-    function readURL13(input) {
+    function readURL13a(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
     
     
             reader.onload = function (e) {
-                $('#wizardPicturePreview13').attr('src', e.target.result).fadeIn('slow');
+                $('#wizardPicturePreview13a').attr('src', e.target.result).fadeIn('slow');
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -340,34 +340,6 @@ $(document).ready(function () {
 
 
     //Function to show image before upload
-
-    function readURL1(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-    
-    
-            reader.onload = function (e) {
-                $('#wizardPicturePreview1').attr('src', e.target.result).fadeIn('slow');
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    
-        
-        }
-
-        function readURL2(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-        
-        
-                reader.onload = function (e) {
-                    $('#wizardPicturePreview2').attr('src', e.target.result).fadeIn('slow');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        
-            
-            }
 
     
 

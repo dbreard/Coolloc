@@ -25,7 +25,7 @@
 
 {% endblock %}
 
-
+{% block content %}
 {% if error is defined %}
     {% for errors in error %}
         <div>{{ errors }}</div>
@@ -48,7 +48,7 @@
 
 {% endblock %}
 <!-- End page header -->
-{% block content %}
+
 <!-- property area -->
 <div class="content-area submit-property" style="background-color: #FCFCFC;">&nbsp;
     <div class="container">

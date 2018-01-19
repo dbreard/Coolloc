@@ -27,7 +27,7 @@
 
 
 
-
+{% block content %}
 <div class="page-head">
     <div class="container">
         <div class="row">
@@ -43,7 +43,7 @@
 {% endblock %}
 
 <!-- End page header -->
-{% block content %}
+
 <!-- property area -->
 <div class="content-area submit-property" style="background-color: #FCFCFC;">&nbsp;
     <div class="container">
@@ -649,10 +649,9 @@
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview13" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview13a" title=""/>
 
-                                                <input type="file" id="wizard-picture13
-                                                " name="photo13">
+                                                <input type="file" id="wizard-picture13a" name="photo13">
                                                 </div>
                                             </div>
                                         </div>
