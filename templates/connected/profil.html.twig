@@ -27,71 +27,13 @@
 {% endblock %}
 
 {% block content %}
-{% if profilInfo.status == 'première connexion' %}
 
-<div class="register-area" style="background-color: rgb(249, 249, 249);">
-    <div class="container">
+    {% if profilInfo.status == 'première connexion' %}
+    {# contenu différent car dépend de la première connexion #}
 
-        <div class="col-md-12">
-            <div class="box-for overflow">
-                <div class="col-md-12 col-xs-12 register-blocks ">
-                    <h2 class="col-md-12 col-xs-12 text-center ">Bienvenue {{ profilInfo.firstname }} sur Coolloc  : </h2>
-                        <!-- ouverture du contenu textuel -->
-                        <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2" >
-                                    <div class="row">
-                                       <h5 class="text-center">Avant de commencer, dites-nous ce que vous reherchez:</h5>
-                                    </div>
-                                    <!--  recherche colocataire -->
+      {% include 'required/premiereconnexion.html.twig' ignore missing %}
 
-                                    <div class="row">
-                                        <!--  recherche colocataire -->
-                                        {% if error.incorrect_status is defined %}
-                                          <span class="alert alert-danger col-xs-12 text-center">{{ error.incorrect_status }}</span>
-                                        {% elseif error.wrong_status is defined %}
-                                          <span class="alert alert-danger col-xs-12 text-center">{{ error.wrong_status }}</span>
-                                        {% endif %}
-                                        <div class="col-md-5 col-xs-12 choice ">
-                                        <h6 class="text-center">Vous êtes en recherche de colocation</h6>
-                                        <ul>
-                                            <Li>Accèdez aux coordonnées des colocations qui vous intéressent
-                                            <li>Affinez votre profil utilisateur en ajoutant des préférences</li>
-                                            <li>Publiez votre profil pour augmenter vos chances de trouver une colocation qui vous corresponde</li>
-                                        </ul>
-                                        <form method="post">
-                                          <input type="hidden" name="statut" value="cherche_colocation"/>
-                                          <button class="col-xs-10 col-xs-offset-1 navbar-btn nav-button wow bounceInRight login text-center" type="submit" data-wow-delay="0.45s">Continuer</button>
-                                        </form>
-                                        </div>
-                                        <!--  fin de bloc -->
-                                        <!--  recherche colocataire -->
-                                        <div class="col-md-5  col-md-offset-2  col-xs-12 choice " >
-                                        <h6 class="text-center">Vous êtes en recherche de colocataire</h6>
-                                        Propriétaire ou actuellement colocataire, une place dans votre colocation est disponible
-                                        <ul>
-                                            <li>Postez votre annonce en ligne</li>
-                                            <li>Utilisez les outils dédiés, tirelire participative pour le budget, gestion du frigo, emploi du temps de chacun... (prochainement)</li>
-                                        </ul>
-                                        <form method="post">
-                                          <input type="hidden" name="statut" value="cherche_colocataire"/>
-                                          <button class="col-xs-10 col-xs-offset-1  navbar-btn nav-button wow bounceInRight login text-center" type="submit" data-wow-delay="0.45s">Continuer</button>
-                                        </form>
-                                        </div>
-                                        <!--  fin de bloc -->
-                                    </div>
-                                    <!--  fin de row -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- fermeture du contenu textuel-->
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-{% else %}
+    {% else %}
 
 <div class="page-head">
     <div class="container">
@@ -108,7 +50,7 @@
     </div>
 </div>
 <br>
-<div class="container target">
+<div class="container target content-area">
     <div class="row">
       <div class="col-sm-10">
           <div class="buttons col-sm-12">
@@ -218,7 +160,8 @@
         </div>
       <div id="push"></div>
     </div>
-  <script src="/plugins/bootstrap-pager.js"></script>
+  {# <script src="/plugins/bootstrap-pager.js"></script> #}
 </div>
+
 {% endif %}
 {% endblock %}
