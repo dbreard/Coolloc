@@ -112,6 +112,18 @@ $app->get('/login', function () use ($app) {
     ->bind('login');
     $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
+// LOGOUT
+$app->get('/connected/deconnexion', function () use ($app) {
+    
+        $isdisconnected = Controller::sessionDestroy();
+    
+            return $app['twig']->render('index.html.twig', array(
+         "disconnected" => $isdisconnected,
+        ));
+    })
+        ->bind('deconnexion');
+    $app->post('/connected/deconnexion', 'Coolloc\Controller\Controller::sessionDestroy');
+
 
 //INSCRIPTION
 $app->get('/inscription', function () use ($app) {
@@ -439,15 +451,6 @@ $app->post('/connected/temoigner', 'Coolloc\Controller\CommentController::commen
 
 
 //*** ROUTES GET ***//
-
-
-
-// deconnexion
-$app->get('/connected/deconnexion', function () use ($app) {
-    return $app['twig']->render('index.html.twig', array());
-})
-    ->bind('deconnexion');
-
 
 
 //*************************************//
