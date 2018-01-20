@@ -24,7 +24,7 @@ class DetailsProfilController extends Controller{
 
     if ($date_dispo == "")
       $date_dispo = date('Y-m-d');
-    var_dump($date_dispo);
+    // var_dump($date_dispo);
 
 
     // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
@@ -63,7 +63,7 @@ class DetailsProfilController extends Controller{
       "member_profil" => $member_profil,
       "hobbies" => $hobbies,
     );
-    // var_dump($arrayDetailsProfil['date_dispo']);
+    // var_dump($arrayDetailsProfil['hobbies']);
     // die();
 
     $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
@@ -77,11 +77,57 @@ class DetailsProfilController extends Controller{
 
     if ($rowAffected == true){
       $optionUser = Model::userOptionOnly($userId, $app);
-      return $app['twig']->render('connected/profil.html.twig', array("modified" => "Vos préférences ont bien été modifiées", "profilInfo" => $idUser, "userOption" => $optionUser));
+      $annonceUser = Model::annonceByUser($userId, $app);
+      return $app['twig']->render('connected/profil.html.twig', array("modified" => "Vos préférences ont bien été modifiées", "profilInfo" => $idUser, "userOption" => $optionUser, "annonceUser" => $annonceUser));
     }
     else{
       $optionUser = Model::userOptionOnly($userId, $app);
       return $app['twig']->render('connected/profil.html.twig', array("error" => "OooOops une erreur est survenue, merci de rééssayer", "profilInfo" => $idUser, "userOption" => $optionUser));
+    }
+  }
+
+  //---------------Envoi des options utilisteur sur une page----------------//
+
+  public function sendUserOption(){
+
+    //appel de la globale $app
+    global $app;
+
+    //recupération des option user en fonction du token de la session en cours
+    $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+    $options = Model::userOptionOnly($idUser['id_user'], $app);
+
+    if ($options['district'] != ""){
+      $district = Controller::stringToArray($options['district']);
+      $options['district'] = $district;
+      if ($options['district'] == "proche d'écoles")
+        $options['district'] == "proche_écoles";
+    }
+
+    if ($options['equipment'] != ""){
+      $equipment = Controller::stringToArray($options['equipment']);
+      $options['equipment'] = $equipment;
+    }
+
+    if ($options['hobbies'] != ""){
+      $hobbies = Controller::stringToArray($options['hobbies']);
+      $options['hobbies'] = $hobbies;
+    }
+    if($options['member_profil'] != ""){
+      $member_profil = Controller::stringToArray($options['member_profil']);
+      $options['member_profil'] = $member_profil;
+    }
+
+    // echo'<pre>';var_dump($options);echo'</pre>';
+    // die();
+
+
+    $isconnected = $this->ifConnected();
+
+    if (!$isconnected) {
+        return $app->redirect('/../Coolloc/public/login');
+    } else {
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options));
     }
   }
 

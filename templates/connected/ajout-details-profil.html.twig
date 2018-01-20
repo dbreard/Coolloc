@@ -6,16 +6,26 @@
 
 
 {% block header %}
-        {% include 'required/header_c.html.twig' ignore missing  %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
 {% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_c.html.twig' ignore missing  %}
-    {# modif de la nav #}
-{% endblock %}
-{% block content %}
 
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
+{% endblock %}
+
+{% block content %}
 
 {% if error is defined %}
     {% for errors in error %}
@@ -23,24 +33,19 @@
     {%  endfor %}
 {% endif %}
 
-
 <div class="page-head">
     <div class="container">
         <div class="row">
             <div class="page-head-content">
-                <h1 class="page-title">Affinez et postez votre profil</h1>
+                <h1 class="page-title">Affinez et postez votre profil </h1>
             </div>
         </div>
     </div>
 </div>
 
-
 {% block fonction %}
 
-
     {% include 'required/membre.php' ignore missing  %}
-
-
 
 {% endblock %}
 <!-- End page header -->
@@ -84,7 +89,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Date de disponibilité :</label>
-                                            <input name="date_dispo" type="date" class="form-control" placeholder="*" value="{% if value.date_dispo is defined %}{{ value.date_dispo }}{% endif %}">
+                                          <input name="date_dispo" type="date" class="form-control" placeholder="*" value="{% if options.date_dispo is defined %}{{ options.date_dispo }}{% endif %}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -93,112 +98,176 @@
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
+                                                      {% if options.member_profil.Timide is defined %}
+                                                        <input type="checkbox" name="member_profil[]" value="Timide" checked> Timide
+                                                      {% else %}
                                                         <input type="checkbox" name="member_profil[]" value="Timide"> Timide
+                                                      {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Bavard"> Bavard
+                                                    {% if options.member_profil.Bavard is defined %}
+                                                        <input type="checkbox" name="member_profil[]" value="Bavard" checked> Bavard
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Bavard"> Bavard
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Solitaire"> Solitaire
+                                                    {% if options.member_profil.Solitaire is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Solitaire" checked> Solitaire
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Solitaire"> Solitaire
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Casanier"> Casanier
+                                                    {% if options.member_profil.Casanier is defined %}
+                                                        <input type="checkbox" name="member_profil[]" value="Casanier" checked> Casanier
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Casanier"> Casanier
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Discret"> Discret
+                                                    {% if options.member_profil.Discret is defined %}
+                                                        <input type="checkbox" name="member_profil[]" value="Discret" checked> Discret
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Discret"> Discret
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Convivial"> Convivial
+                                                    {% if options.member_profil.Convivial is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Convivial" checked> Convivial
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Convivial"> Convivial
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
+                                                    {% if options.member_profil.Cool is defined %}
+                                                        <input type="checkbox" name="member_profil[]" value="Cool" checked> Cool
+                                                    {% else %}
                                                         <input type="checkbox" name="member_profil[]" value="Cool"> Cool
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Extraverti"> Extraverti
+                                                    {% if options.member_profil.Extraverti is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Extraverti" checked> Extraverti
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Extraverti"> Extraverti
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Ordonné"> Ordonné
+                                                    {% if options.member_profil.Ordonné is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Ordonné" checked> Ordonné
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Ordonné"> Ordonné
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Tolérant"> Tolérant
+                                                    {% if options.member_profil.Tolérant is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Tolérant" checked> Tolérant
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Tolérant"> Tolérant
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Sportif"> Sportif
+                                                    {% if options.member_profil.Sportif is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Sportif" checked> Sportif
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Sportif"> Sportif
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Fétard"> Fétard
+                                                    {% if options.member_profil.Fétard is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Fétard" checked> Fétard
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Fétard"> Fétard
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Studieux"> Studieux
+                                                    {% if options.member_profil.Studieux is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Studieux" checked> Studieux
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Studieux"> Studieux
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Curieux"> Curieux
+                                                    {% if options.member_profil.Curieux is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Curieux" checked> Curieux
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Curieux"> Curieux
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Joyeux"> Joyeux
+                                                    {% if options.member_profil.Joyeux is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Joyeux" checked> Joyeux
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Joyeux"> Joyeux
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="member_profil[]" value="Respectueux"> Respectueux
+                                                    {% if options.member_profil.Respectueux is defined %}
+                                                      <input type="checkbox" name="member_profil[]" value="Respectueux" checked> Respectueux
+                                                    {% else %}
+                                                      <input type="checkbox" name="member_profil[]" value="Respectueux"> Respectueux
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
@@ -211,131 +280,212 @@
                             <div class="tab-pane" id="step2">
                                 <h4 class="info-text"> Décrivez les caractéristiques de la colocation recherchée</h4>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Loyer minimum (€)</label>
-                                                <input name="min-rent" type="number" class="form-control" placeholder="0" value="{% if value.rent is defined %}{{ value.rent }}{% endif %}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Loyer maximum (€)</label>
-                                                <input name="max-rent" type="number" class="form-control" placeholder="3330000" value="{% if value.rent is defined %}{{ value.rent }}{% endif %}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Type de bien immobilier :</label>
-                                                <select id="housing_type" name="housing_type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Selectionner">
-                                                    <option value="maison">Maison</option>
-                                                    <option value="appartement">Appartement</option>
-                                                    <option value="loft">Loft</option>
-                                                    <option value="hotel particulier">Hôtel particulier</option>
-                                                    <option value="corps de ferme">Corps de ferme</option>
-                                                    <option value="autre">Autre</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 padding-top-15">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Surface générale (m²):</label>
-                                                <input name="surface" type="number" class="form-control" placeholder="Surface moyenne" value="{% if value.surface is defined %}{{ value.surface }}{% endif %}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Nombre de pièces :</label>
-                                                <input name="nb_room" type="number" class="form-control" placeholder="3" value="{% if value.nb_room is defined %}{{ value.nb_room }}{% endif %}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Nombre de colocataires (max 7):</label>
-                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7" value="{% if value.nb_roommates is defined %}{{ value.nb_roommates }}{% endif %}">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-sm-12 padding-top-15">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Composition :</label>
-                                                <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins">
+                                                {% if options.sex_roommates is defined %}
+                                                  {% if options.sex_roommates == "homme" %}
+                                                    <option value="homme" selected>Homme</option>
+                                                    <option value="femme">Femme</option>
+                                                    <option value="mixte">Mixte</option>
+                                                  {% elseif options.sex_roommates == "femme" %}
+                                                    <option value="homme">Homme</option>
+                                                    <option value="femme" selected>Femme</option>
+                                                    <option value="mixte">Mixte</option>
+                                                  {% else %}
                                                     <option value="homme">Homme</option>
                                                     <option value="femme">Femme</option>
-                                                    <option value="peu importe">Mixte</option>
+                                                    <option value="mixte" selected>Mixte</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="homme">Homme</option>
+                                                  <option value="femme">Femme</option>
+                                                  <option value="mixte" selected>Mixte</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Accès Handicapé disponible :</label>
-                                                <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
-                                                    <option value="oui">Oui</option>
+                                                <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.handicap_access is defined %}
+                                                  {% if options.handicap_access == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
                                                     <option value="non">Non</option>
                                                     <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.handicap_access == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Colocataire(s) fumeur(s) :</label>
-                                                <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.smoking is defined %}
+                                                  {% if options.smoking == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.smoking == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Présence d'animaux :</label>
-                                                <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.animals is defined %}
+                                                  {% if options.animals == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.animals == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Meublé :</label>
-                                                <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.furniture is defined %}
+                                                  {% if options.furniture == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.furniture == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Jardin :</label>
-                                                <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.garden is defined %}
+                                                  {% if options.garden == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.garden == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Balcon :</label>
-                                                <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.balcony is defined %}
+                                                  {% if options.balcony == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.balcony == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Parking :</label>
-                                                <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+                                                {% if options.parking is defined %}
+                                                  {% if options.parking == "oui" %}
+                                                    <option value="oui" selected>Oui</option>
+                                                    <option value="non">Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% elseif options.parking == "non" %}
+                                                    <option value="oui">Oui</option>
+                                                    <option value="non" selected>Non</option>
+                                                    <option value="peu importe">Peu importe</option>
+                                                  {% else %}
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
+                                                  {% endif %}
+                                                {% else %}
+                                                  <option value="oui">Oui</option>
+                                                  <option value="non">Non</option>
+                                                  <option value="peu importe" selected>Peu importe</option>
+                                                {% endif %}
                                                 </select>
                                             </div>
                                         </div>
@@ -346,35 +496,55 @@
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="district[]" value="Proche de commerces"> Proche de commerces
+                                                    {% if options.district.Proche_de_commerces is defined %}
+                                                      <input type="checkbox" name="district[]" value="Proche de commerces" checked> Proche de commerces
+                                                    {% else %}
+                                                      <input type="checkbox" name="district[]" value="Proche de commerces"> Proche de commerces
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="district[]" value="Proche d'écoles"> Proche d'écoles
+                                                    {% if options.district.Prochedécoles is defined %}
+                                                      <input type="checkbox" name="district[]" value="Proche d'écoles" checked> Proche d'écoles
+                                                    {% else %}
+                                                      <input type="checkbox" name="district[]" value="Proche d'écoles"> Proche d'écoles
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="district[]" value="Proche de transports"> Proche de transports
+                                                    {% if options.district.Prochedetransports is defined %}
+                                                      <input type="checkbox" name="district[]" value="Proche de transports" checked> Proche de transports
+                                                    {% else %}
+                                                      <input type="checkbox" name="district[]" value="Proche de transports"> Proche de transports
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="district[]" value="Calme"> Calme
+                                                    {% if options.district.Calme is defined %}
+                                                      <input type="checkbox" name="district[]" value="Calme" checked> Calme
+                                                    {% else %}
+                                                      <input type="checkbox" name="district[]" value="Calme"> Calme
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="district[]" value="Animé"> Animé
+                                                    {% if options.district.Animé is defined %}
+                                                      <input type="checkbox" name="district[]" value="Animé" checked> Animé
+                                                    {% else %}
+                                                      <input type="checkbox" name="district[]" value="Animé"> Animé
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
@@ -386,42 +556,66 @@
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipment[]" value="TV"> TV
+                                                    {% if options.equipment.TV is defined %}
+                                                      <input type="checkbox" name="equipment[]" value="TV" checked> TV
+                                                    {% else %}
+                                                      <input type="checkbox" name="equipment[]" value="TV"> TV
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipment[]" value="Hifi"> Hifi
+                                                    {% if options.equipment.Hifi is defined %}
+                                                      <input type="checkbox" name="equipment[]" value="Hifi" checked> Hifi
+                                                    {% else %}
+                                                      <input type="checkbox" name="equipment[]" value="Hifi"> Hifi
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipment[]" value="Wifi"> Wifi
+                                                    {% if options.equipment.Wifi is defined %}
+                                                      <input type="checkbox" name="equipment[]" value="Wifi" checked> Wifi
+                                                    {% else %}
+                                                      <input type="checkbox" name="equipment[]" value="Wifi"> Wifi
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipment[]" value="Fibre optique"> Fibre optique
+                                                    {% if options.equipment.Fibreoptique is defined %}
+                                                      <input type="checkbox" name="equipment[]" value="Fibre optique" checked> Fibre optique
+                                                    {% else %}
+                                                      <input type="checkbox" name="equipment[]" value="Fibre optique"> Fibre optique
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipment[]" value="Salle de jeux"> Salle de jeux
+                                                    {% if options.equipment.Salledejeux is defined %}
+                                                      <input type="checkbox" name="equipment[]" value="Salle de jeux" checked> Salle de jeux
+                                                    {% else %}
+                                                      <input type="checkbox" name="equipment[]" value="Salle de jeux"> Salle de jeux
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipment[]" value="Machine à laver"> Machine à laver
+                                                    {% if options.equipment.Machineàlaver is defined %}
+                                                      <input type="checkbox" name="equipment[]" value="Machine à laver" checked> Machine à laver
+                                                    {% else %}
+                                                      <input type="checkbox" name="equipment[]" value="Machine à laver"> Machine à laver
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
@@ -433,84 +627,132 @@
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Ciné - TV - Série"> Ciné - TV - Série
+                                                    {% if options.hobbies.CinéTVSérie is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Ciné - TV - Série" checked> Ciné - TV - Série
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Ciné - TV - Série"> Ciné - TV - Série
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Littérature"> Littérature
+                                                    {% if options.hobbies.Littérature is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Littérature" checked> Littérature
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Littérature"> Littérature
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Musique"> Musique
+                                                    {% if options.hobbies.Musique is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Musique" checked> Musique
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Musique"> Musique
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Jeux vidéo"> Jeux vidéo
+                                                    {% if options.hobbies.Jeuxvidéo is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Jeux vidéo" checked> Jeux vidéo
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Jeux vidéo"> Jeux vidéo
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Jeux plateau - Société"> Jeux plateau - Société
+                                                    {% if options.hobbies.JeuxplateauSociété is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Jeux plateau - Société" checked> Jeux plateau - Société
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Jeux plateau - Société"> Jeux plateau - Société
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Mode"> Mode
+                                                    {% if options.hobbies.Mode is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Mode" checked> Mode
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Mode"> Mode
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Shopping"> Shopping
+                                                    {% if options.hobbies.Shopping is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Shopping"> Shopping
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Shopping"> Shopping
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Sport"> Sport
+                                                    {% if options.hobbies.Sport is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Sport" checked> Sport
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Sport"> Sport
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Cuisine - Pâtisserie"> Cuisine - Pâtisserie
+                                                    {% if options.hobbies.CuisinePâtisserie is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Cuisine - Pâtisserie" checked> Cuisine - Pâtisserie
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Cuisine - Pâtisserie"> Cuisine - Pâtisserie
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Sorties culturelles"> Sorties culturelles (musée, expo, théâtre ...)
+                                                    {% if options.hobbies.Sortiesclturelles is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Sorties culturelles" checked> Sorties culturelles (musée, expo, théâtre ...)
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Sorties culturelles"> Sorties culturelles (musée, expo, théâtre ...)
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Voyages"> Voyages
+                                                    {% if options.hobbies.Voyages is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Voyages" checked> Voyages
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Voyages"> Voyages
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="hobbies[]" value="Autres"> Autres
+                                                    {% if options.hobbies.Autres is defined %}
+                                                      <input type="checkbox" name="hobbies[]" value="Autres" checked> Autres
+                                                    {% else %}
+                                                      <input type="checkbox" name="hobbies[]" value="Autres"> Autres
+                                                    {% endif %}
                                                     </label>
                                                 </div>
                                             </div>

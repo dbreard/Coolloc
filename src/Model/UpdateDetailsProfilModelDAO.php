@@ -27,7 +27,7 @@ class UpdateDetailsProfilModelDAO{
 
   public function UpdateDetailsProfil(array $arrayDetailsProfil, string $idUser): bool{
       $idOption = $this->getIdOptionByUser($idUser);
-      $sql = "UPDATE options SET handicap_access = ?, smoking = ?, animals = ?, equipment = ?, sex_roommates = ?, furniture = ?, garden = ?, balcony = ?, parking = ?, district = ?, date_dispo = ?, member_profil = ?  WHERE id_options = ? ";
+      $sql = "UPDATE options SET handicap_access = ?, smoking = ?, animals = ?, equipment = ?, sex_roommates = ?, furniture = ?, garden = ?, balcony = ?, parking = ?, district = ?, date_dispo = ?, member_profil = ?, hobbies = ?  WHERE id_options = ? ";
       $rowAffected = $this->getDB()->executeUpdate( $sql, array(
         (string) $arrayDetailsProfil['handicap_access'],
         (string) $arrayDetailsProfil['smoking'],
@@ -41,6 +41,7 @@ class UpdateDetailsProfilModelDAO{
         (string) $arrayDetailsProfil['district'],
         (string) $arrayDetailsProfil['date_dispo'],
         (string) $arrayDetailsProfil['member_profil'],
+        (string) $arrayDetailsProfil['hobbies'],
         (string) $idOption['options_id']));
 
       if ($rowAffected == 1){

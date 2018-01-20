@@ -327,17 +327,7 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 
 //AJOUT DETAILS PROFIL
-$app->get('/connected/ajout-details-profil', function () use ($app) {
-    $isconnected = Controller::ifConnected();
-
-    if (!$isconnected) {
-        return $app->redirect('/../Coolloc/public/login');
-    } else {
-        $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-        $options = Model::userOptionOnly($idUser['id_user'], $app);
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options));
-    }
-})
+$app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
     ->bind('ajout-details-profil');
 $app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
 

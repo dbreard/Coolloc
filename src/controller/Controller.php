@@ -5,6 +5,7 @@ namespace Coolloc\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Model\Model;
 use \DateTime;
 
 
@@ -328,6 +329,21 @@ class Controller {
     }
     // --------------------- fin envoi mail ----------------------- //
 
+    //fonction permettant de formater les champs multiple string en array
+    public static function stringToArray(string $stringTarget){
+
+      $arrayConstruct = explode(', ', $stringTarget);
+
+      foreach ($arrayConstruct as $key => $value) {
+        $newKey = str_replace(' ', '', $value);
+        $newKey = str_replace("'", '', $newKey);
+        $newKey = str_replace("-", '', $newKey);
+        $arrayResponse[$newKey] = $value;
+      }
+
+      return $arrayResponse;
+
+    }
 
 
 }

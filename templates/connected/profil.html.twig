@@ -107,7 +107,9 @@
               {% endif %}
             {% elseif profilInfo.status == "admin" %}
               <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil') }}">Modifier mes préférences</a>
+              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('gerer-annonce')}}">Gérer mes annonces</a>
             {% else %}
+              <a class="btn btn-default col-xs-12 col-sm-4" href="{{path ('gerer-annonce')}}">Gérer mes annonces</a>
             {% endif %}
           </div>
           <br>
@@ -183,7 +185,7 @@
                       <li><b>Je veux que le bien soit situé&nbsp;: </b>{{userOption.district}}</li>
                     {% endif %}
                     {% if userOption.hobbies != "" %}
-                      <li><b>J'aimerai que les centre d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
+                      <li><b>J'aimerai que les centres d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
                     {% endif %}
                     {% if userOption.date_dispo != "" %}
                       <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo}}</li>
@@ -204,13 +206,14 @@
               <div class="row">
               {% if annonceUser is defined%}
                 {% for annonceUsers in annonceUser %}
-                  <a  href="{{path ('gerer-annonce')}}">
+                  <a  href="{{path ('details-annonce')}}">
                     <div class="col-md-4">
                       <div class="thumbnail annonce_miniature">
-                        <div class="gerer col-xs-12 text-center" type="button"><p>Gérer annonce<p></div>
+                        <div class="gerer col-xs-12 text-center" type="button"><p>Voir l'annonce<p></div>
                         <img alt="300x200" src="{{ annonceUsers.url_media }}">
                         <div class="caption">
                           <h4>{{ annonceUsers.name_coloc }}</h4>
+                          <a href="" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
                         </div>
                       </div>
                     </div>

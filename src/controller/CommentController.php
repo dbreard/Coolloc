@@ -29,11 +29,11 @@ class CommentController extends Controller
                 "error" => $this->erreur,
             ));
           }
-          
+
           else {
             // on fait appel à la fonction statique dans model - qui permet de récupérer les infos du profil utilisateur connecté
              $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-         
+
 
              if(!empty($profilInfo)){
                 $commentaire = new CommentModelDAO($app['db']);
@@ -47,7 +47,7 @@ class CommentController extends Controller
              {
                 $this->erreur['comment'] = 'Ce message ne peut être envoyé';
              }
-        
+
             }
 
 
@@ -59,13 +59,13 @@ class CommentController extends Controller
             ));
         }
         else
-        { // si les formats du message, 
+        { // si les formats du message,
 
             $comment = new CommentModelDAO($app['db']);
             return $app['twig']->redirect('Coolloc/public/connected/merci');
-            
+
         }
 
-        
+
     }
 }
