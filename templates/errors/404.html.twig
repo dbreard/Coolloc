@@ -4,18 +4,24 @@
     Erreur 404 | CoolLoc, la colocation cool !
 {% endblock %}
 
+{% block header %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    
-    {# {% if  is defined %}
-        <p>connecté</p> #}
-        {# {% include 'required/navigation_c.html.twig' ignore missing  %}
-    {% else %}
-        <p>non connecté</p> #}
-        {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {# {% endif %} #}
-    
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
 
 {% block content %}
@@ -26,7 +32,6 @@
                     <h2 class="error-title">Erreur 404</h2>
                     <p>
                         Cette page n'existe pas ou n'existe plus.
-                        <br />
                         Nous vous prions de nous excuser pour la gêne occasionnée.
                         <br />
                         <div class="retour-accueil">

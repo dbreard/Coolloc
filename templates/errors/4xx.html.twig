@@ -5,18 +5,27 @@
 {% endblock %}
 
 {# Bloc nav #}
+{% block header %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
+{# Bloc nav #}
 
 {% block navigation %}
-    
-    {# {% if  is defined %}
-        <p>connecté</p> #}
-        {# {% include 'required/navigation_c.html.twig' ignore missing  %}
-    {% else %}
-        <p>non connecté</p> #}
-        {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {# {% endif %} #}
-    
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
+
+
 
 {% block content %}
     <div class="content-area error-page" style="background-color: #FCFCFC; padding-bottom: 55px;">
@@ -26,7 +35,6 @@
                     <h2 class="error-title">Erreur 4xx</h2>
                     <p>
                         Cette page est indisponible en raison d'une requête incorrecte.
-                        <br />
                         Nous vous prions de nous excuser pour la gêne occasionnée.
                         <br />
                         <div class="retour-accueil">

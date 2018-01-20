@@ -5,15 +5,25 @@
 {% endblock %}
 
 {% block header %}
-        {% include 'required/header_c.html.twig' ignore missing  %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
 {% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {# modif de la nav #}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
-{% block content %}
+
 
 
 {% if error is defined %}
@@ -21,6 +31,8 @@
 {% endif %}
 
 
+
+{% block content %}
 <div class="page-head">
     <div class="container">
         <div class="row">
@@ -31,12 +43,10 @@
     </div>
 </div>
 
-
 {% block fonction %}
-
     {% include 'functions/membre.php' ignore missing  %}
-
 {% endblock %}
+
 <!-- End page header -->
 
 <!-- property area -->
@@ -648,10 +658,9 @@
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview13" title=""/>
+                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview13a" title=""/>
 
-                                                <input type="file" id="wizard-picture13
-                                                " name="photo13">
+                                                <input type="file" id="wizard-picture13a" name="photo13">
                                                 </div>
                                             </div>
                                         </div>

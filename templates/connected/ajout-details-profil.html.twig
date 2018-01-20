@@ -6,23 +6,32 @@
 
 
 {% block header %}
-        {% include 'required/header_c.html.twig' ignore missing  %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
 {% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_c.html.twig' ignore missing  %}
-    {# modif de la nav #}
-{% endblock %}
-{% block content %}
 
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
+{% endblock %}
+
+{% block content %}
 
 {% if error is defined %}
     {% for errors in error %}
         <div>{{ errors }}</div>
     {%  endfor %}
 {% endif %}
-
 
 <div class="page-head">
     <div class="container">
@@ -34,13 +43,9 @@
     </div>
 </div>
 
-
 {% block fonction %}
 
-
     {% include 'required/membre.php' ignore missing  %}
-
-
 
 {% endblock %}
 <!-- End page header -->
@@ -84,7 +89,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Date de disponibilité :</label>
-                                            <input name="date_dispo_annonce" type="date" class="form-control" placeholder="*" value="{% if value.date_dispo is defined %}{{ value.date_dispo }}{% endif %}">
+                                            <input name="date_dispo" type="date" class="form-control" placeholder="*" value="{% if value.date_dispo is defined %}{{ value.date_dispo }}{% endif %}">
                                         </div>
                                     </div>                              
                                     <div class="col-sm-6">
@@ -211,131 +216,84 @@
                             <div class="tab-pane" id="step2">
                                 <h4 class="info-text"> Décrivez les caractéristiques de la colocation recherchée</h4>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Loyer minimum (€)</label>
-                                                <input name="min-rent" type="number" class="form-control" placeholder="0" value="{% if value.rent is defined %}{{ value.rent }}{% endif %}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Loyer maximum (€)</label>
-                                                <input name="max-rent" type="number" class="form-control" placeholder="3330000" value="{% if value.rent is defined %}{{ value.rent }}{% endif %}">
-                                            </div>
-                                        </div>                              
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Type de bien immobilier :</label>
-                                                <select id="housing_type" name="housing_type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Selectionner">
-                                                    <option value="maison">Maison</option>
-                                                    <option value="appartement">Appartement</option>
-                                                    <option value="loft">Loft</option>
-                                                    <option value="hotel particulier">Hôtel particulier</option>
-                                                    <option value="corps de ferme">Corps de ferme</option>
-                                                    <option value="autre">Autre</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 padding-top-15">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Surface générale (m²):</label>
-                                                <input name="surface" type="number" class="form-control" placeholder="Surface moyenne" value="{% if value.surface is defined %}{{ value.surface }}{% endif %}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Nombre de pièces :</label>
-                                                <input name="nb_room" type="number" class="form-control" placeholder="3" value="{% if value.nb_room is defined %}{{ value.nb_room }}{% endif %}">
-                                            </div>
-                                        </div>              
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Nombre de colocataires (max 7):</label>
-                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7" value="{% if value.nb_roommates is defined %}{{ value.nb_roommates }}{% endif %}">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-sm-12 padding-top-15"> 
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Composition :</label>
-                                                <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins">
                                                     <option value="homme">Homme</option>
                                                     <option value="femme">Femme</option>
-                                                    <option value="mixte">Mixte</option>
+                                                    <option value="mixte" selected>Mixte</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Accès Handicapé disponible :</label>
-                                                <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Colocataire(s) fumeur(s) :</label>
-                                                <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Présence d'animaux :</label>
-                                                <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Meublé :</label>
-                                                <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Jardin :</label>
-                                                <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Balcon :</label>
-                                                <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Parking :</label>
-                                                <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
                                                     <option value="oui">Oui</option>
                                                     <option value="non">Non</option>
-                                                    <option value="non">Peu importe</option>
+                                                    <option value="peu importe" selected>Peu importe</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -386,42 +344,42 @@
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipments[]" value="TV"> TV
+                                                        <input type="checkbox" name="equipment[]" value="TV"> TV
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipments[]" value="Hifi"> Hifi
+                                                        <input type="checkbox" name="equipment[]" value="Hifi"> Hifi
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipments[]" value="Wifi"> Wifi
+                                                        <input type="checkbox" name="equipment[]" value="Wifi"> Wifi
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipments[]" value="Fibre optique"> Fibre optique
+                                                        <input type="checkbox" name="equipment[]" value="Fibre optique"> Fibre optique
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipments[]" value="Salle de jeux"> Salle de jeux
+                                                        <input type="checkbox" name="equipment[]" value="Salle de jeux"> Salle de jeux
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="equipments[]" value="Machine à laver"> Machine à laver
+                                                        <input type="checkbox" name="equipment[]" value="Machine à laver"> Machine à laver
                                                     </label>
                                                 </div>
                                             </div>
