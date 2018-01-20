@@ -145,6 +145,10 @@ font-weight: 500;
 
 /* page accueil */
 
+.itemthumb.profil-user img {
+    width: 100%;
+    height: auto;
+}
 
 @media (min-width: 768px) and (max-width: 979px){
 
