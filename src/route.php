@@ -113,16 +113,7 @@ $app->get('/login', function () use ($app) {
     $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
 // LOGOUT
-$app->get('/connected/deconnexion', function () use ($app) {
-    
-        $isdisconnected = Controller::sessionDestroy();
-    
-            return $app['twig']->render('index.html.twig', array(
-         "disconnected" => $isdisconnected,
-        ));
-    })
-        ->bind('deconnexion');
-    $app->post('/connected/deconnexion', 'Coolloc\Controller\Controller::sessionDestroy');
+$app->get('/connected/deconnexion','Coolloc\Controller\Controller::sessionDestroy')->bind('deconnexion');
 
 
 //INSCRIPTION

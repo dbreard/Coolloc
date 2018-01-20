@@ -59,13 +59,23 @@ class UserModelDAO {
         return $this->db->lastInsertId();
     }
 
-    // SELECTION D'UN USER PAR SON TOKEN
+    // SELECTION D'UN USER PAR SON TOKEN EMAIL
     public function selectUserFromToken(string $token) :array{
 
         $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
         $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));
 
         return $idUser;
+
+    }
+
+    // SELECTION D'UN TOKEN CONNEXION PAR SON USER_ID
+    public function selectTokenConnectionFromUser(int $userId) {
+        
+        $sql = "SELECT token FROM tokens WHERE user_id = ? AND type LIKE 'connexion'";
+        $token = $this->getDb()->fetchAssoc($sql, array((int) $userId));
+
+        return $token;
 
     }
 

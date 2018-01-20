@@ -3,6 +3,7 @@
 namespace Coolloc\Controller;
 
 use Silex\Application;
+use Doctrine\DBAL\Connection;
 use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
