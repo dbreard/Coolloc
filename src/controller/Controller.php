@@ -6,12 +6,8 @@ use Silex\Application;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-<<<<<<< HEAD
 use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\TokensDAO;
-=======
-use Coolloc\Model\Model;
->>>>>>> dev_clonemaster
 use \DateTime;
 
 
