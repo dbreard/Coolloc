@@ -37,6 +37,19 @@ class AnnonceModelDAO{
         if ($ville_id == false)
             return "id_invalid";
 
+        // echo "<pre>";
+        // var_dump($arrayAnnonce);
+        // echo "</pre>";
+        // die();
+
+        $arrayAnnonce['handicap_access'] = ( !empty($arrayAnnonce['handicap_access']) ) ? $arrayAnnonce['handicap_access'] : 'non';
+        $arrayAnnonce['smoking'] = ( !empty($arrayAnnonce['smoking']) ) ? $arrayAnnonce['smoking'] : 'non';
+        $arrayAnnonce['animals'] = ( !empty($arrayAnnonce['animals']) ) ? $arrayAnnonce['animals']: 'non';
+        $arrayAnnonce['sex_roommates'] = ( !empty($arrayAnnonce['sex_roommates']) ) ? $arrayAnnonce['sex_roommates'] : 'peu importe';
+        $arrayAnnonce['furniture'] = ( !empty($arrayAnnonce['furniture']) ) ? $arrayAnnonce['furniture'] : 'peu importe';
+        $arrayAnnonce['garden'] = ( !empty($arrayAnnonce['garden']) ) ? $arrayAnnonce['garden'] : 'non';
+        $arrayAnnonce['balcony'] = ( !empty($arrayAnnonce['balcony']) ) ? $arrayAnnonce['balcony'] : 'non';
+        $arrayAnnonce['parking'] = ( !empty($arrayAnnonce['parking']) ) ? $arrayAnnonce['parking'] : 'non';
 
         $ajoutOption = $this->db->insert('options', array(
             'handicap_access' => $arrayAnnonce['handicap_access'],

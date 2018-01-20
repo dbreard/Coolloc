@@ -215,7 +215,17 @@ class Controller {
         }
         // Si le nombre de valeur ne correspond pas au nombre de check erreur
         if (count($arrayCheck) != count($arrayTarget)) {
-            array_push($this->erreur, "Problème de selection dans '" . $champs . "'");
+            
+            if ($champs == "Quartier") {
+                $this->erreur['district'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Equipement") {
+                $this->erreur['equipment'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Profil colocataires") {
+                $this->erreur['member_profil'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Centre d'intérêts") {
+                $this->erreur['hobbies'] = "Problème de selection dans '" . $champs . "'";
+            }
+
             return "";
         }else { // Sinon on format notre tableau en string en fonction du mode choisi
             // Si le mode est SELECT
