@@ -330,6 +330,34 @@ $app->get('/a-propos', function () use ($app) {
     ->bind('a-propos');
 
 
+    //AFFICHAGE PRESENTATION PROFIL
+
+$app->get('/fiche-profil', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+            "connected" => $isconnected, 
+    ));
+    } 
+
+    else {
+        return $app['twig']->render('profil-recherche-colocation.html.twig', array());
+    }
+})
+    ->bind('fiche-profil');
+
+    //controleur
+
+
 
 
 //*****************************//
@@ -354,6 +382,9 @@ $app->get('/connected/details-annonce-connecter', function () use ($app) {
 $app->post('/connected/details-annonce-connecter', function () use ($app) {
     //controleur
 });
+
+
+
 
 
 //PROFIL

@@ -56,6 +56,9 @@
                             <div class="text-center">
                             <h2 >Connexion : </h2>
                             </div>
+                            {% if error is defined %}
+                                <div class="alert alert-danger text-center">{{ error }}</div>
+                            {% endif %}
 
                             {% if error.email_error is defined %}
                                     <div class="alert alert-danger text-center">{{ error.email_error }}</div>
