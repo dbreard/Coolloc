@@ -173,7 +173,7 @@ class Controller {
 
 
     // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
-    public function formatCity($city) {
+    public function formatCity(string $city) {
         $cityClean = strip_tags(trim($city));
         $cityClean = ucwords ($cityClean);
         $cityClean = str_replace(" ", "-", $cityClean);
@@ -339,7 +339,7 @@ class Controller {
     }
     // --------------------- fin envoi mail ----------------------- //
 
-    //fonction permettant de formater les champs multiple string en array
+    // fonction permettant de formater les champs multiple string en array
     public static function stringToArray(string $stringTarget){
 
         if (empty($stringTarget))
@@ -348,10 +348,12 @@ class Controller {
         $arrayConstruct = explode(', ', $stringTarget);
 
         foreach ($arrayConstruct as $key => $value) {
+
             $newKey = str_replace(' ', '', $value);
             $newKey = str_replace("'", '', $newKey);
             $newKey = str_replace("-", '', $newKey);
             $arrayResponse[$newKey] = $value;
+
         }
 
         return $arrayResponse;

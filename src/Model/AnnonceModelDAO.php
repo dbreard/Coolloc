@@ -35,7 +35,7 @@ class AnnonceModelDAO{
 
         // Si c'est faux on stop la requête
         if ($ville_id == false)
-            return "2";
+            return "id_invalid";
 
 
         $ajoutOption = $this->db->insert('options', array(
@@ -58,7 +58,6 @@ class AnnonceModelDAO{
             $optionId = $this->db->lastInsertId();
 
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-            // $user['id']
 
             $ajoutAnnonce = $this->db->insert('user_post_annonce', array(
                 'user_id' => $user['id_user'],
@@ -79,8 +78,6 @@ class AnnonceModelDAO{
                 'conditions' => $arrayAnnonce['conditions'],
             ));
 
-            // var_dump($ajoutAnnonce);
-            // die();
             if ($ajoutAnnonce) {
                 $annonceId = $this->db->lastInsertId();
 
@@ -109,16 +106,16 @@ class AnnonceModelDAO{
                         $rowAffected = $updateStatus->updateUserStatus($user['id_user'], "cherche colocataire");
 
                         if ($rowAffected == 1) {
-                            return '1';
+                            return $annonceId;
                         }
                     }else {
-                        return '1';
+                        return $annonceId;
                     }
 
                 }
             }
         }else {
-            return '0';
+            return false;
         }
     }
 
@@ -139,7 +136,7 @@ class AnnonceModelDAO{
         $responsePhoto = $this->getDb()->fetchAll($sql, array((int) $id_annonce));
 
         $sql = "SELECT media.url_media FROM user_post_annonce, media WHERE user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND user_post_annonce.id_user_post_annonce = ? AND type = 'video'";
-        $responseVideo = $this->getDb()->fetchAll($sql, array((int) $id_annonce));
+        $responseVideo = $this->getDb()->fetchAssoc($sql, array((int) $id_annonce));
 
         $response = array();
 
