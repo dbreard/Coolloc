@@ -123,7 +123,25 @@ div.choice:hover{
     margin-left: 15%;
 }
 
+/* fiche profil */
+.img-circle {
+    width: 100%;
+    max-width: 100%;
+}
 
+.property-features ul li {
+    text-transform: uppercase;
+color: #9C9C9C;
+font-weight: 500;
+}
+
+.property-features ul li::after {
+    content: "/";
+    color: #FDC600;
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 14px;
+}
 
 /* page accueil */
 
