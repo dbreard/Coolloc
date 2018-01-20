@@ -39,6 +39,7 @@ class AnnonceController extends Controller
         $name_coloc = strip_tags(trim($request->get('name_coloc')));
         $rent = strip_tags(trim($request->get('rent')));
         $description = strip_tags(trim($request->get('description')));
+        $ville = strip_tags(trim($request->get('ville')));
         $postal_code = strip_tags(trim($request->get('postal_code')));
         $adress = strip_tags(trim($request->get('adress')));
         $city = strip_tags(trim($request->get('city')));
@@ -191,6 +192,9 @@ class AnnonceController extends Controller
         // VERIF DESCRIPTION PAS TROP LONGUE
         (iconv_strlen($description) <= 600) ? : array_push($this->erreur, 'Longueur de la description incorrect');
 
+        // VERIF ET FORMAT VILLE
+        $ville = $this->formatCity($ville);
+
         // VERIF STRUCTURE DU CODE POSTAL
         (iconv_strlen($postal_code) == 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
 
@@ -203,7 +207,7 @@ class AnnonceController extends Controller
         //-------------- VIDEO ---------------
         $video = strip_tags(trim($request->get('video')));
         if (!empty($video)) {
-            if ( !preg_match(" #youtube.com|vimeo.com# " , $video) ){
+            if ( !preg_match(" #youtube.com# " , $video) ){
                 array_push($this->erreur, "l'URL de la vidéo est invalide");
             }else {
                 $arrayMedia['video'] = $video;
@@ -285,6 +289,7 @@ class AnnonceController extends Controller
                 "name_coloc" => $name_coloc,
                 "rent" => $rent,
                 "description" => $description,
+                "ville" => $ville,
                 "postal_code" => $postal_code,
                 "adress" => $adress,
                 "housing_type" => $housing_type,
@@ -317,11 +322,73 @@ class AnnonceController extends Controller
 
             $annonce = new AnnonceModelDAO($app['db']);
 
-            if ($annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app)) {
+            $response = $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
+
+            if ($response == "1") {
                 return $app['twig']->render('/connected/fiche-annonce.html.twig', array());
+            }else if ($response == "2"){
+                return $app['twig']->render('/connected/ajout-annonce.html.twig', array("ville" => "Erreur sur le champs 'Ville' ou 'Code postal'"));
             }else {
                 return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
             }
+        }
+    }
+
+    public function detailAnnonceAction(Application $app, Request $request) {
+
+        $isconnected = Controller::ifConnected();
+
+        $id_annonce = strip_tags(trim($request->get("id_annonce")));
+
+        if (!filter_var($id_annonce, FILTER_VALIDATE_INT)) {
+            if ($isconnected) {
+                return $app['twig']->render('details-annonce.html.twig', array(
+                    "connected" => $isconnected,
+                    "error" => "l'URL à été corrompu.",
+                ));
+            }else {
+                return $app['twig']->render('details-annonce.html.twig', array(
+                    "error" => "l'URL à été corrompu.",
+                ));
+            }
+        }
+
+        $annonce = new AnnonceModelDAO($app['db']);
+
+        $infoAnnonce = $annonce->selectAnnonceById($id_annonce);
+
+
+        $district = $this->stringToArray($infoAnnonce['annonce']['district']);
+        $equipment = $this->stringToArray($infoAnnonce['annonce']['equipment']);
+        $hobbies = $this->stringToArray($infoAnnonce['annonce']['hobbies']);
+        $member_profil = $this->stringToArray($infoAnnonce['annonce']['member_profil']);
+
+        $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
+        (($this->getDate() - $dateDispoAnnonce) <= 0) ? $dispoAnnonce = 'non' : $dispoAnnonce = 'oui';
+
+        if ($isconnected) {
+            return $app['twig']->render('details-annonce.html.twig', array(
+                "connected" => $isconnected,
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "dispo_annonce" => $dispoAnnonce,
+                "district" => $district,
+                "equipment" => $equipment,
+                "hobbie" => $hobbies,
+                "member_profil" => $member_profil,
+        ));
+        } else {
+            return $app['twig']->render('details-annonce.html.twig', array(
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "dispo_annonce" => $dispoAnnonce,
+                "district" => $district,
+                "equipment" => $equipment,
+                "hobbies" => $hobbies,
+                "member_profil" => $member_profil,
+        ));
         }
     }
 }

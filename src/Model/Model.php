@@ -19,13 +19,12 @@ class Model {
     }
 
 
-
+    // SELECTION USER + OPTION EN FONCTION DU TOKEN SESSION
     public static function userByTokenSession(string $token, Application $app): array {
         $sql = "SELECT user_options.* FROM user_options, tokens WHERE tokens.token = ? AND tokens.user_id = user_options.id_user";
         $user = $app['db']->fetchAssoc($sql, array((string) $token));
         return $user;
     }
-
 
     // SELECTION DES OPTIONS DE L'UTILISATEUR EN RECHERCHE DE COLOCATAIRES (UNIQUEMENT LES OPTIONS)
     public static function userOptionOnly(string $idUser, Application $app){

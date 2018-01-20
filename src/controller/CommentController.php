@@ -20,11 +20,11 @@ class CommentController extends Controller
     {
         $comment = strip_tags(trim($request->get('comment')));
 
-        if ((iconv_strlen($comment) < 3 || iconv_strlen($comment) > 100)){
+        if ((iconv_strlen($comment) < 3 && iconv_strlen($comment) > 100)){
             $this->erreur['comment'] = 'Votre commentaire doit contenir entre 3 et 100 caractères';
           }
 
-          if(!empty($erreur)){
+          if(!empty($this->erreur)){
             return $app['twig']->render('connected/temoigner.html.twig', array(
                 "error" => $this->erreur,
             ));

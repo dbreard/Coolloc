@@ -90,6 +90,7 @@
                                         <div class="form-group">
                                             <label>Date de disponibilité :</label>
                                           <input name="date_dispo" type="date" class="form-control" placeholder="*" value="{% if options.date_dispo is defined %}{{ options.date_dispo }}{% endif %}">
+
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -280,11 +281,14 @@
                             <div class="tab-pane" id="step2">
                                 <h4 class="info-text"> Décrivez les caractéristiques de la colocation recherchée</h4>
                                 <div class="row">
+
                                     <div class="col-sm-12 padding-top-15">
+
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Composition :</label>
                                                 <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins">
+
                                                 {% if options.sex_roommates is defined %}
                                                   {% if options.sex_roommates == "homme" %}
                                                     <option value="homme" selected>Homme</option>
@@ -304,6 +308,7 @@
                                                   <option value="femme">Femme</option>
                                                   <option value="mixte" selected>Mixte</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -311,6 +316,7 @@
                                             <div class="form-group">
                                                 <label>Accès Handicapé disponible :</label>
                                                 <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.handicap_access is defined %}
                                                   {% if options.handicap_access == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -330,6 +336,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -337,6 +344,7 @@
                                             <div class="form-group">
                                                 <label>Colocataire(s) fumeur(s) :</label>
                                                 <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.smoking is defined %}
                                                   {% if options.smoking == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -356,6 +364,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -363,6 +372,7 @@
                                             <div class="form-group">
                                                 <label>Présence d'animaux :</label>
                                                 <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.animals is defined %}
                                                   {% if options.animals == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -382,6 +392,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -389,6 +400,7 @@
                                             <div class="form-group">
                                                 <label>Meublé :</label>
                                                 <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.furniture is defined %}
                                                   {% if options.furniture == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -408,6 +420,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -415,6 +428,7 @@
                                             <div class="form-group">
                                                 <label>Jardin :</label>
                                                 <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.garden is defined %}
                                                   {% if options.garden == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -434,6 +448,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -441,6 +456,7 @@
                                             <div class="form-group">
                                                 <label>Balcon :</label>
                                                 <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.balcony is defined %}
                                                   {% if options.balcony == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -460,6 +476,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -467,6 +484,7 @@
                                             <div class="form-group">
                                                 <label>Parking :</label>
                                                 <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" >
+
                                                 {% if options.parking is defined %}
                                                   {% if options.parking == "oui" %}
                                                     <option value="oui" selected>Oui</option>
@@ -486,6 +504,7 @@
                                                   <option value="non">Non</option>
                                                   <option value="peu importe" selected>Peu importe</option>
                                                 {% endif %}
+
                                                 </select>
                                             </div>
                                         </div>
@@ -556,66 +575,78 @@
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
+
                                                     {% if options.equipment.TV is defined %}
                                                       <input type="checkbox" name="equipment[]" value="TV" checked> TV
                                                     {% else %}
                                                       <input type="checkbox" name="equipment[]" value="TV"> TV
                                                     {% endif %}
+
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
+
                                                     {% if options.equipment.Hifi is defined %}
                                                       <input type="checkbox" name="equipment[]" value="Hifi" checked> Hifi
                                                     {% else %}
                                                       <input type="checkbox" name="equipment[]" value="Hifi"> Hifi
                                                     {% endif %}
+
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
+
                                                     {% if options.equipment.Wifi is defined %}
                                                       <input type="checkbox" name="equipment[]" value="Wifi" checked> Wifi
                                                     {% else %}
                                                       <input type="checkbox" name="equipment[]" value="Wifi"> Wifi
                                                     {% endif %}
+
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
+
                                                     {% if options.equipment.Fibreoptique is defined %}
                                                       <input type="checkbox" name="equipment[]" value="Fibre optique" checked> Fibre optique
                                                     {% else %}
                                                       <input type="checkbox" name="equipment[]" value="Fibre optique"> Fibre optique
                                                     {% endif %}
+
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
+
                                                     {% if options.equipment.Salledejeux is defined %}
                                                       <input type="checkbox" name="equipment[]" value="Salle de jeux" checked> Salle de jeux
                                                     {% else %}
                                                       <input type="checkbox" name="equipment[]" value="Salle de jeux"> Salle de jeux
                                                     {% endif %}
+
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="checkbox">
                                                     <label>
+
                                                     {% if options.equipment.Machineàlaver is defined %}
                                                       <input type="checkbox" name="equipment[]" value="Machine à laver" checked> Machine à laver
                                                     {% else %}
                                                       <input type="checkbox" name="equipment[]" value="Machine à laver"> Machine à laver
                                                     {% endif %}
+
                                                     </label>
                                                 </div>
                                             </div>

@@ -161,6 +161,17 @@ class Controller {
         }
     }
 
+    public function sessionDestroy() {
+
+        // Détruit toutes les variables de session
+        $_SESSION = array();
+
+        // Finalement, on détruit la session.
+        session_destroy();
+
+        // var_dump($_SESSION);
+    }
+
 
     // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
     public function formatCity($city) {
@@ -332,18 +343,21 @@ class Controller {
     //fonction permettant de formater les champs multiple string en array
     public static function stringToArray(string $stringTarget){
 
-      $arrayConstruct = explode(', ', $stringTarget);
 
-      foreach ($arrayConstruct as $key => $value) {
-        $newKey = str_replace(' ', '', $value);
-        $newKey = str_replace("'", '', $newKey);
-        $newKey = str_replace("-", '', $newKey);
-        $arrayResponse[$newKey] = $value;
-      }
+        if (empty($stringTarget))
+            return '';
 
-      return $arrayResponse;
+        $arrayConstruct = explode(', ', $stringTarget);
+
+        foreach ($arrayConstruct as $key => $value) {
+            $newKey = str_replace(' ', '', $value);
+            $newKey = str_replace("'", '', $newKey);
+            $newKey = str_replace("-", '', $newKey);
+            $arrayResponse[$newKey] = $value;
+        }
+
+        return $arrayResponse;
 
     }
-
 
 }

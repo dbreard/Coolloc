@@ -84,7 +84,7 @@ $verifContact = function (Request $request, Application $app)
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
 $verifParamAnnonce = function (Request $request, Application $app)
                     {
-                      $retour = verifParam($request->request, array("name_coloc", "rent", "description", "adress", "postal_code", "housing_type", "date_dispo", "nb_roommates", "conditions"));
+                      $retour = verifParam($request->request, array("name_coloc", "rent", "description", "adress", "ville", "postal_code", "housing_type", "date_dispo", "nb_roommates", "conditions"));
 
                       // echo "<pre>";
                       //     var_dump($request->request);
