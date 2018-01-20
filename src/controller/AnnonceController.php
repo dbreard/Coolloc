@@ -208,7 +208,7 @@ class AnnonceController extends Controller
         //-------------- VIDEO ---------------
         $video = strip_tags(trim($request->get('video')));
         if (!empty($video)) {
-            if ( !preg_match(" #youtube.com# " , $video) ){
+            if ( !preg_match(" #youtube.com|youtu.be# " , $video) ){
                 array_push($this->erreur, "l'URL de la vidéo est invalide");
             }else {
                 $arrayMedia['video'] = $video;
