@@ -132,9 +132,9 @@ class SearchAnnonceModelDAO{
             $response = $app['db']->fetchAll($sql);
 
             // echo $conditionWhere;
-            echo "<pre>";
-            var_dump($response);
-            echo "</pre>";
+            // echo "<pre>";
+            // var_dump($response);
+            // echo "</pre>";
             // var_dump($city);
             // die();
 

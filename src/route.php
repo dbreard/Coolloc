@@ -427,6 +427,10 @@ $app->post('/connected/profil', function () use ($app) {
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
 
+    if ($_SESSION['membre']['status'] != "cherche colocataire")
+        return $app->redirect('/Coolloc/public/');
+
+
     return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
 })
     ->bind('ajout-annonce');

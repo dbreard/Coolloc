@@ -28,6 +28,16 @@ class AnnonceModelDAO{
 
     public function createAnnonce(array $arrayAnnonce, array $arrayMedia, Application $app){
 
+        // On vérifie dans la BDD que la ville et code postal sont correctes
+        $sql = "SELECT ville_id FROM city WHERE ville_code_postal = ? AND ville_nom_reel = ?";
+
+        $ville_id = $this->db->fetchAssoc($sql, array((int) $arrayAnnonce['postal_code'], (string) $arrayAnnonce['ville']));
+
+        // Si c'est faux on stop la requête
+        if ($ville_id == false)
+            return "2";
+
+
         $ajoutOption = $this->db->insert('options', array(
             'handicap_access' => $arrayAnnonce['handicap_access'],
             'smoking' => $arrayAnnonce['smoking'],
@@ -49,9 +59,6 @@ class AnnonceModelDAO{
 
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             // $user['id']
-            $sql = "SELECT ville_id FROM city WHERE ville_code_postal = ?";
-
-            $ville_id = $this->db->fetchAssoc($sql, array((int) $arrayAnnonce['postal_code']));
 
             $ajoutAnnonce = $this->db->insert('user_post_annonce', array(
                 'user_id' => $user['id_user'],
@@ -102,16 +109,16 @@ class AnnonceModelDAO{
                         $rowAffected = $updateStatus->updateUserStatus($user['id_user'], "cherche colocataire");
 
                         if ($rowAffected == 1) {
-                            return true;
+                            return '1';
                         }
                     }else {
-                        return true;
+                        return '1';
                     }
 
                 }
             }
         }else {
-            return false;
+            return '0';
         }
     }
 
@@ -121,5 +128,26 @@ class AnnonceModelDAO{
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
+    }
+
+    public function selectAnnonceById(int $id_annonce) {
+
+        $sql = "SELECT * FROM user, user_post_annonce, options, city WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options AND user_post_annonce.id_user_post_annonce = ? GROUP BY user_post_annonce.id_user_post_annonce";
+        $responseAnnonce = $this->getDb()->fetchAssoc($sql, array((int) $id_annonce));
+
+        $sql = "SELECT media.url_media FROM user_post_annonce, media WHERE user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND user_post_annonce.id_user_post_annonce = ? AND type = 'photo'";
+        $responsePhoto = $this->getDb()->fetchAll($sql, array((int) $id_annonce));
+
+        $sql = "SELECT media.url_media FROM user_post_annonce, media WHERE user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND user_post_annonce.id_user_post_annonce = ? AND type = 'video'";
+        $responseVideo = $this->getDb()->fetchAll($sql, array((int) $id_annonce));
+
+        $response = array();
+
+        $response['annonce'] = $responseAnnonce;
+        $response['photo'] = $responsePhoto;
+        $response['video'] = $responseVideo;
+
+        return $response;
+
     }
 }
