@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\Model;
 use Coolloc\Model\AnnonceModelDAO;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class AnnonceController extends Controller
@@ -31,7 +32,7 @@ class AnnonceController extends Controller
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
-        $arrayEquipments = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
+        $arrayEquipment = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
         $arrayMemberProfil = array('Timide', 'Bavard', 'Solitaire', 'Casanier', 'Discret', 'Convivial', 'Cool', 'Extraverti', 'Ordonné', 'Tolérant', 'Sportif', 'Fétard', 'Studieux', 'Curieux', 'Joyeux', 'Respectueux');
         $arrayHobbies = array('Ciné - TV - Série', 'Littérature', 'Musique', 'Jeux vidéo', 'Jeux plateau - Société', 'Mode', 'Shopping', 'Sport', 'Cuisine - Pâtisserie', 'Sorties culturelles', 'Voyages', 'Autres');
 
@@ -133,7 +134,7 @@ class AnnonceController extends Controller
         // SEX_ROOMMATES
         $sex_roommates = strip_tags(trim($request->get('sex_roommates')));
         if (!empty($sex_roommates)) {
-            if ($sex_roommates != 'homme' && $sex_roommates != 'femme' && $sex_roommates != 'mixte') {
+            if ($sex_roommates != 'homme' && $sex_roommates != 'femme' && $sex_roommates != 'peu importe') {
                 array_push($this->erreur, "Saisie incorrect sur le champs 'Sexe'");
             }
         }
@@ -193,7 +194,7 @@ class AnnonceController extends Controller
         (iconv_strlen($description) <= 600) ? : array_push($this->erreur, 'Longueur de la description incorrect');
 
         // VERIF ET FORMAT VILLE
-        $ville = $this->formatCity($ville);
+        $villeBDD = $this->formatCity($ville);
 
         // VERIF STRUCTURE DU CODE POSTAL
         (iconv_strlen($postal_code) == 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : array_push($this->erreur, 'Code postal saisie incorrect');
@@ -207,10 +208,11 @@ class AnnonceController extends Controller
         //-------------- VIDEO ---------------
         $video = strip_tags(trim($request->get('video')));
         if (!empty($video)) {
-            if ( !preg_match(" #youtube.com# " , $video) ){
+            if ( !preg_match(" #youtube.com|youtu.be# " , $video) ){
                 array_push($this->erreur, "l'URL de la vidéo est invalide");
             }else {
-                $arrayMedia['video'] = $video;
+                $videoClean = substr($video, -11);
+                $arrayMedia['video'] = $videoClean;
             }
         }
 
@@ -280,6 +282,7 @@ class AnnonceController extends Controller
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
+            $this->erreur = ( is_array($this->erreur) )? $this->erreur : array($this->erreur);
             return $app['twig']->render('connected/ajout-annonce.html.twig', array(
                 "error" => $this->erreur,
                 "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"]
@@ -289,7 +292,7 @@ class AnnonceController extends Controller
                 "name_coloc" => $name_coloc,
                 "rent" => $rent,
                 "description" => $description,
-                "ville" => $ville,
+                "ville" => $villeBDD,
                 "postal_code" => $postal_code,
                 "adress" => $adress,
                 "housing_type" => $housing_type,
@@ -317,19 +320,20 @@ class AnnonceController extends Controller
 
             // echo "<pre>";
             // var_dump($arrayAnnonce);
+            // var_dump($arrayMedia);
             // echo "</pre>";
             // die();
 
             $annonce = new AnnonceModelDAO($app['db']);
 
-            $response = $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
+            $retour = $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
 
-            if ($response == "1") {
-                return $app['twig']->render('/connected/fiche-annonce.html.twig', array());
-            }else if ($response == "2"){
-                return $app['twig']->render('/connected/ajout-annonce.html.twig', array("ville" => "Erreur sur le champs 'Ville' ou 'Code postal'"));
-            }else {
+            if ($retour == false) {
                 return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
+            }else if ($retour == "id_invalid"){
+                return $app['twig']->render('/connected/ajout-annonce.html.twig', array("cityError" => "Erreur sur le champs 'Ville' ou 'Code postal'"));
+            }else {
+                return new RedirectResponse('/Coolloc/public/details-annonce/' . $retour);
             }
         }
     }
@@ -357,11 +361,16 @@ class AnnonceController extends Controller
 
         $infoAnnonce = $annonce->selectAnnonceById($id_annonce);
 
+        // echo "<pre>";
+        // var_dump($infoAnnonce['video']['url_media']);
+        // echo "</pre>";
+        // die();
 
         $district = $this->stringToArray($infoAnnonce['annonce']['district']);
         $equipment = $this->stringToArray($infoAnnonce['annonce']['equipment']);
         $hobbies = $this->stringToArray($infoAnnonce['annonce']['hobbies']);
         $member_profil = $this->stringToArray($infoAnnonce['annonce']['member_profil']);
+
 
         $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
         (($this->getDate() - $dateDispoAnnonce) <= 0) ? $dispoAnnonce = 'non' : $dispoAnnonce = 'oui';
@@ -386,7 +395,7 @@ class AnnonceController extends Controller
                 "dispo_annonce" => $dispoAnnonce,
                 "district" => $district,
                 "equipment" => $equipment,
-                "hobbies" => $hobbies,
+                "hobbie" => $hobbies,
                 "member_profil" => $member_profil,
         ));
         }

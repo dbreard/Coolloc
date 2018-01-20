@@ -61,7 +61,7 @@ $app->get('/resultat-recherche', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('serp-annonce.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
@@ -94,7 +94,7 @@ $app->get('/login', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('formulaires/login.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
@@ -105,7 +105,7 @@ $app->get('/login', function () use ($app) {
            ));
 
     } else {
-        
+
            return $app->redirect('/Coolloc/public/connected/profil') ;
 
     }
@@ -117,9 +117,9 @@ $app->get('/login', function () use ($app) {
 
 // LOGOUT
 $app->get('/connected/deconnexion', function () use ($app) {
-    
+
         $isdisconnected = Controller::sessionDestroy();
-    
+
             return $app['twig']->render('index.html.twig', array(
          "disconnected" => $isdisconnected,
         ));
@@ -136,7 +136,7 @@ $app->get('/inscription', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app->redirect('/') ;
- 
+
     }
     elseif ($isconnected) {
         return $app->redirect('/') ;
@@ -202,18 +202,18 @@ $app->get('/faq', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('faq.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
     elseif ($isconnected) {
         return $app['twig']->render('faq.html.twig', array(
-     "connected" => $isconnected, 
+     "connected" => $isconnected,
     ));
-    } 
+    }
     else {
         return $app['twig']->render('faq.html.twig', array());
     }
-    
+
 })
     ->bind('faq');
 
@@ -231,7 +231,7 @@ $app->get('/contact', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('contact.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
@@ -267,7 +267,7 @@ $app->get('/mentions-legales', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('mentions-legales.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
@@ -290,7 +290,7 @@ $app->get('/conditions-generales-de-vente', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
@@ -313,7 +313,7 @@ $app->get('/a-propos', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('a-propos.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
@@ -338,15 +338,15 @@ $app->get('/fiche-profil', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-            "connected" => $isconnected, 
+            "connected" => $isconnected,
     ));
-    } 
+    }
 
     else {
         return $app['twig']->render('profil-recherche-colocation.html.twig', array());
@@ -407,7 +407,7 @@ $app->get('/connected/profil', function () use ($app) {
 
     }
 
-    
+
 })
     ->bind('profil');
 $app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStatusAction')->before($verifStatus);
@@ -425,10 +425,6 @@ $app->post('/connected/profil', function () use ($app) {
 
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
-
-    if ($_SESSION['membre']['status'] != "cherche colocataire")
-        return $app->redirect('/Coolloc/public/');
-
 
     return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
 })
@@ -453,6 +449,21 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 $app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
 
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
+    }
+
+    else {
+        return $app->redirect('Coolloc/public/login');
+    }
+})
+
     ->bind('ajout-details-profil');
 $app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
 
@@ -466,7 +477,7 @@ $app->get('connected/temoigner', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('connected/temoigner.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
