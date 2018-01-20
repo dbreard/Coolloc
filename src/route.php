@@ -449,21 +449,6 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 $app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
 
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
-    }
-
-    else {
-        return $app->redirect('Coolloc/public/login');
-    }
-})
-
     ->bind('ajout-details-profil');
 $app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
 
