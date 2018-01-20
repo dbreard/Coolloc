@@ -60,7 +60,7 @@ class UserModelDAO {
     }
 
     // SELECTION D'UN USER PAR SON TOKEN
-    public function selectUserFromToken(string $token) :array{
+    public function selectUserFromToken(string $token){
 
         $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
         $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));

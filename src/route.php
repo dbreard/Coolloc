@@ -109,8 +109,6 @@ $app->get('/inscription', function () use ($app) {
         
         
     }
-    
-
 })
     ->bind('inscription');
     
