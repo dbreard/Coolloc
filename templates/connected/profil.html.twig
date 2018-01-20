@@ -82,6 +82,7 @@
             </div>
         </div>
 
+
       <div class="row">
           <div class="col-sm-3 col-xs-12">
                 <!--left col-->
@@ -110,55 +111,73 @@
                     <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="path ('ajout-details-profil')">Ajouter mes préférences</a>
                   {% endif %}
                   {% if userOption is defined %}
-                    <ul>
-                      {% if userOption == "" %}
-                      {% else %}
-                        <li><b>J'ai besoin d'un acces handicapé&nbsp;: </b>{{userOption.handicap_access}}</li>
-                        <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
-                        <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
-                        {% if userOption.equipment != "" %}
-                          <li>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
-                        {% endif %}
-                        <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
-                        <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
-                        <li><b>Je veux un jardin&nbsp;: </b>{{userOption.garden}}</li>
-                        <li><b>Je veux un balcon&nbsp;: </b>{{userOption.balcony}}</li>
-                        <li><b>Je veux un parking&nbsp;: </b>{{userOption.parking}}</li>
-                        {% if userOption.district != "" %}
-                          <li><b>Je veux que le bien soit situé&nbsp;: </b>{{userOption.district}}</li>
-                        {% endif %}
-                        {% if userOption.hobbies != "" %}
-                          <li><b>J'aimerai que les centre d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
-                        {% endif %}
-                        {% if userOption.date_dispo != "" %}
-                          <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo}}</li>
-                        {% endif %}
-                        {% if userOption.member_profil != "" %}
-                          <li><b>Je recherche des collocataires du genre&nbsp;: </b>{{userOption.member_profil}}</li>
-                        {% endif %}
-                      {% endif %}
-                    </ul>
+                <ul>
+                  {% if userOption == "" %}
+                  {% else %}
+                    {% if userOption.handicap_access != "" %}
+                      <li><b>J'ai besoin d'un acces handicapé&nbsp;: </b>{{userOption.handicap_access}}</li>
+                    {% endif %}
+                    {% if userOption.smoking != "" %}
+                      <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
+                    {% endif %}
+                    {% if userOption.animals != "" %}
+                      <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
+                    {% endif %}
+                    {% if userOption.equipment != "" %}
+                      <li><b>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
+                    {% endif %}
+                    {% if userOption.sex_roommates != "" %}
+                      <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
+                    {% endif %}
+                    {% if userOption.furniture != "" %}
+                      <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
+                    {% endif %}
+                    {% if userOption.garden != "" %}
+                      <li><b>Je veux un jardin&nbsp;: </b>{{userOption.garden}}</li>
+                    {% endif %}
+                    {% if userOption.balcony != "" %}
+                      <li><b>Je veux un balcon&nbsp;: </b>{{userOption.balcony}}</li>
+                    {% endif %}
+                    {% if userOption.parking != "" %}
+                      <li><b>Je veux un parking&nbsp;: </b>{{userOption.parking}}</li>
+                    {% endif %}
+
+                    {% if userOption.district != "" %}
+                      <li><b>Je veux que le bien soit situé&nbsp;: </b>{{userOption.district}}</li>
+                    {% endif %}
+                    {% if userOption.hobbies != "" %}
+                      <li><b>J'aimerai que les centres d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
+                    {% endif %}
+                    {% if userOption.date_dispo != "" %}
+                      <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo}}</li>
+                    {% endif %}
+                    {% if userOption.member_profil != "" %}
+                      <li><b>Je recherche des collocataires du type&nbsp;: </b>{{userOption.member_profil}}</li>
+                    {% endif %}
                   {% endif %}
-                </div>
-              </div>
-            {% endif %}
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
             {% if profilInfo.status == "cherche colocataire" or profilInfo.status == "admin" %}
-            <div class="panel panel-default target">
-              <div class="panel-heading text-center" contenteditable="false"><b>Vos annonces publiées</b></div>
-                <div class="panel-body">
-                  <div class="row">
-                  {% if annonceUser is defined%}
-                    {% for annonceUsers in annonceUser %}
-                      <a  href="{{path ('gerer-annonce')}}">
-                        <div class="col-md-4">
-                          <div class="thumbnail annonce_miniature">
-                            <div class="gerer col-xs-12 text-center" type="button"><p>Gérer annonce<p></div>
-                            <img alt="300x200" src="{{ annonceUsers.url_media }}">
-                            <div class="caption">
-                              <h4>{{ annonceUsers.name_coloc }}</h4>
-                              <p>{{ annonceUsers.description }}</p>
+        <div class="panel panel-default target">
+          <div class="panel-heading text-center" contenteditable="false"><b>Vos annonces publiées</b></div>
+            <div class="panel-body">
+              <div class="row">
+              {% if annonceUser is defined%}
+                {% for annonceUsers in annonceUser %}
+                  <a  href="{{path ('details-annonce')}}">
+                    <div class="col-md-4">
+                      <div class="thumbnail annonce_miniature">
+                        <div class="gerer col-xs-12 text-center" type="button"><p>Voir l'annonce<p></div>
+                        <img alt="300x200" src="{{ annonceUsers.url_media }}">
+                        <div class="caption">
+                          <h4>{{ annonceUsers.name_coloc }}</h4>
+                          <a href="" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
                             </div>
                           </div>
+
                         </div>
                       </a>
                     {% endfor %}

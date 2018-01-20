@@ -75,8 +75,20 @@ img.profile_img{
 
 /* UNIQUEMENT SECTION ANNONCES DANS PROFIL*/
 div.annonce_miniature{
-  min-height: 249px;
+  position: relative;
+  min-height: 380px;
   transition: all 0.5s ease;
+}
+
+a.modif_annonce{
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  transition: all 0.5s ease;
+}
+
+a.modif_annonce:hover{
+  transform: scale(1.1);
 }
 
 div.gerer{
