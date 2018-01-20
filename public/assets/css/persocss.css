@@ -10,7 +10,7 @@
 /* page ajout annonce */
 /* text area en mode desktop */
 .form-control.textarea-annonce {
-    min-height: 142px;
+    min-height: 190px;
 }
 /* input de class adresse */
 .form-control.adresse {
@@ -141,4 +141,3 @@ div.choice:hover{
 .page-title p.retour-accueil{
     font-weight: normal;
 }
-

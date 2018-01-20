@@ -28,6 +28,16 @@ class AnnonceModelDAO{
 
     public function createAnnonce(array $arrayAnnonce, array $arrayMedia, Application $app){
 
+        // On vérifie dans la BDD que la ville et code postal sont correctes
+        $sql = "SELECT ville_id FROM city WHERE ville_code_postal = ? AND ville_nom_reel = ?";
+
+        $ville_id = $this->db->fetchAssoc($sql, array((int) $arrayAnnonce['postal_code'], (string) $arrayAnnonce['ville']));
+
+        // Si c'est faux on stop la requête
+        if ($ville_id == false)
+            return "2";
+
+
         $ajoutOption = $this->db->insert('options', array(
             'handicap_access' => $arrayAnnonce['handicap_access'],
             'smoking' => $arrayAnnonce['smoking'],
@@ -49,9 +59,6 @@ class AnnonceModelDAO{
 
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             // $user['id']
-            $sql = "SELECT ville_id FROM city WHERE ville_code_postal = ?";
-
-            $ville_id = $this->db->fetchAssoc($sql, array((int) $arrayAnnonce['postal_code']));
 
             $ajoutAnnonce = $this->db->insert('user_post_annonce', array(
                 'user_id' => $user['id_user'],
@@ -102,16 +109,16 @@ class AnnonceModelDAO{
                         $rowAffected = $updateStatus->updateUserStatus($user['id_user'], "cherche colocataire");
 
                         if ($rowAffected == 1) {
-                            return true;
+                            return '1';
                         }
                     }else {
-                        return true;
+                        return '1';
                     }
 
                 }
             }
         }else {
-            return false;
+            return '0';
         }
     }
 

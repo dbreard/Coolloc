@@ -17,9 +17,7 @@
 
 
 {% if error is defined %}
-    {% for errors in error %}
-        <div>{{ errors }}</div>
-    {%  endfor %}
+    <div>{{ error }}</div>
 {% endif %}
 
 
@@ -137,7 +135,7 @@
                                         <h4>Média vidéo</h4>
                                         <div class="form-group">
                                             <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
-                                        <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% endif %}">
+                                        <input class="form-control" value="" placeholder="http://www.youtube.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% endif %}">
                                         </div>
                                     </div>
                                 </div>
@@ -158,6 +156,10 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Adresse :</label>
+                                                {% if ville is defined %}
+                                                    <div>{{ ville }}</div>
+                                                {% endif %}
+                                                <input name="ville" type="text" class="form-control adresse" placeholder="Ville *" value="{% if value.ville is defined %}{{ value.ville }}{% endif %}">
                                                 <input name="postal_code" type="number" class="form-control adresse" placeholder="Code postal *" value="{% if value.postal_code is defined %}{{ value.postal_code }}{% endif %}">
                                                 <input name="adress" type="text" class="form-control adresse" placeholder="Adresse *" value="{% if value.adress is defined %}{{ value.adress }}{% endif %}">
                                                 <input name="adress_details" type="text" class="form-control adresse" placeholder="Complément d'adresse" value="{% if value.adress_details is defined %}{{ value.adress_details }}{% endif %}">
@@ -200,8 +202,8 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Nombre de colocataires (max 7):</label>
-                                                <input name="nb_roommates" type="number" class="form-control" placeholder="0-7 *" value="{% if value.nb_roommates is defined %}{{ value.nb_roommates }}{% endif %}">
+                                                <label>Nombre de colocataires :</label>
+                                            <input name="nb_roommates" type="number" class="form-control" placeholder="3 *" value="{% if value.nb_roommates is defined %}{{ value.nb_roommates }}{% endif %}">
                                             </div>
                                         </div>
                                     </div>

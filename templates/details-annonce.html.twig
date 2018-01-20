@@ -154,7 +154,7 @@
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Type de bien</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.housing_type }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.housing_type|capitalize }}</span>
                                     </li>
 
                                     <li>
@@ -164,7 +164,7 @@
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Colocation de</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.nb_roommates }} personnes</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.nb_roommates }} Personnes</span>
                                     </li>
 
                                     <li>
@@ -174,81 +174,77 @@
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Accés handicapé</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.handicap_access }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.handicap_access|capitalize }}</span>
                                     </li>
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Animaux</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.animals }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.animals|capitalize }}</span>
                                     </li>
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Sexe des colocataires</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.sex_roommates }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.sex_roommates|capitalize }}</span>
                                     </li>
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Fumeur</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.smoking }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.smoking|capitalize }}</span>
                                     </li>
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Balcon</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.balcony }}</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.balcony|capitalize }}</span>
                                     </li>
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Meublé</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.furniture }}</span>
-                                    </li>
-
-                                    {% if info_annonce.equipment != "" %}
-                                        <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Equipements</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.equipment }}</span>
-                                        </li>
-                                    {% endif %}
-
-                                    {% if info_annonce.district != "" %}
-                                        <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Quartier</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.district }}</span>
-                                        </li>
-                                    {% endif %}
-
-                                    {% if info_annonce.hobbies != "" %}
-                                        <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Centre d'intérêt</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.hobbies }}</span>
-                                        </li>
-                                    {% endif %}
-
-                                    {% if info_annonce.member_profil != "" %}
-                                        <li>
-                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Profil de colocataire</span>
-                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.member_profil }}</span>
-                                        </li>
-                                    {% endif %}
-
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.furniture|capitalize }}</span>
                                     </li>
 
                                 </ul>
                             </div>
                             <!-- End additional-details area  -->
-
-                            <div class="section property-features">
-
-                                <h4 class="s-property-title">Features</h4>
-                                <ul>
-                                    <li><a href="properties.html">Swimming Pool</a></li>
-                                    <li><a href="properties.html">3 Stories</a></li>
-                                    <li><a href="properties.html">Central Cooling</a></li>
-                                    <li><a href="properties.html">Jog Path 2</a></li>
-                                    <li><a href="properties.html">2 Lawn</a></li>
-                                    <li><a href="properties.html">Bike Path</a></li>
-                                </ul>
-
-                            </div>
+                            {% if equipment != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Equipement :</h4>
+                                    <ul>
+                                        {% for equipments in equipment %}
+                                            <li> {{ equipments }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if district != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Quartier :</h4>
+                                    <ul>
+                                        {% for districts in district %}
+                                            <li> {{ districts }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if hobbie != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Centre d'intérêt :</h4>
+                                    <ul>
+                                        {% for hobbies in hobbie %}
+                                            <li> {{ hobbies }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if member_profil != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Profil des colocataires :</h4>
+                                    <ul>
+                                        {% for member_profils in member_profil %}
+                                            <li> {{ member_profils }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
                             <!-- End features area  -->
                         </div>
                     </div>
@@ -261,9 +257,11 @@
                                     <div class="inner-wrapper">
 
                                         <div class="clear">
-                                            <div class="col-xs-4 col-sm-4 dealer-face">
-                                                    <img src="{{ asset('assets/img/client-face1.png') }}" class="img-circle">
-                                            </div>
+                                            {% if info_annonce.profil_picture|default() %}
+                                                <div class="col-xs-4 col-sm-4 dealer-face">
+                                                        <img src="{{ info_annonce.profil_picture }}" alt="Photo de profil de {{ info_annonce.firstname }} {{ info_annonce.lastname }}" class="img-circle">
+                                                </div>
+                                            {% endif %}
                                             <div class="col-xs-8 col-sm-8 ">
                                                 <h3 class="dealer-name">
                                                     {{ info_annonce.firstname }} {{ info_annonce.lastname }}<br>
@@ -276,9 +274,9 @@
                                             {# si utilisateur connecté il peut voir les coordonnées sinon rien #}
                                             {% if connected is defined %}
                                                 <ul class="dealer-contacts">
-                                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                                    <li><i class="pe-7s-map-marker strong"> </i> {{ info_annonce.adress }}</li>
+                                                    <li><i class="pe-7s-mail strong"> </i> {{ info_annonce.mail }}</li>
+                                                    <li><i class="pe-7s-call strong"> </i> {{ info_annonce.tel }}</li>
                                                 </ul>
 
                                             {% else %}
@@ -301,15 +299,17 @@
                                     </div>
                                 </div>
                                 {# SI vidéo existe affichez la vidéo sinon rien #}
-                                <div class="section property-video">
-                                <h4 class="s-property-title">Property Video</h4>
-                                <div class="video-thumb">
-                                    <a class="video-popup" href="yout" title="Virtual Tour">
-                                        <iframe width="350" height="196" src="{# lien de la vidéo #}?rel=0&amp;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                    </a>
-                                </div>
-                                </div>
-                                <!-- End video area  -->
+                                {% if info_video.url_media is defined %}
+                                    <div class="section property-video">
+                                    <h4 class="s-property-title">Vidéo</h4>
+                                    <div class="video-thumb">
+                                        <a class="video-popup" href="yout" title="Virtual Tour">
+                                            <iframe width="350" height="196" src="{{ info_video.url_media }}?rel=0&amp;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </a>
+                                    </div>
+                                    </div>
+                                    <!-- End video area  -->
+                                {% endif %}
 
                             </div>
 
@@ -317,10 +317,13 @@
 
                             <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Similar Properties</h3>
+                                    <h3 class="panel-title">Ces annonces pourraient vous intérresser :</h3>
                                 </div>
                                 <div class="panel-body recent-property-widget">
-                                        <ul>
+                                    <span class="property-seeker">
+                                        <b class="b-1">Non définie pour le moment</b>
+                                    </span>
+                                        {# <ul>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="{{ asset('assets/img/demo/small-property-2.jpg') }}"></a>
@@ -375,7 +378,7 @@
                                             </div>
                                         </li>
 
-                                    </ul>
+                                    </ul> #}
                                 </div>
                             </div>
 

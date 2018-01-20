@@ -284,9 +284,9 @@ class Controller {
         public function getToken(){
             return $this->token;
         }
-    
+
         //*********** SETTER ****************//
-    
+
         public function setToken($token){
             $this->token = $token;
         }
@@ -328,6 +328,23 @@ class Controller {
     }
     // --------------------- fin envoi mail ----------------------- //
 
+    //fonction permettant de formater les champs multiple string en array
+    public static function stringToArray(string $stringTarget){
 
+        if (empty($stringTarget))
+            return '';
+
+        $arrayConstruct = explode(', ', $stringTarget);
+
+        foreach ($arrayConstruct as $key => $value) {
+            $newKey = str_replace(' ', '', $value);
+            $newKey = str_replace("'", '', $newKey);
+            $newKey = str_replace("-", '', $newKey);
+            $arrayResponse[$newKey] = $value;
+        }
+
+        return $arrayResponse;
+
+    }
 
 }
