@@ -24,14 +24,6 @@
 
 {% endblock %}
 
-
-
-{% if error is defined %}
-    <div>{{ error }}</div>
-{% endif %}
-
-
-
 {% block content %}
 <div class="page-head">
     <div class="container">
@@ -43,9 +35,7 @@
     </div>
 </div>
 
-{% block fonction %}
-    {% include 'functions/membre.php' ignore missing  %}
-{% endblock %}
+
 
 <!-- End page header -->
 

@@ -386,7 +386,7 @@ class AnnonceController extends Controller
                 "dispo_annonce" => $dispoAnnonce,
                 "district" => $district,
                 "equipment" => $equipment,
-                "hobbies" => $hobbies,
+                "hobbie" => $hobbies,
                 "member_profil" => $member_profil,
         ));
         }
