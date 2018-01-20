@@ -58,10 +58,10 @@
                 <li>
                     <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{{ path ('accueil') }}"><i class="fa fa-home"></i> Retour à la Home</a>
                 </li>
 
@@ -93,30 +93,23 @@
 
 
 {% block content %}
-    {% if error is defined %}
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4 alert alert-danger text-center">{{ error }}</div>
-        </div>
-    {% endif %}
-    {% if succes is defined %}
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4 alert alert-success text-center">{{ succes }}</div>
-        </div>
-    {% endif %}
 
     <form class="col-md-3" method="post">
 
         <div class="form-group">
             <label for="question">Votre question : </label>
-            <textarea class="form-control" name="question" rows="2" cols="80" style="resize: none"></textarea>
+            <textarea class="form-control" name="question" rows="2" cols="80" style="resize: none">{% if valueFaq is defined %}{{ valueFaq.question }}{% endif %}</textarea>
         </div>
 
         <div class="form-group">
             <label for="reponse">Votre réponse : </label>
-            <textarea class="form-control" name="reponse" rows="10" cols="80" style="resize: none"></textarea>
+            <textarea class="form-control" name="reponse" rows="10" cols="80" style="resize: none">{% if valueFaq is defined %}{{ valueFaq.reponse }}{% endif %}</textarea>
         </div>
-
-        <input class="btn btn-primary col-md-4" type="submit" name="send" value="Envoyer">
+        {% if valueFaq is defined %}
+            <input class="btn btn-primary col-md-4" type="submit" value="Modifier">
+        {% else %}
+            <input class="btn btn-primary col-md-4" type="submit" value="Envoyer">
+        {% endif %}
     </form>
 
     <div class="table-responsive">
@@ -138,14 +131,12 @@
                     <td class="text-center">{{ faq.id }}</td>
                     <td class="text-center">{{ faq.question }}</td>
                     <td class="text-center">{{ faq.reponse }}</td>
-                    <td class="text-center"><a href=""><i class="fa fa-pencil"></i></a></td>
-                    <td class="text-center"><a href=""><i class="fa fa-trash"></i></a></td>
+                    <td class="text-center"><a href="{{ path("gerer-faq-modifier-ou-supprimer", {"id_faq" : faq.id, "action" : 'modify'}) }}"><i class="fa fa-pencil"></i></a></td>
+                    <td class="text-center"><a href="{{ path("gerer-faq-modifier-ou-supprimer", {"id_faq" : faq.id, "action" : 'delete'}) }}"><i class="fa fa-trash"></i></a></td>
                 </tr>
             {% endfor %}
                 {% endif %}
             </tbody>
-
-
         </table>
     </div>
 

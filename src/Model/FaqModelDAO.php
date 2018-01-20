@@ -29,6 +29,25 @@ class FaqModelDAO
         return $faq;
     }
 
+    public function deleteFaq(int $idFaq){
+        $resultat = $this->getDb()->delete("faq", array("id" => $idFaq));
+        return $resultat;
+    }
+
+    public function selectFaq(int $idFaq){
+        $sql = "SELECT * FROM faq WHERE id = ?";
+        $faq = $this->getDb()->fetchAssoc($sql, array((int) $idFaq));
+
+        return $faq;
+    }
+
+    public function updateFaq(int $idFaq, string $question, string $reponse){
+        $sql = "UPDATE faq SET question = :question, reponse = :reponse WHERE id = :id ";
+        $rowAffected = $this->getDb()->executeUpdate($sql, array('question' => $question, 'reponse' => $reponse, 'id' => $idFaq));
+
+        return $rowAffected;
+    }
+
 
     //******* GETTER *********//
 

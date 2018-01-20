@@ -404,9 +404,13 @@ $app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController:
 
 //GERER FAQ
 $app->get('/connected/sabit/gerer-faq', 'Coolloc\Controller\FaqController::selectedFaqAndAdminInfo') ->bind('gerer-faq');
-
-
 $app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamComment);
+
+
+//MODIFIER - SUPPRIMER FAQ
+$app->get('/connected/sabit/gerer-faq/{id_faq}/{action}', 'Coolloc\Controller\FaqController::ModifyDeleteFaq') ->bind('gerer-faq-modifier-ou-supprimer');
+$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::ModifyFaq')->before($verifParamComment);
+
 
 //*******************//
 //*** ROUTE ERREUR***//
