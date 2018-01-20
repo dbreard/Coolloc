@@ -211,7 +211,8 @@ class AnnonceController extends Controller
             if ( !preg_match(" #youtube.com|youtu.be# " , $video) ){
                 array_push($this->erreur, "l'URL de la vidéo est invalide");
             }else {
-                $arrayMedia['video'] = $video;
+                $videoClean = substr($video, -11);
+                $arrayMedia['video'] = $videoClean;
             }
         }
 
