@@ -34,6 +34,11 @@ class CommentModelDAO
 
         }
 
+        public function deleteComment(int $idComment){
+            $resultat = $this->getDb()->delete("comments", array("id_comments" => $idComment));
+            return $resultat;
+        }
+
     //******* GETTER *********//
 
     public function getDb(){

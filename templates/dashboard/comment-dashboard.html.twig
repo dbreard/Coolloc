@@ -58,10 +58,10 @@
                 <li>
                     <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="{{ path ('gerer-temoignage') }}"><i class="fa fa-fw fa-comments-o"></i> Gestion des témoignages</a>
                 </li>
                 <li>
@@ -81,11 +81,11 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Gestion F.A.Q
+                Gestion Témoignages
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Dashboard
+                    <i class="fa fa-dashboard"></i> Dashboard / gestion de témoignages
                 </li>
             </ol>
         </div>
@@ -97,48 +97,30 @@
 
 {% block content %}
 
-    <form class="col-md-3" method="post">
-
-        <div class="form-group">
-            <label for="question">Votre question : </label>
-            <textarea class="form-control" name="question" rows="2" cols="80" style="resize: none">{% if valueFaq is defined %}{{ valueFaq.question }}{% endif %}</textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="reponse">Votre réponse : </label>
-            <textarea class="form-control" name="reponse" rows="10" cols="80" style="resize: none">{% if valueFaq is defined %}{{ valueFaq.reponse }}{% endif %}</textarea>
-        </div>
-        {% if valueFaq is defined %}
-            <input class="btn btn-primary col-md-4" type="submit" value="Modifier">
-        {% else %}
-            <input class="btn btn-primary col-md-4" type="submit" value="Envoyer">
-        {% endif %}
-    </form>
-
     <div class="table-responsive">
         <table class="table table-hover table-striped col-md-12">
             <thead>
             <tr>
-                <th class="text-center">Id F.A.Q</th>
-                <th class="text-center">Question</th>
-                <th class="text-center">Réponse</th>
-                <th class="text-center">Editer</th>
+                <th class="text-center">Id du témoignage</th>
+                <th class="text-center">Id utilisateur</th>
+                <th class="text-center">Témoignage</th>
+                <th class="text-center">Date du post</th>
                 <th class="text-center">Supprimer</th>
             </tr>
             </thead>
 
             <tbody>
-            {% if faqs is defined %}
-            {% for faq in faqs %}
-                <tr>
-                    <td class="text-center">{{ faq.id }}</td>
-                    <td class="text-center">{{ faq.question }}</td>
-                    <td class="text-center">{{ faq.reponse }}</td>
-                    <td class="text-center"><a href="{{ path("gerer-faq-modifier-ou-supprimer", {"id_faq" : faq.id, "action" : 'modify'}) }}"><i class="fa fa-pencil"></i></a></td>
-                    <td class="text-center"><a href="{{ path("gerer-faq-modifier-ou-supprimer", {"id_faq" : faq.id, "action" : 'delete'}) }}"><i class="fa fa-trash"></i></a></td>
-                </tr>
-            {% endfor %}
-                {% endif %}
+            {% if comments is defined %}
+                {% for comment in comments %}
+                    <tr>
+                        <td class="text-center">{{ comment.id_comments }}</td>
+                        <td class="text-center">{{ comment.user_id }}</td>
+                        <td class="text-center">{{ comment.comment }}</td>
+                        <td class="text-center">{{ comment.date_created }}</td>
+                        <td class="text-center"><a href="{{ path("supprimer-temoignage", {"id_comments" : comment.id_comments}) }}"><i class="fa fa-trash"></i></a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
             </tbody>
         </table>
     </div>

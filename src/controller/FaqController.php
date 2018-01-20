@@ -21,7 +21,7 @@ class FaqController extends Controller
             $infosAnnonce = new FaqModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
             $resultat = $infosAnnonce->allFaqSelected();
 
-            if(!empty($resultat)){
+            if(isset($resultat)){
                 return $app['twig']->render('dashboard/faq-dashboard.html.twig', array(
                     "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                     "faqs" => $resultat,
@@ -47,7 +47,7 @@ class FaqController extends Controller
 
     }
 
-    public function ModifyDeleteFaq(Application $app, Request $request){
+    public function modifyDeleteFaq(Application $app, Request $request){
         $idFaq = strip_tags(trim($request->get("id_faq"))); // ON RECUPERE L'ID DE LA FAQ DANS L'URL
         $action = strip_tags(trim($request->get("action"))); // ON RECUPERE L'ACTION A EFFECTUER
 
@@ -81,14 +81,14 @@ class FaqController extends Controller
         }
     }
 
-    public function ModifyFaq(Application $app, Request $request)
+    public function modifyFaq(Application $app, Request $request)
     {
         $question = strip_tags(trim($request->get("question")));
         $reponse = strip_tags(trim($request->get("reponse")));
         $idFaq = strip_tags(trim($request->get("id_faq")));
 
         $insertionFaq = new FaqModelDAO($app['db']);
-        $row = $insertionFaq->updateFaq($idFaq, $question, $reponse);
+        $insertionFaq->updateFaq($idFaq, $question, $reponse);
 
 
             return $app->redirect('/Coolloc/public/connected/sabit/gerer-faq');

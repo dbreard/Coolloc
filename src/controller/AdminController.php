@@ -34,7 +34,7 @@ class AdminController extends Controller {
             $resultatCommentaire = $commentaires->selectComment();
 
 
-            if (!empty($resultatUserColocation) && !empty($resultatUserColocataires) && !empty($resultatAnnonce) && !empty($resultatCommentaire)){
+            if (isset($resultatUserColocation) && isset($resultatUserColocataires) && isset($resultatAnnonce) && isset($resultatCommentaire)){
                 return $app['twig']->render('dashboard/index-dashboard.html.twig', array(
                     "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                     "usersColocations" => $resultatUserColocation,
@@ -60,7 +60,7 @@ class AdminController extends Controller {
                 $infosUser = new UserModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'un user
                 $resultat = $infosUser->UsersColocationSelected();
 
-                if(!empty($resultat)){ // si la requette retourne un resultat
+                if(isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/user-dashboard-colocations.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "usersInfo" => $resultat,
@@ -85,7 +85,7 @@ class AdminController extends Controller {
                 $infosUser = new UserModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'un user
                 $resultat = $infosUser->UsersColocataireSelected();
 
-                if(!empty($resultat)){
+                if(isset($resultat)){
                     return $app['twig']->render('dashboard/user-dashboard-colocataires.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app), // selection des info de l'admin pour affichage dans le dashboard
                         "usersInfo" => $resultat, // selection des infos utilisateur cherchant des colocataires
@@ -110,7 +110,7 @@ class AdminController extends Controller {
                 $infosAnnonce = new AnnonceModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
                 $resultat = $infosAnnonce->allAnnoncesSelected();
 
-                if(!empty($resultat)){
+                if(isset($resultat)){
                     return $app['twig']->render('dashboard/annonces-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "annoncesInfo" => $resultat,
@@ -141,7 +141,7 @@ class AdminController extends Controller {
                 $detailsUser = new UserModelDAO($app['db']); // instanciation d'un objet pour recupérer les infos utilisateur
                 $resultat = $detailsUser->selectUserFromId($idUser);
 
-                if(!empty($resultat)){ // si la requette retourne un resultat
+                if(isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/details-profil-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "detailsUser" => $resultat,
@@ -171,7 +171,7 @@ class AdminController extends Controller {
                 $detailsAnnonce = new AnnonceModelDAO($app['db']); // instanciation d'un objet pour recupérer les infos de l'annonce
                 $resultat = $detailsAnnonce->selectAnnonceById($id_annonce);
 
-                if (!empty($resultat)){ // si la requette retourne un resultat
+                if (isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/details-annonce-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "detailsAnnonces" => $resultat['annonce'],

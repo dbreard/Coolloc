@@ -132,8 +132,9 @@ class UserModelDAO {
     //SELECTION DES UTILISATEURS CHERCHANT DES COLOCATAIRES
     public function UsersColocataireSelected(){
 
-        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocataire'";
+        $sql = "SELECT uo.* , aoc.id_user_post_annonce FROM user_options uo , annonce_options_city aoc WHERE aoc.user_id = uo.id_user AND status = 'cherche colocataire'";
         $users = $this->getDb()->fetchAll($sql, array());
+
 
         return $users;
 

@@ -408,8 +408,13 @@ $app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAc
 
 
 //MODIFIER - SUPPRIMER FAQ
-$app->get('/connected/sabit/gerer-faq/{id_faq}/{action}', 'Coolloc\Controller\FaqController::ModifyDeleteFaq') ->bind('gerer-faq-modifier-ou-supprimer');
-$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::ModifyFaq')->before($verifParamComment);
+$app->get('/connected/sabit/gerer-faq/{id_faq}/{action}', 'Coolloc\Controller\FaqController::modifyDeleteFaq') ->bind('gerer-faq-modifier-ou-supprimer');
+$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::modifyFaq')->before($verifParamComment);
+
+//GERER COMMENTAIRES-TEMOIGNAGE
+$app->get('/connected/sabit/gerer-temoignage', 'Coolloc\Controller\CommentController::selectCommentAndAdminInfo')->bind('gerer-temoignage');
+$app->get('/connected/sabit/gerer-temoignage/{id_comments}','Coolloc\Controller\CommentController::deleteComment')->bind('supprimer-temoignage');
+
 
 
 //*******************//

@@ -62,6 +62,9 @@
                     <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
                 </li>
                 <li>
+                    <a href="{{ path ('gerer-temoignage') }}"><i class="fa fa-fw fa-comments-o"></i> Gestion des témoignages</a>
+                </li>
+                <li>
                     <a href="{{ path ('accueil') }}"><i class="fa fa-home"></i> Retour à la Home</a>
                 </li>
 
@@ -138,7 +141,7 @@
                         {% else %}
                             <td class="text-center text-danger">{{ users.account }}</td>
                         {% endif %}
-                            <td class="text-center"><a href=''><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
+                            <td class="text-center"><a href='{{ path("details-annonce-admin", {"id_annonce" : users.id_user_post_annonce}) }}'><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
                         <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocataires'}) }}' ><i class="fa fa-times"></a></td>
                     </tr>
                 {% endif %}
