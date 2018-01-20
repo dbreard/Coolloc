@@ -19,13 +19,12 @@ class Model {
     }
 
 
-
+    // SELECTION USER + OPTION EN FONCTION DU TOKEN SESSION
     public static function userByTokenSession(string $token, Application $app): array {
         $sql = "SELECT user_options.* FROM user_options, tokens WHERE tokens.token = ? AND tokens.user_id = user_options.id_user";
         $user = $app['db']->fetchAssoc($sql, array((string) $token));
         return $user;
     }
-
 
     // SELECTION DES OPTIONS DE L'UTILISATEUR EN RECHERCHE DE COLOCATAIRES (UNIQUEMENT LES OPTIONS)
     public static function userOptionOnly(string $idUser, Application $app){
@@ -36,7 +35,7 @@ class Model {
 
     //SELECTION DES ANNONCES CORRESPONDANT A SON PROPRIETAIRE (INFOS DE BASE)
     public static function annonceByUser(string $idUser, Application $app){
-      $sql = "SELECT a.name_coloc, a.description, m.url_media FROM annonce_options_city a, media m WHERE a.id_user_post_annonce = m.user_post_annonce_id AND user_id = ?";
+      $sql = "SELECT a.name_coloc, a.description, m.url_media FROM annonce_options_city a, media m WHERE a.id_user_post_annonce = m.user_post_annonce_id AND user_id = ? GROUP BY a.id_user_post_annonce";
       $userAnnonce = $app['db']->fetchAll($sql, array((string) $idUser));
 
       return $userAnnonce;

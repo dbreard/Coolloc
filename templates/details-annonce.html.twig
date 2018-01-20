@@ -29,136 +29,109 @@
 
 
 {% if error is defined %}
-    {% for errors in error %}
-        <div>{{ errors }}</div>
-    {%  endfor %}
+    <div>{{ error }}</div>
 {% endif %}
 
+{% if info_annonce is defined %}
 
-<div class="page-head">
-    <div class="container">
-        <div class="row">
-            <div class="page-head-content">
-                <h1 class="page-title"><small>La CoolLoc </small>{# nom de la colocation#} nom de la colocation</h1>
+        <div class="page-head">
+            <div class="container">
+                <div class="row">
+                    <div class="page-head-content">
+                        <h1 class="page-title"><small>La Coolloc </small>{{ info_annonce.name_coloc }}</h1>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-{% block fonction %}
-
-    {% include 'functions/membre.php' ignore missing  %}
-
-{% endblock %}
-
 
 
         <!-- property area -->
         <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
-            <div class="container">   
+            <div class="container">
 
                 <div class="clearfix padding-top-40" >
 
                     <div class="col-md-8 single-property-content prp-style-1 ">
                         <div class="row">
-                            <div class="light-slide-item">            
+                            <div class="light-slide-item">
                                 <div class="clearfix">
-                                    
+
 
                                     <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                        <li data-thumb="{{ asset('assets/img/property-1/property1.jpg') }}"> 
-                                            <img src="{{ asset('assets/img/property-1/property1.jpg') }}" />
-                                        </li>
-                                        <li data-thumb="{{ asset('assets/img/property-1/property2.jpg') }}"> 
-                                            <img src="{{ asset('assets/img/property-1/property2.jpg') }}" />
-                                        </li>
-                                        <li data-thumb="{{ asset('assets/img/property-1/property3.jpg') }}"> 
-                                            <img src="{{ asset('assets/img/property-1/property3.jpg') }}" />
-                                        </li>
-                                        <li data-thumb="{{ asset('assets/img/property-1/property4.jpg') }}"> 
-                                            <img src="{{ asset('assets/img/property-1/property4.jpg') }}" />
-                                        </li>                                         
+
+                                        {% for info_photos in info_photo %}
+
+                                                <li data-thumb="{{ info_photos.url_media }}">
+                                                    <img src="{{ info_photos.url_media }}" alt="Photo de l'annonce de {{ info_annonce.firstname }} {{ info_annonce.lastname }}" />
+                                                </li>
+
+                                        {% endfor %}
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="single-property-wrapper">
-                            <div class="single-property-header">                                          
-                                <h1 class="property-title pull-left">Villa in Coral Gables</h1>
-                                <span class="property-price pull-right">$825,000</span>
+                            <div class="single-property-header">
+                                <h1 class="property-title pull-left">{{ info_annonce.name_coloc }}</h1>
+                                <span class="property-price pull-right">{{ info_annonce.rent }} €</span>
                             </div>
 
-                            <div class="property-meta entry-meta clearfix ">   
-
-                                <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                    <span class="property-info-icon icon-tag">                                        
-                                        <img src="{{ asset('assets/img/icon/sale-orange.png') }}">
-                                    </span>
-                                    <span class="property-info-entry">
-                                        <span class="property-info-label">Status</span>
-                                        <span class="property-info-value">For Sale</span>
-                                    </span>
-                                </div>
+                            <div class="property-meta entry-meta clearfix ">
 
                                 <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
                                     <span class="property-info icon-area">
                                         <img src="{{ asset('assets/img/icon/room-orange.png') }}">
                                     </span>
                                     <span class="property-info-entry">
-                                        <span class="property-info-label">Area</span>
-                                        <span class="property-info-value">3500<b class="property-info-unit">Sq Ft</b></span>
+                                        <span class="property-info-label">Surface</span>
+                                        <span class="property-info-value">{{ info_annonce.surface }} <b class="property-info-unit">m²</b></span>
                                     </span>
                                 </div>
 
-                                <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                    <span class="property-info-icon icon-bed">
-                                        <img src="{{ asset('assets/img/icon/bed-orange.png') }}">
-                                    </span>
-                                    <span class="property-info-entry">
-                                        <span class="property-info-label">Bedrooms</span>
-                                        <span class="property-info-value">3</span>
-                                    </span>
-                                </div>
-
-                                <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                    <span class="property-info-icon icon-bed">
-                                        <img src="{{ asset('assets/img/icon/cars-orange.png') }}">
-                                    </span>
-                                    <span class="property-info-entry">
-                                        <span class="property-info-label">Car garages</span>
-                                        <span class="property-info-value">1</span>
-                                    </span>
-                                </div>
+                                    <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                        <span class="property-info-icon icon-bed">
+                                            {% if info_annonce.parking == 'oui' %}
+                                                <img src="{{ asset('assets/img/icon/cars-orange.png') }}">
+                                            {% else %}
+                                                <img src="{{ asset('assets/img/icon/cars.png') }}">
+                                            {% endif %}
+                                        </span>
+                                        <span class="property-info-entry">
+                                            <span class="property-info-label">Parking</span>
+                                            <span class="property-info-value">{{ info_annonce.parking }}</span>
+                                        </span>
+                                    </div>
 
                                 <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
                                     <span class="property-info-icon icon-bath">
-                                        <img src="{{ asset('assets/img/icon/os-orange.png') }}">
+                                        {% if info_annonce.garden == 'oui' %}
+                                            <img src="{{ asset('assets/img/icon/os-orange.png') }}">
+                                        {% else %}
+                                            <img src="{{ asset('assets/img/icon/os.png') }}">
+                                        {% endif %}
                                     </span>
                                     <span class="property-info-entry">
-                                        <span class="property-info-label">Bathrooms</span>
-                                        <span class="property-info-value">3.5</span>
+                                        <span class="property-info-label">Jardin</span>
+                                        <span class="property-info-value">{{ info_annonce.garden }}</span>
                                     </span>
                                 </div>
 
                                 <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
                                     <span class="property-info-icon icon-garage">
-                                        <img src="{{ asset('assets/img/icon/room-orange.png') }}">
+                                        {% if dispo_annonce == 'oui' %}
+                                            <img src="{{ asset('assets/img/icon/rent-orange.png') }}">
+                                        {% else %}
+                                            <img src="{{ asset('assets/img/icon/rent.png') }}">
+                                        {% endif %}
                                     </span>
                                     <span class="property-info-entry">
-                                        <span class="property-info-label">Garages</span>
-                                        <span class="property-info-value">2</span>
-                                    </span>
-                                </div>
-                                
-                                <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
-                                    <span class="property-info-icon icon-garage">
-                                        <img src="{{ asset('assets/img/icon/shawer-orange.png') }}">
-                                    </span>
-                                    <span class="property-info-entry">
-                                        <span class="property-info-label">Garages</span>
-                                        <span class="property-info-value">2</span>
+                                        {% if dispo_annonce == 'oui' %}
+                                            <span class="property-info-label">Disponnible</span>
+                                        {% else %}
+                                            <span class="property-info-label">Pas encore disponnible</span>
+                                        {% endif %}
                                     </span>
                                 </div>
 
@@ -169,70 +142,111 @@
                             <div class="section">
                                 <h4 class="s-property-title">Description</h4>
                                 <div class="s-property-content">
-                                    <p>Nulla quis dapibus nisl. Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies commodo arcu nec pretium. Nullam sed arcu ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies                                </p>
+                                    <p>{{ info_annonce.description }}</p>
                                 </div>
                             </div>
                             <!-- End description area  -->
 
                             <div class="section additional-details">
 
-                                <h4 class="s-property-title">Additional Details</h4>
+                                <h4 class="s-property-title">Détails supplémentaires</h4>
 
                                 <ul class="additional-details-list clearfix">
+
                                     <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Type de bien</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.housing_type|capitalize }}</span>
                                     </li>
 
                                     <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Built In</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">2003</span>
-                                    </li>
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Parking</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">2 Or More Spaces,Covered Parking,Valet Parking</span>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date de disponibilité</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.date_dispo|date("d/m/Y") }}</span>
                                     </li>
 
                                     <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Colocation de</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.nb_roommates }} Personnes</span>
                                     </li>
 
                                     <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">View</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal View,Direct ew</span>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Nombre de pièces</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.nb_room }}</span>
                                     </li>
 
                                     <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront Description:</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal Front,Ocean Access</span>
-                                    </li> 
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Accés handicapé</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.handicap_access|capitalize }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Animaux</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.animals|capitalize }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Sexe des colocataires</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.sex_roommates|capitalize }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Fumeur</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.smoking|capitalize }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Balcon</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.balcony|capitalize }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Meublé</span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ info_annonce.furniture|capitalize }}</span>
+                                    </li>
 
                                 </ul>
-                            </div>  
-                            <!-- End additional-details area  -->
-
-                            <div class="section property-features">      
-
-                                <h4 class="s-property-title">Features</h4>                            
-                                <ul>
-                                    <li><a href="properties.html">Swimming Pool</a></li>   
-                                    <li><a href="properties.html">3 Stories</a></li>
-                                    <li><a href="properties.html">Central Cooling</a></li>
-                                    <li><a href="properties.html">Jog Path 2</a></li>
-                                    <li><a href="properties.html">2 Lawn</a></li>
-                                    <li><a href="properties.html">Bike Path</a></li>
-                                </ul>
-
                             </div>
+                            <!-- End additional-details area  -->
+                            {% if equipment != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Equipement :</h4>
+                                    <ul>
+                                        {% for equipments in equipment %}
+                                            <li> {{ equipments }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if district != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Quartier :</h4>
+                                    <ul>
+                                        {% for districts in district %}
+                                            <li> {{ districts }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if hobbie != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Centre d'intérêt :</h4>
+                                    <ul>
+                                        {% for hobbies in hobbie %}
+                                            <li> {{ hobbies }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if member_profil != "" %}
+                                <div class="section property-features">
+                                    <h4 class="s-property-title">Profil des colocataires :</h4>
+                                    <ul>
+                                        {% for member_profils in member_profil %}
+                                            <li> {{ member_profils }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
                             <!-- End features area  -->
-
-                            
-                            
-                            
-
-                            
-                            
                         </div>
                     </div>
 
@@ -244,13 +258,15 @@
                                     <div class="inner-wrapper">
 
                                         <div class="clear">
-                                            <div class="col-xs-4 col-sm-4 dealer-face">
-                                                    <img src="{{ asset('assets/img/client-face1.png') }}" class="img-circle">
-                                            </div>
+                                            {% if info_annonce.profil_picture|default() %}
+                                                <div class="col-xs-4 col-sm-4 dealer-face">
+                                                        <img src="{{ info_annonce.profil_picture }}" alt="Photo de profil de {{ info_annonce.firstname }} {{ info_annonce.lastname }}" class="img-circle">
+                                                </div>
+                                            {% endif %}
                                             <div class="col-xs-8 col-sm-8 ">
                                                 <h3 class="dealer-name">
-                                                    Nom du contact<br>
-                                                    <span>Nom de la coloc</span>        
+                                                    {{ info_annonce.firstname }} {{ info_annonce.lastname }}<br>
+                                                    <span>{{ info_annonce.name_coloc }}</span>
                                                 </h3>
                                             </div>
                                         </div>
@@ -258,16 +274,16 @@
                                         <div class="clear">
                                             {# si utilisateur connecté il peut voir les coordonnées sinon rien #}
                                             {% if connected is defined %}
-                                                <ul class="dealer-contacts">                                       
-                                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                                <ul class="dealer-contacts">
+                                                    <li><i class="pe-7s-map-marker strong"> </i> {{ info_annonce.adress }}</li>
+                                                    <li><i class="pe-7s-mail strong"> </i> {{ info_annonce.mail }}</li>
+                                                    <li><i class="pe-7s-call strong"> </i> {{ info_annonce.tel }}</li>
                                                 </ul>
-                                            
+
                                             {% else %}
                                                 <p>Vous souhaitez acceder aux coordonnées completes de cette colocation ! inscrivez-vous ou connectez-vous </p>
 
-                                                <ul class="dealer-contacts">                                       
+                                                <ul class="dealer-contacts">
                                                     <li><i class="pe-7s-map-marker strong"> </i>Adresse</li>
                                                     <li><i class="pe-7s-mail strong"> </i> Email</li>
                                                     <li><i class="pe-7s-call strong"> </i> Tél.</li>
@@ -276,34 +292,39 @@
                                                 <button class="navbar-btn nav-button wow bounceInRight login"  onclick=" window.open('{{ path('inscription') }}', '_self')" data-wow-delay="0.45s" data-wow-delay="0.45s">S'inscrire</button>
 
                                                 <button class="navbar-btn nav-button wow bounceInRight login"  onclick=" window.open('{{ path('login') }}', '_self')" data-wow-delay="0.45s" data-wow-delay="0.45s">Se connecter</button>
-                                                
+
                                             {% endif %}
-                                            
+
                                         </div>
 
                                     </div>
                                 </div>
                                 {# SI vidéo existe affichez la vidéo sinon rien #}
-                                <div class="section property-video"> 
-                                <h4 class="s-property-title">Property Video</h4> 
-                                <div class="video-thumb">
-                                    <a class="video-popup" href="yout" title="Virtual Tour">
-                                        <iframe width="350" height="196" src="{# lien de la vidéo #}?rel=0&amp;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>           
-                                    </a>
-                                </div>
-                                </div>
-                                <!-- End video area  --> 
+                                {% if info_video.url_media is defined %}
+                                    <div class="section property-video">
+                                    <h4 class="s-property-title">Vidéo</h4>
+                                    <div class="video-thumb">
+                                        <a class="video-popup" href="yout" title="Virtual Tour">
+                                            <iframe width="350" height="196" src="{{ info_video.url_media }}?rel=0&amp;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </a>
+                                    </div>
+                                    </div>
+                                    <!-- End video area  -->
+                                {% endif %}
 
                             </div>
 
-                            
+
 
                             <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Similar Properties</h3>
+                                    <h3 class="panel-title">Ces annonces pourraient vous intérresser :</h3>
                                 </div>
                                 <div class="panel-body recent-property-widget">
-                                        <ul>
+                                    <span class="property-seeker">
+                                        <b class="b-1">Non définie pour le moment</b>
+                                    </span>
+                                        {# <ul>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="{{ asset('assets/img/demo/small-property-2.jpg') }}"></a>
@@ -358,11 +379,11 @@
                                             </div>
                                         </li>
 
-                                    </ul>
+                                    </ul> #}
                                 </div>
-                            </div>  
-                            
-                                                   
+                            </div>
+
+
 
                         </aside>
                     </div>
@@ -371,10 +392,7 @@
             </div>
         </div>
 
+{% endif %}
 
-        
+
 {% endblock %}
-
-        
-        
-        

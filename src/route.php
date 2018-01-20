@@ -28,18 +28,18 @@ $app->get('/', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('index.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('index.html.twig', array(
-     "connected" => $isconnected, 
+     "connected" => $isconnected,
     ));
-    
-    } 
 
-    
+    }
+
+
     else {
         return $app['twig']->render('index.html.twig', array()) ;
     }
@@ -92,7 +92,6 @@ $app->get('/login', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-
     if ($isConnectedAndAdmin){
         return $app['twig']->render('formulaires/login.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
@@ -101,10 +100,14 @@ $app->get('/login', function () use ($app) {
 
     elseif (!$isconnected) {
         return $app['twig']->render('formulaires/login.html.twig', array(
-     "connected" => $isconnected,
-    ));
+            "connected" => $isconnected,
+
+           ));
+
     } else {
-        return $app->redirect('/Coolloc/public/connected/profil') ;
+        
+           return $app->redirect('/Coolloc/public/connected/profil') ;
+
     }
 
 
@@ -131,7 +134,6 @@ $app->get('/inscription', function () use ($app) {
 
     } else {
         return $app['twig']->render('formulaires/register.html.twig', array());
-
     }
 
 })
@@ -186,9 +188,26 @@ $app->post('/change-password/{token}', "Coolloc\Controller\ChangePassController:
 
 //FAQ
 $app->get('/faq', function () use ($app) {
-    return $app['twig']->render('faq.html.twig', array());
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('faq.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+    elseif ($isconnected) {
+        return $app['twig']->render('faq.html.twig', array(
+     "connected" => $isconnected, 
+    ));
+    } 
+    else {
+        return $app['twig']->render('faq.html.twig', array());
+    }
+    
 })
     ->bind('faq');
+
 $app->post('/faq', function () use ($app) {
     //controleur
 });
@@ -301,6 +320,34 @@ $app->get('/a-propos', function () use ($app) {
     ->bind('a-propos');
 
 
+    //AFFICHAGE PRESENTATION PROFIL
+
+$app->get('/fiche-profil', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+            "connected" => $isconnected, 
+    ));
+    } 
+
+    else {
+        return $app['twig']->render('profil-recherche-colocation.html.twig', array());
+    }
+})
+    ->bind('fiche-profil');
+
+    //controleur
+
+
 
 
 //*****************************//
@@ -325,6 +372,9 @@ $app->get('/connected/details-annonce-connecter', function () use ($app) {
 $app->post('/connected/details-annonce-connecter', function () use ($app) {
     //controleur
 });
+
+
+
 
 
 //PROFIL
@@ -367,6 +417,10 @@ $app->post('/connected/profil', function () use ($app) {
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
 
+    if ($_SESSION['membre']['status'] != "cherche colocataire")
+        return $app->redirect('/Coolloc/public/');
+
+
     return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
 })
     ->bind('ajout-annonce');
@@ -387,29 +441,11 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 
 //AJOUT DETAILS PROFIL
-$app->get('/connected/ajout-details-profil', function () use ($app) {
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
+$app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
 
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, 
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array());
-    } 
-
-    else {
-        return $app->redirect('Coolloc/public/login');
-    }
-})
     ->bind('ajout-details-profil');
-$app->post('/connected/ajout-details-profil', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
 
 
 //ajout temoignage

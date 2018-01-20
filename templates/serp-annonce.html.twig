@@ -100,32 +100,36 @@
                     <div class="col-md-12 clear ">
                         <div id="list-type" class="proerty-th">
 
-                            {% for affichages in affichage %}
+                            {% if affichage is defined %}
 
-                                <div class="col-sm-6 col-md-3 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}" ><img src="{{ affichages.url_media }}" alt="Photo principale de l'annonce de {{ affichages.firstname }} {{ affichages.lastname }}"></a>
-                                        </div>
+                                {% for affichages in affichage %}
 
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html">{{ affichages.name_coloc }}</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Surface :</b> {{ affichages.surface }} m² </span>
-                                            <span class="proerty-price pull-right">{{ affichages.rent }} €</span>
-                                            <p style="display: none;">{{ affichages.description }}</p>
-                                            <div class="property-icon">
-                                                <b> Type de bien :</b> {{ affichages.housing_type }}
-                                                {# <img src="assets/img/icon/bed.png">(5)|
-                                                <img src="assets/img/icon/shawer.png">(2)|
-                                                <img src="assets/img/icon/cars.png">(1) #}
+                                    <div class="col-sm-6 col-md-3 p0">
+                                        <div class="box-two proerty-item">
+                                            <div class="item-thumb">
+                                                <a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}" ><img src="{{ affichages.url_media }}" alt="Photo principale de l'annonce de {{ affichages.firstname }} {{ affichages.lastname }}"></a>
                                             </div>
+
+                                            <div class="item-entry overflow">
+                                                <h5><a href="property-1.html">{{ affichages.name_coloc }}</a></h5>
+                                                <div class="dot-hr"></div>
+                                                <span class="pull-left"><b> Surface :</b> {{ affichages.surface }} m² </span>
+                                                <span class="proerty-price pull-right">{{ affichages.rent }} €</span>
+                                                <p style="display: none;">{{ affichages.description }}</p>
+                                                <div class="property-icon">
+                                                    <b> Type de bien :</b> {{ affichages.housing_type }}
+                                                    {# <img src="assets/img/icon/bed.png">(5)|
+                                                    <img src="assets/img/icon/shawer.png">(2)|
+                                                    <img src="assets/img/icon/cars.png">(1) #}
+                                                </div>
+                                            </div>
+
                                         </div>
-
                                     </div>
-                                </div>
 
-                            {% endfor %}
+                                {% endfor %}
+
+                            {% endif %}
 
                         </div>
                     </div>
