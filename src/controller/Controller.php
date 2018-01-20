@@ -5,6 +5,7 @@ namespace Coolloc\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Model\Model;
 use \DateTime;
 
 
@@ -197,7 +198,7 @@ class Controller {
 
 
     // FONCTION POUR VERIFIER LA VALIDITE D'UN ARRAY ET FORMATER CELUI CI POUR LA BDD
-    public function verifArrayAndFormat(array $arrayTarget, array $arrayCompare, string $champs, string $mode) {
+    public function verifArrayAndFormat(array $arrayTarget, array $arrayCompare, string $champs, string $mode): string {
         // on créer un tableau pour faire le comparatif
         $arrayCheck = array();
         // boucle sur l'ensemble des données
@@ -245,7 +246,7 @@ class Controller {
     }
 
     // FONCTION APPELER PAR verifArrayAndFormat() SI LE MODE CHOISI EST "SELECT" POUR CHERCHER EN BDD VIA UN TABLEAU
-    private function searchByArray(array $arrayTarget, string $champsBDD) {
+    private function searchByArray(array $arrayTarget, string $champsBDD): string {
         // Je crée ma variable réponse
         $response = "";
         // Je vérifie que mon tableau n'es pas vide
@@ -261,7 +262,7 @@ class Controller {
     }
 
     // FONCTION APPELER PAR verifArrayAndFormat() SI LE MODE CHOISI EST "INSERT" POUR VALIDER ET FORMATER UN ARRAY EN STRING POUR l'INSERTION
-    private function formatArrayForBDD(array $arrayTarget) {
+    private function formatArrayForBDD(array $arrayTarget): string {
         // Je créer ma variable de réponse
         $response = "";
         // Je vérifie que mon tableau n'est pas vide
@@ -341,6 +342,7 @@ class Controller {
 
     // fonction permettant de formater les champs multiple string en array
     public static function stringToArray(string $stringTarget){
+
 
         if (empty($stringTarget))
             return '';
