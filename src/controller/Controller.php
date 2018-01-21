@@ -174,7 +174,7 @@ class Controller {
 
 
     // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
-    public function formatCity($city) {
+    public function formatCity(string $city) {
         $cityClean = strip_tags(trim($city));
         $cityClean = ucwords ($cityClean);
         $cityClean = str_replace(" ", "-", $cityClean);
@@ -215,7 +215,17 @@ class Controller {
         }
         // Si le nombre de valeur ne correspond pas au nombre de check erreur
         if (count($arrayCheck) != count($arrayTarget)) {
-            array_push($this->erreur, "Problème de selection dans '" . $champs . "'");
+            
+            if ($champs == "Quartier") {
+                $this->erreur['district'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Equipement") {
+                $this->erreur['equipment'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Profil colocataires") {
+                $this->erreur['member_profil'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Centre d'intérêts") {
+                $this->erreur['hobbies'] = "Problème de selection dans '" . $champs . "'";
+            }
+
             return "";
         }else { // Sinon on format notre tableau en string en fonction du mode choisi
             // Si le mode est SELECT
@@ -340,7 +350,7 @@ class Controller {
     }
     // --------------------- fin envoi mail ----------------------- //
 
-    //fonction permettant de formater les champs multiple string en array
+    // fonction permettant de formater les champs multiple string en array
     public static function stringToArray(string $stringTarget){
 
 
@@ -350,10 +360,12 @@ class Controller {
         $arrayConstruct = explode(', ', $stringTarget);
 
         foreach ($arrayConstruct as $key => $value) {
+
             $newKey = str_replace(' ', '', $value);
             $newKey = str_replace("'", '', $newKey);
             $newKey = str_replace("-", '', $newKey);
             $arrayResponse[$newKey] = $value;
+
         }
 
         return $arrayResponse;
