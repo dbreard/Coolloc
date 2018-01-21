@@ -27,31 +27,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="slider-area">
-
+    <div class="slider-area">
+    
     {% block slider %}
         {# insertion des images du slideshow #}
         {% include 'required/slider.html.twig' ignore missing  %}
     {% endblock %}
 
-    {# fin de slider #}
+        {# fin de slider #}
 
-    <div class="slider-content">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                <h2>CoolLoc </h2>
-                <p>La façon la plus cool de trouver une colocation qui vous ressemble !</p>
+        <div class="slider-content">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                    <h2>CoolLoc </h2>
+                    <p>La façon la plus cool de trouver une colocation qui vous ressemble !</p>
 
-                {% block search %}
-                    {# insertion du formulaire de recherche #}
-                    {% include 'required/search.html.twig' ignore missing  %}
-                {% endblock %}
+                    {% block search %}
+                        {# insertion du formulaire de recherche #}
+                        {% include 'required/search.html.twig' ignore missing  %}
+                    {% endblock %}
 
 
+                </div>
             </div>
         </div>
+        
     </div>
-</div>
 
 <!-- property area -->
 {% block properties %}
@@ -60,71 +61,76 @@
 {% endblock %}
 
 
-<!--Welcome area -->
-<div class="Welcome-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 Welcome-entry  col-sm-12">
-                <div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
-                    <div class="welcome_text wow fadeInLeft" data-wow-delay="0.3s" data-wow-offset="100">
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                                <!-- /.feature title -->
-                                <h2>Cool<br> Loc </h2>
+    <!--Welcome area -->
+    <div class="Welcome-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 Welcome-entry  col-sm-12">
+
+                    <div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
+                        <div class="welcome_text wow fadeInLeft" data-wow-delay="0.3s" data-wow-offset="100">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                                    <!-- /.feature title -->
+                                    <h2 class="logo-home"><img src="{{asset('assets/img/logo.png')}}" alt=""/></h2>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-5 col-sm-6 col-xs-12">
-                    <div  class="welcome_services wow fadeInRight" data-wow-delay="0.3s" data-wow-offset="100">
-                        <div class="row">
-                            <div class="col-xs-6 m-padding">
-                                <div class="welcome-estate">
-                                    <div class="welcome-icon">
-                                        <i class="pe-7s-home pe-4x"></i>
+                    <!-- div englobant welcome service -->
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <div  class="welcome_services wow fadeInRight" data-wow-delay="0.3s" data-wow-offset="100">
+                            <div class="row">
+
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate" onclick=" window.open('{{ path('resultat-recherche') }}', '_self')">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-home pe-4x"></i>
+                                        </div>
+                                        <h3>Nos CoolLocations disponibles</h3>
                                     </div>
-                                    <h3>Nos colocations disponibles</h3>
                                 </div>
-                            </div>
-                            <div class="col-xs-6 m-padding">
-                                <div class="welcome-estate">
-                                    <div class="welcome-icon">
-                                        <i class="pe-7s-users pe-4x"></i>
+
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate" onclick=" window.open('{{ path('profils-colocataires-recherchant-colocation') }}', '_self')">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-users pe-4x"></i>
+                                        </div>
+                                        <h3>Les CoolLocataires <br>en recherche</h3>
                                     </div>
-                                    <h3>Les colocataires <br>en recherche</h3>
                                 </div>
-                            </div>
 
 
-                            <div class="col-xs-12 text-center">
-                                <i class="welcome-circle"></i>
-                            </div>
-
-                            <div class="col-xs-6 m-padding">
-                                <div class="welcome-estate">
-                                    <div class="welcome-icon">
-                                        <i class="pe-7s-info pe-4x"></i>
-                                    </div>
-                                    <h3>A propos <br> de CoolLoc</h3>
+                                <div class="col-xs-12 text-center">
+                                    <i class="welcome-circle"></i>
                                 </div>
-                            </div>
-                            <div class="col-xs-6 m-padding">
-                                <div class="welcome-estate">
-                                    <div class="welcome-icon">
-                                        <i class="pe-7s-help2 pe-4x"></i>
-                                    </div>
-                                    <h3>Les questions <br>fréquentes </h3>
-                                </div>
-                            </div>
 
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate" onclick=" window.open('{{ path('a-propos') }}', '_self')">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-info pe-4x"></i>
+                                        </div>
+                                        <h3>A propos <br> de CoolLoc</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate" onclick=" window.open('{{ path('faq') }}', '_self')">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-help2 pe-4x"></i>
+                                        </div>
+                                        <h3>Les questions <br>fréquentes </h3>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+                    <!-- div welcome service -->
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 {% block testimonial %}
     {# Bloc de séléction annonce et profil différent quand user connecter #}
     {% include 'required/testimonials.html.twig' ignore missing  %}
@@ -134,7 +140,6 @@
     {# Bloc de séléction annonce et profil différent quand user connecter #}
     {% include 'required/countarea.html.twig' ignore missing  %}
 {% endblock %}
-
 
 {% block defineprofil %}
     {# Bloc de séléction annonce et profil différent quand user connecter #}
