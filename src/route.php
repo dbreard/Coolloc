@@ -53,6 +53,30 @@ $app->post('/', "Coolloc\Controller\SearchController::searchAction");
 
 
 //RESULTAT RECHERCHE
+$app->get('/profils-public-colocataire', function () use ($app) {
+
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('serp-profil.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('serp-profil.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app['twig']->render('serp-profil.html.twig', array());
+    }
+
+})
+    ->bind('profils-colocataires-recherchant-colocation');
+
+//RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {
 
     $isconnected = Controller::ifConnected();
@@ -255,7 +279,24 @@ $app->post('/contact', "Coolloc\Controller\ContactController::contactAction")->b
 
 //MERCI
 $app->get('connected/merci', function () use ($app) {
-    return $app['twig']->render('connected/merci.html.twig', array());
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('connected/merci.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('connected/merci.html.twig', array(
+     "connected" => $isconnected,
+    ));
+    } else {
+        return $app->redirect('/Coolloc/public');
+    }
+
 })
     ->bind('merci');
 

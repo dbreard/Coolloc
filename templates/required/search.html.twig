@@ -1,5 +1,8 @@
 <div class="search-form wow pulse" data-wow-delay="0.8s">
 
+                    {% if errorSearch is defined %}
+                        <span class="red">{{ errorSearch }}</span>
+                    {% endif %}
 
                     <form action="" class="form-inline" method="POST">
                         <button class="btn toggle-btn" type="button"><i class="fa fa-bars"></i></button>

@@ -170,7 +170,11 @@
               <div class="row">
               {% if annonceUser is defined%}
                 {% for annonceUsers in annonceUser %}
+<<<<<<< HEAD
                   <a  href="path ('details-annonce')">
+=======
+                  <a  href="{{ path ('details-annonce', {"id_annonce" : annonceUsers.id_user_post_annonce }) }}">
+>>>>>>> dev_clonemaster
                     <div class="col-md-4">
                       <div class="thumbnail annonce_miniature">
                         <div class="gerer col-xs-12 text-center" type="button"><p>Voir l'annonce<p></div>

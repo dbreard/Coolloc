@@ -26,6 +26,9 @@ class AnnonceController extends Controller
 
     public function annonceAction(Application $app, Request $request) {
 
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
         $arrayMessage = $app["formulaire"]["verifParamAnnonce"]["arrayMessage"];
 
         $name_coloc = ( !isset($arrayMessage['name_coloc']) ) ? '' : 'name_coloc';
@@ -41,19 +44,40 @@ class AnnonceController extends Controller
 
         // Si il y a des erreurs enregistré par le middleware on redirige vers la page ajout-annonce
         if ($app["formulaire"]["verifParamAnnonce"]["error"] == true) {
-            return  $app['twig']->render('/connected/ajout-annonce.html.twig', array(
-                "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
-                $name_coloc => 'Le nom de la colocation doit être rempli',
-                $rent => 'Le loyer doit être rempli',
-                $description => 'La description doit être rempli',
-                $adress => 'L\'adresse doit être rempli',
-                $ville => 'La ville doit être rempli',
-                $postal_code => 'Le code postal doit être rempli',
-                $housing_type => 'Le type de bien doit être rempli',
-                $date_dispo => 'Le date de disponibilité doit être rempli',
-                $nb_roommates => 'Le nombre de colocataire doit être rempli',
-                $conditions => 'Les conditions doivent être acceptés',
-            ));
+            if ($isConnectedAndAdmin){
+                return  $app['twig']->render('/connected/ajout-annonce.html.twig', array(
+                    "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                    $name_coloc => 'Le nom de la colocation doit être rempli',
+                    $rent => 'Le loyer doit être rempli',
+                    $description => 'La description doit être rempli',
+                    $adress => 'L\'adresse doit être rempli',
+                    $ville => 'La ville doit être rempli',
+                    $postal_code => 'Le code postal doit être rempli',
+                    $housing_type => 'Le type de bien doit être rempli',
+                    $date_dispo => 'Le date de disponibilité doit être rempli',
+                    $nb_roommates => 'Le nombre de colocataire doit être rempli',
+                    $conditions => 'Les conditions doivent être acceptés',
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                ));
+            }
+
+            elseif ($isconnected) {
+                return  $app['twig']->render('/connected/ajout-annonce.html.twig', array(
+                    "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                    $name_coloc => 'Le nom de la colocation doit être rempli',
+                    $rent => 'Le loyer doit être rempli',
+                    $description => 'La description doit être rempli',
+                    $adress => 'L\'adresse doit être rempli',
+                    $ville => 'La ville doit être rempli',
+                    $postal_code => 'Le code postal doit être rempli',
+                    $housing_type => 'Le type de bien doit être rempli',
+                    $date_dispo => 'Le date de disponibilité doit être rempli',
+                    $nb_roommates => 'Le nombre de colocataire doit être rempli',
+                    $conditions => 'Les conditions doivent être acceptés',
+                    "connected" => $isconnected,
+                ));
+            }
         }
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
@@ -80,7 +104,7 @@ class AnnonceController extends Controller
         $mail_annonce = strip_tags(trim($request->get('mail_annonce')));
         if (!empty($mail_annonce)) {
             ($this->verifEmail($mail_annonce)) ? : $this->erreur['mail_annonce'] = 'Email saisi invalide';
-        }else if ($_SESSION['membre']['zoubida']){
+        }else if (isset($_SESSION['membre']['zoubida'])){
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             // charger l'email du profil de l'utilisateur
             $mail_annonce = $user['mail'];
@@ -92,7 +116,7 @@ class AnnonceController extends Controller
         $tel_annonce = strip_tags(trim($request->get('tel_annonce')));
         if (!empty($tel_annonce)) {
             ($this->verifTel($tel_annonce)) ? $tel_annonce = $this->modifyTel($tel_annonce) : $this->erreur['tel_annonce'] = 'Téléphone saisi invalide';
-        }else if ($_SESSION['membre']['zoubida']){
+        }else if (isset($_SESSION['membre']['zoubida'])){
             $user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
             //charger le numéro de téléphone du profil de l'utilisateur
             $tel_annonce = $user['tel'];
@@ -228,7 +252,7 @@ class AnnonceController extends Controller
         (iconv_strlen($postal_code) == 5 && preg_match('#^[0-9]{5,5}$#',$postal_code)) ? : $this->erreur['postal_code'] = 'Code postal saisie incorrect';
 
         // VERIF DATE DE DISPO VALIDE
-        (($this->getDate() - $dateFormatage) <= 0) ? : $this->erreur['date_dispo'] = 'La date de disponibilité est invalide';
+        (($this->getDate() - $dateFormatage) <= 0) ? : $this->erreur['date_dispo'] = "La date de disponibilité ne peut pas être antérieure à la date d'aujourd'hui";
 
         // TABLEAU DES MEDIAS
         $arrayMedia = array();
@@ -311,10 +335,23 @@ class AnnonceController extends Controller
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
-            return $app['twig']->render('connected/ajout-annonce.html.twig', array(
-                "error" => $this->erreur,
-                "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"]
-            ));
+            if ($isConnectedAndAdmin){
+                return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                    "error" => $this->erreur,
+                    "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                ));
+            }
+
+            elseif ($isconnected) {
+                return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                    "error" => $this->erreur,
+                    "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                    "connected" => $isconnected,
+                ));
+            }
+
         }else {
             $arrayAnnonce = array(
                 "name_coloc" => $name_coloc,
@@ -357,9 +394,39 @@ class AnnonceController extends Controller
             $retour = $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
 
             if ($retour == false) {
-                return $app['twig']->render('/connected/ajout-annonce.html.twig', array("error" => "Erreur lors de l'insertion, veuillez réessayer."));
-            }else if ($retour == "id_invalid"){
-                return $app['twig']->render('/connected/ajout-annonce.html.twig', array("cityError" => "Erreur sur le champs 'Ville' ou 'Code postal'"));
+                if ($isConnectedAndAdmin){
+                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                        "error" => "Erreur lors de l'insertion, veuillez réessayer.",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                        "isConnectedAndAmin" => $isConnectedAndAdmin,
+                        "connected" => $isconnected,
+                    ));
+                }
+
+                elseif ($isconnected) {
+                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                        "error" => "Erreur lors de l'insertion, veuillez réessayer.",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                        "connected" => $isconnected,
+                    ));
+                }
+            }else if ($retour == "ville_invalid"){
+                if ($isConnectedAndAdmin){
+                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                        "cityError" => "Erreur sur le champs 'Ville', celle-ci n'est pas valide",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                        "isConnectedAndAmin" => $isConnectedAndAdmin,
+                        "connected" => $isconnected,
+                    ));
+                }
+
+                elseif ($isconnected) {
+                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                        "cityError" => "Erreur sur le champs 'Ville' ou 'Code postal'",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
+                        "connected" => $isconnected,
+                    ));
+                }
             }else {
                 return new RedirectResponse('/Coolloc/public/details-annonce/' . $retour);
             }
@@ -401,7 +468,7 @@ class AnnonceController extends Controller
 
 
         $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
-        (($this->getDate() - $dateDispoAnnonce) <= 0) ? $dispoAnnonce = 'non' : $dispoAnnonce = 'oui';
+        $dispoAnnonce = (($this->getDate() - $dateDispoAnnonce) < 0) ? 'non' : 'oui';
 
         if ($isconnected) {
             return $app['twig']->render('details-annonce.html.twig', array(
