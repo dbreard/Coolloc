@@ -157,9 +157,15 @@ font-weight: 500;
 
 /* page accueil */
 
-.itemthumb.profil-user img {
-    width: 100%;
-    height: auto;
+#profil-colocataire img {
+    width:200px;
+    max-width: 100%;
+    min-height: auto !important;
+    max-height: 200px !important;
+}
+
+.Welcome-area h2 {
+    line-height: 85px !important;
 }
 
 @media (min-width: 768px) and (max-width: 979px){
