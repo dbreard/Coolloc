@@ -166,6 +166,18 @@ font-weight: 500;
     max-height: 200px !important;
 }
 
+.slider-principal .owl-wrapper-outer {
+    background-color: #F3F3F3;
+    opacity: .6;
+}
+
+#bg-slider .slider-principal .item img {
+    width: 100%;
+    height: 630px;
+    opacity: .6;
+}
+
+
 .Welcome-area h2 {
     line-height: 85px !important;
 }
