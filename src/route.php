@@ -4,12 +4,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Coolloc\Controller\Controller;
-use Coolloc\Controller\AdminController;
 use Coolloc\Controller\HomeController;
+use Coolloc\Controller\FaqController;
 use Coolloc\Model\Model;
-use Coolloc\Model\UserModelDAO;
 
 
 //Request::setTrustedProxies(array('127.0.0.1'));
@@ -217,7 +215,7 @@ $app->post('/change-password', "Coolloc\Controller\ChangePassController::changeP
 
 
 //CHANGER MDP OUBLIER PAR EMAIL
-$app->get('/change-password/{token}', function ($token) use ($app) {
+$app->get('/change-password/{token}', function () use ($app) {
     return $app['twig']->render('basic/change-password.html.twig', array());
 })
     ->bind('change-password');
@@ -229,19 +227,25 @@ $app->post('/change-password/{token}', "Coolloc\Controller\ChangePassController:
 $app->get('/faq', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    $faq = new FaqController();
+    $resultatFaq = $faq->selectFaqs($app);
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('faq.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "infosFaqs" => $resultatFaq,
         ));
     }
     elseif ($isconnected) {
         return $app['twig']->render('faq.html.twig', array(
      "connected" => $isconnected,
+            "infosFaqs" => $resultatFaq,
     ));
     }
     else {
-        return $app['twig']->render('faq.html.twig', array());
+        return $app['twig']->render('faq.html.twig', array(
+            "infosFaqs" => $resultatFaq,
+        ));
     }
 
 })

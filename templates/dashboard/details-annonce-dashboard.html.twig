@@ -9,71 +9,9 @@
 
 
 {% block nav %}
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ path ('dashboard') }}">Coolloc Admin</a>
-        </div>
-        <!-- Top Menu Items -->
-        <ul class="nav navbar-right top-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>{{ userAdmin.firstname }} {{ userAdmin.lastname }}<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ path ('profil') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="{{ path ('deconnexion') }}"><i class="fa fa-fw fa-power-off"></i> Deconnexion</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="{{ path ('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Accueil Dashboard</a>
-                </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user"></i> Gerer utilisateurs <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse">
-                        <li>
-                            <a href="{{ path ('gerer-user-colocations') }}">Cherchant une colocation</a>
-                        </li>
-                        <li>
-                            <a href="{{ path ('gerer-user-colocataires') }}">Cherchant des colocataires</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{ path ('gerer-annonces-admin') }}"><i class="fa fa-fw fa-table"></i> Gestion des annonces</a>
-                </li>
-                <li>
-                    <a href="{{ path ('gerer-faq') }}"><i class="fa fa-fw fa-edit"></i> Gestion de la FAQ</a>
-                </li>
-                <li>
-                    <a href="{{ path ('gerer-temoignage') }}"><i class="fa fa-fw fa-edit"></i> Gestion des témoignages</a>
-                </li>
-                <li>
-                    <a href="{{ path ('accueil') }}"><i class="fa fa-home"></i> Retour à la Home</a>
-                </li>
-
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </nav>
+    {# insertion des barre de navigation #}
+    {% include 'dashboard/required/nav.html.twig' ignore missing  %}
 {% endblock %}
-
 
 
 {% block title %}

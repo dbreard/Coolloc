@@ -18,10 +18,10 @@ class FaqController extends Controller
         // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
         if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
 
-            $infosAnnonce = new FaqModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
-            $resultat = $infosAnnonce->allFaqSelected();
+            $infosFaqs = new FaqModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
+            $resultat = $infosFaqs->allFaqSelected();
 
-            if(isset($resultat)){
+            if($resultat != false){
                 return $app['twig']->render('dashboard/faq-dashboard.html.twig', array(
                     "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                     "faqs" => $resultat,
@@ -34,6 +34,17 @@ class FaqController extends Controller
             return $app->redirect('/Coolloc/public');
         }
     }
+
+    // SELECTION DE TOUTE LES FAQ
+    public function selectFaqs(Application $app){
+
+        $infosFaqs = new FaqModelDAO($app['db']);
+        $resultat = $infosFaqs->allFaqSelected();
+
+            return $resultat;
+
+    }
+
 
     public function faqAction(Application $app, Request $request){
 

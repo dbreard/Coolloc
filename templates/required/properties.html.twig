@@ -17,7 +17,7 @@
                         <div class="col-sm-6 col-md-2 p0">
                             <div class="box-two proerty-item property-features">
                                 <div class="item-thumb">
-                                    <a href="{{ path('fiche-profil') }}" ><img  src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                                    <a href="{{ path('fiche-profil') }}" ><img  src="{{ profil.profil_picture }}" alt="Photo de profil de {{ profil.firstname }} {{ profil.lastname }}"></a>
                                 </div>
                                 <div class="item-entry overflow">
                                     <h5><a href="{{ path('fiche-profil') }}" ><ul><li>{{ profil.firstname }}</li><li> {{ profil.lastname }}</li></ul></a></h5>
