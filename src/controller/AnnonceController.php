@@ -95,7 +95,7 @@ class AnnonceController extends Controller
         $adress = strip_tags(trim($request->get('adress')));
         $city = strip_tags(trim($request->get('city')));
         $date_dispo = strip_tags(trim($request->get('date_dispo')));
-            $dateFormatage = str_replace("-", "", $date_dispo);
+        $dateFormatage = str_replace("-", "", $date_dispo);
         $nb_roommates = strip_tags(trim($request->get('nb_roommates')));
         $conditions = strip_tags(trim($request->get('conditions')));
 

@@ -41,6 +41,7 @@
     require __DIR__.'/../src/Model/SearchAnnonceModelDAO.php';
     require __DIR__.'/../src/Model/CommentModelDAO.php';
     require __DIR__.'/../src/Model/UpdateDetailsProfilModelDAO.php';
+    require __DIR__.'/../src/Model/UpdateProfilModelDAO.php';
 
 
 

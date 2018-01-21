@@ -459,9 +459,7 @@ $app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStat
 //MODIFIER PROFIL
 $app->get('/connected/profil-modif', 'Coolloc\Controller\ModifProfilController::sendUserProfilInfo')->bind('profil-modif');
 
-$app->post('/connected/profil-modif', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/profil-modif', 'Coolloc\Controller\ModifProfilController::updateProfilAction');
 
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
