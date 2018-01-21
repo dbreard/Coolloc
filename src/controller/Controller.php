@@ -169,6 +169,7 @@ class Controller {
         // Finalement, on détruit la session.
         session_destroy();
 
+
         // var_dump($_SESSION);
     }
 
@@ -215,7 +216,7 @@ class Controller {
         }
         // Si le nombre de valeur ne correspond pas au nombre de check erreur
         if (count($arrayCheck) != count($arrayTarget)) {
-            
+
             if ($champs == "Quartier") {
                 $this->erreur['district'] = "Problème de selection dans '" . $champs . "'";
             }else if ($champs == "Equipement") {

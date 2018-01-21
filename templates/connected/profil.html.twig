@@ -108,7 +108,10 @@
                 <div class="panel-body">
                   {% if success is defined %}
                     <div class="alert alert-warning text-center">Vos préférences actuelles ont été définies par défaut. Pour les personnaliser, veuillez cliquer sur le bouton AJOUTER MES PREFERENCES</div>
-                    <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="path ('ajout-details-profil')">Ajouter mes préférences</a>
+                    <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="{{path ('ajout-details-profil')}}">Ajouter mes préférences</a>
+                  {% endif %}
+                  {% if modified is defined %}
+                    <div class="col-xs-12 alert alert-success text-center">Vos préférences actuelles ont bien été modifiées</div>
                   {% endif %}
                   {% if userOption is defined %}
                 <ul>

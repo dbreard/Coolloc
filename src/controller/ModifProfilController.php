@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ModifProfilController{
 
-  public function sendUserProfilInfo(){
+  public function sendUserProfilInfo(Application $app){
 
     $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
 
