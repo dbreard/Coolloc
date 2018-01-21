@@ -9,12 +9,12 @@
         </div>
 
         <div class="row">
-            <div class="proerty-th " id="profile-user">
+            <div class="proerty-th" id="profil-colocataire">
                 {# first #}
                 <div class="col-sm-6 col-md-2 p0">
                     <div class="box-two proerty-item property-features">
                         <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                            <a href="{{ path('fiche-profil') }}" ><img  src="{{ asset('assets/img/client-face2.png ') }}"></a>
                         </div>
                         <div class="item-entry overflow">
                             <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
@@ -29,7 +29,7 @@
                 <div class="col-sm-6 col-md-2 p0">
                     <div class="box-two proerty-item property-features">
                         <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                            <a href="{{ path('fiche-profil') }}" ><img  src="{{ asset('assets/img/client-face2.png ') }}"></a>
                         </div>
                         <div class="item-entry overflow">
                             <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
@@ -44,7 +44,7 @@
                 <div class="col-sm-6 col-md-2 p0">
                     <div class="box-two proerty-item property-features">
                         <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                            <a href="{{ path('fiche-profil') }}" ><img  src="{{ asset('assets/img/client-face2.png ') }}"></a>
                         </div>
                         <div class="item-entry overflow">
                             <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
@@ -59,7 +59,7 @@
                <div class="col-sm-6 col-md-2 p0">
                     <div class="box-two proerty-item property-features">
                         <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                            <a href="{{ path('fiche-profil') }}" ><img  src="{{ asset('assets/img/client-face2.png ') }}"></a>
                         </div>
                         <div class="item-entry overflow">
                             <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
@@ -86,16 +86,15 @@
                 </div>
 
                 {# sixth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                <div class="col-sm-6 col-md-2 p0">
+                    <div class="box-tree more-proerty text-center">
+                        <div class="item-tree-icon">
+                            <i class="fa fa-th"></i>
                         </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
+                        <div class="more-entry overflow">
+                            <h5><a href="{{path('profils-colocataires-recherchant-colocation')}}" >Votre futur colocataire </a></h5>
+                            <h5 class="tree-sub-ttl">Voir tous les profils</h5>
+                            <a href="{{path('profils-colocataires-recherchant-colocation')}}" class="btn border-btn more-black" value="Les colocataires">tout voir</a>
                         </div>
                     </div>
                 </div>
