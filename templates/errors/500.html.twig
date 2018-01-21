@@ -4,18 +4,24 @@
     Erreur 500 | CoolLoc, la colocation cool !
 {% endblock %}
 
+{% block header %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    
-    {# {% if  is defined %}
-        <p>connecté</p> #}
-        {# {% include 'required/navigation_c.html.twig' ignore missing  %}
-    {% else %}
-        <p>non connecté</p> #}
-        {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {# {% endif %} #}
-    
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
 
 {% block content %}
@@ -26,9 +32,7 @@
                     <h2 class="error-title">Erreur 500</h2>
                     <p>
                         Cette page est temporairement indisponible en raison d'une erreur interne du serveur.
-                        <br />
                         Nous vous prions de nous excuser pour la gêne occasionnée.
-                        <br />
                         <div class="retour-accueil">
                             Nous vous invitons à revenir à la <a href="{{ path('accueil') }}">page d'acceuil</a> de notre site.
                         </div>

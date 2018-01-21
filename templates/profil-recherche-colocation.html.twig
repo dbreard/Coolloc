@@ -1,0 +1,237 @@
+{% extends"layout.html.twig" %}
+
+
+{% block headTitle %}
+    A propos de nous | CoolLoc, la colocation cool !
+{% endblock %}
+
+{# Bloc header #}
+{% block header %}
+    {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
+{# Bloc nav #}
+
+{% block navigation %}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
+{% endblock %}
+
+{% block content %}
+<div class="page-head">
+            <div class="container">
+                <div class="row">
+                    <div class="page-head-content">
+                        <h1 class="page-title">Je recherche une colocation !</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page header -->
+
+        <!-- property area -->
+        <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
+            <div class="container">   
+
+                <div class="clearfix padding-top-40" >
+
+                    <div class="col-md-8 single-property-content prp-style-1 ">
+                        
+                        <div class="single-property-wrapper">
+
+
+                            <div class="section additional-details">
+
+                                <h4 class="s-property-title">Ma colocation idéale </h4>
+
+                                    <ul class="additional-details-list clearfix">
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Sexe des colocataires</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Yes</span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Doit il y avoir un accès handicapé ?</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">2003</span>
+                                        </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Peut on fumer dans la colocation ? </span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">2 Or More Spaces,Covered Parking,Valet Parking</span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Les animaux sont ils tolérés ?</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Yes</span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Mon espace individuel est il meublé ?</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal View,Direct ew</span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Le jardin est il essentiel ?</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal Front,Ocean Access</span>
+                                        </li> 
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Le balcon est il essentiel ?</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal Front,Ocean Access</span>
+                                        </li> 
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Le parking est il essentiel ?</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal Front,Ocean Access</span>
+                                        </li> 
+
+                                    </ul>
+                                
+                            </div>  
+                            <!-- End additional-details area  -->
+
+                            <div class="col-sm-12 col-xs-12">
+                                        <div class="section property-features">      
+
+                                        <h4 class="s-property-title">Le quartier idéal : </h4>                            
+                                        <ul>
+                                            <li>Swimming Pool</li>   
+                                            <li>3 Stories</li>
+                                            <li>Central Cooling</li>
+                                            <li>Jog Path 2</li>
+                                            <li>2 Lawn</li>
+                                            <li>Bike Path</li>
+                                        </ul>
+
+                                        </div>
+                                    <!-- End features area  -->
+
+                                        <div class="section property-features">      
+
+                                        <h4 class="s-property-title">L'équipement de la colocation : </h4>                            
+                                        <ul>
+                                            <li>Swimming Pool</li>   
+                                            <li>3 Stories</li>
+                                            <li>Central Cooling</li>
+                                            <li>Jog Path 2</li>
+                                            <li>2 Lawn</li>
+                                            <li>Bike Path</li>
+                                        </ul>
+
+                                        </div>
+                                    <!-- End features area  -->
+
+
+                                        <div class="section property-features">      
+
+                                        <h4 class="s-property-title">Les centres d'intérêts des colocataires : </h4>                            
+                                        <ul>
+                                            <li>Swimming Pool</li>   
+                                            <li>3 Stories</li>
+                                            <li>Central Cooling</li>
+                                            <li>Jog Path 2</li>
+                                            <li>2 Lawn</li>
+                                            <li>Bike Path</li>
+                                        </ul>
+
+                                        </div>
+                                    <!-- End features area  -->
+
+                                        <div class="section property-features">      
+
+                                        <h4 class="s-property-title">Mon tempérament</h4>                            
+                                        <ul>
+                                            <li>Swimming Pool</li>   
+                                            <li>3 Stories</li>
+                                            <li>Central Cooling</li>
+                                            <li>Jog Path 2</li>
+                                            <li>2 Lawn</li>
+                                            <li>Bike Path</li>
+                                        </ul>
+
+                                        </div>
+                                    <!-- End features area  -->
+                                </div>
+
+
+                        </div>
+
+                        
+                    </div>
+
+
+                    <div class="col-md-4 p0">
+                        <aside class="sidebar sidebar-property blog-asside-right">
+                             <div class="dealer-widget">
+                                <div class="dealer-content">
+                                    <div class="inner-wrapper">
+
+                                        <div class="clear">
+                                            <div class="col-xs-12 col-sm-6 dealer-face">
+                                                    <img src="{{ asset('assets/img/client-face1.png') }}" class="img-circle">
+                                            
+
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 ">
+                                                <h3 class="dealer-name s-property-title">
+                                                    Nom du contact<br>
+                                                </h3>
+                                            
+                                                <div class=" text-center col-xs-12 col-sm-12">
+                                            {% if connected is defined %}
+                                                                                            
+                                            {% else %}
+                                                <p>Pour accèder aux coordonnées ! inscrivez-vous ou connectez-vous </p>
+
+                                                <button class="navbar-btn nav-button wow bounceInRight login"  onclick=" window.open('{{ path('inscription') }}', '_self')" data-wow-delay="0.45s" data-wow-delay="0.45s">S'inscrire</button>
+
+                                                <button class="navbar-btn nav-button wow bounceInRight login"  onclick=" window.open('{{ path('login') }}', '_self')" data-wow-delay="0.45s" data-wow-delay="0.45s">Se connecter</button>
+                                                                                            
+                                            {% endif %}
+                                                </div>
+
+                                                {# si utilisateur connecté il peut voir les coordonnées sinon rien #}
+                                            {% if connected is defined %}
+                                                <ul class="dealer-contacts">                                       
+                                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
+                                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
+                                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                                </ul>
+                                            
+                                            {% else %}
+                                                                                               
+                                                <ul class="dealer-contacts">                                       
+                                                    <li><i class="pe-7s-map-marker strong"> </i> Adresse</li>
+                                                    <li><i class="pe-7s-mail strong"> </i> Email</li>
+                                                    <li><i class="pe-7s-call strong"> </i> Tél.</li>
+                                                </ul>
+                                                
+                                            {% endif %}
+                                            </div>
+                                            
+
+                                        </div>
+                                <div>
+                            </div>
+
+                        </aside>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--  fin de property area-->
+
+
+<!-- End container area  -->
+
+
+{% endblock %}

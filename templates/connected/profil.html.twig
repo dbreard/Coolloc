@@ -6,166 +6,153 @@
     Ajouter une colocation | CoolLoc, la colocation cool !
 {% endblock %}
 
+{% block header %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
 {# Bloc nav #}
 
 {% block navigation %}
-    {% include 'required/navigation_nc.html.twig' ignore missing  %}
-    {# modif de la nav #}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
 {% endblock %}
 
 {% block content %}
-{% if profilInfo.status == 'première connexion' %}
 
-<div class="register-area" style="background-color: rgb(249, 249, 249);">
-    <div class="container">
+    {% if profilInfo.status == 'première connexion' %}
+    {# contenu différent car dépend de la première connexion #}
 
-        <div class="col-md-12">
-            <div class="box-for overflow">
-                <div class="col-md-12 col-xs-12 register-blocks ">
-                    <h2 class="col-md-12 col-xs-12 text-center ">Bienvenue {{ profilInfo.firstname }} sur Coolloc  : </h2>
-                        <!-- ouverture du contenu textuel -->
-                        <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2" >
-                                    <div class="row">
-                                       <h5 class="text-center">Avant de commencer, dites-nous ce que vous reherchez:</h5>
-                                    </div>
-                                    <!--  recherche colocataire -->
+      {% include 'required/premiereconnexion.html.twig' ignore missing %}
 
-                                    <div class="row">
-                                        <!--  recherche colocataire -->
-                                        {% if error.incorrect_status is defined %}
-                                          <span class="alert alert-danger col-xs-12 text-center">{{ error.incorrect_status }}</span>
-                                        {% elseif error.wrong_status is defined %}
-                                          <span class="alert alert-danger col-xs-12 text-center">{{ error.wrong_status }}</span>
-                                        {% endif %}
-                                        <div class="col-md-5 col-xs-12 choice ">
-                                        <h6 class="text-center">Vous êtes en recherche de colocation</h6>
-                                        <ul>
-                                            <Li>Accèdez aux coordonnées des colocations qui vous intéressent
-                                            <li>Affinez votre profil utilisateur en ajoutant des préférences</li>
-                                            <li>Publiez votre profil pour augmenter vos chances de trouver une colocation qui vous corresponde</li>
-                                        </ul>
-                                        <form method="post">
-                                          <input type="hidden" name="statut" value="cherche_colocation"/>
-                                          <button class="col-xs-10 col-xs-offset-1 navbar-btn nav-button wow bounceInRight login text-center" type="submit" data-wow-delay="0.45s">Continuer</button>
-                                        </form>
-                                        </div>
-                                        <!--  fin de bloc -->
-                                        <!--  recherche colocataire -->
-                                        <div class="col-md-5  col-md-offset-2  col-xs-12 choice " >
-                                        <h6 class="text-center">Vous êtes en recherche de colocataire</h6>
-                                        Propriétaire ou actuellement colocataire, une place dans votre colocation est disponible
-                                        <ul>
-                                            <li>Postez votre annonce en ligne</li>
-                                            <li>Utilisez les outils dédiés, tirelire participative pour le budget, gestion du frigo, emploi du temps de chacun... (prochainement)</li>
-                                        </ul>
-                                        <form method="post">
-                                          <input type="hidden" name="statut" value="cherche_colocataire"/>
-                                          <button class="col-xs-10 col-xs-offset-1  navbar-btn nav-button wow bounceInRight login text-center" type="submit" data-wow-delay="0.45s">Continuer</button>
-                                        </form>
-                                        </div>
-                                        <!--  fin de bloc -->
-                                    </div>
-                                    <!--  fin de row -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- fermeture du contenu textuel-->
+    {% else %}
+
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                  <div class="">
+                  <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.firstname }}</span>{% else %}Ma bite{% endif %}</h1>
+                  <a type="button" href="{{ path ('temoigner') }}" class="navbar-btn nav-button wow bounceInRight login col-sm-2 col-xs-4">Témoigner</a>
+                  </div>
+                  <div>
+                  {% if profilInfo.profil_picture != NULL %}
+                    <div class="">
+                    <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="{{ profilInfo.profil_picture }}" width="10" height="10">
+                    </div>
+                  {% else %}
+                    <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="http://www.rlsandbox.com/img/profile.jpg" width="10" height="10">
+                  {% endif %}
+                  </div>
                 </div>
             </div>
         </div>
-
     </div>
-</div>
 
-{% else %}
-
-<div class="page-head">
-    <div class="container">
+    <div class="container content-area recent-property padding-top-40">
         <div class="row">
-            <div class="page-head-content">
-          <h1 class="page-title col-xs-8">Bonjour {% if profilInfo is defined %}<span class="orange strong">{{ profilInfo.firstname }}</span>{% else %}Ma bite{% endif %}</h1>
-                <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="http://www.rlsandbox.com/img/profile.jpg" width="10" height="10">
+            <div class="content-area">
+                  
+
+                    
+                      {% if profilInfo.status == "cherche colocation" %}
+                        {% if success is defined %}
+                          <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en cliquant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
+                        {% else %}
+                          <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil')}}">Modifier mes préférences</a>
+                        {% endif %}
+                      {% elseif profilInfo.status == "cherche colocataire" %}
+                        <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
+                      {% elseif profilInfo.status == "admin" %}
+                        <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil') }}">Modifier mes préférences</a>
+                        <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
+                      {% else %}
+                      {% endif %}
+                    
+
+              
             </div>
         </div>
-    </div>
-</div>
-<br>
-<div class="container target">
-    <div class="row">
-      <div class="col-sm-10">
-          <div class="buttons col-sm-12">
-            {% if profilInfo.status == "cherche colocation" %}
-              {% if success is defined %}
-                <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en cliquant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
-              {% else %}
-                <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="path ('ajout-details-profil')">Modifier mes préférences</a>
-              {% endif %}
-            {% elseif profilInfo.status == "cherche colocataire" %}
-              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="path ('ajout-annonce')">Modifier mes annonces</a>
-            {% elseif profilInfo.status == "admin" %}
-              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="path ('ajout-details-profil')">Modifier mes préférences</a>
-              <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="path ('ajout-annonce')">Modifier mes annonces</a>
-            {% else %}
-            {% endif %}
-          </div>
-          <br>
-      </div>
-      <div class="col-sm-2">
-        <a type="button" href="path ('temoigner')" class="btn btn-default col-xs-12">Témoigner</a>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-3 col-xs-12">
-            <!--left col-->
-        <ul class="list-group">
-          <li class="list-group-item text-muted text-center" contenteditable="false"><b>Profil</b></li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.lastname }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.firstname }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.mail }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.tel }}{% endif %}</li>
-          <li class="list-group-item text-right"><span class="pull-left"><strong class="">Statut</strong></span>{% if profilInfo is defined %}{{ profilInfo.status }}{% endif %}</li>
-        </ul>
-        <a type="button" class="btn btn-default col-xs-12" href="path ('profil-modif')">Modifier mon Profil</a>
-      </div>
-        <!--/col-3-->
 
-      <div class="col-sm-9 col-xs-12" style="" contenteditable="false">
-        {% if profilInfo.status == "cherche colocation" or profilInfo.status == "admin" %}
-          <div class="panel panel-default">
-            <div class="panel-heading">Vos préférences</div>
-            <div class="panel-body">
-              {% if success is defined %}
-                <div class="alert alert-warning text-center">Vos préférences actuelles ont été définies par défaut. Pour les personnaliser, veuillez cliquer sur le bouton AJOUTER MES PREFERENCES</div>
-                <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="path ('ajout-details-profil')">Ajouter mes préférences</a>
-              {% endif %}
-              {% if userOption is defined %}
+
+      <div class="row">
+          <div class="col-sm-3 col-xs-12">
+                <!--left col-->
+            <ul class="list-group">
+              <li class="list-group-item text-muted text-center" contenteditable="false"><b>Profil</b></li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.lastname }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.firstname }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Sexe</strong></span>{% if profilInfo is defined %}{{ profilInfo.sex }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Date de naissance</strong></span>{% if profilInfo is defined %}{{ profilInfo.birthdate }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Activité</strong></span>{% if profilInfo is defined %}{{ profilInfo.activity }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.mail }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.tel }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Statut</strong></span>{% if profilInfo is defined %}{{ profilInfo.status }}{% endif %}</li>
+            </ul>
+            <a type="button" class="btn btn-default col-xs-12" href="{{ path ('profil-modif') }}">Modifier mon Profil</a>
+          </div>
+            <!--/col-3-->
+
+          <div class="col-sm-9 col-xs-12" style="" contenteditable="false">
+            {% if profilInfo.status == "cherche colocation" or profilInfo.status == "admin" %}
+              <div class="panel panel-default">
+                <div class="panel-heading text-center"><b>Vos préférences</b></div>
+                <div class="panel-body">
+                  {% if success is defined %}
+                    <div class="alert alert-warning text-center">Vos préférences actuelles ont été définies par défaut. Pour les personnaliser, veuillez cliquer sur le bouton AJOUTER MES PREFERENCES</div>
+                    <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="path ('ajout-details-profil')">Ajouter mes préférences</a>
+                  {% endif %}
+                  {% if userOption is defined %}
                 <ul>
                   {% if userOption == "" %}
                   {% else %}
-                    <li><b>J'ai besoin d'un acces handicapé&nbsp;: </b>{{userOption.handicap_access}}</li>
-                    <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
-                    <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
-                    {% if userOption.equipment != "" %}
-                      <li>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
+                    {% if userOption.handicap_access != "" %}
+                      <li><b>J'ai besoin d'un acces handicapé&nbsp;: </b>{{userOption.handicap_access}}</li>
                     {% endif %}
-                    <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
-                    <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
-                    <li><b>Je veux un jardin&nbsp;: </b>{{userOption.garden}}</li>
-                    <li><b>Je veux un balcon&nbsp;: </b>{{userOption.balcony}}</li>
-                    <li><b>Je veux un parking&nbsp;: </b>{{userOption.parking}}</li>
+                    {% if userOption.smoking != "" %}
+                      <li><b>J'accepte les fumeurs&nbsp;: </b>{{userOption.smoking}}</li>
+                    {% endif %}
+                    {% if userOption.animals != "" %}
+                      <li><b>J'accepte les animaux&nbsp;: </b>{{userOption.animals}}</li>
+                    {% endif %}
+                    {% if userOption.equipment != "" %}
+                      <li><b>Je désire les équipement suivants&nbsp;: </b>{{userOption.equipment}}</li>
+                    {% endif %}
+                    {% if userOption.sex_roommates != "" %}
+                      <li><b>Mon genre de collocataire recherché&nbsp;: </b>{{userOption.sex_roommates}}</li>
+                    {% endif %}
+                    {% if userOption.furniture != "" %}
+                      <li><b>Je desire que le bien soit meublé&nbsp;: </b>{{userOption.furniture}}</li>
+                    {% endif %}
+                    {% if userOption.garden != "" %}
+                      <li><b>Je veux un jardin&nbsp;: </b>{{userOption.garden}}</li>
+                    {% endif %}
+                    {% if userOption.balcony != "" %}
+                      <li><b>Je veux un balcon&nbsp;: </b>{{userOption.balcony}}</li>
+                    {% endif %}
+                    {% if userOption.parking != "" %}
+                      <li><b>Je veux un parking&nbsp;: </b>{{userOption.parking}}</li>
+                    {% endif %}
+
                     {% if userOption.district != "" %}
                       <li><b>Je veux que le bien soit situé&nbsp;: </b>{{userOption.district}}</li>
                     {% endif %}
                     {% if userOption.hobbies != "" %}
-                      <li><b>J'aimerai que les centre d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
+                      <li><b>J'aimerai que les centres d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
                     {% endif %}
                     {% if userOption.date_dispo != "" %}
                       <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo}}</li>
                     {% endif %}
                     {% if userOption.member_profil != "" %}
-                      <li><b>Je recherche des collocataires du genre&nbsp;: </b>{{userOption.member_profil}}</li>
+                      <li><b>Je recherche des collocataires du type&nbsp;: </b>{{userOption.member_profil}}</li>
                     {% endif %}
                   {% endif %}
                 </ul>
@@ -173,34 +160,37 @@
             </div>
           </div>
         {% endif %}
-        {% if profilInfo.status == "cherche colocataire" or profilInfo.status == "admin" %}
+            {% if profilInfo.status == "cherche colocataire" or profilInfo.status == "admin" %}
         <div class="panel panel-default target">
-          <div class="panel-heading" contenteditable="false">Vos annonces publiées</div>
+          <div class="panel-heading text-center" contenteditable="false"><b>Vos annonces publiées</b></div>
             <div class="panel-body">
               <div class="row">
               {% if annonceUser is defined%}
                 {% for annonceUsers in annonceUser %}
-                  {% for annonceUserss in annonceUsers %}
+                  <a  href="{{path ('details-annonce')}}">
                     <div class="col-md-4">
-                      <div class="thumbnail">
-                        <img alt="300x200" src="">
+                      <div class="thumbnail annonce_miniature">
+                        <div class="gerer col-xs-12 text-center" type="button"><p>Voir l'annonce<p></div>
+                        <img alt="300x200" src="{{ annonceUsers.url_media }}">
                         <div class="caption">
-                          <h3>{{ annonceUserss }}</h3>
-                          <p>Description de l'annonce 1</p>
+                          <h4>{{ annonceUsers.name_coloc }}</h4>
+                          <a href="" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
+                            </div>
+                          </div>
+
                         </div>
-                      </div>
-                    </div>
-                  {% endfor %}
-                {% endfor %}
-              {% endif %}
+                      </a>
+                    {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
               </div>
+            {% endif %}
             </div>
-          </div>
-        {% endif %}
+          <div id="push"></div>
         </div>
-      <div id="push"></div>
-    </div>
-  <script src="/plugins/bootstrap-pager.js"></script>
+      {# <script src="/plugins/bootstrap-pager.js"></script> #}
 </div>
+
 {% endif %}
 {% endblock %}

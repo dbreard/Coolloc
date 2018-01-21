@@ -2,21 +2,85 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b9f7f37-bb14-4e2b-b93a-49513c8e62e1" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/icon/rent.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/4eme_annonce-IMG_1038.JPG" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Annonce_2_michou-20170404_220229.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Annonce_2_michou-20170423_003620.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Colocation_chez_Michou-IMG_1036.JPG" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Colocation_chez_Michou-IMG_1181.JPG" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Colocation_chez_Michou-IMG_1271.JPG" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Kévin_Cessac-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Kévin_Cessac-moyenne-622c2ba7af1ec9e698bd0bdfa2970985.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/La_coloc_du_siècle-Malgre-numerisation-equipements-tournages-salles-cinema-nouvelles-generations-cineastes-oublie-pellicule_0_1400_681.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/La_coloc_du_siècle-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/La_super_coloc_de_Csouk-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/La_super_coloc_de_Csouk-b28807db01f3877b135d6887627e27ef8c77a13eac484a649d42d28c65c0946e.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/La_super_coloc_de_Csouk-maxresdefault.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Ma_super_coloc_test-montage_gardiens2bis.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-201603_2236_ifhhd_sm.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-3255981908_1_5_a1cEyNgn.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-b28807db01f3877b135d6887627e27ef8c77a13eac484a649d42d28c65c0946e.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-maxresdefault.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-montage_gardiens2bis.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_video_youtube-moyenne-622c2ba7af1ec9e698bd0bdfa2970985.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_vidéo_Youtube-Malgre-numerisation-equipements-tournages-salles-cinema-nouvelles-generations-cineastes-oublie-pellicule_0_1400_681.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/Test_vidéo_Youtube-moyenne-622c2ba7af1ec9e698bd0bdfa2970985.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/login_login-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/qeth_bte-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/regh_ethth_r-moyenne-622c2ba7af1ec9e698bd0bdfa2970985.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/test_debug-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/test_debug-moyenne-622c2ba7af1ec9e698bd0bdfa2970985.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/test_test-3255981908_1_5_a1cEyNgn.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/test_test-Very-Bad-Trip-3.03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/test_test-montage_gardiens2bis.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/test_video_youtube-Malgre-numerisation-equipements-tournages-salles-cinema-nouvelles-generations-cineastes-oublie-pellicule_0_1400_681.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/zegf_erg_rae-b28807db01f3877b135d6887627e27ef8c77a13eac484a649d42d28c65c0946e.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/photos/zreg_etg_e-b28807db01f3877b135d6887627e27ef8c77a13eac484a649d42d28c65c0946e.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/Model/UpdateDetailsProfilModelDAO.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/controller/DetailsProfilController.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/templates/faq.html.twig" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/templates/profil-recherche-colocation.html.twig" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/templates/required/premierconnexion.html.twig" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/persocss.css" afterPath="$PROJECT_DIR$/public/assets/css/persocss.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/jquery.validate.min.js" afterPath="$PROJECT_DIR$/public/assets/js/jquery.validate.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/wizard.js" afterPath="$PROJECT_DIR$/public/assets/js/wizard.js" />
       <change beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
       <change beforePath="$PROJECT_DIR$/src/Middleware/middleware.php" afterPath="$PROJECT_DIR$/src/Middleware/middleware.php" />
       <change beforePath="$PROJECT_DIR$/src/Model/AnnonceModelDAO.php" afterPath="$PROJECT_DIR$/src/Model/AnnonceModelDAO.php" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CommentModelDAO.php" afterPath="$PROJECT_DIR$/src/Model/CommentModelDAO.php" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Model.php" afterPath="$PROJECT_DIR$/src/Model/Model.php" />
+      <change beforePath="$PROJECT_DIR$/src/Model/SearchAnnonceModelDAO.php" afterPath="$PROJECT_DIR$/src/Model/SearchAnnonceModelDAO.php" />
       <change beforePath="$PROJECT_DIR$/src/Model/UserModelDAO.php" afterPath="$PROJECT_DIR$/src/Model/UserModelDAO.php" />
       <change beforePath="$PROJECT_DIR$/src/controller/AdminController.php" afterPath="$PROJECT_DIR$/src/controller/AdminController.php" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AnnonceController.php" afterPath="$PROJECT_DIR$/src/controller/AnnonceController.php" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CommentController.php" afterPath="$PROJECT_DIR$/src/controller/CommentController.php" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.php" afterPath="$PROJECT_DIR$/src/controller/Controller.php" />
       <change beforePath="$PROJECT_DIR$/src/route.php" afterPath="$PROJECT_DIR$/src/route.php" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/annonce-dashboard.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/annonces-dashboard.html.twig" afterPath="$PROJECT_DIR$/templates/dashboard/annonces-dashboard.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/details-profil-dashboard.html.twig" afterPath="$PROJECT_DIR$/templates/dashboard/details-profil-dashboard.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/index-dashboard.html.twig" afterPath="$PROJECT_DIR$/templates/dashboard/index-dashboard.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/user-dashboard-colocataires.html.twig" afterPath="$PROJECT_DIR$/templates/dashboard/user-dashboard-colocataires.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/user-dashboard-colocations.html.twig" afterPath="$PROJECT_DIR$/templates/dashboard/user-dashboard-colocations.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/user-dashboard.html.twig" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/templates/a-propos.html.twig" afterPath="$PROJECT_DIR$/templates/a-propos.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/basic/change-password.html.twig" afterPath="$PROJECT_DIR$/templates/basic/change-password.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/basic/forgotten-password.html.twig" afterPath="$PROJECT_DIR$/templates/basic/forgotten-password.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/conditions" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/templates/conditions-generales-de-vente.html.twig" afterPath="$PROJECT_DIR$/templates/conditions-generales-de-vente.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/confirmation-oublie.html.twig" afterPath="$PROJECT_DIR$/templates/confirmation-oublie.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/confirmation.html.twig" afterPath="$PROJECT_DIR$/templates/confirmation.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ajout-annonce.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ajout-annonce.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ajout-details-profil.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ajout-details-profil.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/merci.html.twig" afterPath="$PROJECT_DIR$/templates/connected/merci.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/profil.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/details-annonce.html.twig" afterPath="$PROJECT_DIR$/templates/details-annonce.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/errors/404.html.twig" afterPath="$PROJECT_DIR$/templates/errors/404.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/errors/4xx.html.twig" afterPath="$PROJECT_DIR$/templates/errors/4xx.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/errors/500.html.twig" afterPath="$PROJECT_DIR$/templates/errors/500.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/errors/5xx.html.twig" afterPath="$PROJECT_DIR$/templates/errors/5xx.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/formulaires/login.html.twig" afterPath="$PROJECT_DIR$/templates/formulaires/login.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" afterPath="$PROJECT_DIR$/templates/index.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/layout-class-nojs.html.twig" afterPath="$PROJECT_DIR$/templates/layout-class-nojs.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/required/defineprofil.html.twig" afterPath="$PROJECT_DIR$/templates/required/defineprofil.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/required/footer.html.twig" afterPath="$PROJECT_DIR$/templates/required/footer.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/required/navigation_c.html.twig" afterPath="$PROJECT_DIR$/templates/required/navigation_c.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/required/properties.html.twig" afterPath="$PROJECT_DIR$/templates/required/properties.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/serp-annonce.html.twig" afterPath="$PROJECT_DIR$/templates/serp-annonce.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,14 +94,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="route.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="route.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/route.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="407" column="121" lean-forward="true" selection-start-line="407" selection-start-column="121" selection-end-line="407" selection-end-column="121" />
-              <folding>
-                <element signature="e#7#52#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="-4429">
+              <caret line="306" column="0" lean-forward="true" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -45,9 +107,25 @@
       <file leaf-file-name="middleware.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Middleware/middleware.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="140" column="105" lean-forward="false" selection-start-line="140" selection-start-column="105" selection-end-line="140" selection-end-column="105" />
+            <state relative-caret-position="378">
+              <caret line="24" column="65" lean-forward="true" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnnonceModelDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/AnnonceModelDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-235">
+              <caret line="62" column="50" lean-forward="true" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
+              <folding>
+                <marker date="1516533453597" expanded="true" signature="715:791" ph="SELECT ville... city" />
+                <marker date="1516533453597" expanded="true" signature="5604:5638" ph="SELECT * FRO... annonce_options_city" />
+                <marker date="1516533453597" expanded="true" signature="5864:6159" ph="SELECT * FRO... user" />
+                <marker date="1516533453597" expanded="true" signature="6266:6458" ph="SELECT media... user_post_annonce" />
+                <marker date="1516533453597" expanded="true" signature="6561:6753" ph="SELECT media... user_post_annonce" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,8 +133,8 @@
       <file leaf-file-name="faq-dashboard.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/dashboard/faq-dashboard.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="719">
-              <caret line="144" column="24" lean-forward="false" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="24" />
+            <state relative-caret-position="2592">
+              <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,7 +143,7 @@
       <file leaf-file-name="annonces-dashboard.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/dashboard/annonces-dashboard.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-635">
+            <state relative-caret-position="1116">
               <caret line="62" column="21" lean-forward="false" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
               <folding />
             </state>
@@ -75,8 +153,8 @@
       <file leaf-file-name="FaqController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/FaqController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="48" column="23" lean-forward="true" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+            <state relative-caret-position="774">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="e#37#59#0#PHP" expanded="true" />
               </folding>
@@ -84,14 +162,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="171" column="0" lean-forward="false" selection-start-line="171" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+            <state relative-caret-position="395">
+              <caret line="171" column="73" lean-forward="false" selection-start-line="171" selection-start-column="73" selection-end-line="171" selection-end-column="73" />
               <folding>
                 <element signature="e#37#59#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="27" column="63" lean-forward="true" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="63" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,21 +232,21 @@
         <option value="$PROJECT_DIR$/src/Model/UserModelDAO.php" />
         <option value="$PROJECT_DIR$/templates/dashboard/user-dashboard.html.twig" />
         <option value="$PROJECT_DIR$/templates/functions/membre.php" />
-        <option value="$PROJECT_DIR$/src/Model/AnnonceModelDAO.php" />
         <option value="$PROJECT_DIR$/templates/dashboard/user-dashboard-colocataires.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/annonces-dashboard.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/details-annonce-dashboard.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/details-profil-dashboard.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/index-dashboard.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/user-dashboard-colocations.html.twig" />
-        <option value="$PROJECT_DIR$/src/Middleware/middleware.php" />
         <option value="$PROJECT_DIR$/src/Model/CommentModelDAO.php" />
-        <option value="$PROJECT_DIR$/public/index.php" />
-        <option value="$PROJECT_DIR$/src/route.php" />
         <option value="$PROJECT_DIR$/src/Model/FaqModelDAO.php" />
         <option value="$PROJECT_DIR$/templates/dashboard/faq-dashboard.html.twig" />
         <option value="$PROJECT_DIR$/src/controller/FaqController.php" />
+        <option value="$PROJECT_DIR$/public/index.php" />
+        <option value="$PROJECT_DIR$/src/Middleware/middleware.php" />
         <option value="$PROJECT_DIR$/src/controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/src/Model/AnnonceModelDAO.php" />
+        <option value="$PROJECT_DIR$/src/route.php" />
       </list>
     </option>
   </component>
@@ -231,7 +319,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -239,6 +326,11 @@
             <path>
               <item name="Coolloc" type="b2602c69:ProjectViewProjectNode" />
               <item name="Coolloc" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Coolloc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Coolloc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Coolloc" type="b2602c69:ProjectViewProjectNode" />
@@ -254,12 +346,25 @@
             <path>
               <item name="Coolloc" type="b2602c69:ProjectViewProjectNode" />
               <item name="Coolloc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Middleware" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Coolloc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Coolloc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Model" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Coolloc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Coolloc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -307,11 +412,12 @@
       <workItem from="1516044241407" duration="347000" />
       <workItem from="1516092504701" duration="11629000" />
       <workItem from="1516104175459" duration="15925000" />
+      <workItem from="1516533137759" duration="446000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105699000" />
+    <option name="totallyTimeSpent" value="106145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -362,9 +468,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -386,9 +490,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -477,7 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -492,9 +593,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="71" lean-forward="false" selection-start-line="15" selection-start-column="71" selection-end-line="15" selection-end-column="71" />
-          <folding>
-            <element signature="e#12#52#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -503,7 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="900" column="39" lean-forward="false" selection-start-line="900" selection-start-column="39" selection-end-line="900" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -518,65 +616,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="134" column="78" lean-forward="false" selection-start-line="134" selection-start-column="78" selection-end-line="134" selection-end-column="78" />
-          <folding>
-            <marker date="1516371812982" expanded="true" signature="420:453" ph="SELECT * FRO... user" />
-            <marker date="1516371812982" expanded="true" signature="680:708" ph="UPDATE user... " />
-            <marker date="1516371812982" expanded="true" signature="1715:1779" ph="SELECT user_... tokens" />
-            <marker date="1516371812982" expanded="true" signature="1997:2041" ph="SELECT * FRO... user_options" />
-            <marker date="1516371812982" expanded="true" signature="2305:2356" ph="UPDATE user... " />
-            <marker date="1516371812982" expanded="true" signature="2624:2668" ph="UPDATE user... " />
-            <marker date="1516371812982" expanded="true" signature="2950:3006" ph="UPDATE user... " />
-            <marker date="1516371812982" expanded="true" signature="3258:3284" ph="SELECT * FRO... user_options" />
-            <marker date="1516371812982" expanded="true" signature="3498:3560" ph="SELECT * FRO... user_options" />
-            <marker date="1516371812982" expanded="true" signature="3778:3841" ph="SELECT * FRO... user_options" />
-            <marker date="1516371812982" expanded="true" signature="4003:4056" ph="UPDATE user... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard/annonce-dashboard.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/annonce-dashboard.html.twig" />
     <entry file="file://$PROJECT_DIR$/templates/dashboard/layout-dashboard.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard/user-dashboard.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1871">
-          <caret line="168" column="2" lean-forward="true" selection-start-line="168" selection-start-column="2" selection-end-line="168" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/AnnonceModelDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="132" column="77" lean-forward="false" selection-start-line="132" selection-start-column="19" selection-end-line="132" selection-end-column="77" />
-          <folding>
-            <marker date="1516379242211" expanded="true" signature="1622:1675" ph="SELECT ville... city" />
-            <marker date="1516379242211" expanded="true" signature="4414:4448" ph="SELECT * FRO... annonce_options_city" />
-            <marker date="1516379242211" expanded="true" signature="4668:4702" ph="SELECT * FRO... annonce_options_city" />
-            <marker date="1516379242211" expanded="true" signature="4668:4732" ph="SELECT * FRO... annonce_options_city" />
-            <marker date="1516379242211" expanded="true" signature="4668:4733" ph="SELECT * FRO... annonce_options_city" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/user-dashboard.html.twig" />
     <entry file="file://$PROJECT_DIR$/templates/functions/membre.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="2" lean-forward="true" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -584,7 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="62" column="21" lean-forward="false" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -592,7 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1116">
           <caret line="62" column="21" lean-forward="false" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -616,9 +670,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <marker date="1516385444273" expanded="true" signature="607:629" ph="SELECT * FRO... comments" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -634,15 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1183">
           <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Middleware/middleware.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="140" column="105" lean-forward="false" selection-start-line="140" selection-start-column="105" selection-end-line="140" selection-end-column="105" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -650,7 +693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="39" column="13" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="188" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -658,55 +700,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="24" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <marker date="1516368105506" expanded="true" signature="7551:7757" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="7834:7946" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="7979:8041" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="8043:8049" ph=" " />
-            <marker date="1516368105506" expanded="true" signature="8092:8233" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="8274:8362" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="8461:8610" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="8729:8855" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="8968:9069" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="9147:9232" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="9293:9355" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="9392:9486" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="9560:9654" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="9848:9957" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="10081:10165" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="10257:10342" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="10477:10606" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="10688:10982" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="11358:11452" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="11558:11652" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="11985:12048" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="12122:12207" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="12282:12421" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="12476:12528" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="12685:12765" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="12913:13052" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="13123:13198" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="13434:13496" ph="..." />
-            <marker date="1516368105506" expanded="true" signature="13498:13504" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="407" column="121" lean-forward="true" selection-start-line="407" selection-start-column="121" selection-end-line="407" selection-end-column="121" />
-          <folding>
-            <element signature="e#7#52#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -714,7 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -722,9 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1080">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1516368105448" expanded="true" signature="6932:7133" ph="SELECT * FRO... user" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -732,13 +722,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="71" />
-          <folding>
-            <marker date="1516368105445" expanded="true" signature="270:330" ph="SELECT email... user" />
-            <marker date="1516368105445" expanded="true" signature="518:630" ph="SELECT user_... user_options" />
-            <marker date="1516368105445" expanded="true" signature="924:1009" ph="SELECT o.* F... options" />
-            <marker date="1516368105445" expanded="true" signature="1288:1362" ph="SELECT name_... annonce_options_city" />
-            <marker date="1516368105445" expanded="true" signature="1647:1689" ph="SELECT id_us... user" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -746,13 +730,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-343">
           <caret line="62" column="21" lean-forward="false" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/dashboard/annonces-dashboard.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-635">
+        <state relative-caret-position="1116">
           <caret line="62" column="21" lean-forward="false" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
           <folding />
         </state>
@@ -760,8 +743,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/dashboard/faq-dashboard.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="719">
-          <caret line="144" column="24" lean-forward="false" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="24" />
+        <state relative-caret-position="2592">
+          <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -770,29 +753,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="26" column="39" lean-forward="false" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-          <folding>
-            <marker date="1516387833115" expanded="true" signature="489:506" ph="SELECT * FRO... faq" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/FaqController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="48" column="23" lean-forward="true" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+        <state relative-caret-position="774">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="e#37#59#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="27" column="63" lean-forward="true" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Middleware/middleware.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="24" column="65" lean-forward="true" selection-start-line="24" selection-start-column="65" selection-end-line="24" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="171" column="0" lean-forward="false" selection-start-line="171" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+        <state relative-caret-position="395">
+          <caret line="171" column="73" lean-forward="false" selection-start-line="171" selection-start-column="73" selection-end-line="171" selection-end-column="73" />
           <folding>
             <element signature="e#37#59#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/AnnonceModelDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-235">
+          <caret line="62" column="50" lean-forward="true" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
+          <folding>
+            <marker date="1516533453597" expanded="true" signature="715:791" ph="SELECT ville... city" />
+            <marker date="1516533453597" expanded="true" signature="5604:5638" ph="SELECT * FRO... annonce_options_city" />
+            <marker date="1516533453597" expanded="true" signature="5864:6159" ph="SELECT * FRO... user" />
+            <marker date="1516533453597" expanded="true" signature="6266:6458" ph="SELECT media... user_post_annonce" />
+            <marker date="1516533453597" expanded="true" signature="6561:6753" ph="SELECT media... user_post_annonce" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4429">
+          <caret line="306" column="0" lean-forward="true" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -20,20 +20,20 @@ class CommentController extends Controller
     {
         $comment = strip_tags(trim($request->get('comment')));
 
-        if ((iconv_strlen($comment) < 3 || iconv_strlen($comment) > 100)){
+        if ((iconv_strlen($comment) < 3 && iconv_strlen($comment) > 100)){
             $this->erreur['comment'] = 'Votre commentaire doit contenir entre 3 et 100 caractères';
           }
 
-          if(!empty($erreur)){
+          if(!empty($this->erreur)){
             return $app['twig']->render('connected/temoigner.html.twig', array(
                 "error" => $this->erreur,
             ));
           }
-          
+
           else {
             // on fait appel à la fonction statique dans model - qui permet de récupérer les infos du profil utilisateur connecté
              $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-         
+
 
              if(isset($profilInfo)){
                 $commentaire = new CommentModelDAO($app['db']);
@@ -47,7 +47,7 @@ class CommentController extends Controller
              {
                 $this->erreur['comment'] = 'Ce message ne peut être envoyé';
              }
-        
+
             }
 
 
@@ -58,14 +58,14 @@ class CommentController extends Controller
             ));
         }
         else
-        { // si les formats du message, 
+        { // si les formats du message,
 
             $comment = new CommentModelDAO($app['db']);
             return $app['twig']->redirect('Coolloc/public/connected/merci');
-            
+
         }
 
-        
+
     }
 
     public function selectCommentAndAdminInfo(Application $app){

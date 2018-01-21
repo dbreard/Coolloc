@@ -3,6 +3,7 @@
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Controller\Controller;
 
 
 function verifParam($request , $verifRequest = array()) :array
@@ -42,7 +43,7 @@ $verifParamLogin = function (Request $request, Application $app)
                         return $app->redirect("/Coolloc/public/login");
                       };
 
-                      
+
 $verifParamForgotPass = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("mail"));
@@ -84,7 +85,7 @@ $verifContact = function (Request $request, Application $app)
 // recéption des données et analyse pour savoir si elle sont existentes et remplis
 $verifParamAnnonce = function (Request $request, Application $app)
                     {
-                      $retour = verifParam($request->request, array("name_coloc", "rent", "description", "adress", "postal_code", "housing_type", "date_dispo", "nb_roommates", "conditions"));
+                      $retour = verifParam($request->request, array("name_coloc", "rent", "description", "adress", "ville", "postal_code", "housing_type", "date_dispo", "nb_roommates", "conditions"));
 
                       // echo "<pre>";
                       //     var_dump($request->request);
@@ -93,19 +94,25 @@ $verifParamAnnonce = function (Request $request, Application $app)
                       //die();
                       $value_form = $request->request->all();
 
+                      $arrayMessage = Controller::stringToArray($retour['message']);
+
                       if($retour["error"]){
 
                           $app["formulaire"] = array(
                               "verifParamAnnonce" => array(
                                   "error" => $retour["error"],
+                                  "message" => $retour["message"],
                                   "value_form" => $value_form,
+                                  "arrayMessage" => $arrayMessage,
                               )
                           );
                       }else{
                           $app["formulaire"] = array(
                               "verifParamAnnonce" => array(
                                   "error" => false,
+                                  "message" => $retour["message"],
                                   "value_form" => $value_form,
+                                  "arrayMessage" => $arrayMessage,
                               )
                           );
                       }
@@ -134,8 +141,8 @@ $verifParamComment = function (Request $request, Application $app)
                         return $app->redirect("/Coolloc/public/connected/temoigner");
                       };
 
-//Middleware pour la F.A.Q
 
+//Middleware pour la F.A.Q
 $verifParamComment = function (Request $request, Application $app)
 {
                     // on vérifie que le contenu du message et de la réponse et qu'ils ne soient pas vide
@@ -143,4 +150,5 @@ $verifParamComment = function (Request $request, Application $app)
                     if($retour["error"])
                         return $app->redirect("/Coolloc/public/connected/temoigner");
 };
+
 

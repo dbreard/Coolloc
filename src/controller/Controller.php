@@ -5,6 +5,7 @@ namespace Coolloc\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Model\Model;
 use \DateTime;
 
 
@@ -160,9 +161,20 @@ class Controller {
         }
     }
 
+    public function sessionDestroy() {
+
+        // Détruit toutes les variables de session
+        $_SESSION = array();
+
+        // Finalement, on détruit la session.
+        session_destroy();
+
+        // var_dump($_SESSION);
+    }
+
 
     // FORMATAGE DE LA CITY POUR LA RENDRE CONFORME A LA BDD
-    public function formatCity($city) {
+    public function formatCity(string $city) {
         $cityClean = strip_tags(trim($city));
         $cityClean = ucwords ($cityClean);
         $cityClean = str_replace(" ", "-", $cityClean);
@@ -186,7 +198,7 @@ class Controller {
 
 
     // FONCTION POUR VERIFIER LA VALIDITE D'UN ARRAY ET FORMATER CELUI CI POUR LA BDD
-    public function verifArrayAndFormat(array $arrayTarget, array $arrayCompare, string $champs, string $mode) {
+    public function verifArrayAndFormat(array $arrayTarget, array $arrayCompare, string $champs, string $mode): string {
         // on créer un tableau pour faire le comparatif
         $arrayCheck = array();
         // boucle sur l'ensemble des données
@@ -203,7 +215,17 @@ class Controller {
         }
         // Si le nombre de valeur ne correspond pas au nombre de check erreur
         if (count($arrayCheck) != count($arrayTarget)) {
-            array_push($this->erreur, "Problème de selection dans '" . $champs . "'");
+            
+            if ($champs == "Quartier") {
+                $this->erreur['district'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Equipement") {
+                $this->erreur['equipment'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Profil colocataires") {
+                $this->erreur['member_profil'] = "Problème de selection dans '" . $champs . "'";
+            }else if ($champs == "Centre d'intérêts") {
+                $this->erreur['hobbies'] = "Problème de selection dans '" . $champs . "'";
+            }
+
             return "";
         }else { // Sinon on format notre tableau en string en fonction du mode choisi
             // Si le mode est SELECT
@@ -234,7 +256,7 @@ class Controller {
     }
 
     // FONCTION APPELER PAR verifArrayAndFormat() SI LE MODE CHOISI EST "SELECT" POUR CHERCHER EN BDD VIA UN TABLEAU
-    private function searchByArray(array $arrayTarget, string $champsBDD) {
+    private function searchByArray(array $arrayTarget, string $champsBDD): string {
         // Je crée ma variable réponse
         $response = "";
         // Je vérifie que mon tableau n'es pas vide
@@ -250,7 +272,7 @@ class Controller {
     }
 
     // FONCTION APPELER PAR verifArrayAndFormat() SI LE MODE CHOISI EST "INSERT" POUR VALIDER ET FORMATER UN ARRAY EN STRING POUR l'INSERTION
-    private function formatArrayForBDD(array $arrayTarget) {
+    private function formatArrayForBDD(array $arrayTarget): string {
         // Je créer ma variable de réponse
         $response = "";
         // Je vérifie que mon tableau n'est pas vide
@@ -284,9 +306,9 @@ class Controller {
         public function getToken(){
             return $this->token;
         }
-    
+
         //*********** SETTER ****************//
-    
+
         public function setToken($token){
             $this->token = $token;
         }
@@ -328,6 +350,26 @@ class Controller {
     }
     // --------------------- fin envoi mail ----------------------- //
 
+    // fonction permettant de formater les champs multiple string en array
+    public static function stringToArray(string $stringTarget){
 
+
+        if (empty($stringTarget))
+            return '';
+
+        $arrayConstruct = explode(', ', $stringTarget);
+
+        foreach ($arrayConstruct as $key => $value) {
+
+            $newKey = str_replace(' ', '', $value);
+            $newKey = str_replace("'", '', $newKey);
+            $newKey = str_replace("-", '', $newKey);
+            $arrayResponse[$newKey] = $value;
+
+        }
+
+        return $arrayResponse;
+
+    }
 
 }
