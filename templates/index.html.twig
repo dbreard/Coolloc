@@ -28,15 +28,11 @@
 
 {% block content %}
     <div class="slider-area">
-
-        {% if error is defined %}
-            <div>{{ error }}</div>
-        {% endif %}
-
-        {% block slider %}
-            {# insertion des images du slideshow #}
-            {% include 'required/slider.html.twig' ignore missing  %}
-        {% endblock %}
+    
+    {% block slider %}
+        {# insertion des images du slideshow #}
+        {% include 'required/slider.html.twig' ignore missing  %}
+    {% endblock %}
 
         {# fin de slider #}
 
