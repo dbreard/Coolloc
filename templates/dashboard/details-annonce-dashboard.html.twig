@@ -155,44 +155,70 @@
 
     <h2><small> Choix de l'utilisateur :</small> </h2>
 
-
-    <div class="table-responsive">
-        <table class="table table-hover table-striped col-md-12">
-            <tr>
-                <th class="col-md-2">Equipement</th>
-                {% if detailsAnnonces.equipment == '' %}
-                    <td>Non défini par l'utilisateur</td>
-                {% else %}
-                    <td>{{ detailsAnnonces.equipment }}</td>
-                {% endif %}
-            </tr>
-            <tr>
-                <th>Quartier</th>
-                {% if detailsAnnonces.district == '' %}
-                    <td>Non défini par l'utilisateur</td>
-                {% else %}
-                    <td>{{ detailsAnnonces.district }}</td>
-                {% endif %}
-            </tr>
-            <tr>
-                <th>Centres d'interet</th>
-                {% if detailsAnnonces.hobbies == '' %}
-                    <td>Non défini par l'utilisateur</td>
-                {% else %}
-                    <td>{{ detailsAnnonces.hobbies }}</td>
-                {% endif %}
-            </tr>
-            <tr>
-                <th>Profil de memebre rechercher</th>
-                {% if detailsAnnonces.member_profil == '' %}
-                    <td>Non défini par l'utilisateur</td>
-                {% else %}
-                    <td>{{ detailsAnnonces.member_profil }}</td>
-                {% endif %}
-            </tr>
-        </table>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped col-md-12">
+                <tr>
+                    <th class="col-md-2">Equipement</th>
+                    {% if detailsAnnonces.equipment == '' %}
+                        <td>Non défini par l'utilisateur</td>
+                    {% else %}
+                        <td>{{ detailsAnnonces.equipment }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Quartier</th>
+                    {% if detailsAnnonces.district == '' %}
+                        <td>Non défini par l'utilisateur</td>
+                    {% else %}
+                        <td>{{ detailsAnnonces.district }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Centres d'interet</th>
+                    {% if detailsAnnonces.hobbies == '' %}
+                        <td>Non défini par l'utilisateur</td>
+                    {% else %}
+                        <td>{{ detailsAnnonces.hobbies }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Profil de memebre rechercher</th>
+                    {% if detailsAnnonces.member_profil == '' %}
+                        <td>Non défini par l'utilisateur</td>
+                    {% else %}
+                        <td>{{ detailsAnnonces.member_profil }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
     </div>
 
 
+    <h2><small> Photos de l'annonce :</small> </h2>
+        {% if photoAnnonces != false %}
+            <div class="row">
+
+                {% for urlPhoto in photoAnnonces %}
+                    <div class="col-lg-2 col-md-4"><img style="margin: 10px auto;" width="200" class="img-responsive img-rounded" src="{{ urlPhoto.url_media }}"></div>
+                {% endfor %}
+
+            </div>
+            {% else %}
+                <p>Aucune photo pour cette annonce</p>
+        {% endif %}
+
+
+    <h2><small> Lien vers les video de l'annonce :</small> </h2>
+        {% if videoAnnonces != false %}
+            <div class="row">
+                {% for urlVideo in videoAnnonces %}
+                    <a href="{{ urlVideo }}">{{ urlVideo }}</a>
+                {% endfor %}
+
+            </div>
+            {% else %}
+                <p>Aucune video pour cette annonce</p>
+        {% endif %}
 
 {% endblock %}

@@ -116,13 +116,22 @@ class UserModelDAO {
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
-
     }
 
     //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
     public function UsersColocationSelected(){
 
         $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation'";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+    //SELECTION DES UTILISATEURS RECENT CHERCHANT UNE COLOCATION
+    public function OrderUsersColocationSelected(){
+
+        $sql = "SELECT *  FROM user_options WHERE status = 'cherche colocation' ORDER BY date_created DESC LIMIT 0,6";
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
@@ -137,10 +146,7 @@ class UserModelDAO {
 
 
         return $users;
-
     }
-
-
 
 
     public function modifyUserStatus( $idUser ){

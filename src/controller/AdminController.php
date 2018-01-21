@@ -171,6 +171,7 @@ class AdminController extends Controller {
                 $detailsAnnonce = new AnnonceModelDAO($app['db']); // instanciation d'un objet pour recupérer les infos de l'annonce
                 $resultat = $detailsAnnonce->selectAnnonceById($idAnnonce);
 
+
                 if (isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/details-annonce-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),

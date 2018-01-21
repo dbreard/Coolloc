@@ -32,6 +32,7 @@
     require __DIR__.'/../src/controller/CommentController.php';
     require __DIR__.'/../src/controller/FaqController.php';
     require __DIR__.'/../src/controller/DetailsProfilController.php';
+    require __DIR__.'/../src/controller/HomeController.php';
 
 
 

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Coolloc\Controller\Controller;
 use Coolloc\Controller\AdminController;
+use Coolloc\Controller\HomeController;
 use Coolloc\Model\Model;
 use Coolloc\Model\UserModelDAO;
 
@@ -24,24 +25,29 @@ use Coolloc\Model\UserModelDAO;
 $app->get('/', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
+    $membresAnnoncesInfo = new HomeController;
+    $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('index.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('index.html.twig', array(
      "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
     ));
 
     }
 
 
     else {
-        return $app['twig']->render('index.html.twig', array()) ;
+        return $app['twig']->render('index.html.twig', array(
+            "affichage" => $donneesMembresAnnonces,
+        )) ;
     }
 
     // si internaute non connecté rdv vers index-nc.html.twig autrement rdv vers index-c.html.twig

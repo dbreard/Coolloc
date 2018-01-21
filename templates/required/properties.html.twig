@@ -10,95 +10,24 @@
 
         <div class="row">
             <div class="proerty-th " id="profile-user">
-                {# first #}
-                <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
+                {% if affichage is defined %}
+                    {% for profil in affichage.membres %}
+                        <div class="col-sm-6 col-md-2 p0">
+                            <div class="box-two proerty-item property-features">
+                                <div class="item-thumb">
+                                    <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                                </div>
+                                <div class="item-entry overflow">
+                                    <h5><a href="{{ path('fiche-profil') }}" ><ul><li>{{ profil.firstname }}</li><li>{{ profil.lastname }}</li></ul></a></h5>
+                                    <div class="dot-hr"></div>
+                                    <span class="pull-left"><b>date souhaitée :</b><br>{{ profil.date_dispo }}</span>
 
-                {# second #}
-                <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% endif %}
 
-                {# third #}
-                <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# fourth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# fifth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb profil-user">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100% !important; height:auto !important;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# sixth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
 
         </div>
 
@@ -112,53 +41,34 @@
 
         <div class="row">
             <div class="proerty-th">
-                {# first #}
-                <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-1.html" ><img src="{{ asset('assets/img/demo/property-1.jpg ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="property-1.html" >Super nice villa </a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>Area :</b> 120m </span>
-                            <span class="proerty-price pull-right">$ 300,000</span>
+
+                {% for affichages in affichage.annonces %}
+
+                    <div class="col-sm-6 col-md-3 p0">
+                        <div class="box-two proerty-item">
+                            <div class="item-thumb">
+                                <a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}" ><img src="{{ affichages.url_media }}" alt="Photo principale de l'annonce de {{ affichages.firstname }} {{ affichages.lastname }}"></a>
+                            </div>
+
+                            <div class="item-entry overflow">
+                                <h5><a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}">{{ affichages.name_coloc }}</a></h5>
+                                <div class="dot-hr"></div>
+                                <span class="pull-left"><b> Surface :</b> {{ affichages.surface }} m² </span>
+                                <span class="proerty-price pull-right">{{ affichages.rent }} €</span>
+                                <p style="display: none;">{{ affichages.description }}</p>
+                                <div class="property-icon">
+                                    <b> Type de bien :</b> {{ affichages.housing_type }}
+                                    {# <img src="assets/img/icon/bed.png">(5)|
+                                    <img src="assets/img/icon/shawer.png">(2)|
+                                    <img src="assets/img/icon/cars.png">(1) #}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
 
-                {# second #}
-                <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-2.html" ><img src="{{ asset('assets/img/demo/property-2.jpg ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="property-2.html" >Super nice villa </a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>Area :</b> 120m </span>
-                            <span class="proerty-price pull-right">$ 300,000</span>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
 
-                {# third #}
-                <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-3.html" ><img src="{{ asset('assets/img/demo/property-3.jpg ') }}"></a>
-
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="property-3.html" >Super nice villa </a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>Area :</b> 120m </span>
-                            <span class="proerty-price pull-right">$ 300,000</span>
-                        </div>
-                    </div>
-                </div>
-
-                {# fourth #}
                 <div class="col-sm-6 col-md-3 p0">
                     <div class="box-tree more-proerty text-center">
                         <div class="item-tree-icon">
