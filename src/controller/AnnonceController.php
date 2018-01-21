@@ -468,7 +468,7 @@ class AnnonceController extends Controller
 
 
         $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
-        (($this->getDate() - $dateDispoAnnonce) <= 0) ? $dispoAnnonce = 'non' : $dispoAnnonce = 'oui';
+        $dispoAnnonce = (($this->getDate() - $dateDispoAnnonce) < 0) ? 'non' : 'oui';
 
         if ($isconnected) {
             return $app['twig']->render('details-annonce.html.twig', array(
