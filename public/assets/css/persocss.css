@@ -7,6 +7,8 @@
         padding: 5px;
     }
 
+    span.bold {font-weight:bold;}
+
 /* page ajout annonce */
 /* text area en mode desktop */
 .form-control.textarea-annonce {

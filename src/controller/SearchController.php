@@ -14,6 +14,9 @@ class SearchController extends Controller
 {
     public function searchAction(Application $app, Request $request) {
 
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
         $arrayEquipment = array('TV', 'Hifi', 'Wifi', 'Fibre optique', 'Salle de jeux', 'Machine à laver');
@@ -165,10 +168,53 @@ class SearchController extends Controller
 
             $response = $searchAnnonce->searchAnnonce($arraySearch, $app);
 
+            $nbResponse = count($response);
+
             if ($response != false) {
-                return $app['twig']->render('serp-annonce.html.twig', array("affichage" => $response));
+
+                if ($isConnectedAndAdmin){
+                    return $app['twig']->render('serp-annonce.html.twig', array(
+                        "isConnectedAndAmin" => $isConnectedAndAdmin,
+                        "connected" => $isconnected,
+                        "affichage" => $response,
+                        "nb_resultats" => $nbResponse,
+                    ));
+                }
+
+                elseif ($isconnected) {
+                    return $app['twig']->render('serp-annonce.html.twig', array(
+                        "connected" => $isconnected,
+                        "affichage" => $response,
+                        "nb_resultats" => $nbResponse,
+                    ));
+                } else {
+                    return $app['twig']->render('serp-annonce.html.twig', array(
+                        "affichage" => $response,
+                        "nb_resultats" => $nbResponse,
+                    ));
+                }
+
             }else {
-                return $app['twig']->render('index.html.twig', array("error" => "Erreur lors de la recherche, veuillez réessayer"));
+
+                if ($isConnectedAndAdmin){
+                    return $app['twig']->render('index.html.twig', array(
+                        "isConnectedAndAmin" => $isConnectedAndAdmin,
+                        "connected" => $isconnected,
+                        "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                    ));
+                }
+
+                elseif ($isconnected) {
+                    return $app['twig']->render('index.html.twig', array(
+                        "connected" => $isconnected,
+                        "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                    ));
+                }
+                else {
+                    return $app['twig']->render('index.html.twig', array(
+                        "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                    ));
+                }
             }
         }
     }

@@ -29,13 +29,13 @@ class AnnonceModelDAO{
     public function createAnnonce(array $arrayAnnonce, array $arrayMedia, Application $app){
 
         // On vérifie dans la BDD que la ville et code postal sont correctes
-        $sql = "SELECT ville_id FROM city WHERE ville_code_postal = ? AND ville_nom_reel = ?";
+        $sql = "SELECT ville_id FROM city WHERE ville_nom_reel = ?";
 
-        $ville_id = $this->db->fetchAssoc($sql, array((int) $arrayAnnonce['postal_code'], (string) $arrayAnnonce['ville']));
+        $ville_id = $this->db->fetchAssoc($sql, array((string) $arrayAnnonce['ville']));
 
         // Si c'est faux on stop la requête
         if ($ville_id == false)
-            return "id_invalid";
+            return "ville_invalid";
 
         // echo "<pre>";
         // var_dump($arrayAnnonce);
