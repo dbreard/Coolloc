@@ -131,7 +131,7 @@ class UserModelDAO {
     //SELECTION DES UTILISATEURS RECENT CHERCHANT UNE COLOCATION
     public function OrderUsersColocationSelected(){
 
-        $sql = "SELECT *  FROM user_options WHERE status = 'cherche colocation' ORDER BY date_created DESC LIMIT 0,6";
+        $sql = "SELECT *  FROM user_options WHERE status = 'cherche colocation' ORDER BY date_created DESC LIMIT 0,5";
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
