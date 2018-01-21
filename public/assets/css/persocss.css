@@ -166,12 +166,12 @@ font-weight: 500;
     max-height: 200px !important;
 }
 
-.owl-wrapper-outer {
+.slider-principal .owl-wrapper-outer {
     background-color: #F3F3F3;
     opacity: .6;
 }
 
-#bg-slider .item img {
+#bg-slider .slider-principal .item img {
     width: 100%;
     height: 630px;
     opacity: .6;
