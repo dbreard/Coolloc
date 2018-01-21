@@ -3,6 +3,7 @@
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Coolloc\Controller\Controller;
 
 
 function verifParam($request , $verifRequest = array()) :array
@@ -93,19 +94,25 @@ $verifParamAnnonce = function (Request $request, Application $app)
                       //die();
                       $value_form = $request->request->all();
 
+                      $arrayMessage = Controller::stringToArray($retour['message']);
+
                       if($retour["error"]){
 
                           $app["formulaire"] = array(
                               "verifParamAnnonce" => array(
                                   "error" => $retour["error"],
+                                  "message" => $retour["message"],
                                   "value_form" => $value_form,
+                                  "arrayMessage" => $arrayMessage,
                               )
                           );
                       }else{
                           $app["formulaire"] = array(
                               "verifParamAnnonce" => array(
                                   "error" => false,
+                                  "message" => $retour["message"],
                                   "value_form" => $value_form,
+                                  "arrayMessage" => $arrayMessage,
                               )
                           );
                       }

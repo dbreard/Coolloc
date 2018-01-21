@@ -143,6 +143,7 @@ $app->get('/inscription', function () use ($app) {
 
     } else {
         return $app['twig']->render('formulaires/register.html.twig', array());
+
     }
 
 })
@@ -426,7 +427,26 @@ $app->post('/connected/profil', function () use ($app) {
 //AJOUT ANNONCE
 $app->get('/connected/ajout-annonce', function () use ($app) {
 
-    return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('/connected/ajout-annonce.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('/connected/ajout-annonce.html.twig', array(
+            "connected" => $isconnected,
+        ));
+    }
+
+    else {
+        return $app->redirect('Coolloc/public/login');
+    }
+
 })
     ->bind('ajout-annonce');
 
@@ -446,11 +466,31 @@ $app->post('/connected/gerer-annonce', function () use ($app) {
 
 
 //AJOUT DETAILS PROFIL
+$app->get('/connected/ajout-details-profil', function () use ($app) {
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-$app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
 
+    if ($isConnectedAndAdmin){
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+        ));
+    }
+
+    elseif ($isconnected) {
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
+            "connected" => $isconnected,
+        ));
+    }
+
+    else {
+        return $app->redirect('Coolloc/public/login');
+    }
+})
     ->bind('ajout-details-profil');
-$app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
+$app->post('/connected/ajout-details-profil', function () use ($app) {
+    //controleur
+});
 
 
 //ajout temoignage
