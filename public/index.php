@@ -31,6 +31,7 @@
     require __DIR__.'/../src/controller/StatusController.php';
     require __DIR__.'/../src/controller/CommentController.php';
     require __DIR__.'/../src/controller/DetailsProfilController.php';
+    require __DIR__.'/../src/controller/ModifProfilController.php';
 
 
     require __DIR__.'/../src/Model/Model.php';
