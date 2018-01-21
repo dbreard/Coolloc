@@ -397,6 +397,7 @@ class AnnonceController extends Controller
                 if ($isConnectedAndAdmin){
                     return $app['twig']->render('connected/ajout-annonce.html.twig', array(
                         "error" => "Erreur lors de l'insertion, veuillez réessayer.",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
                     ));
@@ -405,13 +406,15 @@ class AnnonceController extends Controller
                 elseif ($isconnected) {
                     return $app['twig']->render('connected/ajout-annonce.html.twig', array(
                         "error" => "Erreur lors de l'insertion, veuillez réessayer.",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "connected" => $isconnected,
                     ));
                 }
-            }else if ($retour == "id_invalid"){
+            }else if ($retour == "ville_invalid"){
                 if ($isConnectedAndAdmin){
                     return $app['twig']->render('connected/ajout-annonce.html.twig', array(
-                        "cityError" => "Erreur sur le champs 'Ville' ou 'Code postal'",
+                        "cityError" => "Erreur sur le champs 'Ville', celle-ci n'est pas valide",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
                     ));
@@ -420,6 +423,7 @@ class AnnonceController extends Controller
                 elseif ($isconnected) {
                     return $app['twig']->render('connected/ajout-annonce.html.twig', array(
                         "cityError" => "Erreur sur le champs 'Ville' ou 'Code postal'",
+                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "connected" => $isconnected,
                     ));
                 }
