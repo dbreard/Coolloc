@@ -223,6 +223,12 @@ p.radio-text {
     margin-bottom: 5px;
 }
 
+.client-text {
+
+    min-height: 136px;
+
+}
+
 @media (max-width: 480px){
 
   div.annonce_miniature{
