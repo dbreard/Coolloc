@@ -55,139 +55,60 @@
 
                 <div class="row row-feat"> 
                     <div class="col-md-12">
- 
+
                         <div class="col-sm-6 feat-list">
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                         <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa11" >
-                                            Nostrud exercitation ullamco laboris 1 1
-                                         </h4> 
-                                    </div>
-                                    <div id="fqa11" class="panel-collapse collapse fqa-body">
-                                        <div class="panel-body">
-                                            <ol>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>                                           
-                                            </ol> 
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                         <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa22" >
-                                            Nostrud exercitation ullamco laboris 2 2
-                                         </h4> 
-                                    </div>
-                                    <div id="fqa22" class="panel-collapse collapse fqa-body">
-                                        <div class="panel-body">
-                                            <ol>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>                                           
-                                            </ol> 
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                         <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa33" >
-                                            Nostrud exercitation ullamco laboris 3 3
-                                         </h4> 
-                                    </div>
-                                    <div id="fqa33" class="panel-collapse collapse fqa-body">
-                                        <div class="panel-body">
-                                            <ol>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>                                           
-                                            </ol> 
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
+                            {% if infosFaqs is defined %}
+                                {% for faq in infosFaqs %}
+                                    {% if (loop.index) % 2 == 1 %} {# affiche les faq pair a gauche #}
+                                        <div class="panel-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa{{ loop.index }}" >
+                                                        {{ faq.question }}
+                                                    </h4>
+                                                </div>
+                                                <div id="fqa{{ loop.index }}" class="panel-collapse collapse fqa-body">
+                                                    <div class="panel-body">
+                                                        <ol style="list-style: none;">
+                                                            <li>{{ faq.reponse }}</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
+
                         <div class="col-sm-6 feat-list">
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                         <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa1" >
-                                            Nostrud exercitation ullamco laboris 1 
-                                         </h4> 
-                                    </div>
-                                    <div id="fqa1" class="panel-collapse collapse fqa-body">
-                                        <div class="panel-body">
-                                            <ol>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>                                           
-                                            </ol> 
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                         <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa2" >
-                                            Nostrud exercitation ullamco laboris 2 
-                                         </h4> 
-                                    </div>
-                                    <div id="fqa2" class="panel-collapse collapse fqa-body">
-                                        <div class="panel-body">
-                                            <ol>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>                                           
-                                            </ol> 
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                         <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa3" >
-                                            Nostrud exercitation ullamco laboris 3
-                                         </h4> 
-                                    </div>
-                                    <div id="fqa3" class="panel-collapse collapse fqa-body">
-                                        <div class="panel-body">
-                                            <ol>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>
-                                                <li> Lorem ipsum dolor sit amet, consectetur adipisicing</li>                                           
-                                            </ol> 
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
+                            {% if infosFaqs is defined %}
+                                {% for faq in infosFaqs %}
+                                    {% if (loop.index) % 2 == 0 %} {# affiche les faq impaire a droite #}
+                                        <div class="panel-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa{{ loop.index }}" >
+                                                        {{ faq.question }}
+                                                    </h4>
+                                                </div>
+                                                <div id="fqa{{ loop.index }}" class="panel-collapse collapse fqa-body">
+                                                    <div class="panel-body">
+                                                        <ol style="list-style: none;">
+                                                            <li>{{ faq.reponse }}</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
 
                     </div>
                 </div>
-                
+
             </div>
         </div>
 

@@ -132,7 +132,9 @@ class AnnonceModelDAO{
         }
     }
 
-    public function allAnnoncesSelected(){
+
+    // SELECTION DE TOUTES LES ANNONCES
+    public function allAnnoncesSelected() : array{
 
         $sql = "SELECT * FROM annonce_options_city";
         $users = $this->getDb()->fetchAll($sql, array());
@@ -140,6 +142,17 @@ class AnnonceModelDAO{
         return $users;
     }
 
+    // SELECTION DE TOUTES LES ANNONCES RECENTE
+    public function OrderAllAnnoncesSelected() : array{
+
+        $sql = "SELECT * FROM user, user_post_annonce, media WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND media.type = 'photo' GROUP BY user_post_annonce.id_user_post_annonce ORDER BY user_post_annonce.date_created DESC LIMIT 0,3";
+        $response = $this->getDb()->fetchAll($sql);
+
+        return $response;
+    }
+
+
+    // SELECTIONNE TOUTE LES INFO D'UNE ANNONCE PAR SON ID
     public function selectAnnonceById(int $id_annonce) {
 
         $sql = "SELECT * FROM user, user_post_annonce, options, city WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options AND user_post_annonce.id_user_post_annonce = ? GROUP BY user_post_annonce.id_user_post_annonce";

@@ -27,6 +27,53 @@ class TokensDAO
         return $resultat;
     }
 
+    //verification de la date de validité du token
+    public function verifValidateToken(string $token){
+        $sql = "SELECT * FROM tokens WHERE token = ? AND date_expire >= NOW()";
+        $resultat = $this->getDb()->fetchAssoc( $sql, array((string) $token) );
+
+        if(!empty($resultat)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public function selectTokenFromIdUser(int $idUser){
+        $sql = "SELECT * FROM tokens WHERE user_id = ?";
+        $resultat = $this->getDb()->fetchAssoc( $sql, array((int) $idUser) );
+
+        return $resultat;
+    }
+
+    //verification de l'éxistance du token
+    public function verifExistTokenConnection(string $idUser) :bool{
+        $sql = "SELECT * FROM tokens WHERE user_id = ? AND type = 'connexion'";
+        $resultat = $this->getDb()->fetchAssoc( $sql, array((int) $idUser) );
+
+        if(!empty($resultat)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    //verification de l'éxistance du token
+    public function verifExistTokenEmail(string $idUser) :bool{
+        $sql = "SELECT * FROM tokens WHERE user_id = ? AND type = 'email'";
+        $resultat = $this->getDb()->fetchAssoc( $sql, array((int) $idUser) );
+
+        if(!empty($resultat)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
     //******* GETTER *********//
 
     public function getDb(){
