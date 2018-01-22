@@ -137,6 +137,10 @@ div.choice:hover{
     margin-left: 15%;
 }
 
+.maj {
+    text-transform: uppercase;
+}
+
 /* fiche profil */
 .img-circle {
     width: 100%;
