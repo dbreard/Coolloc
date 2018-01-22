@@ -148,7 +148,10 @@ class AnnonceModelDAO extends Model{
         return $response;
     }
 
+    protected function getDB() {
+        return $this->db;
+    }
 
-    
+
 
 }
