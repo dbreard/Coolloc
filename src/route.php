@@ -57,13 +57,14 @@ $app->get('/', function () use ($app) {
 $app->post('/', "Coolloc\Controller\SearchController::searchAction");
 
 
-//RESULTAT RECHERCHE
-$app->get('/profils-public-colocataire', function () use ($app) {
+//AFFICHAGE DE TOUT LES PROFIL CHERCHANT DES COLOCATIONS
+$app->get('/profils-public-colocataire/{page}', function (Request $request) use ($app) {
 
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
     $membresAnnoncesInfo = new SearchController;
-    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app);
+    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app, $request);
+
 
     if ($isConnectedAndAdmin) {
         return $app['twig']->render('serp-profil.html.twig', array(

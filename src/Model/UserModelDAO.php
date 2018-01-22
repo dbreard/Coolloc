@@ -139,19 +139,17 @@ class UserModelDAO {
 
 
     // COMPTE LE NOMBRE D'UTILISATEUR EN BDD
-    public function countAllUsers(){
+    public function countAllUsers(): int{
 
-        $sql = "SELECT COUNT(id_user) FROM user";
-        $nbrAnnonces = $this->getDb()->fetchAssoc($sql, array());
-
-        return $nbrAnnonces;
+        $sql = "SELECT COUNT(*) AS 'count_user' FROM user";
+        return $this->getDb()->fetchAssoc($sql)['count_user'];
     }
 
 
     //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
-    public function UsersColocationSelected(){
+    public function UsersColocationSelected(int $limit, int $offset){
 
-        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation'";
+        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation' LIMIT $limit OFFSET $offset";
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;

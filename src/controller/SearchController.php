@@ -250,12 +250,39 @@ class SearchController extends Controller
         }
     }
 
-    // SELECTION DE TOUT LES PROFILS
-    public function searchAllProfils(Application $app){
+
+
+    // SELECTION DE TOUT LES PROFILS AVEC SYSTEME DE PAGINATION
+    public function searchAllProfils(Application $app, Request $request){
+
         $membres = new UserModelDAO($app['db']);
+        $pageActuelle = strip_tags(trim($request->get("page")));
 
-        $membresAnnonce = $membres->UsersColocationSelected(); // stockage des resultat de selection des membres
+        $nbProfils = $membres->countAllUsers();
+        $a = (int) $nbProfils;
+        $maxPage = (int)ceil( $a / $app['nbFilter']);
 
-        return $membresAnnonce;
+        $membre = array();
+
+        // La fonction ceil() arrondit à l'entier supérieur.
+
+        $page = ''; // Le numéro de la page que nous souhaitons visualiser
+            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $page <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
+            {
+                $page = $pageActuelle;
+            }
+            else // Si le paramètre n'est pas spécifié ou n'est pas un nombre valide
+            {
+                $page = 1;
+            }
+
+        // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
+        $offset = ($page - 1) * 8;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
+
+        $membre['profil'] = $membres->UsersColocationSelected($app['nbFilter'], $offset);
+        $membre['page'] = $page;
+        $membre['maxPage'] = $maxPage;
+
+        return $membre;
     }
 }

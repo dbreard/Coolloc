@@ -71,7 +71,8 @@ class CommentController extends Controller
     }
 
     public function selectCommentAndAdminInfo(Application $app){
-        // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
+
+        // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET EST ADMIN
         $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
         // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
@@ -92,7 +93,9 @@ class CommentController extends Controller
         } else {// Si l'utilisateur n'est pas admin
             return $app->redirect('/Coolloc/public');
         }
+
     }
+
 
     public function deleteComment(Application $app, Request $request){
         $idComment = strip_tags(trim($request->get("id_comments"))); // ON RECUPERE L'ID DU COMMENTAIRE
