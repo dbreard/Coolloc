@@ -40,9 +40,11 @@ class SearchController extends Controller
         // MAX
         $maxRent = strip_tags(trim($request->get('max-rent')));
         if (!empty($maxRent)) {
-            if (!is_numeric($maxRent) || $maxRent <= 0) {
+            if (!is_numeric($maxRent) || $maxRent < 0) {
                 array_push($this->erreur, 'Prix maximum saisis invalide');
             }
+        }else {
+            $maxRent = "9999999";
         }
         // COMPARE MIN ET MAX
         if ($maxRent < $minRent) {
@@ -134,9 +136,24 @@ class SearchController extends Controller
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
-            return $app['twig']->render('/details-annonce.html.twig', array(
-                "error" => $this->erreur,
-            ));
+            if ($isConnectedAndAdmin){
+                return $app['twig']->render('serp-annonce.html.twig', array(
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                    "error" => $this->erreur,
+                ));
+            }
+
+            elseif ($isconnected) {
+                return $app['twig']->render('serp-annonce.html.twig', array(
+                    "connected" => $isconnected,
+                    "error" => $this->erreur,
+                ));
+            } else {
+                return $app['twig']->render('serp-annonce.html.twig', array(
+                    "error" => $this->erreur,
+                ));
+            }
         }else {
             $arraySearch = array(
                 "city" => $city,
@@ -200,12 +217,16 @@ class SearchController extends Controller
 
             }else {
 
+                $membresAnnoncesInfo = new HomeController;
+                $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
+
                 if ($isConnectedAndAdmin){
                     return $app['twig']->render('index.html.twig', array(
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
                         "userSearchColocation" => $userSearchColocation,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                        "affichage" => $donneesMembresAnnonces,
                     ));
                 }
 
@@ -214,11 +235,13 @@ class SearchController extends Controller
                         "connected" => $isconnected,
                         "userSearchColocation" => $userSearchColocation,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                        "affichage" => $donneesMembresAnnonces,
                     ));
                 }
                 else {
                     return $app['twig']->render('index.html.twig', array(
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                        "affichage" => $donneesMembresAnnonces,
                     ));
                 }
             }

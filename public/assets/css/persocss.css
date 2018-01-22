@@ -75,6 +75,12 @@ img.profile_img{
   margin-bottom: 10px;
 }
 
+/* UNIQUEMENT LA HAUTEUR MINIMUM DE SERP-ANNONCE */
+div.serp-height{
+    min-height: 175px;
+}
+
+
 /* UNIQUEMENT SECTION ANNONCES DANS PROFIL*/
 div.annonce_miniature{
   position: relative;
@@ -187,7 +193,7 @@ font-weight: 500;
 }
 
 .search-form {
-    
+
     width: 100%;
     margin: 0 auto;
 }
@@ -290,7 +296,7 @@ p.radio-text {
     div.caption h4{
       margin-bottom: 50px;
     }
-  
+
     a.modif_annonce{
       left: 50px;
     }

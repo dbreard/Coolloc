@@ -439,6 +439,7 @@ class AnnonceController extends Controller
 
     public function detailAnnonceAction(Application $app, Request $request) {
 
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
         $isconnected = Controller::ifConnected();
         $userSearchColocation = Controller::userSearchColocation($app);
 
@@ -446,7 +447,13 @@ class AnnonceController extends Controller
         $id_annonce = strip_tags(trim($request->get("id_annonce")));
 
         if (!filter_var($id_annonce, FILTER_VALIDATE_INT)) {
-            if ($isconnected) {
+            if ($isConnectedAndAdmin) {
+                return $app['twig']->render('details-annonce.html.twig', array(
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                    "error" => "l'URL à été corrompu.",
+                ));
+            }else if ($isconnected) {
                 return $app['twig']->render('details-annonce.html.twig', array(
                     "connected" => $isconnected,
                     "error" => "l'URL à été corrompu.",
@@ -469,7 +476,20 @@ class AnnonceController extends Controller
         $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
         $dispoAnnonce = (($this->getDate() - $dateDispoAnnonce) < 0) ? 'non' : 'oui';
 
-        if ($isconnected) {
+        if ($isConnectedAndAdmin) {
+            return $app['twig']->render('details-annonce.html.twig', array(
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "dispo_annonce" => $dispoAnnonce,
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbie" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
+        ));
+        }else if ($isconnected) {
             return $app['twig']->render('details-annonce.html.twig', array(
                 "connected" => $isconnected,
                 "info_annonce" => $infoAnnonce['annonce'],
