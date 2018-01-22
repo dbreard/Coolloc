@@ -87,13 +87,11 @@
                         </div><!--/ .layout-switcher-->
                     </div>
 
+                    {% if affichage is defined %}
+
                     <div class="col-md-12 clear ">
                         <div id="list-type" class="proerty-th">
 
-                            {% if annonce is defined %}
-
-
-                                {% for affichage in annonce.annonce %}
                                     {% for affichages in affichage %}
 
                                     <div class="col-sm-6 col-md-3 p0">
@@ -120,13 +118,11 @@
                                     </div>
 
                                     {% endfor %}
-                                {% endfor %}
-
-                            {% endif %}
 
                         </div>
                     </div>
 
+{% if annonce is defined %}
                    <div class="col-md-12 clear">
                         <div class="pull-right">
                             <div class="pagination">
@@ -141,7 +137,9 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
 
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -74,7 +74,7 @@ $app->get('/profils-public-colocataire/{page}', function (Request $request) use 
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
     $membresAnnoncesInfo = new SearchController;
-    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app);
+    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app, $request);
     $userSearchColocation = Controller::userSearchColocation($app);
 
 
