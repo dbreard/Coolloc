@@ -92,7 +92,7 @@ $app->get('/profils-public-colocataire/{page}', function (Request $request) use 
 
 
 //RESULTAT RECHERCHE
-$app->get('/resultat-recherche', "Coolloc\Controller\SearchController::searchAllAnnonce")->bind('resultat-recherche');
+$app->get('/resultat-recherche/{page}', "Coolloc\Controller\SearchController::searchAllAnnonce")->bind('resultat-recherche');
 
 
 

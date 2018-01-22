@@ -33,7 +33,7 @@
                                     {% else %}
                                         <li><a href="{{ path('inscription') }}">Vous inscrire</a>  </li>
                                     {% endif %}
-                                    <li><a href="{{ path('resultat-recherche') }}">Nos annonces</a>  </li>
+                                    <li><a href="{{ path('resultat-recherche',  {"page" : 1}) }}">Nos annonces</a>  </li>
                                     <li><a href="{{ path('contact') }}">Nous contacter</a></li>
                                     <li><a href="{{ path('faq') }}">Questions fréquentes (FAQ)</a>  </li>
                                     <li><a href="{{ path('mentions-legales') }}">Mentions légales </a>  </li>

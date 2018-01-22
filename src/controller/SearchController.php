@@ -220,12 +220,37 @@ class SearchController extends Controller
         }
     }
 
-    public function searchAllAnnonce(Application $app) {
+    public function searchAllAnnonce(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $pageActuelle = strip_tags(trim($request->get("page")));
 
         $response = Model::searchAllAnnonceExist($app);
+
+        $a = (int) $response['count'];
+        $maxPage = (int)ceil( $a / $app['nbFilterAnnonce']);
+
+        $annonce = array();
+
+        // La fonction ceil() arrondit à l'entier supérieur.
+
+        $page = ''; // Le numéro de la page que nous souhaitons visualiser
+            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $page <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
+            {
+                $page = $pageActuelle;
+            }
+            else // Si le paramètre n'est pas spécifié ou n'est pas un nombre valide
+            {
+                $page = 1;
+            }
+
+        // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
+        $offset = ($page - 1) * 8;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
+
+        $annonce['annonce'] = Model::searchAllAnnonceExistLimitDesc($app, $app['nbFilterAnnonce'], $offset);
+        $annonce['page'] = $page;
+        $annonce['maxPage'] = $maxPage;
 
         if ($isConnectedAndAdmin){
             return $app['twig']->render('serp-annonce.html.twig', array(
@@ -233,6 +258,7 @@ class SearchController extends Controller
                 "connected" => $isconnected,
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                "annonce" => $annonce,
             ));
         }
 
@@ -241,11 +267,13 @@ class SearchController extends Controller
                 "connected" => $isconnected,
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                "annonce" => $annonce,
         ));
         } else {
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                "annonce" => $annonce,
             ));
         }
     }
@@ -260,7 +288,7 @@ class SearchController extends Controller
 
         $nbProfils = $membres->countAllUsers();
         $a = (int) $nbProfils;
-        $maxPage = (int)ceil( $a / $app['nbFilter']);
+        $maxPage = (int)ceil( $a / $app['nbFilterProfil']);
 
         $membre = array();
 
@@ -279,7 +307,7 @@ class SearchController extends Controller
         // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
         $offset = ($page - 1) * 8;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
 
-        $membre['profil'] = $membres->UsersColocationSelectedLimitDesc($app['nbFilter'], $offset);
+        $membre['profil'] = $membres->UsersColocationSelectedLimitDesc($app['nbFilterProfil'], $offset);
         $membre['page'] = $page;
         $membre['maxPage'] = $maxPage;
 

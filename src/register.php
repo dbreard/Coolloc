@@ -46,5 +46,6 @@
 
     $app['mail'] = new PHPMailer(true);
 
-    $app['nbFilter'] = 8;
+    $app['nbFilterProfil'] = 8;
+    $app['nbFilterAnnonce'] = 8;
 
