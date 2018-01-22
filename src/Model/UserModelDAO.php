@@ -59,13 +59,8 @@ class UserModelDAO {
         return $this->db->lastInsertId();
     }
 
-<<<<<<< HEAD
-    // SELECTION D'UN USER PAR SON TOKEN EMAIL
-    public function selectUserFromToken(string $token) :array{
-=======
     // SELECTION D'UN USER PAR SON TOKEN
     public function selectUserFromToken(string $token){
->>>>>>> dev_clonemaster
 
         $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
         $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));
