@@ -161,14 +161,27 @@ class Controller {
         }
     }
 
+    public static function userSearchColocation(){
+      if (ifConnected())
+        $userStatus = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $userStatus = $userStatus['status'];
+        if ($userStatus == "cherche colocation"){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+    }
+
     public function sessionDestroy(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-    
+
         if (!$isConnectedAndAdmin && !$isconnected)
             return $app->redirect('/Coolloc/public') ;
-    
+
 
         // On delete le token de connexion
         $deleteTokenConnection = new TokensDAO($app['db']);
