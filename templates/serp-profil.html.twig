@@ -65,15 +65,15 @@
                         <div id="list-type" class="proerty-th">
 
                             {% if affichage is defined %}
-                                {% for profil in affichage.membres %}
+                                {% for profil in affichage %}
 
-                                    <div class="col-sm-6 col-md-2 p0">
+                                    <div class="col-sm-6 col-md-3 p0">
                                         <div class="box-two proerty-item property-features">
                                             <div class="item-thumb">
-                                                <a href="{{ path('fiche-profil') }}" ><img  src="{{ profil.profil_picture }}" alt="Photo de profil de {{ profil.firstname }} {{ profil.lastname }}"></a>
+                                                <a href="{{ path('fiche-profil', {"id_user" : profil.id_user }) }}" ><img  src="{{ profil.profil_picture }}" alt="Photo de profil de {{ profil.firstname }} {{ profil.lastname }}"></a>
                                             </div>
                                             <div class="item-entry overflow">
-                                                <h5><a href="{{ path('fiche-profil') }}" ><ul><li>{{ profil.firstname }}</li><li> {{ profil.lastname }}</li></ul></a></h5>
+                                                <h5><a href="{{ path('fiche-profil', {"id_user" : profil.id_user }) }}" ><ul><li>{{ profil.firstname }}</li><li> {{ profil.lastname }}</li></ul></a></h5>
                                                 <div class="dot-hr"></div>
                                                 <span class="pull-left"><b>date souhaitée:</b><br> {{ profil.date_dispo }} </span>
 

@@ -6,6 +6,7 @@ use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\UpdateDetailsProfilModelDAO;
 
 class DetailsProfilController extends Controller{
@@ -130,6 +131,66 @@ class DetailsProfilController extends Controller{
     } else {
         return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options));
     }
+  }
+
+  // Envoie des données de l'utilisateur par son id
+  public function UserInfoById(Application $app, Request $request){
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+      $idUser = strip_tags(trim($request->get("id_user"))); // ON RECUPERE L'ID UTILISATEUR DANS L'URL
+
+      if(!filter_var($idUser, FILTER_VALIDATE_INT)){ // VERIFICATION DU BON FORMAT DE L'ID
+          return $app->redirect('/Coolloc/public/connected/sabit/gerer-annonces');// SI L'ID EST AU MAUVAIS FORMAT
+      }
+
+      $detailsUser = new UserModelDAO($app['db']); // instanciation d'un objet pour recupérer les infos utilisateur
+      $resultat = $detailsUser->selectUserFromId($idUser);
+
+      if ($resultat != false){ // si la variable resultat n'est pas vide
+
+          if ($isConnectedAndAdmin){
+              return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+                  "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+                  "detailsUser" => $resultat['user'],
+                  "district" => $resultat['district'],
+                  "equipment" => $resultat['equipment'],
+                  "member_profil" => $resultat['member_profil'],
+                  "hobbie" => $resultat['hobbies'],
+
+              ));
+          }
+
+          elseif ($isconnected) {
+              return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+                  "connected" => $isconnected,
+                  "detailsUser" => $resultat['user'],
+                  "district" => $resultat['district'],
+                  "equipment" => $resultat['equipment'],
+                  "member_profil" => $resultat['member_profil'],
+                  "hobbie" => $resultat['hobbies'],
+
+
+              ));
+          }
+
+          else {
+              return $app['twig']->render('profil-recherche-colocation.html.twig', array(
+                  "detailsUser" => $resultat['user'],
+                  "detailsUser" => $resultat['user'],
+                  "district" => $resultat['district'],
+                  "equipment" => $resultat['equipment'],
+                  "member_profil" => $resultat['member_profil'],
+                  "hobbie" => $resultat['hobbies'],
+
+
+              ));
+
+          }
+      }else{
+          return $app->abort(404, "Post $idUser n'existe pas.");
+      }
+
   }
 
 
