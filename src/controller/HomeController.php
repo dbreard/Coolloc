@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\Model;
 use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\AnnonceModelDAO;
+use Coolloc\Model\CommentModelDAO;
 
 class HomeController extends Controller{
 
@@ -16,11 +17,13 @@ class HomeController extends Controller{
 
         $membres = new UserModelDAO($app['db']);
         $annonce = new AnnonceModelDAO($app['db']);
+        $temoignages = new CommentModelDAO($app['db']);
 
         $membresAnnonce = array();
 
         $membresAnnonce['membres'] = $membres->OrderUsersColocationSelected(); // stockage des resultat de selection des membres dans un index membres
         $membresAnnonce['annonces'] = $annonce->OrderAllAnnoncesSelected(); // stockage des resultat de selection des annonce dans un index annonces
+        $membresAnnonce['temoignages'] = $temoignages->selectComment(); // Stockage des resultat de selection des temoignages dans un index temoignages
 
         return $membresAnnonce;
 
