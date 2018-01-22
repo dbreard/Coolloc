@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Coolloc\Controller\Controller;
 use Coolloc\Controller\HomeController;
+use Coolloc\Controller\AProposController;
 use Coolloc\Controller\FaqController;
 use Coolloc\Controller\SearchController;
 use Coolloc\Model\Model;
@@ -347,7 +348,6 @@ $app->get('/a-propos', function () use ($app) {
         ));
 
     }
-
 })
     ->bind('a-propos');
 
@@ -355,6 +355,7 @@ $app->get('/a-propos', function () use ($app) {
     //AFFICHAGE PRESENTATION PROFIL
 
 $app->get('/fiche-profil/{id_user}', 'Coolloc\Controller\DetailsProfilController::UserInfoById')->bind('fiche-profil');
+
 
 
 
