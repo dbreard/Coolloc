@@ -61,24 +61,24 @@ $app->get('/profils-public-colocataire', function () use ($app) {
 
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    $membresAnnoncesInfo = new HomeController;
+    $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
 
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('serp-profil.html.twig', array(
+    if ($isConnectedAndAdmin) {
+        return $app['twig']->render('index.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
         ));
-    }
+    } elseif ($isconnected) {
+        return $app['twig']->render('index.html.twig', array(
+            "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
+        ));
 
-    elseif ($isconnected) {
-        return $app['twig']->render('serp-profil.html.twig', array(
-     "connected" => $isconnected,
-    ));
     } else {
         return $app['twig']->render('serp-profil.html.twig', array());
     }
-
-})
-    ->bind('profils-colocataires-recherchant-colocation');
+})->bind('profils-colocataires-recherchant-colocation');
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', function () use ($app) {

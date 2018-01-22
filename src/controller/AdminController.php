@@ -168,8 +168,7 @@ class AdminController extends Controller {
                     return $app->redirect('/Coolloc/public/connected/sabit/gerer-annonces');// SI L'ID EST AU MAUVAIS FORMAT
                 }
 
-                $detailsAnnonce = new AnnonceModelDAO($app['db']); // instanciation d'un objet pour recupérer les infos de l'annonce
-                $resultat = $detailsAnnonce->selectAnnonceById($idAnnonce);
+                $resultat = Model::selectAnnonceById($idAnnonce);
 
 
                 if (isset($resultat)){ // si la requette retourne un resultat
