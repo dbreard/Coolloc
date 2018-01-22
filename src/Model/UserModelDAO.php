@@ -4,6 +4,7 @@ namespace Coolloc\Model;
 
 use Silex\Application;
 use Doctrine\DBAL\Connection;
+use Coolloc\controller\Controller;
 
 class UserModelDAO {
 
@@ -85,8 +86,16 @@ class UserModelDAO {
         $sql = "SELECT * FROM user_options WHERE id_user = ?";
         $user = $this->getDb()->fetchAssoc( $sql, array((int) $idUser) );
 
-        return $user;
 
+        $response = array();
+
+        $response['district'] = Controller::stringToArray($user['district']);
+        $response['equipment'] = Controller::stringToArray($user['equipment']);
+        $response['hobbies'] = Controller::stringToArray($user['hobbies']);
+        $response['member_profil'] = Controller::stringToArray($user['member_profil']);
+        $response['user'] = $user;
+
+        return $response;
     }
 
     // CHANGE LE STATUT DE L'ADMIN EN ACTIF APRES RECEPTION DU TOKEN PAR MAIL
@@ -127,6 +136,17 @@ class UserModelDAO {
 
         return $users;
     }
+
+
+    // COMPTE LE NOMBRE D'UTILISATEUR EN BDD
+    public function countAllUsers(){
+
+        $sql = "SELECT COUNT(id_user) FROM user";
+        $nbrAnnonces = $this->getDb()->fetchAssoc($sql, array());
+
+        return $nbrAnnonces;
+    }
+
 
     //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
     public function UsersColocationSelected(){

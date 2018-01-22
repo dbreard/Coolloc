@@ -7,6 +7,7 @@ use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\SearchAnnonceModelDAO;
 
 
@@ -247,5 +248,14 @@ class SearchController extends Controller
                 "nb_resultats" => $response['count'],
             ));
         }
+    }
+
+    // SELECTION DE TOUT LES PROFILS
+    public function searchAllProfils(Application $app){
+        $membres = new UserModelDAO($app['db']);
+
+        $membresAnnonce = $membres->UsersColocationSelected(); // stockage des resultat de selection des membres
+
+        return $membresAnnonce;
     }
 }
