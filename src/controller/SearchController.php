@@ -17,6 +17,7 @@ class SearchController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
@@ -179,6 +180,7 @@ class SearchController extends Controller
                         "connected" => $isconnected,
                         "affichage" => $response,
                         "nb_resultats" => $nbResponse,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -187,6 +189,7 @@ class SearchController extends Controller
                         "connected" => $isconnected,
                         "affichage" => $response,
                         "nb_resultats" => $nbResponse,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 } else {
                     return $app['twig']->render('serp-annonce.html.twig', array(
@@ -201,6 +204,7 @@ class SearchController extends Controller
                     return $app['twig']->render('index.html.twig', array(
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
                     ));
                 }
@@ -208,6 +212,7 @@ class SearchController extends Controller
                 elseif ($isconnected) {
                     return $app['twig']->render('index.html.twig', array(
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
                     ));
                 }
@@ -224,23 +229,27 @@ class SearchController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
+        $userSearchColocation = Controller::userSearchColocation($app);
         $response = Model::searchAllAnnonceExist($app);
 
         if ($isConnectedAndAdmin){
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "isConnectedAndAmin" => $isConnectedAndAdmin,
                 "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+               
             ));
         }
 
         elseif ($isconnected) {
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                
         ));
         } else {
             return $app['twig']->render('serp-annonce.html.twig', array(

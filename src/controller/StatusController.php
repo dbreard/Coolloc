@@ -28,19 +28,20 @@ class StatusController extends Controller{
     }
     elseif ($status == "cherche_colocation"){
       //si le champ correspond a la recherche de colocation
+      $userSearchColocation = Controller::userSearchColocation($app);
       $id = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
       $updateStatus = new UserModelDAO($app['db']);
       $rowAffected = $updateStatus->updateUserStatus($id['id_user'], "cherche colocation");
       if ($rowAffected == 1){
         //si le modele retourne
         $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-        return $app['twig']->render('connected/profil.html.twig', array('profilInfo' => $profilInfo, "success" => ""));
+        return $app['twig']->render('connected/profil.html.twig', array('profilInfo' => $profilInfo, "success" => "", "userSearchColocation" => $userSearchColocation,));
       }
       else{
         //
         $this->erreur['failed_update'] = 'Le changement du statut a échoué';
         return $app['twig']->render('connected/profil.html.twig', array(
-            "error" => $this->erreur, "profilInfo" => $profilInfo));
+            "error" => $this->erreur, "profilInfo" => $profilInfo, "userSearchColocation" => $userSearchColocation,));
       }
     }
     else{

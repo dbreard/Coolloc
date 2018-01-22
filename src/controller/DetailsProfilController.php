@@ -129,7 +129,8 @@ class DetailsProfilController extends Controller{
     if (!$isconnected) {
         return $app->redirect('/../Coolloc/public/login');
     } else {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options));
+        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options, "profilInfo" => $idUser["id_user"],
+    ));
     }
   }
 

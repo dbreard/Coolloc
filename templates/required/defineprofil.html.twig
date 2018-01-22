@@ -3,42 +3,13 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-6 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
-                 
-                 <div class="asks-first">
-                    <div class="asks-first-circle">
-                        <span class="fa fa-search"></span>
-                    </div>
-                    <a href="{{path('inscription')}}">
-                    <div class="asks-first-info">
-                        <h2>VOUS RECHERCHEZ UNE colocation ?</h2>
-                        <p> Inscrivez vous pour accèder à toutes les infos des annonces de colocations</p>
-                    </div>
-                    
-
-                    <div class="asks-first-arrow">
-                       <span class="fa fa-angle-right"></span>
-                    </div>
-                    </a>
-                </div>
-            </div>
-
-            
-            <div class="col-md-6 col-sm-10 col-sm-offset-1 col-xs-12 col-md-offset-0">
-                <div  class="asks-first">
-                    <div class="asks-first-circle">
-                        <span class="fa fa-usd"></span>
-                    </div>
-                    <a href="{{path('inscription')}}">
-                    <div class="asks-first-info">
-                        <h2>VOUS RECHERCHEZ UN colocataire ?</h2>
-                        <p> Publiez l'annonce de votre collocation dès votre inscription et consultez les profils de nos membres en recherche</p>
-                    </div>
-                    <div class="asks-first-arrow">
-                        <span class="fa fa-angle-right"></span>
-                    </div>
-                    </a>
-
+            <div class="col-md-12">
+                <div class="col-md-4 col-md-offset-4">
+                    {% if connected is defined %}
+                    <a class="navbar-btn nav-button login col-sm-12 text-center "  href="{{ path('profil') }}" ><b>Profil</b></a>
+                    {% else %}
+                    <a class="navbar-btn nav-button login col-sm-12 text-center "  href="{{ path('inscription') }}" ><b>M'inscrire</b></a>
+                    {% endif %}
                 </div>
             </div>
 

@@ -28,6 +28,8 @@ class AnnonceController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         $arrayMessage = $app["formulaire"]["verifParamAnnonce"]["arrayMessage"];
 
@@ -59,6 +61,7 @@ class AnnonceController extends Controller
                     $conditions => 'Les conditions doivent être acceptés',
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -76,6 +79,7 @@ class AnnonceController extends Controller
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
                     $conditions => 'Les conditions doivent être acceptés',
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
         }
@@ -436,6 +440,8 @@ class AnnonceController extends Controller
     public function detailAnnonceAction(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         $id_annonce = strip_tags(trim($request->get("id_annonce")));
 
@@ -444,6 +450,7 @@ class AnnonceController extends Controller
                 return $app['twig']->render('details-annonce.html.twig', array(
                     "connected" => $isconnected,
                     "error" => "l'URL à été corrompu.",
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }else {
                 return $app['twig']->render('details-annonce.html.twig', array(
@@ -473,6 +480,7 @@ class AnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbie" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         } else {
             return $app['twig']->render('details-annonce.html.twig', array(
@@ -485,6 +493,7 @@ class AnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbie" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         }
     }
