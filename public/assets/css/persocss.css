@@ -7,6 +7,8 @@
         padding: 5px;
     }
 
+    span.bold {font-weight:bold;}
+
 /* page ajout annonce */
 /* text area en mode desktop */
 .form-control.textarea-annonce {
@@ -157,9 +159,27 @@ font-weight: 500;
 
 /* page accueil */
 
-.itemthumb.profil-user img {
+#profil-colocataire img {
+    width:200px;
+    max-width: 100%;
+    min-height: auto !important;
+    max-height: 200px !important;
+}
+
+.slider-principal .owl-wrapper-outer {
+    background-color: #F3F3F3;
+    opacity: .6;
+}
+
+#bg-slider .slider-principal .item img {
     width: 100%;
-    height: auto;
+    height: 630px;
+    opacity: .6;
+}
+
+
+.Welcome-area h2 {
+    line-height: 85px !important;
 }
 
 @media (min-width: 768px) and (max-width: 979px){

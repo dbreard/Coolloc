@@ -59,8 +59,13 @@ class UserModelDAO {
         return $this->db->lastInsertId();
     }
 
+<<<<<<< HEAD
     // SELECTION D'UN USER PAR SON TOKEN EMAIL
     public function selectUserFromToken(string $token) :array{
+=======
+    // SELECTION D'UN USER PAR SON TOKEN
+    public function selectUserFromToken(string $token){
+>>>>>>> dev_clonemaster
 
         $sql = "SELECT user_id FROM tokens WHERE token = ? AND type LIKE 'email'";
         $idUser = $this->getDb()->fetchAssoc($sql, array((string) $token));
@@ -89,6 +94,7 @@ class UserModelDAO {
 
     }
 
+    // CHANGE LE STATUT DE L'ADMIN EN ACTIF APRES RECEPTION DU TOKEN PAR MAIL
     public function updateUserFromToken(array $idUser) :int{
 
         $sql = "UPDATE user SET account = 'actif' WHERE id_user = ? ";
@@ -98,7 +104,7 @@ class UserModelDAO {
 
     }
 
-
+    // MODIFICATION DU STATUS UTILISATEUR
     public function updateUserStatus(string $idUser, string $status): int{
       $sql = "UPDATE user SET status = ? WHERE id_user = ? ";
       $rowAffected = $this->getDb()->executeUpdate( $sql, array((string) $status, (int) $idUser));
@@ -125,7 +131,36 @@ class UserModelDAO {
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
+    }
 
+    //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
+    public function UsersColocationSelected(){
+
+        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation'";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+    //SELECTION DES UTILISATEURS RECENT CHERCHANT UNE COLOCATION
+    public function OrderUsersColocationSelected(){
+
+        $sql = "SELECT *  FROM user_options WHERE status = 'cherche colocation' ORDER BY date_created DESC LIMIT 0,5";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+    //SELECTION DES UTILISATEURS CHERCHANT DES COLOCATAIRES
+    public function UsersColocataireSelected(){
+
+        $sql = "SELECT uo.* , aoc.id_user_post_annonce FROM user_options uo , annonce_options_city aoc WHERE aoc.user_id = uo.id_user AND status = 'cherche colocataire'";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+
+        return $users;
     }
 
 
@@ -138,9 +173,5 @@ class UserModelDAO {
 
 
     }
-
-
-    
-    
 
 }

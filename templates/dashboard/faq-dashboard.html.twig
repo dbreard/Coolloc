@@ -1,0 +1,84 @@
+{% extends"dashboard/layout-dashboard.html.twig" %}
+
+
+
+{% block headtitle %}
+    Dashboard | CoolLoc, la colocation cool !
+{% endblock%}
+
+
+
+{% block nav %}
+    {# insertion des barre de navigation #}
+    {% include 'dashboard/required/nav.html.twig' ignore missing  %}
+{% endblock %}
+
+
+{% block title %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Gestion F.A.Q
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Dashboard
+                </li>
+            </ol>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <form class="col-md-3" method="post">
+
+        <div class="form-group">
+            <label for="question">Votre question : </label>
+            <textarea class="form-control" name="question" rows="2" cols="80" style="resize: none">{% if valueFaq is defined %}{{ valueFaq.question }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="reponse">Votre réponse : </label>
+            <textarea class="form-control" name="reponse" rows="10" cols="80" style="resize: none">{% if valueFaq is defined %}{{ valueFaq.reponse }}{% endif %}</textarea>
+        </div>
+        {% if valueFaq is defined %}
+            <input class="btn btn-primary col-md-4" type="submit" value="Modifier">
+        {% else %}
+            <input class="btn btn-primary col-md-4" type="submit" value="Envoyer">
+        {% endif %}
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped col-md-12">
+            <thead>
+            <tr>
+                <th class="text-center">Id F.A.Q</th>
+                <th class="text-center">Question</th>
+                <th class="text-center">Réponse</th>
+                <th class="text-center">Editer</th>
+                <th class="text-center">Supprimer</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% if faqs is defined %}
+            {% for faq in faqs %}
+                <tr>
+                    <td class="text-center">{{ faq.id }}</td>
+                    <td class="text-center">{{ faq.question }}</td>
+                    <td class="text-center">{{ faq.reponse }}</td>
+                    <td class="text-center"><a href="{{ path("gerer-faq-modifier-ou-supprimer", {"id_faq" : faq.id, "action" : 'modify'}) }}"><i class="fa fa-pencil"></i></a></td>
+                    <td class="text-center"><a href="{{ path("gerer-faq-modifier-ou-supprimer", {"id_faq" : faq.id, "action" : 'delete'}) }}"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

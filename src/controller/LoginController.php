@@ -51,8 +51,16 @@ class LoginController extends Controller
                     if($user['account'] === 'actif')
                     { // SI LE COMPTE DE L'UTILISATEUR EST BIEN ACTIF
 
-                        $tokenUser = new TokensDAO($app['db']);
-                        $resultatToken = $tokenUser->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
+                        $selectToken = new tokensDAO($app['db']);
+                        $existToken = $selectToken->verifExistTokenConnection($user['id_user']);
+
+                        if($existToken){ // si un ancien token correspondant a l'utilisateur existe
+                            $token = $selectToken->selectTokenFromIdUser($user['id_user']);
+                            $selectToken->deleteToken($token['token']);
+                        }
+
+
+                        $resultatToken = $selectToken->createToken($user['id_user'], $this->expireToken(), $this->generateToken(), 'connexion');
                         // générer le token en fonction de id_user
                         if (!empty ($resultatToken))
                         { // si le token existe, on récupère sa valeur dans la session
@@ -78,7 +86,7 @@ class LoginController extends Controller
               else 
               {
                     $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
-                }
+              }
 
             }
             if (empty($this->erreur))

@@ -46,14 +46,6 @@
     </div>
 </div>
 
-
-
-    {% block fonction %}
-
-        {% include 'required/membre.php' ignore missing  %}
-
-    {% endblock %}
-
     <body>
         <!-- property area -->
         <div class="properties-area recent-property" style="background-color: #FFF;">
@@ -90,10 +82,12 @@
                                 </div><!--/ .sel-->
                             </div><!--/ .items-per-page-->
                         </div> #}
-
-                        <div class="col-xs-2 layout-switcher">
-                            <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                            <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
+                        <div class="col-xs-12 col-md-7">
+                            <span class="bold"><span class="red">{{ nb_resultats }}</span> annonces correspondent à vos critères.</span>
+                        </div>
+                        <div class="col-md-offset-3 col-md-2 layout-switcher">
+                            <a class="layout-list" href="javascript:void(0);" title="Affichage en ligne"> <i class="fa fa-th-list"></i>  </a>
+                            <a class="layout-grid active" href="javascript:void(0);" title="Affichage en grille"> <i class="fa fa-th"></i> </a>
                         </div><!--/ .layout-switcher-->
                     </div>
 
@@ -111,7 +105,7 @@
                                             </div>
 
                                             <div class="item-entry overflow">
-                                                <h5><a href="property-1.html">{{ affichages.name_coloc }}</a></h5>
+                                                <h5><a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}">{{ affichages.name_coloc }}</a></h5>
                                                 <div class="dot-hr"></div>
                                                 <span class="pull-left"><b> Surface :</b> {{ affichages.surface }} m² </span>
                                                 <span class="proerty-price pull-right">{{ affichages.rent }} €</span>
@@ -134,7 +128,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 clear">
+                    {# <div class="col-md-12 clear">
                         <div class="pull-right">
                             <div class="pagination">
                                 <ul>
@@ -147,7 +141,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> #}
                 </div>
             </div>
         </div>

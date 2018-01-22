@@ -3,171 +3,97 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                 <!-- /.feature title -->
-                <h2>Des colocataires en recherche de colocation</h2>
-                <p>Les profils des derniers membres inscrits. </p>
+                <h2>Votre CoolLocataire est ici !</h2>
+                <p>Les derniers membres inscrits. </p>
             </div>
         </div>
 
         <div class="row">
-            <div class="proerty-th " id="profile-user">
-                {# first #}
+
+            <div class="proerty-th" id="profil-colocataire">
+                {% if affichage is defined %}
+                    {% for profil in affichage.membres %}
+
+                        <div class="col-sm-6 col-md-2 p0">
+                            <div class="box-two proerty-item property-features">
+                                <div class="item-thumb">
+                                    <a href="{{ path('fiche-profil') }}" ><img  src="{{ profil.profil_picture }}" alt="Photo de profil de {{ profil.firstname }} {{ profil.lastname }}"></a>
+                                </div>
+                                <div class="item-entry overflow">
+                                    <h5><a href="{{ path('fiche-profil') }}" ><ul><li>{{ profil.firstname }}</li><li> {{ profil.lastname }}</li></ul></a></h5>
+                                    <div class="dot-hr"></div>
+                                    <span class="pull-left"><b>date souhaitée:</b><br> {{ profil.date_dispo }} </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {# More Profils #}
                 <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
+                    <div class="box-tree more-proerty text-center">
+                        <div class="item-tree-icon">
+                            <i class="fa fa-th"></i>
                         </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# second #}
-                <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
+                        <div class="more-entry overflow">
+                            <h5><a href="{{path('profils-colocataires-recherchant-colocation')}}" >Votre futur CoolLocataire </a></h5>
+                            <h5 class="tree-sub-ttl">Les profils</h5>
+                            <a href="{{path('profils-colocataires-recherchant-colocation')}}" class="btn border-btn more-black" value="Les colocataires">tout voir</a>
                         </div>
                     </div>
                 </div>
 
-                {# third #}
-                <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# fourth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# fifth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb profil-user">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100% !important; height:auto !important;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                {# sixth #}
-               <div class="col-sm-6 col-md-2 p0">
-                    <div class="box-two proerty-item property-features">
-                        <div class="item-thumb">
-                            <a href="{{ path('fiche-profil') }}" ><img  style="with:100%; height:auto;" src="{{ asset('assets/img/client-face2.png ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="{{ path('fiche-profil') }}" ><ul><li>Prénom</li><li> nom</li></ul></a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>date souhaitée:</b> affichage date </span>
-                            
-                        </div>
-                    </div>
-                </div>
 
         </div>
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                 <!-- /.feature title -->
-                <h2>Nos recherches de colocataires</h2>
+                <h2>Nos CoolLocations sont là !</h2>
                 <p>Les dernières annonces publiées. </p>
             </div>
         </div>
 
         <div class="row">
             <div class="proerty-th">
-                {# first #}
-                <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-1.html" ><img src="{{ asset('assets/img/demo/property-1.jpg ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="property-1.html" >Super nice villa </a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>Area :</b> 120m </span>
-                            <span class="proerty-price pull-right">$ 300,000</span>
+
+                {% for affichages in affichage.annonces %}
+
+                    <div class="col-sm-6 col-md-3 p0">
+                        <div class="box-two proerty-item">
+                            <div class="item-thumb">
+                                <a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}" ><img src="{{ affichages.url_media }}" alt="Photo principale de l'annonce de {{ affichages.firstname }} {{ affichages.lastname }}"></a>
+                            </div>
+
+                            <div class="item-entry overflow">
+                                <h5><a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}">{{ affichages.name_coloc }}</a></h5>
+                                <div class="dot-hr"></div>
+                                <span class="pull-left"><b> Surface :</b> {{ affichages.surface }} m² </span>
+                                <span class="proerty-price pull-right">{{ affichages.rent }} €</span>
+                                <p style="display: none;">{{ affichages.description }}</p>
+                                <div class="property-icon">
+                                    <b> Type de bien :</b> {{ affichages.housing_type }}
+                                    {# <img src="assets/img/icon/bed.png">(5)|
+                                    <img src="assets/img/icon/shawer.png">(2)|
+                                    <img src="assets/img/icon/cars.png">(1) #}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
 
-                {# second #}
-                <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-2.html" ><img src="{{ asset('assets/img/demo/property-2.jpg ') }}"></a>
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="property-2.html" >Super nice villa </a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>Area :</b> 120m </span>
-                            <span class="proerty-price pull-right">$ 300,000</span>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
 
-                {# third #}
-                <div class="col-sm-6 col-md-3 p0">
-                    <div class="box-two proerty-item">
-                        <div class="item-thumb">
-                            <a href="property-3.html" ><img src="{{ asset('assets/img/demo/property-3.jpg ') }}"></a>
-
-                        </div>
-                        <div class="item-entry overflow">
-                            <h5><a href="property-3.html" >Super nice villa </a></h5>
-                            <div class="dot-hr"></div>
-                            <span class="pull-left"><b>Area :</b> 120m </span>
-                            <span class="proerty-price pull-right">$ 300,000</span>
-                        </div>
-                    </div>
-                </div>
-
-                {# fourth #}
                 <div class="col-sm-6 col-md-3 p0">
                     <div class="box-tree more-proerty text-center">
                         <div class="item-tree-icon">
                             <i class="fa fa-th"></i>
                         </div>
                         <div class="more-entry overflow">
-                            <h5><a href="property-1.html" >Les colocations </a></h5>
-                            <h5 class="tree-sub-ttl">Voir toutes nos annonces</h5>
-                            <a href="" class="btn border-btn more-black" value="All properties">tout voir</a>
+                            <h5><a href="property-1.html" >Les coolLocations </a></h5>
+                            <h5 class="tree-sub-ttl">Nos annonces</h5>
+                            <a href="" class="btn border-btn more-black" value="toutes les annonces">Tout voir</a>
                         </div>
                     </div>
                 </div>

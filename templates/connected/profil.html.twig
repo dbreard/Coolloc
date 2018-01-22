@@ -60,9 +60,9 @@
     <div class="container content-area recent-property padding-top-40">
         <div class="row">
             <div class="content-area">
-                  
 
-                    
+
+
                       {% if profilInfo.status == "cherche colocation" %}
                         {% if success is defined %}
                           <div class="alert alert-success text-center">BIENVENUE sur votre profil. Pour recevoir des annonces plus pertinentes, nous vous invitons a complèter votre profil en cliquant sur le bouton AJOUTER MES PREFERENCES ci-dessous</div>
@@ -76,9 +76,9 @@
                         <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
                       {% else %}
                       {% endif %}
-                    
 
-              
+
+
             </div>
         </div>
 
@@ -167,14 +167,14 @@
               <div class="row">
               {% if annonceUser is defined%}
                 {% for annonceUsers in annonceUser %}
-                  <a  href="{{path ('details-annonce')}}">
+                  <a  href="{{ path ('details-annonce', {"id_annonce" : annonceUsers.id_user_post_annonce }) }}">
                     <div class="col-md-4">
                       <div class="thumbnail annonce_miniature">
                         <div class="gerer col-xs-12 text-center" type="button"><p>Voir l'annonce<p></div>
                         <img alt="300x200" src="{{ annonceUsers.url_media }}">
                         <div class="caption">
                           <h4>{{ annonceUsers.name_coloc }}</h4>
-                          <a href="" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
+                          <a href="{{ path ('gerer-annonce', {"id_annonce" : annonceUsers.id_user_post_annonce }) }}" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
                             </div>
                           </div>
 
