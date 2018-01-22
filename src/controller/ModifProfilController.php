@@ -49,8 +49,12 @@ class ModifProfilController extends Controller{
     if(empty($sex))
       $this->erreur['sex'] = 'Ce champs ne peut pas être vide';
 
-    if(empty($tel))
-      $this->erreur['tel'] = 'Ce champs ne peut pas être vide';
+    if(empty($tel) || !$this->verifTel($tel)){
+      $this->erreur['tel'] = 'Ce numéro de téléphone n\'est pas valide';
+    }
+    else{
+      $tel = $this->modifyTel($tel);
+    }
 
     if(empty($status))
       $this->erreur['status'] = 'Ce champs ne peut pas être vide';
@@ -62,8 +66,7 @@ class ModifProfilController extends Controller{
 
     $username= $firstname."_".$lastname;
 
-
-    if (!empty($_FILES["profil_picture"]['tmp_name'])) {
+    if (!empty($_FILES["profil_picture"]['name'])) {
         // Je créer un préfixe pour mon image
         $photo_name_profil = str_replace(' ', '_', $username);
         // Je créer le nom de la photo
@@ -73,7 +76,7 @@ class ModifProfilController extends Controller{
         // Je créer le chemin d'accés pour aller copier la photo dans le dossier "photos"
         $photo_dossier = __DIR__ . "/../../public/photos/$nom_photo";
         // Si elle à un nom
-        if (!empty($_FILES["profil_picture"]['name'])) {
+        if (!empty($_FILES["profil_picture"]['tmp_name'])) {
             // Je copie la photo dans le dossier
             copy($_FILES["profil_picture"]['tmp_name'], $photo_dossier);
         }else { // sinon erreur
@@ -82,7 +85,7 @@ class ModifProfilController extends Controller{
     }
 
 // On verifie que l'utilisateur a ajouté une photo
-    if(!empty($_FILES['profile_picture']['name'])){
+    if(!empty($_FILES['profil_picture']['tmp_name']) && !isset($this->erreur['photo'])){
       $arrayUpdateProfil = array(
         "firstname" => $firstname,
         "lastname" => $lastname,
@@ -106,29 +109,31 @@ class ModifProfilController extends Controller{
         "activity" => $activity,);
     }
 
-
-      //
       // var_dump($arrayUpdateProfil);
       // die();
 
-
-      $updateProfil = new UpdateProfilModelDAO($app['db']);
-      $rowAffected = $updateProfil->updateProfilUser($arrayUpdateProfil, $app);
-
-      $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-      $userId = $idUser['id_user'];
-
       if(empty($this->erreur)){
+
+        $updateProfil = new UpdateProfilModelDAO($app['db']);
+        $rowAffected = $updateProfil->updateProfilUser($arrayUpdateProfil, $app);
+
+        $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $userId = $idUser['id_user'];
+
         if ($rowAffected == true){
           $optionUser = Model::userOptionOnly($userId, $app);
           $annonceUser = Model::annonceByUser($userId, $app);
           return $app['twig']->render('connected/profil.html.twig', array("updated" => "votre profil a bien été modifié", "profilInfo" => $idUser, "userOption" => $optionUser, "annonceUser" => $annonceUser));
         }
         else{
+          $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+          $userId = $idUser['id_user'];
           return $app['twig']->render('connected/profil-modif.html.twig', array("error" => "OooOops une erreur est survenue, merci de rééssayer", "profilInfo" => $idUser));
         }
       }
       else{
+        $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $userId = $idUser['id_user'];
         return $app['twig']->render('connected/profil-modif.html.twig', array("errors" => $this->erreur, "profilInfo" => $idUser));
       }
     }

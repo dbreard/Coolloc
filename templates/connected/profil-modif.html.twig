@@ -56,17 +56,17 @@
                       <div class="alert alert-danger text-center">{{ error }}</div>
                     {% endif %}
                     <div class="clear">
-                        <div class="col-sm-3 col-sm-offset-1">
-                            <div class="picture-container">
-                                <div class="picture">
-                              <img src="{% if profilInfo.profil_picture is defined %}{{ profilInfo.profil_picture }}{% endif %}" class="picture-src" id="wizardPicturePreview" title=""/>
-                                  <input type="file" id="wizard-picture" name="profil_picture">
-                                </div>
+                        <div class="col-sm-4 col-sm-offset-1">
+                          <div class="picture-container">
+                            <div class="picture">
+                              <img src="{% if profilInfo.profil_picture != NULL %}{{ profilInfo.profil_picture }}{% else %}{{ asset('assets/img/default-property.jpg') }}{% endif %}" class="picture-src" id="wizardPicturePreview1" title=""/>
+                              <input type="file" id="wizard-picture1" name="profil_picture">
                             </div>
+                          {% if errors.photo is defined %}<div class="alert alert-danger text-center">{{ errors.photo }}</div>{% endif %}
+                            <label for="profil_picture">Ajouter/Modifier la photo de profil</label>
+                          </div>
                         </div>
-
                         <div class="col-sm-3 padding-top-25">
-
                             <div class="form-group">
                                 <label>Prénom</label>
                               {% if errors.firstname is defined %}<div class="alert alert-danger text-center">{{ errors.firstname }}</div>{% endif %}
