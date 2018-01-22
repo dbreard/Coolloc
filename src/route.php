@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Coolloc\Controller\Controller;
 use Coolloc\Controller\HomeController;
 use Coolloc\Controller\FaqController;
+use Coolloc\Controller\SearchController;
 use Coolloc\Model\Model;
 
 
@@ -61,23 +62,26 @@ $app->get('/profils-public-colocataire', function () use ($app) {
 
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-    $membresAnnoncesInfo = new HomeController;
-    $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
+    $membresAnnoncesInfo = new SearchController;
+    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app);
 
     if ($isConnectedAndAdmin) {
-        return $app['twig']->render('index.html.twig', array(
+        return $app['twig']->render('serp-profil.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
         ));
     } elseif ($isconnected) {
-        return $app['twig']->render('index.html.twig', array(
+        return $app['twig']->render('serp-profil.html.twig', array(
             "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
         ));
 
     } else {
-        return $app['twig']->render('serp-profil.html.twig', array());
+        return $app['twig']->render('serp-profil.html.twig', array(
+            "affichage" => $donneesMembresAnnonces,
+        ));
     }
+
 })->bind('profils-colocataires-recherchant-colocation');
 
 //RESULTAT RECHERCHE
@@ -357,30 +361,8 @@ $app->get('/a-propos', function () use ($app) {
 
     //AFFICHAGE PRESENTATION PROFIL
 
-$app->get('/fiche-profil', function () use ($app) {
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+$app->get('/fiche-profil/{id_user}', 'Coolloc\Controller\DetailsProfilController::UserInfoById')->bind('fiche-profil');
 
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-            "connected" => $isconnected,
-    ));
-    }
-
-    else {
-        return $app['twig']->render('profil-recherche-colocation.html.twig', array());
-    }
-})
-    ->bind('fiche-profil');
-
-    //controleur
 
 
 

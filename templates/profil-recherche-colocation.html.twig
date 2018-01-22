@@ -37,7 +37,9 @@
             </div>
         </div>
         <!-- End page header -->
+    <pre>
 
+    </pre>
         <!-- property area -->
         <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">   
@@ -56,41 +58,89 @@
                                     <ul class="additional-details-list clearfix">
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Sexe des colocataires</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Yes</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.sex_roommates == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.sex_roommates }}
+                                                {% endif %}
+                                            </span>
                                         </li>
 
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Doit il y avoir un accès handicapé ?</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">2003</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.handicap_access == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.handicap_access }}
+                                                {% endif %}
+                                            </span>
                                         </li>
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Peut on fumer dans la colocation ? </span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">2 Or More Spaces,Covered Parking,Valet Parking</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.smoking == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.smoking }}
+                                                {% endif %}
+                                            </span>
                                         </li>
 
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Les animaux sont ils tolérés ?</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Yes</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.animals == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.animals }}
+                                                {% endif %}
+                                            </span>
                                         </li>
 
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Mon espace individuel est il meublé ?</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal View,Direct ew</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                            {% if detailsUser.furniture == '' %}
+                                                Non définie par l'utilisateur
+                                            {% else %}
+                                                {{ detailsUser.furniture }}
+                                            {% endif %}
+                                            </span>
                                         </li>
 
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Le jardin est il essentiel ?</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal Front,Ocean Access</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.garden == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.garden }}
+                                                {% endif %}
+                                            </span>
                                         </li> 
 
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Le balcon est il essentiel ?</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal Front,Ocean Access</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.balcony == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.balcony }}
+                                                {% endif %}
+                                            </span>
                                         </li> 
 
                                         <li>
                                             <span class="col-xs-6 col-sm-6 col-md-6 add-d-title">Le parking est il essentiel ?</span>
-                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">Intracoastal Front,Ocean Access</span>
+                                            <span class="col-xs-6 col-sm-6 col-md-6 add-d-entry">
+                                                {% if detailsUser.parking == '' %}
+                                                    Non définie par l'utilisateur
+                                                {% else %}
+                                                    {{ detailsUser.parking }}
+                                                {% endif %}
+                                            </span>
                                         </li> 
 
                                     </ul>
@@ -103,12 +153,9 @@
 
                                         <h4 class="s-property-title">Le quartier idéal : </h4>                            
                                         <ul>
-                                            <li>Swimming Pool</li>   
-                                            <li>3 Stories</li>
-                                            <li>Central Cooling</li>
-                                            <li>Jog Path 2</li>
-                                            <li>2 Lawn</li>
-                                            <li>Bike Path</li>
+                                            {% for districts in district %}
+                                                <li> {{ districts }} </li>
+                                            {% endfor %}
                                         </ul>
 
                                         </div>
@@ -118,12 +165,9 @@
 
                                         <h4 class="s-property-title">L'équipement de la colocation : </h4>                            
                                         <ul>
-                                            <li>Swimming Pool</li>   
-                                            <li>3 Stories</li>
-                                            <li>Central Cooling</li>
-                                            <li>Jog Path 2</li>
-                                            <li>2 Lawn</li>
-                                            <li>Bike Path</li>
+                                            {% for equipments in equipment %}
+                                                <li> {{ equipments }} </li>
+                                            {% endfor %}
                                         </ul>
 
                                         </div>
@@ -134,12 +178,9 @@
 
                                         <h4 class="s-property-title">Les centres d'intérêts des colocataires : </h4>                            
                                         <ul>
-                                            <li>Swimming Pool</li>   
-                                            <li>3 Stories</li>
-                                            <li>Central Cooling</li>
-                                            <li>Jog Path 2</li>
-                                            <li>2 Lawn</li>
-                                            <li>Bike Path</li>
+                                            {% for hobbies in hobbie %}
+                                                <li> {{ hobbies }} </li>
+                                            {% endfor %}
                                         </ul>
 
                                         </div>
@@ -149,12 +190,9 @@
 
                                         <h4 class="s-property-title">Mon tempérament</h4>                            
                                         <ul>
-                                            <li>Swimming Pool</li>   
-                                            <li>3 Stories</li>
-                                            <li>Central Cooling</li>
-                                            <li>Jog Path 2</li>
-                                            <li>2 Lawn</li>
-                                            <li>Bike Path</li>
+                                            {% for member_profils in member_profil %}
+                                                <li> {{ member_profils }} </li>
+                                            {% endfor %}
                                         </ul>
 
                                         </div>
@@ -201,15 +239,13 @@
                                                 {# si utilisateur connecté il peut voir les coordonnées sinon rien #}
                                             {% if connected is defined %}
                                                 <ul class="dealer-contacts">                                       
-                                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                                    <li><i class="pe-7s-mail strong"> </i> {{ detailsUser.mail }}</li>
+                                                    <li><i class="pe-7s-call strong"> </i> {{ detailsUser.tel }}</li>
                                                 </ul>
                                             
                                             {% else %}
                                                                                                
                                                 <ul class="dealer-contacts">                                       
-                                                    <li><i class="pe-7s-map-marker strong"> </i> Adresse</li>
                                                     <li><i class="pe-7s-mail strong"> </i> Email</li>
                                                     <li><i class="pe-7s-call strong"> </i> Tél.</li>
                                                 </ul>
