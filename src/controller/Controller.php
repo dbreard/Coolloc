@@ -163,6 +163,12 @@ class Controller {
 
     public function sessionDestroy(Application $app, Request $request) {
 
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    
+        if (!$isConnectedAndAdmin && !$isconnected)
+            return $app->redirect('/Coolloc/public') ;
+    
 
         // On delete le token de connexion
         $deleteTokenConnection = new TokensDAO($app['db']);
