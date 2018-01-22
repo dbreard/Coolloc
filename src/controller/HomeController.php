@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\Model;
 use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\AnnonceModelDAO;
+use Coolloc\Model\CommentModelDAO;
 
 class HomeController extends Controller{
 
@@ -16,6 +17,7 @@ class HomeController extends Controller{
 
         $membres = new UserModelDAO($app['db']);
         $annonce = new AnnonceModelDAO($app['db']);
+        $temoignages = new CommentModelDAO($app['db']);
 
         $membresAnnonce = array();
 
@@ -24,6 +26,7 @@ class HomeController extends Controller{
         $membresAnnonce['stats_users'] = $membres->countAllUsers(); // stockage du nombre d'utilisateur en bdd
         $membresAnnonce['stats_annonces'] = $annonce->countAllAnnonces(); // stockage du nombres d'annonce en bdd
         $membresAnnonce['stats_city'] = $annonce->countAllCityFromAnnonce(); // stockage des resultat de selection des annonce dans un index annonces
+        $membresAnnonce['temoignages'] = $temoignages->selectComment(); // Stockage des resultat de selection des temoignages dans un index temoignages
 
         return $membresAnnonce;
 

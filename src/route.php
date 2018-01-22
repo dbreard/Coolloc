@@ -35,6 +35,10 @@ $app->get('/', function () use ($app) {
     }
 
     elseif ($isconnected) {
+      // echo '<pre>';
+      // var_dump($donneesMembresAnnonces);
+      // echo '</pre>';
+      // die();
         return $app['twig']->render('index.html.twig', array(
      "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
