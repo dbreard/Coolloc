@@ -8,6 +8,7 @@ use Coolloc\Controller\Controller;
 use Coolloc\Controller\HomeController;
 use Coolloc\Controller\AProposController;
 use Coolloc\Controller\FaqController;
+use Coolloc\Controller\SearchController;
 use Coolloc\Model\Model;
 
 
@@ -35,6 +36,10 @@ $app->get('/', function () use ($app) {
     }
 
     elseif ($isconnected) {
+      // echo '<pre>';
+      // var_dump($donneesMembresAnnonces);
+      // echo '</pre>';
+      // die();
         return $app['twig']->render('index.html.twig', array(
      "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
@@ -62,27 +67,34 @@ $app->get('/profils-public-colocataire', function () use ($app) {
 
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-    $membresAnnoncesInfo = new HomeController;
-    $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
+    $membresAnnoncesInfo = new SearchController;
+    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app);
 
     if ($isConnectedAndAdmin) {
-        return $app['twig']->render('index.html.twig', array(
+        return $app['twig']->render('serp-profil.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
         ));
     } elseif ($isconnected) {
-        return $app['twig']->render('index.html.twig', array(
+        return $app['twig']->render('serp-profil.html.twig', array(
             "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
         ));
 
     } else {
-        return $app['twig']->render('serp-profil.html.twig', array());
+        return $app['twig']->render('serp-profil.html.twig', array(
+            "affichage" => $donneesMembresAnnonces,
+        ));
     }
+
 })->bind('profils-colocataires-recherchant-colocation');
+
+
 
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', "Coolloc\Controller\SearchController::searchAllAnnonce")->bind('resultat-recherche');
+
+
 
 //DETAILS ANNONCE
 $app->get('/details-annonce/{id_annonce}', "Coolloc\Controller\AnnonceController::detailAnnonceAction")->bind('details-annonce');
@@ -314,50 +326,37 @@ $app->get('/conditions-generales-de-vente', function () use ($app) {
 $app->get('/a-propos', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    $membresAnnoncesInfo = new HomeController;
+    $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
 
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('a-propos.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('a-propos.html.twig', array(
-     "connected" => $isconnected,
+            "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
     ));
     } else {
-        return $app['twig']->render('a-propos.html.twig', array());
+        return $app['twig']->render('a-propos.html.twig', array(
+            "affichage" => $donneesMembresAnnonces,
+        ));
+
     }
 })
     ->bind('a-propos');
 
 
-//AFFICHAGE PRESENTATION PROFIL
-$app->get('/fiche-profil', function () use ($app) {
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    //AFFICHAGE PRESENTATION PROFIL
+
+$app->get('/fiche-profil/{id_user}', 'Coolloc\Controller\DetailsProfilController::UserInfoById')->bind('fiche-profil');
 
 
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-            "connected" => $isconnected,
-    ));
-    }
-
-    else {
-        return $app['twig']->render('profil-recherche-colocation.html.twig', array());
-    }
-})
-    ->bind('fiche-profil');
-
-    //controleur
 
 
 
@@ -471,29 +470,7 @@ $app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilC
 
 
 //ajout temoignage
-$app->get('connected/temoigner', function () use ($app) {
-
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('connected/temoigner.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('connected/temoigner.html.twig', array(
-     "connected" => $isconnected,
-    ));
-    }
-    else
-    {
-        return $app->redirect('/Coolloc/public/login') ;
-    }
-
-})
+$app->get('connected/temoigner', 'Coolloc\Controller\CommentController::sendCommentInfos')
     ->bind('temoigner');
 $app->post('/connected/temoigner', 'Coolloc\Controller\CommentController::commentAction')->before($verifParamComment);
 
@@ -536,12 +513,12 @@ $app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController:
 
 //GERER FAQ
 $app->get('/connected/sabit/gerer-faq', 'Coolloc\Controller\FaqController::selectedFaqAndAdminInfo') ->bind('gerer-faq');
-$app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamComment);
+$app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamCommentFaq);
 
 
 //MODIFIER - SUPPRIMER FAQ
 $app->get('/connected/sabit/gerer-faq/{id_faq}/{action}', 'Coolloc\Controller\FaqController::modifyDeleteFaq') ->bind('gerer-faq-modifier-ou-supprimer');
-$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::modifyFaq')->before($verifParamComment);
+$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::modifyFaq')->before($verifParamCommentFaq);
 
 //GERER COMMENTAIRES-TEMOIGNAGE
 $app->get('/connected/sabit/gerer-temoignage', 'Coolloc\Controller\CommentController::selectCommentAndAdminInfo')->bind('gerer-temoignage');
