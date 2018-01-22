@@ -45,9 +45,9 @@ class CommentController extends Controller
         $comment = strip_tags(trim($request->get('comment')));
 
 
-        // si le message contient moins de 5 caractères ou si le message contient plus de 101 caractères
-        if ((iconv_strlen($comment) < 5 && iconv_strlen($comment) > 82)){
-            $this->erreur['comment'] = 'Votre commentaire doit contenir entre 5 et 100 caractères';
+        // si le message contient moins de 5 caractères ou si le message contient plus de 82 caractères
+        if ((iconv_strlen($comment) < 5 || iconv_strlen($comment) > 82)){
+            $this->erreur['comment'] = 'Votre commentaire doit contenir entre 5 et 82 caractères';
           }
 
           if(!empty($this->erreur)){
