@@ -84,8 +84,12 @@ $app->get('/profils-public-colocataire', function () use ($app) {
 
 })->bind('profils-colocataires-recherchant-colocation');
 
+
+
 //RESULTAT RECHERCHE
 $app->get('/resultat-recherche', "Coolloc\Controller\SearchController::searchAllAnnonce")->bind('resultat-recherche');
+
+
 
 //DETAILS ANNONCE
 $app->get('/details-annonce/{id_annonce}', "Coolloc\Controller\AnnonceController::detailAnnonceAction")->bind('details-annonce');
@@ -317,20 +321,27 @@ $app->get('/conditions-generales-de-vente', function () use ($app) {
 $app->get('/a-propos', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    $membresAnnoncesInfo = new HomeController;
+    $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
 
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('a-propos.html.twig', array(
             "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('a-propos.html.twig', array(
-     "connected" => $isconnected,
+            "connected" => $isconnected,
+            "affichage" => $donneesMembresAnnonces,
     ));
     } else {
-        return $app['twig']->render('a-propos.html.twig', array());
+        return $app['twig']->render('a-propos.html.twig', array(
+            "affichage" => $donneesMembresAnnonces,
+        ));
+
     }
 
 })

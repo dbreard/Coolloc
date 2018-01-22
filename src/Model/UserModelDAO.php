@@ -137,6 +137,17 @@ class UserModelDAO {
         return $users;
     }
 
+
+    // COMPTE LE NOMBRE D'UTILISATEUR EN BDD
+    public function countAllUsers(){
+
+        $sql = "SELECT COUNT(id_user) FROM user";
+        $nbrAnnonces = $this->getDb()->fetchAssoc($sql, array());
+
+        return $nbrAnnonces;
+    }
+
+
     //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
     public function UsersColocationSelected(){
 
