@@ -10,39 +10,48 @@
         <div class="row">
             <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
                 <div class="row">
-                    <div class="col-sm-4 col-xs-12">
-                        <div class="count-item">
-                            <div class="count-item-circle">
-                                <span class="pe-7s-users"></span>
-                            </div>
-                            <div class="chart" data-percent="5000">
-                                <h2 class="percent" id="counter">0</h2>
-                                <h5>Utilisateurs inscrits </h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-xs-12">
-                        <div class="count-item">
-                            <div class="count-item-circle">
-                                <span class="pe-7s-home"></span>
-                            </div>
-                            <div class="chart" data-percent="12000">
-                                <h2 class="percent" id="counter1">0</h2>
-                                <h5>Annonces publiées</h5>
+
+                    {% for stat_user in affichage.stats_users %}
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="count-item">
+                                <div class="count-item-circle">
+                                    <span class="pe-7s-users"></span>
+                                </div>
+                                <div class="chart">
+                                    <h2 class="percent">{{ stat_user }}</h2>
+                                    <h5>Utilisateurs inscrits </h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4 col-xs-12">
-                        <div class="count-item">
-                            <div class="count-item-circle">
-                                <span class="pe-7s-flag"></span>
-                            </div>
-                            <div class="chart" data-percent="120">
-                                <h2 class="percent" id="counter2">0</h2>
-                                <h5>Villes déployées </h5>
+                    {% endfor %}
+
+                    {% for stat_annonce in affichage.stats_annonces %}
+                            <div class="col-sm-4 col-xs-12">
+                            <div class="count-item">
+                                <div class="count-item-circle">
+                                    <span class="pe-7s-home"></span>
+                                </div>
+                                <div class="chart" data-percent="12000">
+                                    <h2 class="percent">{{ stat_annonce }}</h2>
+                                    <h5>Annonces publiées</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
+
+                    {% for stat_city in affichage.stats_city %}
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="count-item">
+                                <div class="count-item-circle">
+                                    <span class="pe-7s-flag"></span>
+                                </div>
+                                <div class="chart" data-percent="120">
+                                    <h2 class="percent">{{ stat_city.compte_ville }}</h2>
+                                    <h5>Villes déployées </h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                     
                 </div>
             </div>

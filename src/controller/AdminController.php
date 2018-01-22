@@ -34,7 +34,6 @@ class AdminController extends Controller {
             $resultatCommentaire = $commentaires->selectComment();
 
 
-            if (isset($resultatUserColocation) && isset($resultatUserColocataires) && isset($resultatAnnonce) && isset($resultatCommentaire)){
                 return $app['twig']->render('dashboard/index-dashboard.html.twig', array(
                     "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                     "usersColocations" => $resultatUserColocation,
@@ -42,9 +41,6 @@ class AdminController extends Controller {
                     "annonces" => $resultatAnnonce,
                     "commentaires" => $resultatCommentaire,
                 ));
-            }else{
-                return $app->redirect('/Coolloc/public');
-            }
             }else {
                 return $app->redirect('/Coolloc/public');
             }
@@ -60,14 +56,10 @@ class AdminController extends Controller {
                 $infosUser = new UserModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'un user
                 $resultat = $infosUser->UsersColocationSelected();
 
-                if(isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/user-dashboard-colocations.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "usersInfo" => $resultat,
                     ));
-                }else{
-                    return $app->redirect('/Coolloc/public/connected/sabit');
-                }
 
             } else {// Si l'utilisateur n'est pas admin
 
@@ -85,14 +77,10 @@ class AdminController extends Controller {
                 $infosUser = new UserModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'un user
                 $resultat = $infosUser->UsersColocataireSelected();
 
-                if(isset($resultat)){
                     return $app['twig']->render('dashboard/user-dashboard-colocataires.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app), // selection des info de l'admin pour affichage dans le dashboard
                         "usersInfo" => $resultat, // selection des infos utilisateur cherchant des colocataires
                     ));
-                }else{
-                    return $app->redirect('/Coolloc/public/connected/sabit');
-                }
 
             } else {// Si l'utilisateur n'est pas admin
                 return $app->redirect('/Coolloc/public');
@@ -110,14 +98,10 @@ class AdminController extends Controller {
                 $infosAnnonce = new AnnonceModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
                 $resultat = $infosAnnonce->allAnnoncesSelected();
 
-                if(isset($resultat)){
                     return $app['twig']->render('dashboard/annonces-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "annoncesInfo" => $resultat,
                     ));
-                }else{
-                    return $app->redirect('/Coolloc/public/connected/sabit');
-                }
 
             } else {// Si l'utilisateur n'est pas admin
                 return $app->redirect('/Coolloc/public');
@@ -141,14 +125,11 @@ class AdminController extends Controller {
                 $detailsUser = new UserModelDAO($app['db']); // instanciation d'un objet pour recupérer les infos utilisateur
                 $resultat = $detailsUser->selectUserFromId($idUser);
 
-                if(isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/details-profil-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "detailsUser" => $resultat,
                     ));
-                }else{ // si la requette n'a pas fonctionner
-                    return $app->redirect('/Coolloc/public/connected/sabit');
-                }
+
 
             }else {// Si l'utilisateur n'est pas admin
                 return $app->redirect('/Coolloc/public');
@@ -171,16 +152,13 @@ class AdminController extends Controller {
                 $resultat = Model::selectAnnonceById($idAnnonce, $app);
 
 
-                if (isset($resultat)){ // si la requette retourne un resultat
                     return $app['twig']->render('dashboard/details-annonce-dashboard.html.twig', array(
                         "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
                         "detailsAnnonces" => $resultat['annonce'],
                         "photoAnnonces" => $resultat['photo'],
                         "videoAnnonces" => $resultat['video'],
                     ));
-                }else{ // si la requette n'a pas fonctionner
-                    return $app->redirect('/Coolloc/public/connected/sabit');
-                }
+
 
             }else {// Si l'utilisateur n'est pas admin
                 return $app->redirect('/Coolloc/public');

@@ -138,6 +138,24 @@ class AnnonceModelDAO extends Model{
         return $users;
     }
 
+    // COMPTE LE NOMBRE D'ANNONCE EN BDD
+    public function countAllAnnonces(){
+
+        $sql = "SELECT COUNT(id_user_post_annonce) FROM user_post_annonce";
+        $nbrAnnonces = $this->getDb()->fetchAssoc($sql, array());
+
+        return $nbrAnnonces;
+    }
+
+    // COMPTE LE NOMBRE D'ANNONCE EN BDD GROUPER PAR VILLE
+    public function countAllCityFromAnnonce(){
+
+        $sql = "SELECT COUNT(DISTINCT(ville_id)) AS 'compte_ville' FROM user_post_annonce WHERE 1";
+        $nbrAnnonces = $this->getDb()->fetchAll($sql);
+
+        return $nbrAnnonces;
+    }
+
 
     // SELECTION DE TOUTES LES ANNONCES RECENTE
     public function OrderAllAnnoncesSelected() : array{
