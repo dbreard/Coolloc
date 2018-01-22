@@ -1,0 +1,1214 @@
+{% extends"layout-class-nojs.html.twig" %}
+
+{% block headTitle %}
+    Ajouter une colocation | CoolLoc, la colocation cool !
+{% endblock %}
+
+{% block header %}
+       {% if connected is defined %}
+            {% include 'required/header_c.html.twig' ignore missing  %}
+                {% else %}
+            {% include 'required/header.html.twig' ignore missing  %}
+        {% endif %}
+{% endblock %}
+
+{# Bloc nav #}
+
+{% block navigation %}
+
+            {% if connected is defined %}
+                {% include 'required/navigation_c.html.twig' ignore missing  %}
+                    {% else %}
+                {% include 'required/navigation_nc.html.twig' ignore missing  %}
+            {% endif %}
+
+{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div class="container">
+        <div class="row">
+            <div class="page-head-content">
+                <h1 class="page-title">Modifier votre annonce</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End page header -->
+
+<!-- property area -->
+<div class="content-area submit-property" style="background-color: #FCFCFC;">&nbsp;
+    <div class="container">
+        <div class="clearfix" >
+            <div class="wizard-container">
+
+                <div class="wizard-card ct-wizard-orange" id="wizardProperty">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="wizard-header">
+                            <h3>
+                                <b>MODIFIER</b> VOTRE ANNONCE<br>
+                                <small>Insèrez toutes les informations pour trouver des colocataires.</small>
+                            </h3>
+                        </div>
+
+                        <ul>
+                            <li><a href="#step1" data-toggle="tab">Étape 1</a></li>
+                            <li><a href="#step2" data-toggle="tab">Étape 2</a></li>
+                            <li><a href="#step3" data-toggle="tab">Terminé</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane" id="step1">
+                                <div class="row p-b-15  ">
+                                    <h4 class="info-text">Commençons par les informations de base</h4>
+                                    <div class="col-sm-4 col-sm-offset-1">
+                                        <div>
+                                            {% if error.photo1 is defined %}
+                                                <span class="red">{{ error.photo1 }}</span>
+                                            {% endif %}
+                                            {% if error.photo is defined %}
+                                                <span class="red">{{ error.photo }}</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="picture-container">
+                                            <div class="picture">
+                                                {% if array_photo.photo1 is defined %}
+                                                    <img src="{{ array_photo.photo1.url_media }}" class="picture-src" id="wizardPicturePreview1" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview1" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture1" name="photo1">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo2 is defined %}
+                                                    <img src="{{ array_photo.photo2.url_media }}" class="picture-src" id="wizardPicturePreview2" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview2" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture2" name="photo2">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo3 is defined %}
+                                                    <img src="{{ array_photo.photo3.url_media }}" class="picture-src" id="wizardPicturePreview3" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview3" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture3" name="photo3">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo4 is defined %}
+                                                    <img src="{{ array_photo.photo4.url_media }}" class="picture-src" id="wizardPicturePreview4" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview4" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture4" name="photo4">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo5 is defined %}
+                                                    <img src="{{ array_photo.photo5.url_media }}" class="picture-src" id="wizardPicturePreview5" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview5" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture5" name="photo5">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div>
+                                                {% if error.name_coloc is defined %}
+                                                    <span class="red">{{ error.name_coloc }}</span>
+                                                {% endif %}
+                                                {% if name_coloc|default() %}
+                                                    <span class="red">{{ name_coloc }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Nom de la colocation <span class="red">*</span></label>
+                                        <input name="name_coloc" type="text" class="form-control" placeholder="Super villa ..." value="{% if value.name_coloc is defined %}{{ value.name_coloc }}{% else %}{{ info_annonce.name_coloc }}{% endif %}">
+                                        </div>
+                                        <div class="form-group">
+                                            <div>
+                                                {% if error.rent is defined %}
+                                                    <span class="red">{{ error.rent }}</span>
+                                                {% endif %}
+                                                {% if rent|default() %}
+                                                    <span class="red">{{ rent }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Loyer (€) <span class="red">*</span></label>
+                                        <input name="rent" type="number" class="form-control" placeholder="3330000" value="{% if value.rent is defined %}{{ value.rent }}{% else %}{{ info_annonce.rent }}{% endif %}">
+                                        </div>
+                                        <div class="form-group">
+                                            <div>
+                                                {% if error.tel_annonce is defined %}
+                                                    <span class="red">{{ error.tel_annonce }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Téléphone <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
+                                        <input name="tel_annonce" type="text" class="form-control" placeholder="+33 6 47 84 74 36" value="{% if value.tel_annonce is defined %}{{ value.tel_annonce }}{% else %}{{ info_annonce.tel_annonce }}{% endif %}">
+                                        </div>
+                                        <div class="form-group">
+                                            <div>
+                                                {% if error.mail_annonce is defined %}
+                                                    <span class="red">{{ error.mail_annonce }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Mail de contact <small>(vide si vous voulez utiliser le même que sur votre profil)</small></label>
+                                            <input name="mail_annonce" type="mail" class="form-control" placeholder="contact@mail.com" value="{% if value.mail_annonce is defined %}{{ value.mail_annonce }}{% else %}{{ info_annonce.mail_annonce }}{% endif %}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4>Média vidéo</h4>
+                                        <div class="form-group">
+                                            <div>
+                                                {% if error.video is defined %}
+                                                    <span class="red">{{ error.video }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
+                                        <input class="form-control" placeholder="http://www.youtube.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% elseif info_video.url_media is defined %}{{ info_video.url_media }}{% endif %}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  End step 1 -->
+
+                            <div class="tab-pane" id="step2">
+                                <h4 class="info-text"> Décrivez votre colocation </h4>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.description is defined %}
+                                                        <span class="red">{{ error.description }}</span>
+                                                    {% endif %}
+                                                    {% if description|default() %}
+                                                        <span class="red">{{ description }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Description : <span class="red">*</span></label>
+                                            <textarea name="description" class="form-control textarea-annonce" >{% if value.description is defined %}{{ value.description }}{% else %}{{ info_annonce.description }}{% endif %}</textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if cityError is defined %}
+                                                        <span class="red">{{ cityError }}</span>
+                                                    {% endif %}
+                                                    {% if error.postal_code is defined %}
+                                                        <span class="red">{{ error.postal_code }}</span>
+                                                    {% endif %}
+                                                    {% if error.adress is defined %}
+                                                        <span class="red">{{ error.adress }}</span>
+                                                    {% endif %}
+                                                    {% if error.adress_details is defined %}
+                                                        <span class="red">{{ error.adress_details }}</span>
+                                                    {% endif %}
+                                                    {% if ville|default() %}
+                                                        <span class="red">{{ ville }}</span>
+                                                    {% endif %}
+                                                    {% if postal_code|default() %}
+                                                        <span class="red">{{ postal_code }}</span>
+                                                    {% endif %}
+                                                    {% if adress|default() %}
+                                                        <span class="red">{{ adress }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Adresse : <span class="red">*</span></label>
+                                            <input name="ville" type="text" class="form-control adresse" placeholder="Ville *" value="{% if value.ville is defined %}{{ value.ville }}{% else %}{{ info_annonce.ville_nom_reel }}{% endif %}">
+                                            <input name="postal_code" type="number" class="form-control adresse" placeholder="Code postal *" value="{% if value.postal_code is defined %}{{ value.postal_code }}{% else %}{{ info_annonce.postal_code }}{% endif %}">
+                                                <input name="adress" type="text" class="form-control adresse" placeholder="Adresse *" value="{% if value.adress is defined %}{{ value.adress }}{% else %}{{ info_annonce.adress }}{% endif %}">
+                                            <input name="adress_details" type="text" class="form-control adresse" placeholder="Complément d'adresse" value="{% if value.adress_details is defined %}{{ value.adress_details }}{% else %}{{ info_annonce.adress_details }}{% endif %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 padding-top-15">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.housing_type is defined %}
+                                                        <span class="red">{{ error.housing_type }}</span>
+                                                    {% endif %}
+                                                    {% if housing_type|default() %}
+                                                        <span class="red">{{ housing_type }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Type de bien immobilier : <span class="red">*</span></label>
+                                                <select id="housing_type" name="housing_type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Selectionner">
+                                                    {% if info_annonce.housing_type == 'maison' %}
+                                                        <option value="maison" selected>Maison</option>
+                                                    {% else %}
+                                                        <option value="maison">Maison</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.housing_type == 'appartement' %}
+                                                        <option value="appartement" selected>Appartement</option>
+                                                    {% else %}
+                                                        <option value="appartement">Appartement</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.housing_type == 'loft' %}
+                                                        <option value="loft" selected>Loft</option>
+                                                    {% else %}
+                                                        <option value="loft">Loft</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.housing_type == 'hotel particulier' %}
+                                                        <option value="hotel particulier" selected>Hôtel particulier</option>
+                                                    {% else %}
+                                                        <option value="hotel particulier">Hôtel particulier</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.housing_type == 'corps de ferme' %}
+                                                        <option value="corps de ferme" selected>Corps de ferme</option>
+                                                    {% else %}
+                                                        <option value="corps de ferme">Corps de ferme</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.housing_type == 'autre' %}
+                                                        <option value="autre" selected>Autre</option>
+                                                    {% else %}
+                                                        <option value="autre">Autre</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.surface is defined %}
+                                                        <span class="red">{{ error.surface }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Surface générale (m²):</label>
+                                            <input name="surface" type="number" class="form-control" placeholder="Surface moyenne *" value="{% if value.surface is defined %}{{ value.surface }}{% else %}{{ info_annonce.surface }}{% endif %}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.nb_room is defined %}
+                                                        <span class="red">{{ error.nb_room }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Nombre de pièces :</label>
+                                                <input name="nb_room" type="number" class="form-control" placeholder="3 *" value="{% if value.nb_room is defined %}{{ value.nb_room }}{% else %}{{ info_annonce.nb_room }}{% endif %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.date_dispo is defined %}
+                                                        <span class="red">{{ error.date_dispo }}</span>
+                                                    {% endif %}
+                                                    {% if date_dispo|default() %}
+                                                        <span class="red">{{ date_dispo }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Date de disponibilité : <span class="red">*</span></label>
+                                            <input name="date_dispo" type="date" class="form-control" placeholder="" value="{% if value.date_dispo is defined %}{{ value.date_dispo }}{% else %}{{ info_annonce.date_dispo }}{% endif %}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.nb_roommates is defined %}
+                                                        <span class="red">{{ error.nb_roommates }}</span>
+                                                    {% endif %}
+                                                    {% if nb_roommates|default() %}
+                                                        <span class="red">{{ nb_roommates }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Nombre de colocataires : <span class="red">*</span></label>
+                                                <input name="nb_roommates" type="number" class="form-control" placeholder="3 *" value="{% if value.nb_roommates is defined %}{{ value.nb_roommates }}{% else %}{{ info_annonce.nb_roommates }}{% endif %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 padding-top-15">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.handicap_access is defined %}
+                                                        <span class="red">{{ error.handicap_access }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Accès handicapé :</label>
+                                                <select id="handicap_access" name="handicap_access" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.handicap_access == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.handicap_access == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.smoking is defined %}
+                                                        <span class="red">{{ error.smoking }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Fumeur :</label>
+                                                <select id="smoking" name="smoking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.smoking == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.smoking == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.smoking == 'peu importe' %}
+                                                        <option value="peu importe" selected>Peu importe</option>
+                                                    {% else %}
+                                                        <option value="peu importe">Peu importe</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.animals is defined %}
+                                                        <span class="red">{{ error.animals }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Animaux :</label>
+                                                <select id="animals" name="animals" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.animals == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.animals == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.animals == 'peu importe' %}
+                                                        <option value="peu importe" selected>Peu importe</option>
+                                                    {% else %}
+                                                        <option value="peu importe">Peu importe</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.sex_roommates is defined %}
+                                                        <span class="red">{{ error.sex_roommates }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Sexe :</label>
+                                                <select id="sex_roommates" name="sex_roommates" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.sex_roommates == 'homme' %}
+                                                        <option value="homme" selected>Homme</option>
+                                                    {% else %}
+                                                        <option value="homme">Homme</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.sex_roommates == 'femme' %}
+                                                        <option value="femme" selected>Femme</option>
+                                                    {% else %}
+                                                        <option value="femme">Femme</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.sex_roommates == 'peu importe' %}
+                                                        <option value="peu importe" selected>Peu importe</option>
+                                                    {% else %}
+                                                        <option value="peu importe">Peu importe</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.furniture is defined %}
+                                                        <span class="red">{{ error.furniture }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Meublé :</label>
+                                                <select id="furniture" name="furniture" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.furniture == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.furniture == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.garden is defined %}
+                                                        <span class="red">{{ error.garden }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Jardin :</label>
+                                                <select id="garden" name="garden" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.garden == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.garden == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.balcony is defined %}
+                                                        <span class="red">{{ error.balcony }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Balcon :</label>
+                                                <select id="balcony" name="balcony" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.balcony == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.balcony == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div>
+                                                    {% if error.parking is defined %}
+                                                        <span class="red">{{ error.parking }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <label>Parking :</label>
+                                                <select id="parking" name="parking" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Choix">
+                                                    {% if info_annonce.parking == 'oui' %}
+                                                        <option value="oui" selected>Oui</option>
+                                                    {% else %}
+                                                        <option value="oui">Oui</option>
+                                                    {% endif %}
+
+                                                    {% if info_annonce.parking == 'non' %}
+                                                        <option value="non" selected>Non</option>
+                                                    {% else %}
+                                                        <option value="non">Non</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 padding-top-15">
+                                            <div>
+                                                {% if error.district is defined %}
+                                                    <span class="red">{{ error.district }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Quartier :</label>
+                                            <div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if district.Prochedecommerces is defined %}
+                                                                <input type="checkbox" name="district[]" value="Proche de commerces" checked> Proche de commerces
+                                                            {% else %}
+                                                                <input type="checkbox" name="district[]" value="Proche de commerces"> Proche de commerces
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if district.Prochedécoles is defined %}
+                                                                <input type="checkbox" name="district[]" value="Proche d'écoles" checked> Proche d'écoles
+                                                            {% else %}
+                                                                <input type="checkbox" name="district[]" value="Proche d'écoles"> Proche d'écoles
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if district.Prochedetransports is defined %}
+                                                                <input type="checkbox" name="district[]" value="Proche de transports" checked> Proche de transports
+                                                            {% else %}
+                                                                <input type="checkbox" name="district[]" value="Proche de transports"> Proche de transports
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if district.Calme is defined %}
+                                                                <input type="checkbox" name="district[]" value="Calme" checked> Calme
+                                                            {% else %}
+                                                                <input type="checkbox" name="district[]" value="Calme"> Calme
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if district.Animé is defined %}
+                                                                <input type="checkbox" name="district[]" value="Animé" checked> Animé
+                                                            {% else %}
+                                                                <input type="checkbox" name="district[]" value="Animé"> Animé
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 padding-top-15">
+                                            <div>
+                                                {% if error.equipment is defined %}
+                                                    <span class="red">{{ error.equipment }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Équipements :</label>
+                                            <div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if equipment.TV is defined %}
+                                                                <input type="checkbox" name="equipment[]" value="TV" checked> TV
+                                                            {% else %}
+                                                                <input type="checkbox" name="equipment[]" value="TV"> TV
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if equipment.Hifi is defined %}
+                                                                <input type="checkbox" name="equipment[]" value="Hifi" checked> Hifi
+                                                            {% else %}
+                                                                <input type="checkbox" name="equipment[]" value="Hifi"> Hifi
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if equipment.Wifi is defined %}
+                                                                <input type="checkbox" name="equipment[]" value="Wifi" checked> Wifi
+                                                            {% else %}
+                                                                <input type="checkbox" name="equipment[]" value="Wifi"> Wifi
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if equipment.Fibreoptique is defined %}
+                                                                <input type="checkbox" name="equipment[]" value="Fibre optique" checked> Fibre optique
+                                                            {% else %}
+                                                                <input type="checkbox" name="equipment[]" value="Fibre optique"> Fibre optique
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if equipment.Salledejeux is defined %}
+                                                                <input type="checkbox" name="equipment[]" value="Salle de jeux" checked> Salle de jeux
+                                                            {% else %}
+                                                                <input type="checkbox" name="equipment[]" value="Salle de jeux"> Salle de jeux
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if equipment.Machineàlaver is defined %}
+                                                                <input type="checkbox" name="equipment[]" value="Machine à laver" checked> Machine à laver
+                                                            {% else %}
+                                                                <input type="checkbox" name="equipment[]" value="Machine à laver"> Machine à laver
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 padding-top-15">
+                                            <div>
+                                                {% if error.member_profil is defined %}
+                                                    <span class="red">{{ error.member_profil }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Profil des colocataires recherché :</label>
+                                            <div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Timide is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Timide" checked> Timide
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Timide"> Timide
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Bavard is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Bavard" checked> Bavard
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Bavard"> Bavard
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Solitaire is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Solitaire" checked> Solitaire
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Solitaire"> Solitaire
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Casanier is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Casanier" checked> Casanier
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Casanier"> Casanier
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Discret is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Discret" checked> Discret
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Discret"> Discret
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Convivial is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Convivial" checked> Convivial
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Convivial"> Convivial
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Cool is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Cool" checked> Cool
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Cool"> Cool
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Extraverti is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Extraverti" checked> Extraverti
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Extraverti"> Extraverti
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Ordonné is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Ordonné" checked> Ordonné
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Ordonné"> Ordonné
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Tolérant is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Tolérant" checked> Tolérant
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Tolérant"> Tolérant
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Sportif is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Sportif" checked> Sportif
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Sportif"> Sportif
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Fétard is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Fétard" checked> Fétard
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Fétard"> Fétard
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Studieux is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Studieux" checked> Studieux
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Studieux"> Studieux
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Curieux is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Curieux" checked> Curieux
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Curieux"> Curieux
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Joyeux is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Joyeux" checked> Joyeux
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Joyeux"> Joyeux
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if member_profil.Respectueux is defined %}
+                                                                <input type="checkbox" name="member_profil[]" value="Respectueux" checked> Respectueux
+                                                            {% else %}
+                                                                <input type="checkbox" name="member_profil[]" value="Respectueux"> Respectueux
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-sm-12 padding-top-15">
+                                            <div>
+                                                {% if error.hobbies is defined %}
+                                                    <span class="red">{{ error.hobbies }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <label>Centre d'intérêts :</label>
+                                            <div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.CinéTVSérie is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Ciné - TV - Série" checked> Ciné - TV - Série
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Ciné - TV - Série"> Ciné - TV - Série
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Littérature is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Littérature" checked> Littérature
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Littérature"> Littérature
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Musique is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Musique" checked> Musique
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Musique"> Musique
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Jeuxvidéo is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Jeux vidéo" checked> Jeux vidéo
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Jeux vidéo"> Jeux vidéo
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.JeuxplateauSociété is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Jeux plateau - Société" checked> Jeux plateau - Société
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Jeux plateau - Société"> Jeux plateau - Société
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Mode is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Mode" checked> Mode
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Mode"> Mode
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Shopping is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Shopping" checked> Shopping
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Shopping"> Shopping
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Sport is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Sport" checked> Sport
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Sport"> Sport
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.CuisinePâtisserie is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Cuisine - Pâtisserie" checked> Cuisine - Pâtisserie
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Cuisine - Pâtisserie"> Cuisine - Pâtisserie
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Sortiesculturelles is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Sorties culturelles" checked> Sorties culturelles
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Sorties culturelles"> Sorties culturelles
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Voyages is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Voyages" checked> Voyages
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Voyages"> Voyages
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            {% if hobbies.Autres is defined %}
+                                                                <input type="checkbox" name="hobbies[]" value="Autres" checked> Autres
+                                                            {% else %}
+                                                                <input type="checkbox" name="hobbies[]" value="Autres"> Autres
+                                                            {% endif %}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <!-- End step 2 -->
+
+                            <div class="tab-pane" id="step3">
+                                <h4 class="info-text">Choississez vos options</h4>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div>
+                                                {% if error.photo is defined %}
+                                                    <span class="red">{{ error.photo }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <h4>Des photos supplémentaires</h4>
+                                            <p>Ajoutez jusqu'à 8 photos supplémentaires contre paiement de 10 euros</p>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+
+                                                {% if array_photo.photo6 is defined %}
+                                                    <img src="{{ array_photo.photo6.url_media }}" class="picture-src" id="wizardPicturePreview6" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview6" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture6" name="photo6">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo7 is defined %}
+                                                    <img src="{{ array_photo.photo7.url_media }}" class="picture-src" id="wizardPicturePreview7" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview7" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture7" name="photo7">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo8 is defined %}
+                                                    <img src="{{ array_photo.photo8.url_media }}" class="picture-src" id="wizardPicturePreview8" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview8" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture8" name="photo8">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo9 is defined %}
+                                                    <img src="{{ array_photo.photo9.url_media }}" class="picture-src" id="wizardPicturePreview9" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview9" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture9" name="photo9">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo10 is defined %}
+                                                    <img src="{{ array_photo.photo10.url_media }}" class="picture-src" id="wizardPicturePreview10" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview10" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture10" name="photo10">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo11 is defined %}
+                                                    <img src="{{ array_photo.photo11.url_media }}" class="picture-src" id="wizardPicturePreview11" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview11" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture11" name="photo11">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo12 is defined %}
+                                                    <img src="{{ array_photo.photo12.url_media }}" class="picture-src" id="wizardPicturePreview12" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview12" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture12" name="photo12">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="picture">
+                                                {% if array_photo.photo13 is defined %}
+                                                    <img src="{{ array_photo.photo13.url_media }}" class="picture-src" id="wizardPicturePreview13" title=""/>
+                                                {% else %}
+                                                    <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview13a" title=""/>
+                                                {% endif %}
+
+                                                <input type="file" id="wizard-picture13a" name="photo13">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <h4>Remontez votre annonce en tête de liste</h4>
+
+                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros
+                                        <label class="radio-inline">
+                                            {% if info_annonce.top_list == 'actif' %}
+                                                <input type="radio" id="Top de liste" value="yes" name="Top de liste" checked> oui
+                                            {% else %}
+                                                <input type="radio" id="Top de liste" value="yes" name="Top de liste"> oui
+                                            {% endif %}
+                                        </label>
+
+                                        <label class="radio-inline">
+                                            {% if info_annonce.top_list == 'inactif' %}
+                                                <input type="radio" id="Top de liste2" value="no" checked name="Top de liste"> non
+                                            {% else %}
+                                                <input type="radio" id="Top de liste2" value="no" name="Top de liste"> non
+                                            {% endif %}
+                                        </label>
+                                        </p>
+
+                                        <hr>
+
+                                        <h4>Le pack options</h4>
+                                        <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
+                                        <p>Je choisis le pack option
+
+                                        <label class="radio-inline">
+                                            {% if info_annonce.top_list == 'actif' %}
+                                                <input type="radio" id="pack option" value="yes" name="pack option" checked> oui
+                                            {% else %}
+                                                <input type="radio" id="pack option" value="yes" name="pack option"> oui
+                                            {% endif %}
+
+                                        </label>
+
+                                        <label class="radio-inline">
+                                            {% if info_annonce.top_list == 'inactif' %}
+                                                <input type="radio" id="pack option2" value="no" name="pack option" checked> non
+                                            {% else %}
+                                                <input type="radio" id="pack option2" value="no" name="pack option"> non
+                                            {% endif %}
+                                        </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  End step 3 -->
+                        </div>
+
+                        <div class="wizard-footer">
+                            <div class="pull-right">
+                                <input type='button' class='btn btn-next btn-primary' name='next' value='Suivant' />
+                                <input type='submit' class='btn btn-finish btn-primary ' name='finish' value='Terminé' />
+                            </div>
+
+                            <div class="pull-left">
+                                <input type='button' class='btn btn-previous btn-default' name='previous' value='Précédent' />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+                <!-- End submit form -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

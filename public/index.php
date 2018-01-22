@@ -30,8 +30,11 @@
     require __DIR__.'/../src/controller/AdminController.php';
     require __DIR__.'/../src/controller/StatusController.php';
     require __DIR__.'/../src/controller/CommentController.php';
+    require __DIR__.'/../src/controller/FaqController.php';
     require __DIR__.'/../src/controller/DetailsProfilController.php';
     require __DIR__.'/../src/controller/ModifProfilController.php';
+    require __DIR__.'/../src/controller/UpdateAnnonceController.php';
+    require __DIR__.'/../src/controller/HomeController.php';
 
 
     require __DIR__.'/../src/Model/Model.php';
@@ -40,10 +43,10 @@
     require __DIR__.'/../src/Model/TokensDAO.php';
     require __DIR__.'/../src/Model/SearchAnnonceModelDAO.php';
     require __DIR__.'/../src/Model/CommentModelDAO.php';
+    require __DIR__.'/../src/Model/FaqModelDAO.php';
     require __DIR__.'/../src/Model/UpdateDetailsProfilModelDAO.php';
     require __DIR__.'/../src/Model/UpdateProfilModelDAO.php';
-
-
+    require __DIR__.'/../src/Model/UpdateAnnonceModelDAO.php';
 
 
     require __DIR__.'/../src/route.php';

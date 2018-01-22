@@ -60,45 +60,27 @@
             <div class="container">
                 <div class="row  pr0 padding-top-40 properties-page">
                     <div class="col-md-12  clear">
-                        
-                        <div class="col-xs-2 layout-switcher">
-                            <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                            <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                        </div><!--/ .layout-switcher-->
-                    </div>
 
                     <div class="col-md-12 clear ">
                         <div id="list-type" class="proerty-th">
 
                             {% if affichage is defined %}
+                                {% for profil in affichage.membres %}
 
-                                {% for affichages in affichage %}
-
-                                    <div class="col-sm-6 col-md-3 p0">
-                                        <div class="box-two proerty-item">
+                                    <div class="col-sm-6 col-md-2 p0">
+                                        <div class="box-two proerty-item property-features">
                                             <div class="item-thumb">
-                                                <a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}" ><img src="{{ affichages.url_media }}" alt="Photo principale de l'annonce de {{ affichages.firstname }} {{ affichages.lastname }}"></a>
+                                                <a href="{{ path('fiche-profil') }}" ><img  src="{{ profil.profil_picture }}" alt="Photo de profil de {{ profil.firstname }} {{ profil.lastname }}"></a>
                                             </div>
-
                                             <div class="item-entry overflow">
-                                                <h5><a href="{{ path ('details-annonce', {"id_annonce" : affichages.id_user_post_annonce }) }}">{{ affichages.name_coloc }}</a></h5>
+                                                <h5><a href="{{ path('fiche-profil') }}" ><ul><li>{{ profil.firstname }}</li><li> {{ profil.lastname }}</li></ul></a></h5>
                                                 <div class="dot-hr"></div>
-                                                <span class="pull-left"><b> Surface :</b> {{ affichages.surface }} m² </span>
-                                                <span class="proerty-price pull-right">{{ affichages.rent }} €</span>
-                                                <p style="display: none;">{{ affichages.description }}</p>
-                                                <div class="property-icon">
-                                                    <b> Type de bien :</b> {{ affichages.housing_type }}
-                                                    {# <img src="assets/img/icon/bed.png">(5)|
-                                                    <img src="assets/img/icon/shawer.png">(2)|
-                                                    <img src="assets/img/icon/cars.png">(1) #}
-                                                </div>
-                                            </div>
+                                                <span class="pull-left"><b>date souhaitée:</b><br> {{ profil.date_dispo }} </span>
 
+                                            </div>
                                         </div>
                                     </div>
-
                                 {% endfor %}
-
                             {% endif %}
 
                         </div>

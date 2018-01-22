@@ -3,9 +3,11 @@
 namespace Coolloc\Controller;
 
 use Silex\Application;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Coolloc\Model\Model;
+use Coolloc\Model\UserModelDAO;
+use Coolloc\Model\TokensDAO;
 use \DateTime;
 
 
@@ -34,8 +36,6 @@ class Controller {
     }
 
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
-
-
     public function modifyTel(string $tel){
 
         if (iconv_strlen($tel) == 10){
@@ -161,7 +161,18 @@ class Controller {
         }
     }
 
-    public function sessionDestroy() {
+    public function sessionDestroy(Application $app, Request $request) {
+
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    
+        if (!$isConnectedAndAdmin && !$isconnected)
+            return $app->redirect('/Coolloc/public') ;
+    
+
+        // On delete le token de connexion
+        $deleteTokenConnection = new TokensDAO($app['db']);
+        $deleteTokenConnection->deleteToken($_SESSION['membre']['zoubida']);
 
         // Détruit toutes les variables de session
         $_SESSION = array();
@@ -171,6 +182,9 @@ class Controller {
 
 
         // var_dump($_SESSION);
+
+        // On redirige vers l'acceuil
+        return $app->redirect('/Coolloc/public');
     }
 
 
@@ -302,17 +316,17 @@ class Controller {
         return date("Ymd");
     }
 
-        //*********** GETTER ****************//
+    //*********** GETTER ****************//
 
-        public function getToken(){
-            return $this->token;
-        }
+    public function getToken(){
+        return $this->token;
+    }
 
-        //*********** SETTER ****************//
+    //*********** SETTER ****************//
 
-        public function setToken($token){
-            $this->token = $token;
-        }
+    public function setToken($token){
+        $this->token = $token;
+    }
 
     //-----------------------ENVOI DE MAILS AU STAFF--------------------------//
 
