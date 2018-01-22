@@ -62,7 +62,7 @@
                               <img src="{% if profilInfo.profil_picture != NULL %}{{ profilInfo.profil_picture }}{% else %}{{ asset('assets/img/default-property.jpg') }}{% endif %}" class="picture-src" id="wizardPicturePreview1" title=""/>
                               <input type="file" id="wizard-picture1" name="profil_picture">
                             </div>
-                          {% if errors.photo is defined %}<div class="alert alert-danger text-center">{{ errors.photo }}</div>{% endif %}
+                            {% if errors.photo is defined %}<div class="alert alert-danger text-center">{{ errors.photo }}</div>{% endif %}
                             <label for="profil_picture">Ajouter/Modifier la photo de profil</label>
                           </div>
                         </div>
