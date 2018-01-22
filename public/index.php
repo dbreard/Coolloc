@@ -35,6 +35,7 @@
     require __DIR__.'/../src/controller/ModifProfilController.php';
     require __DIR__.'/../src/controller/UpdateAnnonceController.php';
     require __DIR__.'/../src/controller/HomeController.php';
+    require __DIR__.'/../src/controller/ProfilAccessController.php';
 
 
     require __DIR__.'/../src/Model/Model.php';
