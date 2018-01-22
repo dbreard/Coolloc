@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\TokensDAO;
+use Coolloc\Model\Model;
 use \DateTime;
 
 
@@ -161,15 +162,23 @@ class Controller {
         }
     }
 
-    public static function userSearchColocation(){
-      if (ifConnected())
+    public static function userSearchColocation(Application $app){
+        $connected = Controller::ifConnected();
+        if ($connected){
         $userStatus = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
         $userStatus = $userStatus['status'];
+
         if ($userStatus == "cherche colocation"){
           return true;
         }
         else{
           return false;
+        }
+        
+        }  
+        
+        else {
+            return false;
         }
 
     }

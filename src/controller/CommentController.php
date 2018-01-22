@@ -19,19 +19,23 @@ class CommentController extends Controller
 
       $isconnected = Controller::ifConnected();
       $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+      $userSearchColocation = Controller::userSearchColocation($app);
+
 
 
       if ($isConnectedAndAdmin){
           $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
           return $app['twig']->render('connected/temoigner.html.twig', array(
-              "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "user_id" => $profilInfo['id_user']
+              "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "userSearchColocation" => $userSearchColocation, "user_id" => $profilInfo['id_user'], 
+
           ));
       }
 
       elseif ($isconnected) {
           $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
           return $app['twig']->render('connected/temoigner.html.twig', array(
-       "connected" => $isconnected,
+       "connected" => $isconnected, "userSearchColocation" => $userSearchColocation,
+
       ));
       }
       else

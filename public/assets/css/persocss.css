@@ -218,6 +218,14 @@ font-weight: 500;
 
 }
 
+.client-face > img {
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+
 
 
 ::-moz-selection {

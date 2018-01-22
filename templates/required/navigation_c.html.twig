@@ -17,8 +17,7 @@
                         <button class="navbar-btn nav-button wow bounceInRight login"  onclick=" window.open('{{ path('profil') }}', '_self')" data-wow-delay="0.45s" data-wow-delay="0.45s">Profil</button>
                             
                                 {% if userSearchColocation %}
-                                    bruh !!!
-                                    {% else %}
+                                {% else %}
                                 <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{{ path('ajout-annonce') }}', '_self')" data-wow-delay="0.48s">Ajouter une colocation</button>
                                 {% endif %}
 
