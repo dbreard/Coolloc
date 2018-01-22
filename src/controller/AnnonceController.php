@@ -459,12 +459,6 @@ class AnnonceController extends Controller
         // echo "</pre>";
         // die();
 
-        $district = $this->stringToArray($infoAnnonce['annonce']['district']);
-        $equipment = $this->stringToArray($infoAnnonce['annonce']['equipment']);
-        $hobbies = $this->stringToArray($infoAnnonce['annonce']['hobbies']);
-        $member_profil = $this->stringToArray($infoAnnonce['annonce']['member_profil']);
-
-
         $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
         $dispoAnnonce = (($this->getDate() - $dateDispoAnnonce) < 0) ? 'non' : 'oui';
 
@@ -475,10 +469,10 @@ class AnnonceController extends Controller
                 "info_photo" => $infoAnnonce['photo'],
                 "info_video" => $infoAnnonce['video'],
                 "dispo_annonce" => $dispoAnnonce,
-                "district" => $district,
-                "equipment" => $equipment,
-                "hobbie" => $hobbies,
-                "member_profil" => $member_profil,
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbie" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
         ));
         } else {
             return $app['twig']->render('details-annonce.html.twig', array(
@@ -487,10 +481,10 @@ class AnnonceController extends Controller
                 "info_video" => $infoAnnonce['video'],
                 "array_photo" => $infoAnnonce['array_photo'],
                 "dispo_annonce" => $dispoAnnonce,
-                "district" => $district,
-                "equipment" => $equipment,
-                "hobbie" => $hobbies,
-                "member_profil" => $member_profil,
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbie" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
         ));
         }
     }
