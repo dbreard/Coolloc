@@ -89,10 +89,15 @@ class UserModelDAO {
 
         $response = array();
 
-        $response['district'] = Controller::stringToArray($user['district']);
-        $response['equipment'] = Controller::stringToArray($user['equipment']);
-        $response['hobbies'] = Controller::stringToArray($user['hobbies']);
-        $response['member_profil'] = Controller::stringToArray($user['member_profil']);
+        if ($user['district'] != null)
+            $response['district'] = Controller::stringToArray($user['district']);
+        if ($user['equipment'] != null)
+            $response['equipment'] = Controller::stringToArray($user['equipment']);
+        if ($user['hobbies'] != null)
+            $response['hobbies'] = Controller::stringToArray($user['hobbies']);
+        if ($user['member_profil'] != null)
+            $response['member_profil'] = Controller::stringToArray($user['member_profil']);
+
         $response['user'] = $user;
 
         return $response;
@@ -147,7 +152,17 @@ class UserModelDAO {
 
 
     //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION
-    public function UsersColocationSelected(int $limit, int $offset){
+    public function UsersColocationSelected(){
+
+        $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation'";
+        $users = $this->getDb()->fetchAll($sql, array());
+
+        return $users;
+
+    }
+
+    //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION POUR LA PAGINATION
+    public function UsersColocationSelectedLimitDesc(int $limit, int $offset){
 
         $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation' LIMIT $limit OFFSET $offset";
         $users = $this->getDb()->fetchAll($sql, array());
