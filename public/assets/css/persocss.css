@@ -214,6 +214,30 @@ font-weight: 500;
 
 }
 
+
+
+::-moz-selection {
+
+    background: #b3d4fc;
+    text-shadow: none;
+
+}
+::after, ::before {
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+.titre-label {
+    margin-right : 15px;
+}
+.radio.col-sm-12.col-xs-12 {
+
+    text-align: left;
+
+}
+
 .iradio_square-yellow {
     margin-right: 5px;
 }
