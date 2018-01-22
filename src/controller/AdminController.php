@@ -168,7 +168,7 @@ class AdminController extends Controller {
                     return $app->redirect('/Coolloc/public/connected/sabit/gerer-annonces');// SI L'ID EST AU MAUVAIS FORMAT
                 }
 
-                $resultat = Model::selectAnnonceById($idAnnonce);
+                $resultat = Model::selectAnnonceById($idAnnonce, $app);
 
 
                 if (isset($resultat)){ // si la requette retourne un resultat
