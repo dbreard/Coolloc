@@ -470,7 +470,7 @@ $app->get('/connected/ajout-annonce', function () use ($app) {
     }
 
     else {
-        return $app->redirect('Coolloc/public/login');
+        return $app->redirect('/../Coolloc/public/login');
     }
 
 })
