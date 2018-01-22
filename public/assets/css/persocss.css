@@ -203,9 +203,7 @@ font-weight: 500;
     margin-left: 10px;
 }
 
-.radio-text {
-    display: inline;
-}
+
 #search-form .col-md-3 {
     text-align: left;
 
@@ -216,6 +214,14 @@ font-weight: 500;
 
 }
 
+.iradio_square-yellow {
+    margin-right: 5px;
+}
+
+p.radio-text {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
 
 @media (max-width: 480px){
 
