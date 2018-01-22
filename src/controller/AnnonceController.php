@@ -28,6 +28,8 @@ class AnnonceController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         $arrayMessage = $app["formulaire"]["verifParamAnnonce"]["arrayMessage"];
 
@@ -49,16 +51,17 @@ class AnnonceController extends Controller
                     "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     $name_coloc => 'Le nom de la colocation doit être rempli',
                     $rent => 'Le loyer doit être rempli',
-                    $description => 'La description doit être rempli',
-                    $adress => 'L\'adresse doit être rempli',
-                    $ville => 'La ville doit être rempli',
+                    $description => 'La description doit être remplie',
+                    $adress => 'L\'adresse doit être remplie',
+                    $ville => 'La ville doit être remplie',
                     $postal_code => 'Le code postal doit être rempli',
                     $housing_type => 'Le type de bien doit être rempli',
                     $date_dispo => 'Le date de disponibilité doit être rempli',
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
-                    $conditions => 'Les conditions doivent être acceptés',
+                    $conditions => 'Les conditions doivent être acceptées',
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -67,15 +70,16 @@ class AnnonceController extends Controller
                     "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     $name_coloc => 'Le nom de la colocation doit être rempli',
                     $rent => 'Le loyer doit être rempli',
-                    $description => 'La description doit être rempli',
-                    $adress => 'L\'adresse doit être rempli',
+                    $description => 'La description doit être remplie',
+                    $adress => 'L\'adresse doit être remplie',
                     $ville => 'La ville doit être rempli',
                     $postal_code => 'Le code postal doit être rempli',
                     $housing_type => 'Le type de bien doit être rempli',
-                    $date_dispo => 'Le date de disponibilité doit être rempli',
+                    $date_dispo => 'La date de disponibilité doit être remplie',
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
-                    $conditions => 'Les conditions doivent être acceptés',
+                    $conditions => 'Les conditions doivent être acceptées',
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
         }
@@ -437,6 +441,8 @@ class AnnonceController extends Controller
 
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
         $isconnected = Controller::ifConnected();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         $id_annonce = strip_tags(trim($request->get("id_annonce")));
 
@@ -451,6 +457,7 @@ class AnnonceController extends Controller
                 return $app['twig']->render('details-annonce.html.twig', array(
                     "connected" => $isconnected,
                     "error" => "l'URL à été corrompu.",
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }else {
                 return $app['twig']->render('details-annonce.html.twig', array(
@@ -493,6 +500,7 @@ class AnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbie" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         } else {
             return $app['twig']->render('details-annonce.html.twig', array(
@@ -505,6 +513,7 @@ class AnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbie" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         }
     }

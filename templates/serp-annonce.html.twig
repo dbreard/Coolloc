@@ -90,9 +90,11 @@
                     <div class="col-md-12 clear ">
                         <div id="list-type" class="proerty-th">
 
-                            {% if affichage is defined %}
+                            {% if annonce is defined %}
 
-                                {% for affichages in affichage %}
+
+                                {% for affichage in annonce.annonce %}
+                                    {% for affichages in affichage %}
 
                                     <div class="col-sm-6 col-md-3 p0">
                                         <div class="box-two proerty-item">
@@ -117,6 +119,7 @@
                                         </div>
                                     </div>
 
+                                    {% endfor %}
                                 {% endfor %}
 
                             {% endif %}
@@ -124,20 +127,21 @@
                         </div>
                     </div>
 
-                    {# <div class="col-md-12 clear">
+                   <div class="col-md-12 clear">
                         <div class="pull-right">
                             <div class="pagination">
                                 <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">Next</a></li>
+                                    {% if annonce.page > 1 %}
+                                        <li><a href="{{ path('resultat-recherche', {"page" : (annonce.page -1) }) }}">Prev</a></li>
+                                    {% endif %}
+                                    {% if annonce.page < annonce.maxPage %}
+                                        <li><a href="{{ path('resultat-recherche', {"page" : (annonce.page +1) }) }}">Next</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
-                    </div> #}
+                    </div>
+
                 </div>
             </div>
         </div>

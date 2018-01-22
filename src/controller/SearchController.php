@@ -17,6 +17,7 @@ class SearchController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
 
         // ARRAY DES CHAMPS SELECT A MULTIPLES CHOIX
         $arrayDistrict = array('Proche de commerces', 'Proche d\'écoles', 'Proche de transports', 'Calme', 'Animé');
@@ -196,6 +197,7 @@ class SearchController extends Controller
                         "connected" => $isconnected,
                         "affichage" => $response,
                         "nb_resultats" => $nbResponse,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -204,6 +206,7 @@ class SearchController extends Controller
                         "connected" => $isconnected,
                         "affichage" => $response,
                         "nb_resultats" => $nbResponse,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 } else {
                     return $app['twig']->render('serp-annonce.html.twig', array(
@@ -221,6 +224,7 @@ class SearchController extends Controller
                     return $app['twig']->render('index.html.twig', array(
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
                         "affichage" => $donneesMembresAnnonces,
                     ));
@@ -229,6 +233,7 @@ class SearchController extends Controller
                 elseif ($isconnected) {
                     return $app['twig']->render('index.html.twig', array(
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
                         "affichage" => $donneesMembresAnnonces,
                     ));
@@ -243,42 +248,106 @@ class SearchController extends Controller
         }
     }
 
-    public function searchAllAnnonce(Application $app) {
+    public function searchAllAnnonce(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
+        $pageActuelle = strip_tags(trim($request->get("page")));
+
+        // ajout pour verif si user = search colocation
+        $userSearchColocation = Controller::userSearchColocation($app);
+        //////////////////////////////
+
         $response = Model::searchAllAnnonceExist($app);
+
+        $a = (int) $response['count'];
+        $maxPage = (int)ceil( $a / $app['nbFilterAnnonce']);
+
+        $annonce = array();
+
+        // La fonction ceil() arrondit à l'entier supérieur.
+
+        $page = ''; // Le numéro de la page que nous souhaitons visualiser
+            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $page <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
+            {
+                $page = $pageActuelle;
+            }
+            else // Si le paramètre n'est pas spécifié ou n'est pas un nombre valide
+            {
+                $page = 1;
+            }
+
+        // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
+        $offset = ($page - 1) * 12;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
+
+        $annonce['annonce'] = Model::searchAllAnnonceExistLimitDesc($app, $app['nbFilterAnnonce'], $offset);
+        $annonce['page'] = $page;
+        $annonce['maxPage'] = $maxPage;
 
         if ($isConnectedAndAdmin){
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "isConnectedAndAmin" => $isConnectedAndAdmin,
                 "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                "annonce" => $annonce,
+
             ));
         }
 
         elseif ($isconnected) {
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                "annonce" => $annonce,
+
         ));
         } else {
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "affichage" => $response['search'],
                 "nb_resultats" => $response['count'],
+                "annonce" => $annonce,
             ));
         }
     }
 
-    // SELECTION DE TOUT LES PROFILS
-    public function searchAllProfils(Application $app){
+
+
+    // SELECTION DE TOUT LES PROFILS AVEC SYSTEME DE PAGINATION
+    public function searchAllProfils(Application $app, Request $request){
+
         $membres = new UserModelDAO($app['db']);
+        $pageActuelle = strip_tags(trim($request->get("page")));
 
-        $membresAnnonce = $membres->UsersColocationSelected(); // stockage des resultat de selection des membres
+        $nbProfils = $membres->countAllUsers();
+        $a = (int) $nbProfils;
+        $maxPage = (int)ceil( $a / $app['nbFilterProfil']);
 
-        return $membresAnnonce;
+        $membre = array();
+
+        // La fonction ceil() arrondit à l'entier supérieur.
+
+        $page = ''; // Le numéro de la page que nous souhaitons visualiser
+            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $page <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
+            {
+                $page = $pageActuelle;
+            }
+            else // Si le paramètre n'est pas spécifié ou n'est pas un nombre valide
+            {
+                $page = 1;
+            }
+
+        // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
+        $offset = ($page - 1) * 8;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
+
+        $membre['profil'] = $membres->UsersColocationSelectedLimitDesc($app['nbFilterProfil'], $offset);
+        $membre['page'] = $page;
+        $membre['maxPage'] = $maxPage;
+
+        return $membre;
     }
 }

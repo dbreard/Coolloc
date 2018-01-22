@@ -65,6 +65,18 @@ class Model {
         return $response;
     }
 
+    // Retourne toutes les annonces enregistré et le nombre total d'annonce
+    public static function searchAllAnnonceExistLimitDesc(Application $app, $limit, $offset) {
+        // REQUETE DE SELECTION
+        $sql = "SELECT * FROM user, user_post_annonce, options, city, media WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options AND user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND media.type = 'photo' GROUP BY user_post_annonce.id_user_post_annonce LIMIT $limit OFFSET $offset";
+
+        $response['search'] = $app['db']->fetchAll($sql);
+
+        $response['count'] = count($response['search']);
+
+        return $response;
+    }
+
     // SELECTION DE L'ID UTILISATEUR EN FONCTION DE L'ID DE L'ANNONCE
     public static function verifUserToAnnonce(int $id_annonce, Application $app) {
         // REQUETE DE SELECTION DE L'ID USER

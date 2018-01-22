@@ -143,6 +143,10 @@ div.choice:hover{
     margin-left: 15%;
 }
 
+.maj {
+    text-transform: uppercase;
+}
+
 /* fiche profil */
 .img-circle {
     width: 100%;
@@ -219,6 +223,14 @@ font-weight: 500;
     text-align: left;
 
 }
+
+.client-face > img {
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
 
 
 

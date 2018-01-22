@@ -171,7 +171,7 @@ $verifStatus = function (Request $request, Application $app)
 $verifParamComment = function (Request $request, Application $app)
                       {
                         // on vérifie que le contenu du message et que le user existe et différent de vide
-                        $retour = verifParam($request->request, array("comment","user_id"));
+                        $retour = verifParam($request->request, array("comment",));
                         if($retour["error"])
                         return $app->redirect("/Coolloc/public/connected/temoigner");
                       };

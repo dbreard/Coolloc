@@ -4,6 +4,7 @@ namespace Coolloc\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Coolloc\Controller\Controller;
 //use Webforce\Model\TokensDAO;
 
 
@@ -37,24 +38,88 @@ class ContactController extends Controller
         $this->erreur['message'] = 'Votre message doit faire au minimum 20 caractères';
       }
 
-
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+      $userSearchColocation = Controller::userSearchColocation($app);
 
       // SI IL Y A DES ERREURS
       if (!empty($this->erreur)) {
-          return $app['twig']->render('contact.html.twig', array(
-              "error" => $this->erreur, "firstname" => $firstname, "lastname" => $lastname, "email" => $email, "subject" => $subject, "message" => $message,
+
+        if ($isConnectedAndAdmin){
+          return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+              "error" => $this->erreur,
+              "firstname" => $firstname,
+              "lastname" => $lastname,
+              "email" => $email,
+              "subject" => $subject,
+              "message" => $message,
+              "isConnectedAndAmin" => $isConnectedAndAdmin,
+              "connected" => $isconnected,
+              "userSearchColocation" => $userSearchColocation,
+          ));
+        }elseif ($isconnected) {
+            return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                "error" => $this->erreur,
+                "firstname" => $firstname,
+                "lastname" => $lastname,
+                "email" => $email,
+                "subject" => $subject,
+                "message" => $message,
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+            ));
+        }else {
+          return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+              "error" => $this->erreur,
+              "firstname" => $firstname,
+              "lastname" => $lastname,
+              "email" => $email,
+              "subject" => $subject,
+              "message" => $message,
           ));
       }
-      else { // SI IL N'Y A PAS D'ERREUR
+
+    }else { // SI IL N'Y A PAS D'ERREUR
         $message = utf8_encode($message);
         if ($this->sendMailStaff($username, array("body" => "De: ".$username." -- < ".$email." ><hr>".$message, "subject" => $subject))){
-          return $app['twig']->render('contact.html.twig', array("success" => "Votre message a bien été envoyé, merci pour votre participation :-)"));
-        }
-        else{
+
+          if ($isConnectedAndAdmin){
+            return $app['twig']->render('contact.html.twig', array(
+                "success" => "Votre message a bien été envoyé, merci pour votre participation :-)",
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+            ));
+          }elseif ($isconnected) {
+            return $app['twig']->render('contact.html.twig', array(
+                "success" => "Votre message a bien été envoyé, merci pour votre participation :-)",
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+            ));
+          }else {
+            return $app['twig']->render('contact.html.twig', array(
+                "success" => "Votre message a bien été envoyé, merci pour votre participation :-)",
+            ));
+          }
+        }else{
           array_push($this->erreur, 'Erreur envoi email');
-          return $app['twig']->render('contact.html.twig', array(
-              "error" => $this->erreur,
-          ));
+
+          if ($isConnectedAndAdmin){
+            return $app['twig']->render('contact.html.twig', array(
+                "error" => $this->erreur,
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+            ));
+          }elseif ($isconnected) {
+            return $app['twig']->render('contact.html.twig', array(
+                "error" => $this->erreur,
+                "connected" => $isconnected,
+            ));
+          }else {
+            return $app['twig']->render('contact.html.twig', array(
+                "error" => $this->erreur,
+            ));
+          }
         }
       }
     }

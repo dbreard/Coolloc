@@ -46,3 +46,6 @@
 
     $app['mail'] = new PHPMailer(true);
 
+    $app['nbFilterProfil'] = 8;
+    $app['nbFilterAnnonce'] = 12;
+
