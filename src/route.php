@@ -389,7 +389,7 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
-    
+
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
@@ -420,15 +420,9 @@ $app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStat
 
 
 //MODIFIER PROFIL
-$app->get('/connected/profil-modif', function () use ($app) {
-    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+$app->get('/connected/profil-modif', 'Coolloc\Controller\ModifProfilController::sendUserProfilInfo')->bind('profil-modif');
 
-    return $app['twig']->render('connected/profil-modif.html.twig', array("profilInfo" => $profilInfo));
-})
-    ->bind('profil-modif');
-$app->post('/connected/profil', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/profil-modif', 'Coolloc\Controller\ModifProfilController::updateProfilAction');
 
 
 
@@ -470,32 +464,10 @@ $app->post('/connected/gerer-annonce/{id_annonce}', 'Coolloc\Controller\UpdateAn
 
 
 //AJOUT DETAILS PROFIL
-$app->get('/connected/ajout-details-profil', function () use ($app) {
 
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
-            "connected" => $isconnected,
-        ));
-    }
-
-    else {
-        return $app->redirect('/Coolloc/public/login');
-    }
-})
+$app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
     ->bind('ajout-details-profil');
-$app->post('/connected/ajout-details-profil', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
 
 
 

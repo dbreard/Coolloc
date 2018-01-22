@@ -76,16 +76,6 @@
                             <div class="tab-pane" id="step1">
                                 <div class="row p-b-15  ">
                                     <h4 class="info-text">Dites-nous en un peu plus sur vous</h4>
-                                    <div class="col-sm-4 col-sm-offset-1">
-                                        <div class="picture-container">
-                                            <div class="picture">
-                                                <img src="{{ asset('assets/img/default-property.jpg') }}" class="picture-src" id="wizardPicturePreview1" title=""/>
-
-                                                <input type="file" id="wizard-picture1" name="profil_picture">
-                                            </div>
-
-                                        </div>
-                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Date de disponibilité :</label>
@@ -293,20 +283,20 @@
                                                   {% if options.sex_roommates == "homme" %}
                                                     <option value="homme" selected>Homme</option>
                                                     <option value="femme">Femme</option>
-                                                    <option value="mixte">Mixte</option>
+                                                    <option value="peu importe">Mixte</option>
                                                   {% elseif options.sex_roommates == "femme" %}
                                                     <option value="homme">Homme</option>
                                                     <option value="femme" selected>Femme</option>
-                                                    <option value="mixte">Mixte</option>
+                                                    <option value="peu importe">Mixte</option>
                                                   {% else %}
                                                     <option value="homme">Homme</option>
                                                     <option value="femme">Femme</option>
-                                                    <option value="mixte" selected>Mixte</option>
+                                                    <option value="peu importe" selected>Mixte</option>
                                                   {% endif %}
                                                 {% else %}
                                                   <option value="homme">Homme</option>
                                                   <option value="femme">Femme</option>
-                                                  <option value="mixte" selected>Mixte</option>
+                                                  <option value="peu importe" selected>Mixte</option>
                                                 {% endif %}
 
                                                 </select>

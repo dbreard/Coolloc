@@ -75,6 +75,7 @@ class DetailsProfilController extends Controller{
     $updateDetailsProfil = new UpdateDetailsProfilModelDAO($app['db']);
     $rowAffected = $updateDetailsProfil->UpdateDetailsProfil($arrayDetailsProfil, $userId);
 
+
     if ($rowAffected == true){
       $optionUser = Model::userOptionOnly($userId, $app);
       $annonceUser = Model::annonceByUser($userId, $app);

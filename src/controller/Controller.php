@@ -180,6 +180,7 @@ class Controller {
         // Finalement, on détruit la session.
         session_destroy();
 
+
         // var_dump($_SESSION);
 
         // On redirige vers l'acceuil
