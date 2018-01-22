@@ -82,10 +82,45 @@ $verifContact = function (Request $request, Application $app)
 
 
 // VERIFICATION PARAMETRES D'ANNONCE
-// recéption des données et analyse pour savoir si elle sont existentes et remplis
 $verifParamAnnonce = function (Request $request, Application $app)
                     {
                       $retour = verifParam($request->request, array("name_coloc", "rent", "description", "adress", "ville", "postal_code", "housing_type", "date_dispo", "nb_roommates", "conditions"));
+
+                      // echo "<pre>";
+                      //     var_dump($request->request);
+                      // echo "</pre>";
+                      // echo $retour['error'];
+                      //die();
+                      $value_form = $request->request->all();
+
+                      $arrayMessage = Controller::stringToArray($retour['message']);
+
+                      if($retour["error"]){
+
+                          $app["formulaire"] = array(
+                              "verifParamAnnonce" => array(
+                                  "error" => $retour["error"],
+                                  "message" => $retour["message"],
+                                  "value_form" => $value_form,
+                                  "arrayMessage" => $arrayMessage,
+                              )
+                          );
+                      }else{
+                          $app["formulaire"] = array(
+                              "verifParamAnnonce" => array(
+                                  "error" => false,
+                                  "message" => $retour["message"],
+                                  "value_form" => $value_form,
+                                  "arrayMessage" => $arrayMessage,
+                              )
+                          );
+                      }
+                    };
+
+// VERIFICATION PARAMETRES DE MODIFICATION D'ANNONCE
+$verifParamModifAnnonce = function (Request $request, Application $app)
+                    {
+                      $retour = verifParam($request->request, array("name_coloc", "rent", "description", "adress", "ville", "postal_code", "housing_type", "date_dispo", "nb_roommates"));
 
                       // echo "<pre>";
                       //     var_dump($request->request);

@@ -7,7 +7,7 @@ use Coolloc\Model\UserModelDAO;
 use Doctrine\DBAL\Connection;
 use Silex\Application;
 
-class AnnonceModelDAO extends Model{
+class UpdateAnnonceModelDAO extends Model{
 
     private $db;
 
@@ -22,8 +22,9 @@ class AnnonceModelDAO extends Model{
     //     return $ville;
     // }
 
-    public function createAnnonce(array $arrayAnnonce, array $arrayMedia, Application $app){
+    public function updateAnnonceAction(array $arrayAnnonce, array $arrayMedia, Application $app){
 
+        return "OK";
         // On vérifie dans la BDD que la ville et code postal sont correctes
         $sql = "SELECT ville_id FROM city WHERE ville_nom_reel = ?";
 
@@ -115,10 +116,10 @@ class AnnonceModelDAO extends Model{
                         $rowAffected = $updateStatus->updateUserStatus($user['id_user'], "cherche colocataire");
 
                         if ($rowAffected == 1) {
-                            return $annonceId;
+                            return "OK";
                         }
                     }else {
-                        return $annonceId;
+                        return "OK";
                     }
 
                 }
@@ -128,27 +129,11 @@ class AnnonceModelDAO extends Model{
         }
     }
 
-
-    // SELECTION DE TOUTES LES ANNONCES
-    public function allAnnoncesSelected() : array{
+    public function allAnnoncesSelected(){
 
         $sql = "SELECT * FROM annonce_options_city";
         $users = $this->getDb()->fetchAll($sql, array());
 
         return $users;
     }
-
-
-    // SELECTION DE TOUTES LES ANNONCES RECENTE
-    public function OrderAllAnnoncesSelected() : array{
-
-        $sql = "SELECT * FROM user, user_post_annonce, media WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.id_user_post_annonce = media.user_post_annonce_id AND media.type = 'photo' GROUP BY user_post_annonce.id_user_post_annonce ORDER BY user_post_annonce.date_created DESC LIMIT 0,3";
-        $response = $this->getDb()->fetchAll($sql);
-
-        return $response;
-    }
-
-
-    
-
 }
