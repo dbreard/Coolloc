@@ -162,6 +162,9 @@
             {% if profilInfo.status == "cherche colocataire" or profilInfo.status == "admin" %}
         <div class="panel panel-default target">
           <div class="panel-heading text-center" contenteditable="false"><b>Vos annonces publiées</b></div>
+            {% if modified is defined %}
+              <div class="col-xs-12 alert alert-success text-center">Votre annonce a bien été modifiée</div>
+            {% endif %}
             <div class="panel-body">
               <div class="row">
               {% if annonceUser is defined%}
