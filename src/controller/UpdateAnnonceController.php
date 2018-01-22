@@ -29,15 +29,9 @@ class UpdateAnnonceController extends Controller
 
         $infoAnnonce = Model::selectAnnonceById($request->get('id_annonce'), $app);
 
-<<<<<<< HEAD
-        //echo "<pre>";
-        //var_dump($infoAnnonce);
-        //echo "</pre>";
-=======
         // echo "<pre>";
         // var_dump($infoAnnonce);
         // echo "</pre>";
->>>>>>> dev_clonemaster
 
         if ($isConnectedAndAdmin) {
             return $app['twig']->render('/connected/gerer-annonce.html.twig', array(
