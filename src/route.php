@@ -100,39 +100,17 @@ $app->get('/login', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('formulaires/login.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
+    if ($isConnectedAndAdmin || $isconnected)
+        return $app->redirect('/Coolloc/public') ;
 
-    elseif (!$isconnected) {
-        return $app['twig']->render('formulaires/login.html.twig', array(
-            "connected" => $isconnected,
-        ));
-
-    } else {
-
-           return $app->redirect('/Coolloc/public/connected/profil') ;
-
-    }
-
+    return $app['twig']->render('formulaires/login.html.twig', array());
 
     })
     ->bind('login');
     $app->post('/login', "Coolloc\Controller\LoginController::loginAction")->before($verifParamLogin);
 
 // LOGOUT
-$app->get('/connected/deconnexion', function () use ($app) {
-
-        $isdisconnected = Controller::sessionDestroy();
-
-            return $app['twig']->render('index.html.twig', array(
-         "disconnected" => $isdisconnected,
-        ));
-    })
-        ->bind('deconnexion');
-    $app->post('/connected/deconnexion', 'Coolloc\Controller\Controller::sessionDestroy');
+$app->get('/connected/deconnexion','Coolloc\Controller\Controller::sessionDestroy')->bind('deconnexion');
 
 
 //INSCRIPTION
@@ -393,17 +371,21 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
-    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-    $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
-    $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
+
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
 
     if ($isConnectedAndAdmin){
+        $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
+        $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
         return $app['twig']->render('connected/profil.html.twig', array("profilInfo" => $profilInfo, "userOption" => $optionUser, "annonceUser" => $annonceUser,  "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, ));
     }
 
     elseif ($isconnected) {
+        $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
+        $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
         return $app['twig']->render('connected/profil.html.twig', array("profilInfo" => $profilInfo, "userOption" => $optionUser, "annonceUser" => $annonceUser, "connected" => $isconnected, ));
 
     }
@@ -420,15 +402,9 @@ $app->post('/connected/profil', 'Coolloc\Controller\StatusController::changeStat
 
 
 //MODIFIER PROFIL
-$app->get('/connected/profil-modif', function () use ($app) {
-    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+$app->get('/connected/profil-modif', 'Coolloc\Controller\ModifProfilController::sendUserProfilInfo')->bind('profil-modif');
 
-    return $app['twig']->render('connected/profil-modif.html.twig', array("profilInfo" => $profilInfo));
-})
-    ->bind('profil-modif');
-$app->post('/connected/profil', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/profil-modif', 'Coolloc\Controller\ModifProfilController::updateProfilAction');
 
 
 
@@ -452,7 +428,7 @@ $app->get('/connected/ajout-annonce', function () use ($app) {
     }
 
     else {
-        return $app->redirect('Coolloc/public/login');
+        return $app->redirect('/Coolloc/public/login');
     }
 
 })
@@ -470,32 +446,10 @@ $app->post('/connected/gerer-annonce/{id_annonce}', 'Coolloc\Controller\UpdateAn
 
 
 //AJOUT DETAILS PROFIL
-$app->get('/connected/ajout-details-profil', function () use ($app) {
 
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array(
-            "connected" => $isconnected,
-        ));
-    }
-
-    else {
-        return $app->redirect('Coolloc/public/login');
-    }
-})
+$app->get('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::sendUserOption')
     ->bind('ajout-details-profil');
-$app->post('/connected/ajout-details-profil', function () use ($app) {
-    //controleur
-});
+$app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilController::detailsProfilAction');
 
 
 
@@ -519,7 +473,7 @@ $app->get('connected/temoigner', function () use ($app) {
     }
     else
     {
-        return $app->redirect('Coolloc/public/login') ;
+        return $app->redirect('/Coolloc/public/login') ;
     }
 
 })

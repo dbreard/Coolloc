@@ -70,6 +70,16 @@ class UserModelDAO {
 
     }
 
+    // SELECTION D'UN TOKEN CONNEXION PAR SON USER_ID
+    public function selectTokenConnectionFromUser(int $userId) {
+        
+        $sql = "SELECT token FROM tokens WHERE user_id = ? AND type LIKE 'connexion'";
+        $token = $this->getDb()->fetchAssoc($sql, array((int) $userId));
+
+        return $token;
+
+    }
+
     // SELECTION D'UN USER PAR SON ID
     public function selectUserFromId(int $idUser){
 

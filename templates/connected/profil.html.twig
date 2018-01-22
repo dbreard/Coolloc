@@ -7,23 +7,13 @@
 {% endblock %}
 
 {% block header %}
-       {% if connected is defined %}
             {% include 'required/header_c.html.twig' ignore missing  %}
-                {% else %}
-            {% include 'required/header.html.twig' ignore missing  %}
-        {% endif %}
 {% endblock %}
 
 {# Bloc nav #}
 
 {% block navigation %}
-
-            {% if connected is defined %}
                 {% include 'required/navigation_c.html.twig' ignore missing  %}
-                    {% else %}
-                {% include 'required/navigation_nc.html.twig' ignore missing  %}
-            {% endif %}
-
 {% endblock %}
 
 {% block content %}
@@ -46,10 +36,14 @@
                   <div>
                   {% if profilInfo.profil_picture != NULL %}
                     <div class="">
-                    <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="{{ profilInfo.profil_picture }}" width="10" height="10">
+                      <a href="{{ path ('profil-modif') }}">
+                        <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="{{ profilInfo.profil_picture }}" width="10" height="10" alt="photo de profil">
+                      </a>
                     </div>
                   {% else %}
-                    <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="http://www.rlsandbox.com/img/profile.jpg" width="10" height="10">
+                    <a href="{{ path ('profil-modif') }}">
+                      <img title="profile image" class="profile_img img-circle img-responsive col-xs-4" src="{{ asset('assets/img/default-property.jpg') }}" width="10" height="10" alt="photo de profil">
+                    </a>
                   {% endif %}
                   </div>
                 </div>
@@ -69,8 +63,6 @@
                         {% else %}
                           <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil')}}">Modifier mes préférences</a>
                         {% endif %}
-                      {% elseif profilInfo.status == "cherche colocataire" %}
-                        <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
                       {% elseif profilInfo.status == "admin" %}
                         <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-details-profil') }}">Modifier mes préférences</a>
                         <a type="button" class="btn btn-default col-xs-12 col-sm-4" href="{{path ('ajout-annonce') }}">Modifier mes annonces</a>
@@ -79,11 +71,15 @@
 
 
 
+
             </div>
         </div>
 
 
       <div class="row">
+      {% if updated is defined %}
+        <div class="alert alert-success text-center">{{ updated }}</div>
+      {% endif %}
           <div class="col-sm-3 col-xs-12">
                 <!--left col-->
             <ul class="list-group">
@@ -108,7 +104,10 @@
                 <div class="panel-body">
                   {% if success is defined %}
                     <div class="alert alert-warning text-center">Vos préférences actuelles ont été définies par défaut. Pour les personnaliser, veuillez cliquer sur le bouton AJOUTER MES PREFERENCES</div>
-                    <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="path ('ajout-details-profil')">Ajouter mes préférences</a>
+                    <a type="button" class="btn btn-default col-xs-12 col-xs-offset-4 col-sm-4" href="{{path ('ajout-details-profil')}}">Ajouter mes préférences</a>
+                  {% endif %}
+                  {% if modified is defined %}
+                    <div class="col-xs-12 alert alert-success text-center">Vos préférences actuelles ont bien été modifiées</div>
                   {% endif %}
                   {% if userOption is defined %}
                 <ul>
@@ -177,7 +176,6 @@
                           <a href="{{ path ('gerer-annonce', {"id_annonce" : annonceUsers.id_user_post_annonce }) }}" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
                             </div>
                           </div>
-
                         </div>
                       </a>
                     {% endfor %}
