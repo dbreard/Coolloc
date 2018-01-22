@@ -34,8 +34,6 @@ class Controller {
     }
 
     // MODIFICATION DU FORMAT NUMERO DE TELEPHONE
-
-
     public function modifyTel(string $tel){
 
         if (iconv_strlen($tel) == 10){
@@ -215,7 +213,7 @@ class Controller {
         }
         // Si le nombre de valeur ne correspond pas au nombre de check erreur
         if (count($arrayCheck) != count($arrayTarget)) {
-            
+
             if ($champs == "Quartier") {
                 $this->erreur['district'] = "Problème de selection dans '" . $champs . "'";
             }else if ($champs == "Equipement") {
@@ -301,17 +299,17 @@ class Controller {
         return date("Ymd");
     }
 
-        //*********** GETTER ****************//
+    //*********** GETTER ****************//
 
-        public function getToken(){
-            return $this->token;
-        }
+    public function getToken(){
+        return $this->token;
+    }
 
-        //*********** SETTER ****************//
+    //*********** SETTER ****************//
 
-        public function setToken($token){
-            $this->token = $token;
-        }
+    public function setToken($token){
+        $this->token = $token;
+    }
 
     //-----------------------ENVOI DE MAILS AU STAFF--------------------------//
 
