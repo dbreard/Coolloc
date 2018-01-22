@@ -189,7 +189,7 @@
                                                 {% endif %}
                                             </div>
                                             <label for="videos">Insérez un lien vers la vidéo youtube de votre colocation :</label>
-                                        <input class="form-control" placeholder="http://www.youtube.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% else %}{{ info_video.url_media }}{% endif %}">
+                                        <input class="form-control" placeholder="http://www.youtube.com" name="video" type="text" value="{% if value.video is defined %}{{ value.video }}{% elseif info_video.url_media is defined %}{{ info_video.url_media }}{% endif %}">
                                         </div>
                                     </div>
                                 </div>
