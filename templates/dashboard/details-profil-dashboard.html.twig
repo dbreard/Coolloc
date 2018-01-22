@@ -59,17 +59,17 @@
             </thead>
                 <tr>
 
-                        <td class="text-center">{{ detailsUser.firstname }}</td>
-                        <td class="text-center">{{ detailsUser.lastname }}</td>
-                        <td class="text-center"><img src="{{ detailsUser.profil_picture }}" alt="Miniature photo de profil"></td>
-                        <td class="text-center">{{ detailsUser.handicap_access }}</td>
-                        <td class="text-center">{{ detailsUser.smoking }}</td>
-                        <td class="text-center">{{ detailsUser.animals }}</td>
-                        <td class="text-center">{{ detailsUser.sex_roommates }}</td>
-                        <td class="text-center">{{ detailsUser.furniture }}</td>
-                        <td class="text-center">{{ detailsUser.garden }}</td>
-                        <td class="text-center">{{ detailsUser.balcony }}</td>
-                        <td class="text-center">{{ detailsUser.parking }}</td>
+                        <td class="text-center">{{ detailsUser.user.firstname }}</td>
+                        <td class="text-center">{{ detailsUser.user.lastname }}</td>
+                        <td class="text-center"><img src="{{ detailsUser.user.profil_picture }}" alt="Miniature photo de profil" height="200"></td>
+                        <td class="text-center">{{ detailsUser.user.handicap_access }}</td>
+                        <td class="text-center">{{ detailsUser.user.smoking }}</td>
+                        <td class="text-center">{{ detailsUser.user.animals }}</td>
+                        <td class="text-center">{{ detailsUser.user.sex_roommates }}</td>
+                        <td class="text-center">{{ detailsUser.user.furniture }}</td>
+                        <td class="text-center">{{ detailsUser.user.garden }}</td>
+                        <td class="text-center">{{ detailsUser.user.balcony }}</td>
+                        <td class="text-center">{{ detailsUser.user.parking }}</td>
                  </tr>
         </table>
     </div>
@@ -80,34 +80,34 @@
         <table class="table table-hover table-striped col-md-12">
             <tr>
                 <th class="col-md-2">Equipement</th>
-                {% if detailsUser.equipment == '' %}
+                {% if detailsUser.user.equipment == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.equipment }}</td>
+                    <td>{{ detailsUser.user.equipment }}</td>
                 {% endif %}
             </tr>
             <tr>
                 <th>Quartier</th>
-                {% if detailsUser.district == '' %}
+                {% if detailsUser.user.district == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.district }}</td>
+                    <td>{{ detailsUser.user.district }}</td>
                 {% endif %}
             </tr>
             <tr>
                 <th>Centres d'interet</th>
-                {% if detailsUser.hobbies == '' %}
+                {% if detailsUser.user.hobbies == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.hobbies }}</td>
+                    <td>{{ detailsUser.user.hobbies }}</td>
                 {% endif %}
             </tr>
             <tr>
                 <th>Profil du membre</th>
-                {% if detailsUser.member_profil == '' %}
+                {% if detailsUser.user.member_profil == '' %}
                     <td>Non défini par l'utilisateur</td>
                 {% else %}
-                    <td>{{ detailsUser.member_profil }}</td>
+                    <td>{{ detailsUser.user.member_profil }}</td>
                 {% endif %}
             </tr>
         </table>

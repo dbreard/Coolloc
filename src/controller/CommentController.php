@@ -100,4 +100,45 @@ class CommentController extends Controller
     }
 
 
+    public function selectCommentAndAdminInfo(Application $app){
+
+        // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET EST ADMIN
+        $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+        // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
+        if ($isconnectedAndAdmin) { // Si l'utilisateur est admin
+
+            $comments = new CommentModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
+            $resultat = $comments->selectComment();
+
+            if(isset($resultat)){
+                return $app['twig']->render('dashboard/comment-dashboard.html.twig', array(
+                    "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
+                    "comments" => $resultat,
+                ));
+            }else{
+                return $app->redirect('/Coolloc/public/connected/sabit');
+            }
+
+        } else {// Si l'utilisateur n'est pas admin
+            return $app->redirect('/Coolloc/public');
+        }
+
+    }
+
+
+    public function deleteComment(Application $app, Request $request){
+        $idComment = strip_tags(trim($request->get("id_comments"))); // ON RECUPERE L'ID DU COMMENTAIRE
+
+        if(!filter_var($idComment, FILTER_VALIDATE_INT)){ // VERIFICATION DU BON FORMAT DE L'ID
+            return $app->redirect('/Coolloc/public/connected/sabit/gerer-faq');// SI L'ID EST AU MAUVAIS FORMAT
+        }
+
+        $comment = new CommentModelDAO($app['db']);
+
+        $comment->deleteComment($idComment);
+
+        return $app->redirect('/Coolloc/public/connected/sabit/gerer-temoignage');
+    }
+
 }
