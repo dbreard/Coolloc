@@ -20,7 +20,6 @@ class SearchAnnonceModelDAO{
 
     public function searchAnnonce(array $arraySearch, Application $app){
         if (!empty($arraySearch)) {
-
             // SI CITY N'EST PAS VIDE
             (empty($arraySearch['city'])) ? $city = "" : $city = 'AND city.ville_nom_reel = "' . $arraySearch['city'] . '"';
             // SI MINRENT N'EST PAS VIDE
