@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Coolloc\Controller\Controller;
 use Coolloc\Controller\HomeController;
+use Coolloc\Controller\AProposController;
 use Coolloc\Controller\FaqController;
 use Coolloc\Model\Model;
 
@@ -328,13 +329,11 @@ $app->get('/a-propos', function () use ($app) {
     } else {
         return $app['twig']->render('a-propos.html.twig', array());
     }
-
 })
     ->bind('a-propos');
 
 
-    //AFFICHAGE PRESENTATION PROFIL
-
+//AFFICHAGE PRESENTATION PROFIL
 $app->get('/fiche-profil', function () use ($app) {
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
