@@ -12,42 +12,107 @@
             <div class="row testimonial">
                 <div class="col-md-12">
                     <div id="testimonial-slider">
+                    {% if affichage.temoignages is defined %}
+                      {% if affichage.temoignages.0 is defined %}
                         <div class="item">
                             <div class="client-text">
-                                <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                                <p>{{ affichage.temoignages.0.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.0.firstname }}  {{ affichage.temoignages.0.lastname }} </strong><i>{{ affichage.temoignages.0.status }}</i></h4>
                             </div>
                             <div class="client-face wow fadeInRight" data-wow-delay=".9s">
-                                <img src="{{ asset('assets/img/client-face1.png ') }}" alt="">
+                          <img src="{% if affichage.temoignages.0.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.0.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
                             </div>
                         </div>
+                      {% endif %}
+                      {% if affichage.temoignages.1 is defined %}
                         <div class="item">
                             <div class="client-text">
-                                <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                                <p>{{ affichage.temoignages.1.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.1.firstname }}  {{ affichage.temoignages.1.lastname }} </strong><i>{{ affichage.temoignages.1.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                                <img src="{{ asset('assets/img/client-face2.png ') }}" alt="">
+                          <img src="{% if affichage.temoignages.1.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.1.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
                             </div>
                         </div>
+                      {% endif %}
+                      {% if affichage.temoignages.2 is defined %}
                         <div class="item">
                             <div class="client-text">
-                                <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                                <p>{{ affichage.temoignages.2.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.2.firstname }}  {{ affichage.temoignages.2.lastname }} </strong><i>{{ affichage.temoignages.2.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                                <img src="{{ asset('assets/img/client-face1.png ') }}" alt="">
+                          <img src="{% if affichage.temoignages.2.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.2.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
                             </div>
                         </div>
+                      {% endif %}
+                      {% if affichage.temoignages.3 is defined %}
                         <div class="item">
                             <div class="client-text">
-                                <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                                <p>{{ affichage.temoignages.3.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.3.firstname }} {{ affichage.temoignages.3.lastname }} </strong><i>{{ affichage.temoignages.3.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                                <img src="{{ asset('assets/img/client-face2.png ') }}" alt="">
+                          <img src="{% if affichage.temoignages.3.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.3.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
                             </div>
                         </div>
+                      {% endif %}
+                      {% if affichage.temoignages.4 is defined %}
+                        <div class="item">
+                            <div class="client-text">
+                                <p>{{ affichage.temoignages.4.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.4.firstname }}  {{ affichage.temoignages.4.lastname }} </strong><i>{{ affichage.temoignages.4.status }}</i></h4>
+                            </div>
+                            <div class="client-face">
+                          <img src="{% if affichage.temoignages.4.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.4.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                            </div>
+                        </div>
+                      {% endif %}
+                      {% if affichage.temoignages.5 is defined %}
+                        <div class="item">
+                            <div class="client-text">
+                                <p>{{ affichage.temoignages.5.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.5.firstname }}  {{ affichage.temoignages.5.lastname }} </strong><i>{{ affichage.temoignages.5.status }}</i></h4>
+                            </div>
+                            <div class="client-face">
+                          <img src="{% if affichage.temoignages.5.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.5.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                            </div>
+                        </div>
+                      {% endif %}
+                      {% if affichage.temoignages.6 is defined %}
+                        <div class="item">
+                            <div class="client-text">
+                                <p>{{ affichage.temoignages.6.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.6.firstname }} {{ affichage.temoignages.6.lastname }} </strong><i>{{ affichage.temoignages.6.status }}</i></h4>
+                            </div>
+                            <div class="client-face">
+                          <img src="{% if affichage.temoignages.6.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.6.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                            </div>
+                        </div>
+                      {% endif %}
+                      {% if affichage.temoignages.7 is defined %}
+                        <div class="item">
+                            <div class="client-text">
+                                <p>{{ affichage.temoignages.7.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.7.firstname }} {{ affichage.temoignages.7.lastname }} </strong><i>{{ affichage.temoignages.7.status }}</i></h4>
+                            </div>
+                            <div class="client-face">
+                          <img src="{% if affichage.temoignages.7.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.7.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                            </div>
+                        </div>
+                      {% endif %}
+                      {% if affichage.temoignages.8 is defined %}
+                        <div class="item">
+                            <div class="client-text">
+                                <p>{{ affichage.temoignages.8.comment }}</p>
+                                <h4><strong>{{ affichage.temoignages.8.firstname }} {{ affichage.temoignages.8.lastname }} </strong><i>{{ affichage.temoignages.8.status }}</i></h4>
+                            </div>
+                            <div class="client-face">
+                          <img src="{% if affichage.temoignages.8.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.8.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                            </div>
+                        </div>
+                      {% endif %}
+                    {% endif %}
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ class CommentModelDAO
 
         // selectionne tout les commentaires
         public function selectComment(){
-            $sql = "SELECT * FROM comments";
+            $sql = "SELECT c.*, u.firstname, u.lastname, u.status, u.profil_picture FROM comments c, user u WHERE c.user_id = u.id_user ORDER BY RAND() LIMIT 0, 9";
             $comments = $this->getDb()->fetchAll($sql, array());
 
             return $comments;
