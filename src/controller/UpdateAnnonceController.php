@@ -7,27 +7,66 @@ use Coolloc\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\Model;
-use Coolloc\Model\AnnonceModelDAO;
+use Coolloc\Model\UpdateAnnonceModelDAO;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-class AnnonceController extends Controller
+class UpdateAnnonceController extends Controller
 {
-    // public function callVille(Application $app) {
-    //     $listeVille = new AnnonceModelDAO($app['db']);
-    //     $ville = $listeVille->listeVille();
-    //
-    //     if (!empty($ville)) {
-    //         return $app['twig']->render('/connected/ajout-annonce.html.twig', array('ville' => $ville));
-    //     }else {
-    //         return $app['twig']->render('/connected/ajout-annonce.html.twig', array());
-    //     }
-    // }
-
-    public function annonceAction(Application $app, Request $request) {
+    public function selectAnnonceAction(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+        // Vérification que l'utilisateur est bien sur une annonce qui lui appartient
+        $id_user = Model::verifUserToAnnonce($request->get('id_annonce'), $app);
+
+        $id_user_token = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+
+        // Si il y a une érreur retour à la page profil
+        if ( $id_user['id_user'] != $id_user_token['id_user'] )
+            return $app->redirect('/../Coolloc/public/connected/profil');
+
+        $infoAnnonce = Model::selectAnnonceById($request->get('id_annonce'), $app);
+
+        echo "<pre>";
+        var_dump($infoAnnonce);
+        echo "</pre>";
+
+        if ($isConnectedAndAdmin) {
+            return $app['twig']->render('/connected/gerer-annonce.html.twig', array(
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "array_photo" => $infoAnnonce['array_photo'],
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbies" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
+            ));
+        }else if ($isconnected) {
+            return $app['twig']->render('/connected/gerer-annonce.html.twig', array(
+                "connected" => $isconnected,
+                "info_annonce" => $infoAnnonce['annonce'],
+                "info_photo" => $infoAnnonce['photo'],
+                "info_video" => $infoAnnonce['video'],
+                "array_photo" => $infoAnnonce['array_photo'],
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbies" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
+            ));
+        }
+    }
+
+
+    public function updateAnnonceAction(Application $app, Request $request) {
+
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $infoAnnonce = Model::selectAnnonceById($request->get('id_annonce'), $app);
 
         $arrayMessage = $app["formulaire"]["verifParamAnnonce"]["arrayMessage"];
 
@@ -40,12 +79,11 @@ class AnnonceController extends Controller
         $housing_type = ( !isset($arrayMessage['housing_type']) ) ? '' : 'housing_type';
         $date_dispo = ( !isset($arrayMessage['date_dispo']) ) ? '' : 'date_dispo';
         $nb_roommates = ( !isset($arrayMessage['nb_roommates']) ) ? '' : 'nb_roommates';
-        $conditions = ( !isset($arrayMessage['conditions']) ) ? '' : 'conditions';
 
         // Si il y a des erreurs enregistré par le middleware on redirige vers la page ajout-annonce
         if ($app["formulaire"]["verifParamAnnonce"]["error"] == true) {
             if ($isConnectedAndAdmin){
-                return  $app['twig']->render('/connected/ajout-annonce.html.twig', array(
+                return  $app['twig']->render('/connected/gerer-annonce.html.twig', array(
                     "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     $name_coloc => 'Le nom de la colocation doit être rempli',
                     $rent => 'Le loyer doit être rempli',
@@ -56,14 +94,13 @@ class AnnonceController extends Controller
                     $housing_type => 'Le type de bien doit être rempli',
                     $date_dispo => 'Le date de disponibilité doit être rempli',
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
-                    $conditions => 'Les conditions doivent être acceptés',
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
                 ));
             }
 
             elseif ($isconnected) {
-                return  $app['twig']->render('/connected/ajout-annonce.html.twig', array(
+                return  $app['twig']->render('/connected/gerer-annonce.html.twig', array(
                     "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     $name_coloc => 'Le nom de la colocation doit être rempli',
                     $rent => 'Le loyer doit être rempli',
@@ -74,7 +111,6 @@ class AnnonceController extends Controller
                     $housing_type => 'Le type de bien doit être rempli',
                     $date_dispo => 'Le date de disponibilité doit être rempli',
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
-                    $conditions => 'Les conditions doivent être acceptés',
                     "connected" => $isconnected,
                 ));
             }
@@ -319,36 +355,41 @@ class AnnonceController extends Controller
             }
         }
 
-        // CONDITIONS
-        $conditions = strip_tags(trim($request->get('conditions')));
-        if (!empty($conditions)) {
-            if ($conditions != 'on') {
-                $this->erreur['conditions'] = "Vous devez accepter les conditions pour pouvoir poster votre annonce";
-            }else {
-                $conditions = true;
-            }
-        }
-
         // echo "<pre>";
         // var_dump($arrayMedia);
         // echo "</pre>";
+        // die();
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
             if ($isConnectedAndAdmin){
-                return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                return $app['twig']->render('connected/gerer-annonce.html.twig', array(
                     "error" => $this->erreur,
-                    "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
+                    "info_annonce" => $infoAnnonce['annonce'],
+                    "info_photo" => $infoAnnonce['photo'],
+                    "info_video" => $infoAnnonce['video'],
+                    "array_photo" => $infoAnnonce['array_photo'],
+                    "district" => $infoAnnonce['district'],
+                    "equipment" => $infoAnnonce['equipment'],
+                    "hobbies" => $infoAnnonce['hobbies'],
+                    "member_profil" => $infoAnnonce['member_profil'],
                 ));
             }
 
             elseif ($isconnected) {
-                return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                return $app['twig']->render('connected/gerer-annonce.html.twig', array(
                     "error" => $this->erreur,
-                    "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     "connected" => $isconnected,
+                    "info_annonce" => $infoAnnonce['annonce'],
+                    "info_photo" => $infoAnnonce['photo'],
+                    "info_video" => $infoAnnonce['video'],
+                    "array_photo" => $infoAnnonce['array_photo'],
+                    "district" => $infoAnnonce['district'],
+                    "equipment" => $infoAnnonce['equipment'],
+                    "hobbies" => $infoAnnonce['hobbies'],
+                    "member_profil" => $infoAnnonce['member_profil'],
                 ));
             }
 
@@ -363,7 +404,6 @@ class AnnonceController extends Controller
                 "housing_type" => $housing_type,
                 "date_dispo" => $date_dispo,
                 "nb_roommates" => $nb_roommates,
-                "conditions" => $conditions,
                 "mail_annonce" => $mail_annonce,
                 "tel_annonce" => $tel_annonce,
                 "adress_details" => $adress_details,
@@ -389,109 +429,75 @@ class AnnonceController extends Controller
             // echo "</pre>";
             // die();
 
-            $annonce = new AnnonceModelDAO($app['db']);
+            $annonce = new UpdateAnnonceModelDAO($app['db']);
 
-            $retour = $annonce->createAnnonce($arrayAnnonce, $arrayMedia, $app);
+            $retour = $annonce->updateAnnonceAction($arrayAnnonce, $arrayMedia, $app);
 
             if ($retour == false) {
                 if ($isConnectedAndAdmin){
-                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                    return $app['twig']->render('connected/gerer-annonce.html.twig', array(
                         "error" => "Erreur lors de l'insertion, veuillez réessayer.",
-                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
+                        "info_annonce" => $infoAnnonce['annonce'],
+                        "info_photo" => $infoAnnonce['photo'],
+                        "info_video" => $infoAnnonce['video'],
+                        "array_photo" => $infoAnnonce['array_photo'],
+                        "district" => $infoAnnonce['district'],
+                        "equipment" => $infoAnnonce['equipment'],
+                        "hobbies" => $infoAnnonce['hobbies'],
+                        "member_profil" => $infoAnnonce['member_profil'],
                     ));
                 }
 
                 elseif ($isconnected) {
-                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                    return $app['twig']->render('connected/gerer-annonce.html.twig', array(
                         "error" => "Erreur lors de l'insertion, veuillez réessayer.",
-                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "connected" => $isconnected,
+                        "info_annonce" => $infoAnnonce['annonce'],
+                        "info_photo" => $infoAnnonce['photo'],
+                        "info_video" => $infoAnnonce['video'],
+                        "array_photo" => $infoAnnonce['array_photo'],
+                        "district" => $infoAnnonce['district'],
+                        "equipment" => $infoAnnonce['equipment'],
+                        "hobbies" => $infoAnnonce['hobbies'],
+                        "member_profil" => $infoAnnonce['member_profil'],
                     ));
                 }
             }else if ($retour == "ville_invalid"){
                 if ($isConnectedAndAdmin){
-                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                    return $app['twig']->render('connected/gerer-annonce.html.twig', array(
                         "cityError" => "Erreur sur le champs 'Ville', celle-ci n'est pas valide",
-                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
+                        "info_annonce" => $infoAnnonce['annonce'],
+                        "info_photo" => $infoAnnonce['photo'],
+                        "info_video" => $infoAnnonce['video'],
+                        "array_photo" => $infoAnnonce['array_photo'],
+                        "district" => $infoAnnonce['district'],
+                        "equipment" => $infoAnnonce['equipment'],
+                        "hobbies" => $infoAnnonce['hobbies'],
+                        "member_profil" => $infoAnnonce['member_profil'],
                     ));
                 }
 
                 elseif ($isconnected) {
-                    return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+                    return $app['twig']->render('connected/gerer-annonce.html.twig', array(
                         "cityError" => "Erreur sur le champs 'Ville', celle-ci n'est pas valide",
-                        "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "connected" => $isconnected,
+                        "info_annonce" => $infoAnnonce['annonce'],
+                        "info_photo" => $infoAnnonce['photo'],
+                        "info_video" => $infoAnnonce['video'],
+                        "array_photo" => $infoAnnonce['array_photo'],
+                        "district" => $infoAnnonce['district'],
+                        "equipment" => $infoAnnonce['equipment'],
+                        "hobbies" => $infoAnnonce['hobbies'],
+                        "member_profil" => $infoAnnonce['member_profil'],
                     ));
                 }
-            }else {
-                return new RedirectResponse('/Coolloc/public/details-annonce/' . $retour);
+            }else if ($retour == "OK"){
+                return $app->redirect('/Coolloc/public/connected/profil');
             }
-        }
-    }
-
-    public function detailAnnonceAction(Application $app, Request $request) {
-
-        $isconnected = Controller::ifConnected();
-
-        $id_annonce = strip_tags(trim($request->get("id_annonce")));
-
-        if (!filter_var($id_annonce, FILTER_VALIDATE_INT)) {
-            if ($isconnected) {
-                return $app['twig']->render('details-annonce.html.twig', array(
-                    "connected" => $isconnected,
-                    "error" => "l'URL à été corrompu.",
-                ));
-            }else {
-                return $app['twig']->render('details-annonce.html.twig', array(
-                    "error" => "l'URL à été corrompu.",
-                ));
-            }
-        }
-
-        $infoAnnonce = Model::selectAnnonceById($id_annonce, $app);
-
-        // echo "<pre>";
-        // var_dump($infoAnnonce['video']['url_media']);
-        // echo "</pre>";
-        // die();
-
-        $district = $this->stringToArray($infoAnnonce['annonce']['district']);
-        $equipment = $this->stringToArray($infoAnnonce['annonce']['equipment']);
-        $hobbies = $this->stringToArray($infoAnnonce['annonce']['hobbies']);
-        $member_profil = $this->stringToArray($infoAnnonce['annonce']['member_profil']);
-
-
-        $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
-        $dispoAnnonce = (($this->getDate() - $dateDispoAnnonce) < 0) ? 'non' : 'oui';
-
-        if ($isconnected) {
-            return $app['twig']->render('details-annonce.html.twig', array(
-                "connected" => $isconnected,
-                "info_annonce" => $infoAnnonce['annonce'],
-                "info_photo" => $infoAnnonce['photo'],
-                "info_video" => $infoAnnonce['video'],
-                "dispo_annonce" => $dispoAnnonce,
-                "district" => $district,
-                "equipment" => $equipment,
-                "hobbie" => $hobbies,
-                "member_profil" => $member_profil,
-        ));
-        } else {
-            return $app['twig']->render('details-annonce.html.twig', array(
-                "info_annonce" => $infoAnnonce['annonce'],
-                "info_photo" => $infoAnnonce['photo'],
-                "info_video" => $infoAnnonce['video'],
-                "array_photo" => $infoAnnonce['array_photo'],
-                "dispo_annonce" => $dispoAnnonce,
-                "district" => $district,
-                "equipment" => $equipment,
-                "hobbie" => $hobbies,
-                "member_profil" => $member_profil,
-        ));
         }
     }
 }
