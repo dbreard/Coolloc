@@ -469,29 +469,7 @@ $app->post('/connected/ajout-details-profil', 'Coolloc\Controller\DetailsProfilC
 
 
 //ajout temoignage
-$app->get('connected/temoigner', function () use ($app) {
-
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('connected/temoigner.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('connected/temoigner.html.twig', array(
-     "connected" => $isconnected,
-    ));
-    }
-    else
-    {
-        return $app->redirect('/Coolloc/public/login') ;
-    }
-
-})
+$app->get('connected/temoigner', 'Coolloc\Controller\CommentController::sendCommentInfos')
     ->bind('temoigner');
 $app->post('/connected/temoigner', 'Coolloc\Controller\CommentController::commentAction')->before($verifParamComment);
 
@@ -534,12 +512,12 @@ $app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController:
 
 //GERER FAQ
 $app->get('/connected/sabit/gerer-faq', 'Coolloc\Controller\FaqController::selectedFaqAndAdminInfo') ->bind('gerer-faq');
-$app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamComment);
+$app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamCommentFaq);
 
 
 //MODIFIER - SUPPRIMER FAQ
 $app->get('/connected/sabit/gerer-faq/{id_faq}/{action}', 'Coolloc\Controller\FaqController::modifyDeleteFaq') ->bind('gerer-faq-modifier-ou-supprimer');
-$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::modifyFaq')->before($verifParamComment);
+$app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::modifyFaq')->before($verifParamCommentFaq);
 
 //GERER COMMENTAIRES-TEMOIGNAGE
 $app->get('/connected/sabit/gerer-temoignage', 'Coolloc\Controller\CommentController::selectCommentAndAdminInfo')->bind('gerer-temoignage');

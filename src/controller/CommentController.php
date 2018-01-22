@@ -15,13 +15,37 @@ use Coolloc\Model\TokensDAO;
 class CommentController extends Controller
 {
 
+    public function sendCommentInfos(Application $app){
+
+      $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+
+      if ($isConnectedAndAdmin){
+          return $app['twig']->render('connected/temoigner.html.twig', array(
+              "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "user_id" => $profilInfo['id_user']
+          ));
+      }
+
+      elseif ($isconnected) {
+          return $app['twig']->render('connected/temoigner.html.twig', array(
+       "connected" => $isconnected,
+      ));
+      }
+      else
+      {
+          return $app->redirect('/Coolloc/public/login') ;
+      }
+    }
+
     //fonction d'analyse des champs saisie
     public function commentAction(Application $app, Request $request)
     {
         $comment = strip_tags(trim($request->get('comment')));
-        
 
-        // si le message contient moins de 5 caractères ou si le message contient plus de 101 caractères 
+
+        // si le message contient moins de 5 caractères ou si le message contient plus de 101 caractères
         if ((iconv_strlen($comment) < 5 && iconv_strlen($comment) > 100)){
             $this->erreur['comment'] = 'Votre commentaire doit contenir entre 5 et 100 caractères';
           }
@@ -70,5 +94,5 @@ class CommentController extends Controller
 
     }
 
-    
+
 }
