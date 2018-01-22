@@ -30,23 +30,23 @@ class LoginController extends Controller
         ($this->verifMdp($password)) ?: $this->erreur['password'] = 'Format du mot de passe incorrect ';
 
 
-        if (!empty($this->erreur)) 
+        if (!empty($this->erreur))
         { // si il y a des erreurs lors de la connexion, on les affiche
             return $app['twig']->render('formulaires/login.html.twig', array(
                 "error" => $this->erreur,
             ));
-        } 
-        else 
-        
+        }
+        else
+
         { // si les formats d'email et mdp sont bons, l'user se connecte et crée un token
             $resultat = new UserModelDAO($app['db']);
             $userVerifEmail = $resultat->verifEmailBdd($email);
             ($userVerifEmail) ? $user = $resultat->verifEmailBdd($email) : $this->erreur['email_error'] = 'Email ou mot de passe incorrect';
             // Vérifie si l'email de connexion correspond en BDD
 
-            if (!empty($user)) 
+            if (!empty($user))
             { // Si la selection s'est bien passée
-                if ($user['password'] == password_verify($password, substr($user['password'], 0, -32))) 
+                if ($user['password'] == password_verify($password, substr($user['password'], 0, -32)))
                 { // si les mot de passe cryptés correspondent
                     if($user['account'] === 'actif')
                     { // SI LE COMPTE DE L'UTILISATEUR EST BIEN ACTIF
@@ -68,8 +68,8 @@ class LoginController extends Controller
                                 'zoubida' => $resultatToken,
                                 'status' => $user['status'],
                             );
-                        } 
-                      else 
+                        }
+                      else
                       {
 
                             $this->erreur['failed_connexion'] = 'Erreur lors de la connexion';
@@ -82,8 +82,8 @@ class LoginController extends Controller
                    }
 
 
-                } 
-              else 
+                }
+              else
               {
                     $this->erreur['password_error'] = 'Email ou mot de passe incorrect';
               }
@@ -92,7 +92,7 @@ class LoginController extends Controller
             if (empty($this->erreur))
             {
                 return $app->redirect('/Coolloc/public/connected/profil');
-            } 
+            }
           else
           {
                 return $app['twig']->render('formulaires/login.html.twig', array(
@@ -105,6 +105,3 @@ class LoginController extends Controller
     }
 
 }
-
-
-

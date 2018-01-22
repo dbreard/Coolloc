@@ -544,7 +544,7 @@ class UpdateAnnonceController extends Controller
                         "annonceUser" => $annonceUser,
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
-                        "modified" => "Votre annonce à bien été modifiée",
+                        "modifiedAnnonce" => "",
                     ));
                 }
 
@@ -557,7 +557,7 @@ class UpdateAnnonceController extends Controller
                         "userOption" => $optionUser,
                         "annonceUser" => $annonceUser,
                         "connected" => $isconnected,
-                        "modified" => "",
+                        "modifiedAnnonce" => "",
                     ));
 
                 }

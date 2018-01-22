@@ -15,6 +15,7 @@
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
                         <button class="navbar-btn nav-button wow bounceInRight login"  onclick=" window.open('{{ path('profil') }}', '_self')" data-wow-delay="0.45s" data-wow-delay="0.45s">Profil</button>
+
                         <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{{ path('ajout-annonce') }}', '_self')" data-wow-delay="0.48s">Ajouter une colocation</button>
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
@@ -23,9 +24,9 @@
                         </li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.2s"><a class="" href="{{ path('a-propos') }}">A propos</a></li>
-                        
+
                         <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="{{ path('contact') }}">Contact</a></li>
-                        
+
                         {% if isConnectedAndAmin is defined %}
                             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="{{ path('dashboard') }}"><span>Dashboard<span></a></li>
                         {% endif %}
