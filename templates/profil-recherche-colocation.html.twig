@@ -153,9 +153,14 @@
 
                                         <h4 class="s-property-title">Le quartier idéal : </h4>                            
                                         <ul>
-                                            {% for districts in district %}
-                                                <li> {{ districts }} </li>
-                                            {% endfor %}
+
+                                            {% if district == '' %}
+                                                <li>Non définie par l'utilisateur</li>
+                                            {% else %}
+                                                {% for districts in district %}
+                                                    <li> {{ districts }} </li>
+                                                {% endfor %}
+                                            {% endif %}
                                         </ul>
 
                                         </div>
@@ -165,9 +170,13 @@
 
                                         <h4 class="s-property-title">L'équipement de la colocation : </h4>                            
                                         <ul>
-                                            {% for equipments in equipment %}
-                                                <li> {{ equipments }} </li>
-                                            {% endfor %}
+                                            {% if equipment == '' %}
+                                                <li>Non définie par l'utilisateur</li>
+                                            {% else %}
+                                                {% for equipments in equipment %}
+                                                    <li> {{ equipments }} </li>
+                                                {% endfor %}
+                                            {% endif %}
                                         </ul>
 
                                         </div>
@@ -178,9 +187,13 @@
 
                                         <h4 class="s-property-title">Les centres d'intérêts des colocataires : </h4>                            
                                         <ul>
-                                            {% for hobbies in hobbie %}
-                                                <li> {{ hobbies }} </li>
-                                            {% endfor %}
+                                            {% if hobbie == '' %}
+                                                <li>Non définie par l'utilisateur</li>
+                                            {% else %}
+                                                {% for hobbies in hobbie %}
+                                                    <li> {{ hobbies }} </li>
+                                                {% endfor %}
+                                            {% endif %}
                                         </ul>
 
                                         </div>
@@ -190,9 +203,13 @@
 
                                         <h4 class="s-property-title">Mon tempérament</h4>                            
                                         <ul>
-                                            {% for member_profils in member_profil %}
-                                                <li> {{ member_profils }} </li>
-                                            {% endfor %}
+                                            {% if member_profil == '' %}
+                                                <li>Non définie par l'utilisateur</li>
+                                            {% else %}
+                                                {% for member_profils in member_profil %}
+                                                    <li> {{ member_profils }} </li>
+                                                {% endfor %}
+                                            {% endif %}
                                         </ul>
 
                                         </div>

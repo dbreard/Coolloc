@@ -90,13 +90,40 @@ class UserModelDAO {
         $response = array();
 
         if ($user['district'] != null)
+        {
             $response['district'] = Controller::stringToArray($user['district']);
+        }
+        else
+            {
+                $response['district'] = '';
+            }
+
         if ($user['equipment'] != null)
+        {
             $response['equipment'] = Controller::stringToArray($user['equipment']);
+        }
+        else
+            {
+                $response['equipment'] = '';
+            }
+
         if ($user['hobbies'] != null)
+        {
             $response['hobbies'] = Controller::stringToArray($user['hobbies']);
+        }
+        else
+            {
+                $response['hobbies'] = '';
+            }
+
         if ($user['member_profil'] != null)
+        {
             $response['member_profil'] = Controller::stringToArray($user['member_profil']);
+        }
+        else
+            {
+                $response['member_profil'] = '';
+            }
 
         $response['user'] = $user;
 
