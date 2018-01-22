@@ -7,7 +7,7 @@ use Coolloc\Model\UserModelDAO;
 use Doctrine\DBAL\Connection;
 use Silex\Application;
 
-class AnnonceModelDAO extends Model{
+class UpdateAnnonceModelDAO extends Model{
 
     private $db;
 
@@ -22,8 +22,9 @@ class AnnonceModelDAO extends Model{
     //     return $ville;
     // }
 
-    public function createAnnonce(array $arrayAnnonce, array $arrayMedia, Application $app){
+    public function updateAnnonceAction(array $arrayAnnonce, array $arrayMedia, Application $app){
 
+        return "OK";
         // On vérifie dans la BDD que la ville et code postal sont correctes
         $sql = "SELECT ville_id FROM city WHERE ville_nom_reel = ?";
 
@@ -115,10 +116,10 @@ class AnnonceModelDAO extends Model{
                         $rowAffected = $updateStatus->updateUserStatus($user['id_user'], "cherche colocataire");
 
                         if ($rowAffected == 1) {
-                            return $annonceId;
+                            return "OK";
                         }
                     }else {
-                        return $annonceId;
+                        return "OK";
                     }
 
                 }

@@ -218,4 +218,34 @@ class SearchController extends Controller
             }
         }
     }
+
+    public function searchAllAnnonce(Application $app) {
+
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+        $response = Model::searchAllAnnonceExist($app);
+
+        if ($isConnectedAndAdmin){
+            return $app['twig']->render('serp-annonce.html.twig', array(
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+                "affichage" => $response['search'],
+                "nb_resultats" => $response['count'],
+            ));
+        }
+
+        elseif ($isconnected) {
+            return $app['twig']->render('serp-annonce.html.twig', array(
+                "connected" => $isconnected,
+                "affichage" => $response['search'],
+                "nb_resultats" => $response['count'],
+        ));
+        } else {
+            return $app['twig']->render('serp-annonce.html.twig', array(
+                "affichage" => $response['search'],
+                "nb_resultats" => $response['count'],
+            ));
+        }
+    }
 }

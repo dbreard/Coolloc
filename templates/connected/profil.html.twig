@@ -174,7 +174,7 @@
                         <img alt="300x200" src="{{ annonceUsers.url_media }}">
                         <div class="caption">
                           <h4>{{ annonceUsers.name_coloc }}</h4>
-                          <a href="" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
+                          <a href="{{ path ('gerer-annonce', {"id_annonce" : annonceUsers.id_user_post_annonce }) }}" class="btn btn-default col-xs-10 modif_annonce">Modifier l'annonce</a>
                             </div>
                           </div>
 

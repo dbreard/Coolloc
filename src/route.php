@@ -77,33 +77,9 @@ $app->get('/profils-public-colocataire', function () use ($app) {
     ->bind('profils-colocataires-recherchant-colocation');
 
 //RESULTAT RECHERCHE
-$app->get('/resultat-recherche', function () use ($app) {
+$app->get('/resultat-recherche', "Coolloc\Controller\SearchController::searchAllAnnonce")->bind('resultat-recherche');
 
-    $isconnected = Controller::ifConnected();
-    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-
-
-    if ($isConnectedAndAdmin){
-        return $app['twig']->render('serp-annonce.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
-        ));
-    }
-
-    elseif ($isconnected) {
-        return $app['twig']->render('serp-annonce.html.twig', array(
-     "connected" => $isconnected,
-    ));
-    } else {
-        return $app['twig']->render('serp-annonce.html.twig', array());
-    }
-
-})
-    ->bind('resultat-recherche');
-
-
-
-
-//DETAILS ANNONCE NON CONNECTER
+//DETAILS ANNONCE
 $app->get('/details-annonce/{id_annonce}', "Coolloc\Controller\AnnonceController::detailAnnonceAction")->bind('details-annonce');
 $app->post('/details-annonce', function () use ($app) {
     //controleur
@@ -125,8 +101,7 @@ $app->get('/login', function () use ($app) {
     elseif (!$isconnected) {
         return $app['twig']->render('formulaires/login.html.twig', array(
             "connected" => $isconnected,
-
-           ));
+        ));
 
     } else {
 
@@ -425,9 +400,6 @@ $app->post('/connected/details-annonce-connecter', function () use ($app) {
 });
 
 
-
-
-
 //PROFIL
 $app->get('/connected/profil', function () use ($app) {
     $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
@@ -495,15 +467,10 @@ $app->post('/connected/ajout-annonce', 'Coolloc\Controller\AnnonceController::an
 
 
 // GERER ANNONCE
-$app->get('/connected/gerer-annonce', function () use ($app) {
-
-    return $app['twig']->render('gerer-annonce.html.twig', array());
-
-})
+$app->get('/connected/gerer-annonce/{id_annonce}', 'Coolloc\Controller\UpdateAnnonceController::selectAnnonceAction')
     ->bind('gerer-annonce');
-$app->post('/connected/gerer-annonce', function () use ($app) {
-    //controleur
-});
+
+$app->post('/connected/gerer-annonce/{id_annonce}', 'Coolloc\Controller\UpdateAnnonceController::updateAnnonceAction')->before($verifParamModifAnnonce);
 
 
 //AJOUT DETAILS PROFIL
