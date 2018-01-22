@@ -197,11 +197,15 @@ class SearchController extends Controller
 
             }else {
 
+                $membresAnnoncesInfo = new HomeController;
+                $donneesMembresAnnonces = $membresAnnoncesInfo->homeAction($app);
+
                 if ($isConnectedAndAdmin){
                     return $app['twig']->render('index.html.twig', array(
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                        "affichage" => $donneesMembresAnnonces,
                     ));
                 }
 
@@ -209,11 +213,13 @@ class SearchController extends Controller
                     return $app['twig']->render('index.html.twig', array(
                         "connected" => $isconnected,
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                        "affichage" => $donneesMembresAnnonces,
                     ));
                 }
                 else {
                     return $app['twig']->render('index.html.twig', array(
                         "errorSearch" => "Aucun résultat pour votre recherche, changé quelques critères pour voir apparaître les annonces",
+                        "affichage" => $donneesMembresAnnonces,
                     ));
                 }
             }
