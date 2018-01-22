@@ -6,7 +6,7 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+                        <div class="col-md-6 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
                                 <h4>CoolLoc </h4>
                                 <div class="footer-title-line"></div>
@@ -22,18 +22,13 @@
                             </div>
                         </div>
                         <!-- fin de 1ere col -->
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+                        <div class="col-md-6 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
                                 <h4>Navigation rapide </h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-menu">
                                     <li><a href="{{ path('a-propos') }}">A propos de CoolLoc </a>  </li>
-                                    {% if connected is defined %}
-
-                                    {% else %}
-                                        <li><a href="{{ path('inscription') }}">Vous inscrire</a>  </li>
-                                    {% endif %}
-                                    <li><a href="{{ path('resultat-recherche',  {"page" : 1}) }}">Nos annonces</a>  </li>
+                                    <li><a href="{{ path('resultat-recherche') }}">Nos annonces</a>  </li>
                                     <li><a href="{{ path('contact') }}">Nous contacter</a></li>
                                     <li><a href="{{ path('faq') }}">Questions fréquentes (FAQ)</a>  </li>
                                     <li><a href="{{ path('mentions-legales') }}">Mentions légales </a>  </li>
@@ -42,111 +37,7 @@
                             </div>
                         </div>
                         <!-- fin de 2e col -->
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>Dernières annonces</h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-blog">
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="{{ asset('assets/img/demo/small-proerty-2.jpg') }}">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="{{ asset('assets/img/demo/small-proerty-2.jpg') }}">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="{{ asset('assets/img/demo/small-proerty-2.jpg') }}">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- fin de 3e col -->
-
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>Profils coloc'</h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-blog">
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="{{ asset('assets/img/demo/small-proerty-2.jpg') }}">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="{{ asset('assets/img/demo/small-proerty-2.jpg') }}">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="{{ asset('assets/img/demo/small-proerty-2.jpg') }}">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- fin de 4ecol -->
+                        
                         
 
                     </div>

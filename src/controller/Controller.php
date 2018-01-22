@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Coolloc\Model\UserModelDAO;
 use Coolloc\Model\TokensDAO;
+use Coolloc\Model\Model;
 use \DateTime;
 
 
@@ -161,14 +162,35 @@ class Controller {
         }
     }
 
+    public static function userSearchColocation(Application $app){
+        $connected = Controller::ifConnected();
+        if ($connected){
+        $userStatus = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+        $userStatus = $userStatus['status'];
+
+        if ($userStatus == "cherche colocation"){
+          return true;
+        }
+        else{
+          return false;
+        }
+        
+        }  
+        
+        else {
+            return false;
+        }
+
+    }
+
     public function sessionDestroy(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
-    
+
         if (!$isConnectedAndAdmin && !$isconnected)
             return $app->redirect('/Coolloc/public') ;
-    
+
 
         // On delete le token de connexion
         $deleteTokenConnection = new TokensDAO($app['db']);

@@ -29,9 +29,9 @@ class UpdateAnnonceController extends Controller
 
         $infoAnnonce = Model::selectAnnonceById($request->get('id_annonce'), $app);
 
-        echo "<pre>";
-        var_dump($infoAnnonce);
-        echo "</pre>";
+        // echo "<pre>";
+        // var_dump($infoAnnonce);
+        // echo "</pre>";
 
         if ($isConnectedAndAdmin) {
             return $app['twig']->render('/connected/gerer-annonce.html.twig', array(
@@ -307,8 +307,16 @@ class UpdateAnnonceController extends Controller
 
         //-------------- PHOTOS ---------------
         // Boucle sur les photos
-        for ($i = 1; $i < 13; $i++) {
 
+        // Je sélectionne toutes les photos liés à l'annonce dans la BDD
+        $photo = UpdateAnnonceModelDAO::allPhotosByIdAnnonce($request->get('id_annonce'), $app);
+
+        // Je compte le nombre de photo présente
+        $nbPhotoInBDD = count($photo);
+        // var_dump(count($photo));
+        // die();
+
+        for ($i = 1; $i <= $nbPhotoInBDD; $i++) {
             $photo = "photo" . $i;
             // Si photo 1
             if ($i == 1) {
@@ -331,10 +339,36 @@ class UpdateAnnonceController extends Controller
                     }else { // sinon erreur
                         $this->erreur['photo'] = "Il manque un paramètre important sur la photo N°$i, veuillez choisir une autre photo";
                     }
-                }else {// si elle est vide erreur
-                    $this->erreur['photo'] = "La photo N°$i doit être définie obligatoirement, veuillez choisir une photo";
                 }
-            }else if (!empty($_FILES["photo$i"]['name'])) {
+            }else {
+
+                if (!empty($_FILES["photo$i"]['name'])) {
+                    // Je créer un préfixe pour mon image
+                    $photo_name_coloc = str_replace(' ', '_', $name_coloc);
+                    // Je créer le nom de la photo
+                    $nom_photo = $photo_name_coloc . '-' . $_FILES["photo$i"]['name'];
+                    // Je créer l'URL a insérer dans la BDD
+                    $photo_bdd = $this->URL . "photos/$nom_photo";
+                    // Je créer le chemin d'accés pour aller copier la photo dans le dossier "photos"
+                    $photo_dossier = __DIR__ . "/../../public/photos/$nom_photo";
+                    // Si elle à un nom temporaire
+                    if (!empty($_FILES["photo$i"]['tmp_name'])) {
+                        // Je copie la photo dans le dossier
+                        copy($_FILES["photo$i"]['tmp_name'], $photo_dossier);
+                        // J'ajoute la photo dans mon tableau pour la BDD
+                        $arrayMedia["$photo"] = $photo_bdd;
+                    }else {// sinon erreur
+                        $this->erreur['photo'] = "Il manque un paramètre important sur la photo N°$i, veuillez choisir une autre photo";
+                    }
+                }
+            }
+        }
+
+        for ($i = ($nbPhotoInBDD + 1); $i < 13; $i++) {
+
+            $photo = "photo" . $i;
+
+            if (!empty($_FILES["photo$i"]['name'])) {
                 // Je créer un préfixe pour mon image
                 $photo_name_coloc = str_replace(' ', '_', $name_coloc);
                 // Je créer le nom de la photo
@@ -395,6 +429,7 @@ class UpdateAnnonceController extends Controller
 
         }else {
             $arrayAnnonce = array(
+                "id_annonce" => $request->get('id_annonce'),
                 "name_coloc" => $name_coloc,
                 "rent" => $rent,
                 "description" => $description,
@@ -496,7 +531,39 @@ class UpdateAnnonceController extends Controller
                     ));
                 }
             }else if ($retour == "OK"){
-                return $app->redirect('/Coolloc/public/connected/profil');
+                $isconnected = Controller::ifConnected();
+                $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+                if ($isConnectedAndAdmin){
+                    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+                    $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
+                    $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
+                    return $app['twig']->render('connected/profil.html.twig', array(
+                        "profilInfo" => $profilInfo,
+                        "userOption" => $optionUser,
+                        "annonceUser" => $annonceUser,
+                        "isConnectedAndAmin" => $isConnectedAndAdmin,
+                        "connected" => $isconnected,
+                        "modified" => "Votre annonce à bien été modifiée",
+                    ));
+                }
+
+                elseif ($isconnected) {
+                    $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+                    $optionUser = Model::userOptionOnly($profilInfo['id_user'], $app);
+                    $annonceUser = Model::annonceByUser($profilInfo['id_user'], $app);
+                    return $app['twig']->render('connected/profil.html.twig', array(
+                        "profilInfo" => $profilInfo,
+                        "userOption" => $optionUser,
+                        "annonceUser" => $annonceUser,
+                        "connected" => $isconnected,
+                        "modified" => "",
+                    ));
+
+                }
+                else {
+                    return $app->redirect('/Coolloc/public');
+                }
             }
         }
     }

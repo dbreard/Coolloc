@@ -18,17 +18,18 @@ class ModifProfilController extends Controller{
     $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    $userSearchColocation = Controller::userSearchColocation($app);
 
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('connected/profil-modif.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "profilInfo" => $profilInfo,
+            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "profilInfo" => $profilInfo, "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('connected/profil-modif.html.twig', array(
-            "connected" => $isconnected, "profilInfo" => $profilInfo
+            "connected" => $isconnected, "profilInfo" => $profilInfo, "userSearchColocation" => $userSearchColocation,
         ));
     }
 
@@ -138,19 +139,24 @@ class ModifProfilController extends Controller{
         $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app); // on récupère les informations utilisateur
         $userId = $idUser['id_user']; // On stocke son id dans une variable
 
+        $userSearchColocation = Controller::userSearchColocation($app);
+
         if ($rowAffected == true){ // si la fonction updateProfilUser a retourné un resultat positif
           $optionUser = Model::userOptionOnly($userId, $app);// on récupère les options liées au compte utilisteur
+
           $annonceUser = Model::annonceByUser($userId, $app);// On récupère toutes les infos de toutes les annonces postées par l'utilisateur
-          return $app['twig']->render('connected/profil.html.twig', array("updated" => "votre profil a bien été modifié", "profilInfo" => $idUser, "userOption" => $optionUser, "annonceUser" => $annonceUser));
+          
+
+          return $app['twig']->render('connected/profil.html.twig', array("updated" => "votre profil a bien été modifié", "profilInfo" => $idUser, "userOption" => $optionUser, "annonceUser" => $annonceUser, "userSearchColocation" => $userSearchColocation, ));
           // on envoie le tout sur la page profil pour pouvoir afficher les informations voulues
         }
         else{ // Si la fonction userUpdateProfil a retourné un resultat négatif
-          return $app['twig']->render('connected/profil-modif.html.twig', array("error" => "OooOops une erreur est survenue, merci de rééssayer", "profilInfo" => $idUser));
+          return $app['twig']->render('connected/profil-modif.html.twig', array("error" => "OooOops une erreur est survenue, merci de rééssayer", "profilInfo" => $idUser, "userSearchColocation" => $userSearchColocation,));
           // on renvoi sur la page de modification profil avec une erreur et les informations du profils pour les réafficher dans les champs du formulaire.
         }
       }
       else{// Si le traitement des données du formulaire renvoi une ou plusieures erreurs
-        return $app['twig']->render('connected/profil-modif.html.twig', array("errors" => $this->erreur, "profilInfo" => $idUser));
+        return $app['twig']->render('connected/profil-modif.html.twig', array("errors" => $this->erreur, "profilInfo" => $idUser, "userSearchColocation" => $userSearchColocation,));
         // on le renvoi sur la page modification du profil avec ses info profil pour pouvoir les réafficher dans les champs.
       }
     }

@@ -20,7 +20,7 @@
                                 <h4><strong>{{ affichage.temoignages.0.firstname }}  {{ affichage.temoignages.0.lastname }} </strong><i>{{ affichage.temoignages.0.status }}</i></h4>
                             </div>
                             <div class="client-face wow fadeInRight" data-wow-delay=".9s">
-                          <img src="{% if affichage.temoignages.0.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.0.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.0.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.0.profil_picture }}{% endif %}" width="100" height="100" alt="Photo de {{ affichage.temoignages.0.firstname }}  {{ affichage.temoignages.0.lastname }}">
                             </div>
                         </div>
                       {% endif %}
@@ -31,7 +31,7 @@
                                 <h4><strong>{{ affichage.temoignages.1.firstname }}  {{ affichage.temoignages.1.lastname }} </strong><i>{{ affichage.temoignages.1.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.1.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.1.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.1.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.1.profil_picture }}{% endif %}" width="100" height="100" alt="Photo de {{ affichage.temoignages.1.firstname }}  {{ affichage.temoignages.1.lastname }}">
                             </div>
                         </div>
                       {% endif %}
@@ -42,7 +42,7 @@
                                 <h4><strong>{{ affichage.temoignages.2.firstname }}  {{ affichage.temoignages.2.lastname }} </strong><i>{{ affichage.temoignages.2.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.2.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.2.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.2.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.2.profil_picture }}{% endif %}" width="100" height="100" alt="Photo de {{ affichage.temoignages.2.firstname }}  {{ affichage.temoignages.2.lastname }}">
                             </div>
                         </div>
                       {% endif %}
@@ -53,7 +53,7 @@
                                 <h4><strong>{{ affichage.temoignages.3.firstname }} {{ affichage.temoignages.3.lastname }} </strong><i>{{ affichage.temoignages.3.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.3.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.3.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.3.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.3.profil_picture }}{% endif %}" width="100" height="100" alt="Photo de {{ affichage.temoignages.3.firstname }}  {{ affichage.temoignages.3.lastname }}">
                             </div>
                         </div>
                       {% endif %}
@@ -64,7 +64,7 @@
                                 <h4><strong>{{ affichage.temoignages.4.firstname }}  {{ affichage.temoignages.4.lastname }} </strong><i>{{ affichage.temoignages.4.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.4.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.4.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.4.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.4.profil_picture }}{% endif %}" width="100" height="100" alt="Photo de pr{{ affichage.temoignages.4.firstname }}  {{ affichage.temoignages.4.lastname }}ofil">
                             </div>
                         </div>
                       {% endif %}
@@ -75,7 +75,7 @@
                                 <h4><strong>{{ affichage.temoignages.5.firstname }}  {{ affichage.temoignages.5.lastname }} </strong><i>{{ affichage.temoignages.5.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.5.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.5.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.5.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.5.profil_picture }}{% endif %}" width="100" height="100"alt="Photo de {{ affichage.temoignages.5.firstname }}  {{ affichage.temoignages.5.lastname }}">
                             </div>
                         </div>
                       {% endif %}
@@ -86,7 +86,7 @@
                                 <h4><strong>{{ affichage.temoignages.6.firstname }} {{ affichage.temoignages.6.lastname }} </strong><i>{{ affichage.temoignages.6.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.6.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.6.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.6.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.6.profil_picture }}{% endif %}" width="100"  height="100" alt="Photo de p{{ affichage.temoignages.6.firstname }}  {{ affichage.temoignages.6.lastname }}rofil">
                             </div>
                         </div>
                       {% endif %}
@@ -97,7 +97,7 @@
                                 <h4><strong>{{ affichage.temoignages.7.firstname }} {{ affichage.temoignages.7.lastname }} </strong><i>{{ affichage.temoignages.7.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.7.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.7.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.7.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.7.profil_picture }}{% endif %}" width="100" height="100" alt="Photo de {{ affichage.temoignages.7.firstname }}  {{ affichage.temoignages.7.lastname }}">
                             </div>
                         </div>
                       {% endif %}
@@ -108,7 +108,7 @@
                                 <h4><strong>{{ affichage.temoignages.8.firstname }} {{ affichage.temoignages.8.lastname }} </strong><i>{{ affichage.temoignages.8.status }}</i></h4>
                             </div>
                             <div class="client-face">
-                          <img src="{% if affichage.temoignages.8.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.8.profil_picture }}{% endif %}" width="100" alt="Photo de profil">
+                          <img src="{% if affichage.temoignages.8.profil_picture == NULL %}{{ asset('assets/img/photo-default-profil.jpg') }}{% else %}{{ affichage.temoignages.8.profil_picture }}{% endif %}" width="100"  height="100" alt="Photo de {{ affichage.temoignages.8.firstname }}  {{ affichage.temoignages.8.lastname }}">
                             </div>
                         </div>
                       {% endif %}

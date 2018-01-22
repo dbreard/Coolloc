@@ -15,15 +15,44 @@ use Coolloc\Model\TokensDAO;
 class CommentController extends Controller
 {
 
+    public function sendCommentInfos(Application $app){
+
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+      $userSearchColocation = Controller::userSearchColocation($app);
+
+
+
+      if ($isConnectedAndAdmin){
+          $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+          return $app['twig']->render('connected/temoigner.html.twig', array(
+              "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "userSearchColocation" => $userSearchColocation, "user_id" => $profilInfo['id_user'], 
+
+          ));
+      }
+
+      elseif ($isconnected) {
+          $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+          return $app['twig']->render('connected/temoigner.html.twig', array(
+       "connected" => $isconnected, "userSearchColocation" => $userSearchColocation,
+
+      ));
+      }
+      else
+      {
+          return $app->redirect('/Coolloc/public/login') ;
+      }
+    }
+
     //fonction d'analyse des champs saisie
     public function commentAction(Application $app, Request $request)
     {
         $comment = strip_tags(trim($request->get('comment')));
-        
 
-        // si le message contient moins de 5 caractères ou si le message contient plus de 101 caractères 
-        if ((iconv_strlen($comment) < 5 && iconv_strlen($comment) > 100)){
-            $this->erreur['comment'] = 'Votre commentaire doit contenir entre 5 et 100 caractères';
+
+        // si le message contient moins de 5 caractères ou si le message contient plus de 82 caractères
+        if ((iconv_strlen($comment) < 5 || iconv_strlen($comment) > 82)){
+            $this->erreur['comment'] = 'Votre commentaire doit contenir entre 5 et 82 caractères';
           }
 
           if(!empty($this->erreur)){
@@ -70,6 +99,7 @@ class CommentController extends Controller
 
     }
 
+
     public function selectCommentAndAdminInfo(Application $app){
 
         // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET EST ADMIN
@@ -110,4 +140,5 @@ class CommentController extends Controller
 
         return $app->redirect('/Coolloc/public/connected/sabit/gerer-temoignage');
     }
+
 }

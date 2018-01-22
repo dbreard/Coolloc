@@ -28,6 +28,8 @@ class AnnonceController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         $arrayMessage = $app["formulaire"]["verifParamAnnonce"]["arrayMessage"];
 
@@ -59,6 +61,7 @@ class AnnonceController extends Controller
                     $conditions => 'Les conditions doivent être acceptés',
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -76,6 +79,7 @@ class AnnonceController extends Controller
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
                     $conditions => 'Les conditions doivent être acceptés',
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
         }
@@ -436,6 +440,8 @@ class AnnonceController extends Controller
     public function detailAnnonceAction(Application $app, Request $request) {
 
         $isconnected = Controller::ifConnected();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         $id_annonce = strip_tags(trim($request->get("id_annonce")));
 
@@ -444,6 +450,7 @@ class AnnonceController extends Controller
                 return $app['twig']->render('details-annonce.html.twig', array(
                     "connected" => $isconnected,
                     "error" => "l'URL à été corrompu.",
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }else {
                 return $app['twig']->render('details-annonce.html.twig', array(
@@ -459,12 +466,6 @@ class AnnonceController extends Controller
         // echo "</pre>";
         // die();
 
-        $district = $this->stringToArray($infoAnnonce['annonce']['district']);
-        $equipment = $this->stringToArray($infoAnnonce['annonce']['equipment']);
-        $hobbies = $this->stringToArray($infoAnnonce['annonce']['hobbies']);
-        $member_profil = $this->stringToArray($infoAnnonce['annonce']['member_profil']);
-
-
         $dateDispoAnnonce = str_replace("-", "", $infoAnnonce['annonce']['date_dispo']);
         $dispoAnnonce = (($this->getDate() - $dateDispoAnnonce) < 0) ? 'non' : 'oui';
 
@@ -475,10 +476,11 @@ class AnnonceController extends Controller
                 "info_photo" => $infoAnnonce['photo'],
                 "info_video" => $infoAnnonce['video'],
                 "dispo_annonce" => $dispoAnnonce,
-                "district" => $district,
-                "equipment" => $equipment,
-                "hobbie" => $hobbies,
-                "member_profil" => $member_profil,
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbie" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         } else {
             return $app['twig']->render('details-annonce.html.twig', array(
@@ -487,10 +489,11 @@ class AnnonceController extends Controller
                 "info_video" => $infoAnnonce['video'],
                 "array_photo" => $infoAnnonce['array_photo'],
                 "dispo_annonce" => $dispoAnnonce,
-                "district" => $district,
-                "equipment" => $equipment,
-                "hobbie" => $hobbies,
-                "member_profil" => $member_profil,
+                "district" => $infoAnnonce['district'],
+                "equipment" => $infoAnnonce['equipment'],
+                "hobbie" => $infoAnnonce['hobbies'],
+                "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         }
     }

@@ -137,6 +137,10 @@ div.choice:hover{
     margin-left: 15%;
 }
 
+.maj {
+    text-transform: uppercase;
+}
+
 /* fiche profil */
 .img-circle {
     width: 100%;
@@ -182,6 +186,85 @@ font-weight: 500;
     line-height: 85px !important;
 }
 
+.search-form {
+    
+    width: 100%;
+    margin: 0 auto;
+}
+
+.toggle-btn2, .toggle-btn3, .toggle-btn4 {
+    background-color: #FDC600;
+    color: #333;
+    font-size: 16px;
+    border: 1px solid #EAE9E9;
+    width: 30px;
+    height: 30px;
+    color: #FFF;
+    transition: all 0.3s ease 0s;
+    padding: 0px;
+    position: relative;
+    top: -5px;
+    margin-left: 10px;
+}
+
+
+#search-form .col-md-3 {
+    text-align: left;
+
+}
+
+#search-form .radio .col-md-4 {
+    text-align: left;
+
+}
+
+.client-face > img {
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+
+
+
+::-moz-selection {
+
+    background: #b3d4fc;
+    text-shadow: none;
+
+}
+::after, ::before {
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+.titre-label {
+    margin-right : 15px;
+}
+.radio.col-sm-12.col-xs-12 {
+
+    text-align: left;
+
+}
+
+.iradio_square-yellow {
+    margin-right: 5px;
+}
+
+p.radio-text {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.client-text {
+
+    min-height: 136px;
+
+}
+
 @media (max-width: 480px){
 
   div.annonce_miniature{
@@ -203,6 +286,16 @@ font-weight: 500;
 
 }
 
+@media (min-width: 480px) and (max-width: 767px){
+    div.caption h4{
+      margin-bottom: 50px;
+    }
+  
+    a.modif_annonce{
+      left: 50px;
+    }
+  }
+
 @media (min-width: 768px) and (max-width: 979px){
 
     .search-form .form-inline .form-group {
@@ -218,15 +311,7 @@ font-weight: 500;
     }
 }
 
-@media (min-width: 480px) and (max-width: 767px){
-  div.caption h4{
-    margin-bottom: 50px;
-  }
 
-  a.modif_annonce{
-    left: 50px;
-  }
-}
 
 @media (min-width: 980px) and (max-width: 1450px){
 
