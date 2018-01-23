@@ -166,6 +166,11 @@ class AnnonceModelDAO extends Model{
         return $response;
     }
 
+    public function deleteAnnonce(int $idAnnonce){
+        $resultat = $this->getDb()->delete("user_post_annonce", array("id_user_post_annonce" => $idAnnonce));
+        return $resultat;
+    }
+
     protected function getDB() {
         return $this->db;
     }

@@ -73,13 +73,14 @@
                         <td class="text-center text-danger">{{ users.account }}</td>
                     {% endif %}
                     <td class=""><a href='{{ path("details-profil", {"id_user" : users.id_user}) }}'><i class="glyphicon glyphicon-search"></i> Détails profil </a></td>
-                    <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}' >
+                    <td class="text-center">
                                 {% if users.account == 'actif' %}
-                                    <i class="fa fa-times">
+                        <a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}' ><i class="fa fa-times"></i></a>
                                 {% else %}
-                                    <i class="fa fa-check-circle-o">
+                            <a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}' ><i class="fa fa-check-circle-o"></i></a>
                                 {% endif %}
-                        </a></td>
+
+                    </td>
                 </tr>
             {% endif %}
     {% endfor %}

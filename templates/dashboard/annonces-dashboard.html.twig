@@ -72,7 +72,7 @@
                         <td class="text-center">{{ annonce.date_created }}</td>
                         <td class="text-center">{{ annonce.date_dispo }}</td>
                         <td class="text-center"><a href='{{ path("details-annonce-admin", {"id_annonce" : annonce.id_user_post_annonce}) }}'><i class="glyphicon glyphicon-search"></i> Détails annonce</a></td>
-                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment supprimer l\'annonce ?"))' href='' ><i class="glyphicon glyphicon-trash"></a></td>
+                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment supprimer"))' href='{{ path("gerer-annonces-admin-suppression", {"id_annonce" : annonce.id_user_post_annonce}) }}' ><i class="glyphicon glyphicon-trash"></a></td>
                     </tr>
             {% endfor %}
             </tbody>

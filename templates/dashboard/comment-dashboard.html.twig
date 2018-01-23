@@ -55,7 +55,7 @@
                         <td class="text-center">{{ comment.user_id }}</td>
                         <td class="text-center">{{ comment.comment }}</td>
                         <td class="text-center">{{ comment.date_created }}</td>
-                        <td class="text-center"><a href="{{ path("supprimer-temoignage", {"id_comments" : comment.id_comments}) }}"><i class="fa fa-trash"></i></a></td>
+                        <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href="{{ path("supprimer-temoignage", {"id_comments" : comment.id_comments}) }}"><i class="fa fa-trash"></i></a></td>
                     </tr>
                 {% endfor %}
             {% endif %}
