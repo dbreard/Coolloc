@@ -189,6 +189,7 @@ class SearchController extends Controller
 
             $nbResponse = count($response);
 
+
             if ($response != false) {
 
                 if ($isConnectedAndAdmin){
@@ -285,12 +286,13 @@ class SearchController extends Controller
         $annonce['page'] = $page;
         $annonce['maxPage'] = $maxPage;
 
+
         if ($isConnectedAndAdmin){
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "isConnectedAndAmin" => $isConnectedAndAdmin,
                 "connected" => $isconnected,
                 "userSearchColocation" => $userSearchColocation,
-                "affichage" => $response['search'],
+                "affichage" => $annonce['annonce']['search'],
                 "nb_resultats" => $response['count'],
                 "annonce" => $annonce,
 
@@ -301,14 +303,14 @@ class SearchController extends Controller
             return $app['twig']->render('serp-annonce.html.twig', array(
                 "connected" => $isconnected,
                 "userSearchColocation" => $userSearchColocation,
-                "affichage" => $response['search'],
+                "affichage" => $annonce['annonce']['search'],
                 "nb_resultats" => $response['count'],
                 "annonce" => $annonce,
 
         ));
         } else {
             return $app['twig']->render('serp-annonce.html.twig', array(
-                "affichage" => $response['search'],
+                "affichage" => $annonce['annonce']['search'],
                 "nb_resultats" => $response['count'],
                 "annonce" => $annonce,
             ));
@@ -344,7 +346,7 @@ class SearchController extends Controller
         // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
         $offset = ($page - 1) * 8;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
 
-        $membre['profil'] = $membres->UsersColocationSelectedLimitDesc($app['nbFilterProfil'], $offset);
+        $membre['profil'] = $membres->UsersColocationSelectedLimitOffset($app['nbFilterProfil'], $offset);
         $membre['page'] = $page;
         $membre['maxPage'] = $maxPage;
 

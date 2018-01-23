@@ -176,16 +176,35 @@ class AdminController extends Controller {
                 $pageActuel = strip_tags(trim($request->get("page_actuelle"))); // ON RECUPERE LA PAGE AFIN DE LA REAFICHER APRES TRAITEMENT
                 $modifyUser = new UserModelDAO($app['db']); // instanciation d'un objet pour modifier un utilisateur
 
-                $rowAffected = $modifyUser->modifyUserStatus( $idUser );
+                $selectUser = $modifyUser->selectUserFromId( $idUser );
 
-                if ($rowAffected == 1){ //  SI L'UTILISATEUR A BIEN ETE MODIFIER
-                    return $app->redirect('/Coolloc/public/connected/sabit/gerer-user-' .$pageActuel);
-                }else{//  SI LA REQUETTE A RENCONTRER UNE ERREUR
-                    return $app['twig']->render('dashboard/user-dashboard-' .$pageActuel. '.html.twig', array(
-                        "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
-                        "error" => "Erreur lors de la modification du status utilisateur"
-                    ));
+                if($selectUser['user']['account'] == 'inactif') // si l'utilisateur était inactif on le rend actif
+                {
+                    $rowAffected = $modifyUser->modifyUserAccountActif( $idUser );
+
+                    if ($rowAffected == 1){ //  SI L'UTILISATEUR A BIEN ETE MODIFIER
+                        return $app->redirect('/Coolloc/public/connected/sabit/gerer-user-' .$pageActuel);
+                    }else{//  SI LA REQUETTE A RENCONTRER UNE ERREUR
+                        return $app['twig']->render('dashboard/user-dashboard-' .$pageActuel. '.html.twig', array(
+                            "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
+                            "error" => "Erreur lors de la modification du status utilisateur"
+                        ));
+                    }
                 }
+                else
+                {
+                    $rowAffected = $modifyUser->modifyUserAccountInactif( $idUser );
+
+                    if ($rowAffected == 1){ //  SI L'UTILISATEUR A BIEN ETE MODIFIER
+                        return $app->redirect('/Coolloc/public/connected/sabit/gerer-user-' .$pageActuel);
+                    }else{//  SI LA REQUETTE A RENCONTRER UNE ERREUR
+                        return $app['twig']->render('dashboard/user-dashboard-' .$pageActuel. '.html.twig', array(
+                            "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
+                            "error" => "Erreur lors de la modification du status utilisateur"
+                        ));
+                    }
+                }
+
 
             } else {// Si l'utilisateur n'est pas admin
                 return $app->redirect('/Coolloc/public');

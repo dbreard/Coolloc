@@ -517,4 +517,32 @@ class AnnonceController extends Controller
         ));
         }
     }
+
+    public function deleteAnnonceAction(Application $app, Request $request)
+    {
+        $isconnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+        // VERIFICATION SI L'UTILISATEUR EST CONNECTER ET ADMIN
+        if ($isconnectedAndAdmin)
+        { // Si l'utilisateur est admin
+
+            $Annonce = new AnnonceModelDAO($app['db']); // instanciation d'un objet pour récupérer les infos d'une annonce
+            $resultat = $Annonce->allAnnoncesSelected();
+            $idAnnonce = strip_tags(trim($request->get("id_annonce"))); // ON RECUPERE L'ID DE L'ANNONCE DANS L'URL
+            $rowAffected = $Annonce->deleteAnnonce( $idAnnonce );
+
+
+            if ($rowAffected == 1){ //  SI L'ANNONCE A BIEN ETE SUPPRIMER
+                return $app->redirect('/Coolloc/public/connected/sabit/gerer-annonces');
+            }else{//  SI LA REQUETTE A RENCONTRER UNE ERREUR
+                return $app['twig']->render('dashboard/annonces-dashboard.html.twig', array(
+                    "userAdmin" => Model::userByTokenSession($_SESSION['membre']['zoubida'], $app),
+                    "annoncesInfo" => $resultat,
+                ));
+            }
+        }else
+            {
+            return $app->redirect('/Coolloc/public');
+        }
+    }
 }

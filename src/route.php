@@ -74,7 +74,7 @@ $app->get('/profils-public-colocataire/{page}', function (Request $request) use 
     $isconnected = Controller::ifConnected();
     $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
     $membresAnnoncesInfo = new SearchController;
-    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app);
+    $donneesMembresAnnonces = $membresAnnoncesInfo->searchAllProfils($app, $request);
     $userSearchColocation = Controller::userSearchColocation($app);
 
 
@@ -526,6 +526,10 @@ $app->get('/connected/sabit/details-annonce-admin/{id_annonce}','Coolloc\Control
 $app->get('/connected/sabit/gerer-annonces','Coolloc\Controller\AdminController::selectedAnnoncesAndAdminInfos')->bind('gerer-annonces-admin');
 
 
+//SUPPRIMER ANNONCE ADMIN
+$app->get('/connected/sabit/gerer-annonces/{id_annonce}','Coolloc\Controller\AnnonceController::deleteAnnonceAction')->bind('gerer-annonces-admin-suppression');
+
+
 //GERER FAQ
 $app->get('/connected/sabit/gerer-faq', 'Coolloc\Controller\FaqController::selectedFaqAndAdminInfo') ->bind('gerer-faq');
 $app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAction')->before($verifParamCommentFaq);
@@ -534,6 +538,7 @@ $app->post('/connected/sabit/gerer-faq','Coolloc\Controller\FaqController::faqAc
 //MODIFIER - SUPPRIMER FAQ
 $app->get('/connected/sabit/gerer-faq/{id_faq}/{action}', 'Coolloc\Controller\FaqController::modifyDeleteFaq') ->bind('gerer-faq-modifier-ou-supprimer');
 $app->post('/connected/sabit/gerer-faq/{id_faq}/{action}','Coolloc\Controller\FaqController::modifyFaq')->before($verifParamCommentFaq);
+
 
 //GERER COMMENTAIRES-TEMOIGNAGE
 $app->get('/connected/sabit/gerer-temoignage', 'Coolloc\Controller\CommentController::selectCommentAndAdminInfo')->bind('gerer-temoignage');
