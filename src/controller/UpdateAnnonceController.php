@@ -371,7 +371,7 @@ class UpdateAnnonceController extends Controller
             }
         }
 
-        for ($i = ($nbPhotoInBDD + 1); $i < 13; $i++) {
+        for ($i = ((int) $nbPhotoInBDD + 1); $i < 13; $i++) {
 
             $photo = "photo" . $i;
 
@@ -396,10 +396,10 @@ class UpdateAnnonceController extends Controller
             }
         }
 
-        // echo "<pre>";
-        // var_dump($arrayMedia);
-        // echo "</pre>";
-        // die();
+        //echo "<pre>";
+        //var_dump($arrayMedia);
+        //echo "</pre>";
+        //die();
 
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
