@@ -71,7 +71,7 @@
                                             <div class="item-thumb">
                                                 <a href="{{ path('fiche-profil', {"id_user" : profil.id_user }) }}" ><img  src="{{ profil.profil_picture }}" alt="Photo de profil de {{ profil.firstname }} {{ profil.lastname }}"></a>
                                             </div>
-                                            <div class="item-entry overflow">
+                                            <div class="item-entry overflow" id="profil">
                                                 <h5><a href="{{ path('fiche-profil', {"id_user" : profil.id_user }) }}" ><ul><li>{{ profil.firstname }}</li><li> {{ profil.lastname }}</li></ul></a></h5>
                                                 <div class="dot-hr"></div>
                                                 <span class="pull-left"><b>date souhaitée:</b><br> {{ profil.date_dispo }} </span>
