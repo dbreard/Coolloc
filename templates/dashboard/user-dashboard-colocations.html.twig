@@ -73,7 +73,13 @@
                         <td class="text-center text-danger">{{ users.account }}</td>
                     {% endif %}
                     <td class=""><a href='{{ path("details-profil", {"id_user" : users.id_user}) }}'><i class="glyphicon glyphicon-search"></i> Détails profil </a></td>
-                    <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><i class="fa fa-times"></a></td>
+                    <td class="text-center"><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}'><a OnClick='return(confirm("Voulez vous vraiment modifier le status ?"))' href='{{ path("modify-status-user", {"id_user" : users.id_user, 'page_actuelle' : 'colocations'}) }}' >
+                                {% if users.account == 'actif' %}
+                                    <i class="fa fa-times">
+                                {% else %}
+                                    <i class="fa fa-check-circle-o">
+                                {% endif %}
+                        </a></td>
                 </tr>
             {% endif %}
     {% endfor %}

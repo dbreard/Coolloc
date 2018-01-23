@@ -189,7 +189,7 @@ class UserModelDAO {
     }
 
     //SELECTION DES UTILISATEURS CHERCHANT UN COLOCATION POUR LA PAGINATION
-    public function UsersColocationSelectedLimitDesc(int $limit, int $offset){
+    public function UsersColocationSelectedLimitOffset(int $limit, int $offset){
 
         $sql = "SELECT * FROM user_options WHERE status = 'cherche colocation' LIMIT $limit OFFSET $offset";
         $users = $this->getDb()->fetchAll($sql, array());
@@ -219,9 +219,20 @@ class UserModelDAO {
     }
 
 
-    public function modifyUserStatus( $idUser ){
+    public function modifyUserAccountInactif( $idUser ){
 
         $sql = "UPDATE user SET account = 'inactif' WHERE id_user = ? ";
+        $rowAffected = $this->getDb()->executeUpdate( $sql, array((int) $idUser) );
+
+        return $rowAffected;
+
+
+    }
+
+
+    public function modifyUserAccountActif( $idUser ){
+
+        $sql = "UPDATE user SET account = 'actif' WHERE id_user = ? ";
         $rowAffected = $this->getDb()->executeUpdate( $sql, array((int) $idUser) );
 
         return $rowAffected;

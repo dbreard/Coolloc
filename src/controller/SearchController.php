@@ -346,7 +346,7 @@ class SearchController extends Controller
         // Maintenant, nous avons le numéro de page. Nous pouvons en déduire les enregistrements à afficher :
         $offset = ($page - 1) * 8;   // Si on est à la page 1, (1-1)*10 = OFFSET 0, si on est à la page 2, (2-1)*10 = OFFSET 10, etc.
 
-        $membre['profil'] = $membres->UsersColocationSelectedLimitDesc($app['nbFilterProfil'], $offset);
+        $membre['profil'] = $membres->UsersColocationSelectedLimitOffset($app['nbFilterProfil'], $offset);
         $membre['page'] = $page;
         $membre['maxPage'] = $maxPage;
 
