@@ -231,7 +231,30 @@ font-weight: 500;
     width: 100px;
 }
 
+/* les css de slack */
 
+.lSSlideWrapper.usingCss img {
+
+    min-width: 768px;
+    max-height: 440px;
+}
+
+#profil-colocataire img {
+
+    width: 200px;
+    max-width: 100%;
+    min-height: auto !important;
+    
+    height: 185px;
+}
+
+#profil-colocataire .item-entry.overflow {
+
+    min-height: 170PX;
+
+} 
+
+/*  */
 
 
 ::-moz-selection {
