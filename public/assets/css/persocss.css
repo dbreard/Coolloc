@@ -250,7 +250,7 @@ font-weight: 500;
 
 #profil-colocataire .item-entry.overflow {
 
-    min-height: 170PX;
+    min-height: 170PX !important;
 
 } 
 
