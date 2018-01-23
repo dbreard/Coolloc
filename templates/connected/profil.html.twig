@@ -86,7 +86,7 @@
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nom</strong></span>{% if profilInfo is defined %}{{ profilInfo.lastname }}{% endif %}</li>
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">Prénom</strong></span>{% if profilInfo is defined %}{{ profilInfo.firstname }}{% endif %}</li>
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">Sexe</strong></span>{% if profilInfo is defined %}{{ profilInfo.sex }}{% endif %}</li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Date de naissance</strong></span>{% if profilInfo is defined %}{{ profilInfo.birthdate }}{% endif %}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Date de naissance</strong></span>{% if profilInfo is defined %}{{ profilInfo.birthdate | date('d/m/Y')}}{% endif %}</li>
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">Activité</strong></span>{% if profilInfo is defined %}{{ profilInfo.activity }}{% endif %}</li>
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail</strong></span>{% if profilInfo is defined %}{{ profilInfo.mail }}{% endif %}</li>
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">N° de telephone:</strong></span>{% if profilInfo is defined %}{{ profilInfo.tel }}{% endif %}</li>
@@ -147,7 +147,7 @@
                       <li><b>J'aimerai que les centres d'interêt de mes collocataires soient'&nbsp;: </b>{{userOption.hobbies}}</li>
                     {% endif %}
                     {% if userOption.date_dispo != "" %}
-                      <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo}}</li>
+                      <li><b>J'ai besoin d'une colocation à partir du&nbsp;: </b>{{userOption.date_dispo | date('d/m/Y')}}</li>
                     {% endif %}
                     {% if userOption.member_profil != "" %}
                       <li><b>Je recherche des collocataires du type&nbsp;: </b>{{userOption.member_profil}}</li>

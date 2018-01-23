@@ -46,7 +46,7 @@ class ContactController extends Controller
       if (!empty($this->erreur)) {
 
         if ($isConnectedAndAdmin){
-          return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+          return $app['twig']->render('contact.html.twig', array(
               "error" => $this->erreur,
               "firstname" => $firstname,
               "lastname" => $lastname,
@@ -58,7 +58,7 @@ class ContactController extends Controller
               "userSearchColocation" => $userSearchColocation,
           ));
         }elseif ($isconnected) {
-            return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+            return $app['twig']->render('contact.html.twig', array(
                 "error" => $this->erreur,
                 "firstname" => $firstname,
                 "lastname" => $lastname,
@@ -69,7 +69,7 @@ class ContactController extends Controller
                 "userSearchColocation" => $userSearchColocation,
             ));
         }else {
-          return $app['twig']->render('connected/ajout-annonce.html.twig', array(
+          return $app['twig']->render('contact.html.twig', array(
               "error" => $this->erreur,
               "firstname" => $firstname,
               "lastname" => $lastname,
@@ -106,12 +106,14 @@ class ContactController extends Controller
 
           if ($isConnectedAndAdmin){
             return $app['twig']->render('contact.html.twig', array(
+                "userSearchColocation" => $userSearchColocation,
                 "error" => $this->erreur,
                 "isConnectedAndAmin" => $isConnectedAndAdmin,
                 "connected" => $isconnected,
             ));
           }elseif ($isconnected) {
             return $app['twig']->render('contact.html.twig', array(
+                "userSearchColocation" => $userSearchColocation,
                 "error" => $this->erreur,
                 "connected" => $isconnected,
             ));

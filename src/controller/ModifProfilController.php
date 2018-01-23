@@ -23,13 +23,18 @@ class ModifProfilController extends Controller{
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('connected/profil-modif.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "profilInfo" => $profilInfo, "userSearchColocation" => $userSearchColocation,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
+            "profilInfo" => $profilInfo,
+            "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('connected/profil-modif.html.twig', array(
-            "connected" => $isconnected, "profilInfo" => $profilInfo, "userSearchColocation" => $userSearchColocation,
+            "connected" => $isconnected,
+            "profilInfo" => $profilInfo,
+            "userSearchColocation" => $userSearchColocation,
         ));
     }
 
@@ -130,34 +135,105 @@ class ModifProfilController extends Controller{
 
       // var_dump($arrayUpdateProfil);
       // die();
+      $userSearchColocation = Controller::userSearchColocation($app);
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+
+      $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app); // on récupère les informations utilisateur
+      $userId = $idUser['id_user']; // On stocke son id dans une variable
 
       if(empty($this->erreur)){//si le traitement des données du formulaire ne renvoi aucune erreurs
 
         $updateProfil = new UpdateProfilModelDAO($app['db']);// On crée une nouvelle instance du model Update user profil
         $rowAffected = $updateProfil->updateProfilUser($arrayUpdateProfil, $app); // on apelle la fonction updateProfilUser du modele
 
-        $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app); // on récupère les informations utilisateur
-        $userId = $idUser['id_user']; // On stocke son id dans une variable
-
-        $userSearchColocation = Controller::userSearchColocation($app);
-
         if ($rowAffected == true){ // si la fonction updateProfilUser a retourné un resultat positif
           $optionUser = Model::userOptionOnly($userId, $app);// on récupère les options liées au compte utilisteur
 
           $annonceUser = Model::annonceByUser($userId, $app);// On récupère toutes les infos de toutes les annonces postées par l'utilisateur
-          
 
-          return $app['twig']->render('connected/profil.html.twig', array("updated" => "votre profil a bien été modifié", "profilInfo" => $idUser, "userOption" => $optionUser, "annonceUser" => $annonceUser, "userSearchColocation" => $userSearchColocation, ));
+            if ($isConnectedAndAdmin){
+                return $app->redirect('/Coolloc/public/connected/profil');
+
+                /*return $app['twig']->render('connected/profil.html.twig', array(
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                    "updated" => "votre profil a bien été modifié",
+                    "profilInfo" => $idUser,
+                    "userOption" => $optionUser,
+                    "annonceUser" => $annonceUser,
+                    "userSearchColocation" => $userSearchColocation,
+                ));*/
+            }
+
+            elseif ($isconnected) {
+
+                return $app->redirect('/Coolloc/public/connected/profil');
+
+                /*return $app['twig']->render('connected/profil.html.twig', array(
+                    "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
+                    "updated" => "votre profil a bien été modifié",
+                    "profilInfo" => $idUser,
+                    "userOption" => $optionUser,
+                    "annonceUser" => $annonceUser,
+                ));*/
+            }
+            else{
+                $app->redirect('/Coolloc/public');
+            }
           // on envoie le tout sur la page profil pour pouvoir afficher les informations voulues
         }
         else{ // Si la fonction userUpdateProfil a retourné un resultat négatif
-          return $app['twig']->render('connected/profil-modif.html.twig', array("error" => "OooOops une erreur est survenue, merci de rééssayer", "profilInfo" => $idUser, "userSearchColocation" => $userSearchColocation,));
+            if ($isConnectedAndAdmin){
+                return $app['twig']->render('connected/profil-modif.html.twig', array(
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                    "error" => "OooOops une erreur est survenue, merci de rééssayer",
+                    "profilInfo" => $idUser,
+                    "userSearchColocation" => $userSearchColocation,
+                ));
+            }
+
+            elseif ($isconnected) {
+                return $app['twig']->render('connected/profil-modif.html.twig', array(
+                    "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
+                    "error" => "OooOops une erreur est survenue, merci de rééssayer",
+                    "profilInfo" => $idUser,
+                    "userSearchColocation" => $userSearchColocation,
+                ));
+            }
+            else{
+                $app->redirect('/Coolloc/public');
+            }
+
           // on renvoi sur la page de modification profil avec une erreur et les informations du profils pour les réafficher dans les champs du formulaire.
         }
       }
       else{// Si le traitement des données du formulaire renvoi une ou plusieures erreurs
-        return $app['twig']->render('connected/profil-modif.html.twig', array("errors" => $this->erreur, "profilInfo" => $idUser, "userSearchColocation" => $userSearchColocation,));
-        // on le renvoi sur la page modification du profil avec ses info profil pour pouvoir les réafficher dans les champs.
+          if ($isConnectedAndAdmin){
+              return $app['twig']->render('connected/profil-modif.html.twig', array(
+                  "isConnectedAndAmin" => $isConnectedAndAdmin,
+                  "connected" => $isconnected,
+                  "errors" => $this->erreur,
+                  "profilInfo" => $idUser,
+                  "userSearchColocation" => $userSearchColocation,
+              ));
+          }
+
+          elseif ($isconnected) {
+              return $app['twig']->render('connected/profil-modif.html.twig', array(        // on le renvoi sur la page modification du profil avec ses info profil pour pouvoir les réafficher dans les champs.
+
+                  "connected" => $isconnected,
+                  "userSearchColocation" => $userSearchColocation,
+                  "errors" => $this->erreur,
+                  "profilInfo" => $idUser,
+              ));
+          }
+          else{
+              $app->redirect('/Coolloc/public');
+          }
       }
     }
   }

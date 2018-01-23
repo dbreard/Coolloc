@@ -141,6 +141,7 @@ class SearchController extends Controller
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
                     "error" => $this->erreur,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -148,6 +149,7 @@ class SearchController extends Controller
                 return $app['twig']->render('serp-annonce.html.twig', array(
                     "connected" => $isconnected,
                     "error" => $this->erreur,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             } else {
                 return $app['twig']->render('serp-annonce.html.twig', array(

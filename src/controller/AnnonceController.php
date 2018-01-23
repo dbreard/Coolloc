@@ -345,6 +345,7 @@ class AnnonceController extends Controller
                     "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -353,6 +354,7 @@ class AnnonceController extends Controller
                     "error" => $this->erreur,
                     "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -404,6 +406,7 @@ class AnnonceController extends Controller
                         "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -412,6 +415,7 @@ class AnnonceController extends Controller
                         "error" => "Erreur lors de l'insertion, veuillez réessayer.",
                         "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
             }else if ($retour == "ville_invalid"){
@@ -421,6 +425,7 @@ class AnnonceController extends Controller
                         "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -429,6 +434,7 @@ class AnnonceController extends Controller
                         "cityError" => "Erreur sur le champs 'Ville', celle-ci n'est pas valide",
                         "value" => $app["formulaire"]["verifParamAnnonce"]["value_form"],
                         "connected" => $isconnected,
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
             }else {
@@ -452,6 +458,7 @@ class AnnonceController extends Controller
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
                     "error" => "l'URL à été corrompu.",
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }else if ($isconnected) {
                 return $app['twig']->render('details-annonce.html.twig', array(
@@ -488,6 +495,7 @@ class AnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbie" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
         ));
         }else if ($isconnected) {
             return $app['twig']->render('details-annonce.html.twig', array(
@@ -513,7 +521,6 @@ class AnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbie" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
-                "userSearchColocation" => $userSearchColocation,
         ));
         }
     }

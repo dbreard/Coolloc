@@ -13,8 +13,6 @@ use Coolloc\Model\TokensDAO;
 class ForgotPassController extends Controller
 {
 
-
-
     //fonction d'analyse des champs saisie
     public function forgotPassAction(Application $app, Request $request)
     {

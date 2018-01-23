@@ -17,6 +17,8 @@ class UpdateAnnonceController extends Controller
 
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
 
         // Vérification que l'utilisateur est bien sur une annonce qui lui appartient
         $id_user = Model::verifUserToAnnonce($request->get('id_annonce'), $app);
@@ -45,6 +47,7 @@ class UpdateAnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbies" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
             ));
         }else if ($isconnected) {
             return $app['twig']->render('/connected/gerer-annonce.html.twig', array(
@@ -57,6 +60,7 @@ class UpdateAnnonceController extends Controller
                 "equipment" => $infoAnnonce['equipment'],
                 "hobbies" => $infoAnnonce['hobbies'],
                 "member_profil" => $infoAnnonce['member_profil'],
+                "userSearchColocation" => $userSearchColocation,
             ));
         }
     }
@@ -67,6 +71,7 @@ class UpdateAnnonceController extends Controller
         $isconnected = Controller::ifConnected();
         $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
         $infoAnnonce = Model::selectAnnonceById($request->get('id_annonce'), $app);
+        $userSearchColocation = Controller::userSearchColocation($app);
 
         $arrayMessage = $app["formulaire"]["verifParamAnnonce"]["arrayMessage"];
 
@@ -96,6 +101,7 @@ class UpdateAnnonceController extends Controller
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
                     "isConnectedAndAmin" => $isConnectedAndAdmin,
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -112,6 +118,7 @@ class UpdateAnnonceController extends Controller
                     $date_dispo => 'Le date de disponibilité doit être rempli',
                     $nb_roommates => 'Le nombre de colocataire doit être rempli',
                     "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
         }
@@ -409,6 +416,7 @@ class UpdateAnnonceController extends Controller
                     "equipment" => $infoAnnonce['equipment'],
                     "hobbies" => $infoAnnonce['hobbies'],
                     "member_profil" => $infoAnnonce['member_profil'],
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -424,6 +432,7 @@ class UpdateAnnonceController extends Controller
                     "equipment" => $infoAnnonce['equipment'],
                     "hobbies" => $infoAnnonce['hobbies'],
                     "member_profil" => $infoAnnonce['member_profil'],
+                    "userSearchColocation" => $userSearchColocation,
                 ));
             }
 
@@ -482,6 +491,7 @@ class UpdateAnnonceController extends Controller
                         "equipment" => $infoAnnonce['equipment'],
                         "hobbies" => $infoAnnonce['hobbies'],
                         "member_profil" => $infoAnnonce['member_profil'],
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -497,6 +507,7 @@ class UpdateAnnonceController extends Controller
                         "equipment" => $infoAnnonce['equipment'],
                         "hobbies" => $infoAnnonce['hobbies'],
                         "member_profil" => $infoAnnonce['member_profil'],
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
             }else if ($retour == "ville_invalid"){
@@ -513,6 +524,7 @@ class UpdateAnnonceController extends Controller
                         "equipment" => $infoAnnonce['equipment'],
                         "hobbies" => $infoAnnonce['hobbies'],
                         "member_profil" => $infoAnnonce['member_profil'],
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -528,6 +540,7 @@ class UpdateAnnonceController extends Controller
                         "equipment" => $infoAnnonce['equipment'],
                         "hobbies" => $infoAnnonce['hobbies'],
                         "member_profil" => $infoAnnonce['member_profil'],
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
             }else if ($retour == "OK"){
@@ -545,6 +558,7 @@ class UpdateAnnonceController extends Controller
                         "isConnectedAndAmin" => $isConnectedAndAdmin,
                         "connected" => $isconnected,
                         "modifiedAnnonce" => "",
+                        "userSearchColocation" => $userSearchColocation,
                     ));
                 }
 
@@ -558,6 +572,7 @@ class UpdateAnnonceController extends Controller
                         "annonceUser" => $annonceUser,
                         "connected" => $isconnected,
                         "modifiedAnnonce" => "",
+                        "userSearchColocation" => $userSearchColocation,
                     ));
 
                 }

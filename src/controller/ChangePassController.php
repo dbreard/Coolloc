@@ -16,6 +16,7 @@ class ChangePassController extends Controller
     //fonction d'analyse des champs saisie
     public function changePassForgottenAction(Application $app, Request $request)
     {
+
         $token = strip_tags(trim($request->get("token")));
         $password = strip_tags(trim($request->get("password")));
         $password_repeat = strip_tags(trim($request->get("password_repeat")));

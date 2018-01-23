@@ -13,7 +13,12 @@ class DetailsProfilController extends Controller{
 
   public function detailsProfilAction(Application $app, Request $request){
 
-    $handicap_access = strip_tags(trim($request->get('handicap_access')));
+  $isconnected = Controller::ifConnected();
+  $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+  $userSearchColocation = Controller::userSearchColocation($app);
+
+
+      $handicap_access = strip_tags(trim($request->get('handicap_access')));
     $smoking = strip_tags(trim($request->get('smoking')));
     $animals = strip_tags(trim($request->get('animals')));
     $sex_roommates = strip_tags(trim($request->get('sex_roommates')));
@@ -77,23 +82,68 @@ class DetailsProfilController extends Controller{
     $rowAffected = $updateDetailsProfil->UpdateDetailsProfil($arrayDetailsProfil, $userId);
 
 
-    if ($rowAffected == true){
-      $optionUser = Model::userOptionOnly($userId, $app);
-      $annonceUser = Model::annonceByUser($userId, $app);
-      return $app['twig']->render('connected/profil.html.twig', array("modified" => "Vos préférences ont bien été modifiées", "profilInfo" => $idUser, "userOption" => $optionUser, "annonceUser" => $annonceUser));
+    if ($rowAffected == true) {
+        $optionUser = Model::userOptionOnly($userId, $app);
+        $annonceUser = Model::annonceByUser($userId, $app);
+        if ($isConnectedAndAdmin) {
+            return $app['twig']->render('connected/profil.html.twig', array(
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+                "modified" => "Vos préférences ont bien été modifiées",
+                "profilInfo" => $idUser,
+                "userOption" => $optionUser,
+                "annonceUser" => $annonceUser));
+        } elseif ($isconnected) {
+            return $app['twig']->render('connected/profil.html.twig', array(
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+                "modified" => "Vos préférences ont bien été modifiées",
+                "profilInfo" => $idUser,
+                "userOption" => $optionUser,
+                "annonceUser" => $annonceUser));
+        } else {
+            $app->redirect('/Coolloc/public/');
+        }
     }
+
     else{
-      $optionUser = Model::userOptionOnly($userId, $app);
-      return $app['twig']->render('connected/profil.html.twig', array("error" => "OooOops une erreur est survenue, merci de rééssayer", "profilInfo" => $idUser, "userOption" => $optionUser));
+        $optionUser = Model::userOptionOnly($userId, $app);
+        if ($isConnectedAndAdmin)
+        {
+            return $app['twig']->render('connected/profil.html.twig', array(
+                "isConnectedAndAmin" => $isConnectedAndAdmin,
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+                "profilInfo" => $idUser,
+                "userOption" => $optionUser,
+                "error" => "OooOops une erreur est survenue, merci de rééssayer",
+                ));
+        } elseif ($isconnected) {
+            return $app['twig']->render('connected/profil.html.twig', array(
+                "connected" => $isconnected,
+                "userSearchColocation" => $userSearchColocation,
+                "profilInfo" => $idUser,
+                "userOption" => $optionUser,
+                "error" => "OooOops une erreur est survenue, merci de rééssayer",
+                ));
+        } else {
+            $app->redirect('/Coolloc/public/');
+        }
     }
   }
 
   //---------------Envoi des options utilisteur sur une page----------------//
 
   public function sendUserOption(){
-
     //appel de la globale $app
     global $app;
+
+    $isconnected = Controller::ifConnected();
+    $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+    $userSearchColocation = Controller::userSearchColocation($app);
+
+
 
     //recupération des option user en fonction du token de la session en cours
     $idUser = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
@@ -102,8 +152,6 @@ class DetailsProfilController extends Controller{
     if ($options['district'] != ""){
       $district = Controller::stringToArray($options['district']);
       $options['district'] = $district;
-      if ($options['district'] == "proche d'écoles")
-        $options['district'] == "proche_écoles";
     }
 
     if ($options['equipment'] != ""){
@@ -124,13 +172,24 @@ class DetailsProfilController extends Controller{
     // die();
 
 
-    $isconnected = $this->ifConnected();
-
-    if (!$isconnected) {
-        return $app->redirect('/../Coolloc/public/login');
+    if ($isConnectedAndAdmin)
+    {
+      return $app['twig']->render('connected/ajout-details-profil.html.twig', array(
+          "isConnectedAndAmin" => $isConnectedAndAdmin,
+          "connected" => $isconnected,
+          "userSearchColocation" => $userSearchColocation,
+          "options" => $options,
+          "profilInfo" => $idUser["id_user"],
+      ));
+    } elseif ($isconnected) {
+      return $app['twig']->render('connected/ajout-details-profil.html.twig', array(
+          "connected" => $isconnected,
+          "userSearchColocation" => $userSearchColocation,
+          "options" => $options,
+          "profilInfo" => $idUser["id_user"],
+      ));
     } else {
-        return $app['twig']->render('/connected/ajout-details-profil.html.twig', array("options" => $options, "profilInfo" => $idUser["id_user"],
-    ));
+      return $app->redirect('/../Coolloc/public/login');
     }
   }
 
@@ -138,6 +197,7 @@ class DetailsProfilController extends Controller{
   public function UserInfoById(Application $app, Request $request){
       $isconnected = Controller::ifConnected();
       $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+      $userSearchColocation = Controller::userSearchColocation($app);
 
       $idUser = strip_tags(trim($request->get("id_user"))); // ON RECUPERE L'ID UTILISATEUR DANS L'URL
 
@@ -152,13 +212,14 @@ class DetailsProfilController extends Controller{
 
           if ($isConnectedAndAdmin){
               return $app['twig']->render('profil-recherche-colocation.html.twig', array(
-                  "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+                  "isConnectedAndAmin" => $isConnectedAndAdmin,
+                  "connected" => $isconnected,
                   "detailsUser" => $resultat['user'],
                   "district" => $resultat['district'],
                   "equipment" => $resultat['equipment'],
                   "member_profil" => $resultat['member_profil'],
                   "hobbie" => $resultat['hobbies'],
-
+                  "userSearchColocation" => $userSearchColocation,
               ));
           }
 
@@ -170,21 +231,17 @@ class DetailsProfilController extends Controller{
                   "equipment" => $resultat['equipment'],
                   "member_profil" => $resultat['member_profil'],
                   "hobbie" => $resultat['hobbies'],
-
-
+                  "userSearchColocation" => $userSearchColocation,
               ));
           }
 
           else {
               return $app['twig']->render('profil-recherche-colocation.html.twig', array(
                   "detailsUser" => $resultat['user'],
-                  "detailsUser" => $resultat['user'],
                   "district" => $resultat['district'],
                   "equipment" => $resultat['equipment'],
                   "member_profil" => $resultat['member_profil'],
                   "hobbie" => $resultat['hobbies'],
-
-
               ));
 
           }
