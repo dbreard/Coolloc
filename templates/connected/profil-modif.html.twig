@@ -133,31 +133,31 @@
                                 <select class="form-control" name="activity">
                                   {% if profilInfo.activity is defined %}
                                     {% if profilInfo.activity == "activité pro" %}
-                                      <option value="activité pro" selected>salarié</option>
-                                      <option value="retraité">retraité</option>
-                                      <option value="sans activité">sans-emploi</option>
-                                      <option value="étudiant">étudiant</option>
+                                      <option value="activité pro" selected>salarié(e)</option>
+                                      <option value="retraité">retraité(e)</option>
+                                      <option value="sans activité">sans-emploi(e)</option>
+                                      <option value="étudiant">étudiant(e)</option>
                                     {% elseif profilInfo.activity == "retraité" %}
-                                      <option value="activité pro">salarié</option>
-                                      <option value="retraité" selected>retraité</option>
+                                      <option value="activité pro">salarié(e)</option>
+                                      <option value="retraité" selected>retraité(e)</option>
                                       <option value="sans activité">sans-emploi</option>
-                                      <option value="étudiant">étudiant</option>
+                                      <option value="étudiant">étudiant(e)</option>
                                     {% elseif profilInfo.activity == "sans activité" %}
-                                      <option value="activité pro">salarié</option>
-                                      <option value="retraité">retraité</option>
-                                      <option value="sans activité" selected>sans-emploi</option>
-                                      <option value="étudiant">étudiant</option>
+                                      <option value="activité pro">salarié(e)</option>
+                                      <option value="retraité">retraité(e)</option>
+                                      <option value="sans activité" selected>sans-emploi(e)</option>
+                                      <option value="étudiant">étudiant(e)</option>
                                     {% elseif profilInfo.activity == "étudiant" %}
-                                      <option value="activité pro">salarié</option>
-                                      <option value="retraité">retraité</option>
+                                      <option value="activité pro">salarié(e)</option>
+                                      <option value="retraité">retraité(e)</option>
                                       <option value="sans activité">sans-emploi</option>
-                                      <option value="étudiant" selected>étudiant</option>
+                                      <option value="étudiant" selected>étudiant(e)</option>
                                     {% endif %}
                                   {% else %}
-                                    <option value="activité pro">salarié</option>
-                                    <option value="retraité">retraité</option>
+                                    <option value="activité pro">salarié(e)</option>
+                                    <option value="retraité">retraité(e)</option>
                                     <option value="sans activité">sans-emploi</option>
-                                    <option value="étudiant">étudiant</option>
+                                    <option value="étudiant">étudiant(e)</option>
                                   {% endif %}
                                 </select>
                             </div>
