@@ -162,25 +162,20 @@ class Controller {
         }
     }
 
-    public static function userSearchColocation(Application $app){
+    public static function userSearchColocation(Application $app)
+    {
         $connected = Controller::ifConnected();
-        if ($connected){
-        $userStatus = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
-        $userStatus = $userStatus['status'];
+        if ($connected) {
+            $userStatus = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+            $userStatus = $userStatus['status'];
 
-        if ($userStatus == "cherche colocation"){
-          return true;
-        }
-        else{
-          return false;
-        }
-        
-        }  
-        
-        else {
-            return false;
-        }
+            if ($userStatus == "cherche colocation") {
+                return true;
+            } else {
+                return false;
+            }
 
+        }
     }
 
     public function sessionDestroy(Application $app, Request $request) {
