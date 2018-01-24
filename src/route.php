@@ -55,7 +55,7 @@ $app->get('/', function () use ($app) {
         )) ;
     }
 
-    
+
 
     // si internaute non connecté rdv vers index-nc.html.twig autrement rdv vers index-c.html.twig
     // return $app['twig']->render('index.html.twig', array());
@@ -184,11 +184,11 @@ $app->post('/forgotten-password', "Coolloc\Controller\ForgotPassController::forg
 
 //CHANGER MDP PAR LE PROFIL
 
-$app->get('/change-password', function () use ($app) {
-    return $app['twig']->render('basic/change-password.html.twig', array());
+$app->get('/change-password-from-profil', function () use ($app) {
+    return $app['twig']->render('basic/change-password-from-profil.html.twig', array());
 })
-    ->bind('change-password');
-$app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePass);
+    ->bind('change-password-from-profil');
+$app->post('/change-password', "Coolloc\Controller\ChangePassController::changePassAction")->before($verifParamChangePassFromProfil);
 
 
 //CHANGER MDP OUBLIER PAR EMAIL
