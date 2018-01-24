@@ -99,4 +99,30 @@ class ChangePassController extends Controller
         }
     }
 
-}
+//---------------MODIFICATION DU MDP DEPUIS LE PROFIL UTILISTEUR-------------------//
+
+    public function sendProfilInfos(Application $app){// methode de redirection sur la page change-password depuis le profil
+
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+      $userSearchColocation = Controller::userSearchColocation($app);
+
+      if ($isConnectedAndAdmin){
+        return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+          "isConnectedAndAmin" => $isConnectedAndAdmin,
+          "connected" => $isconnected,
+          "userSearchColocation" => $userSearchColocation,
+        ));
+      }
+
+      elseif ($isconnected) {
+        return $app['twig']->render('connected/profil.html.twig', array(
+          "connected" => $isconnected,
+          "userSearchColocation" => $userSearchColocation,
+        ));
+      }
+      else {
+        return $app->redirect('/Coolloc/public');
+      }
+    }
+  }
