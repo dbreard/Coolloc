@@ -130,6 +130,9 @@
                                     {% if annonce.page > 1 %}
                                         <li><a href="{{ path('resultat-recherche', {"page" : (annonce.page -1) }) }}">Prev</a></li>
                                     {% endif %}
+                                        {% for page in 1..annonce.maxPage %}
+                                            <li><a href="{{ path('resultat-recherche', {"page" : (page) }) }}">{{ page }}</a></li>
+                                        {% endfor %}
                                     {% if annonce.page < annonce.maxPage %}
                                         <li><a href="{{ path('resultat-recherche', {"page" : (annonce.page +1) }) }}">Next</a></li>
                                     {% endif %}

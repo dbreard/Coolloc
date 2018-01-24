@@ -90,10 +90,13 @@
                                 <div class="pagination">
                                     <ul>
                                         {% if affichage.page > 1 %}
-                                        <li><a href="{{ path('profils-colocataires-recherchant-colocation', {"page" : (affichage.page -1) }) }}">Prev</a></li>
+                                            <li><a href="{{ path('profils-colocataires-recherchant-colocation', {"page" : (affichage.page -1) }) }}">Prev</a></li>
                                         {% endif %}
+                                            {% for page in 1..affichage.maxPage %}
+                                                    <li><a href="{{ path('profils-colocataires-recherchant-colocation', {"page" : (page) }) }}">{{ page }}</a></li>
+                                            {% endfor %}
                                         {% if affichage.page < affichage.maxPage %}
-                                        <li><a href="{{ path('profils-colocataires-recherchant-colocation', {"page" : (affichage.page +1) }) }}">Next</a></li>
+                                            <li><a href="{{ path('profils-colocataires-recherchant-colocation', {"page" : (affichage.page +1) }) }}">Next</a></li>
                                         {% endif %}
                                     </ul>
                                 </div>

@@ -272,7 +272,7 @@ class SearchController extends Controller
         // La fonction ceil() arrondit à l'entier supérieur.
 
         $page = ''; // Le numéro de la page que nous souhaitons visualiser
-            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $page <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
+            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $pageActuelle <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
             {
                 $page = $pageActuelle;
             }
@@ -327,7 +327,7 @@ class SearchController extends Controller
         $membres = new UserModelDAO($app['db']);
         $pageActuelle = strip_tags(trim($request->get("page")));
 
-        $nbProfils = $membres->countAllUsers();
+        $nbProfils = $membres->countAllUsersFromColocations();
         $a = (int) $nbProfils;
         $maxPage = (int)ceil( $a / $app['nbFilterProfil']);
 
@@ -336,7 +336,7 @@ class SearchController extends Controller
         // La fonction ceil() arrondit à l'entier supérieur.
 
         $page = ''; // Le numéro de la page que nous souhaitons visualiser
-            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $page <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
+            if (isset($pageActuelle) && !empty($pageActuelle) && ctype_digit($pageActuelle) && $pageActuelle > 0 && $pageActuelle <= $maxPage) // On vérifie si la page est bien un nombre compris entre 1 et $maxPage
             {
                 $page = $pageActuelle;
             }
