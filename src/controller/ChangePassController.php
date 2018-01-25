@@ -116,7 +116,7 @@ class ChangePassController extends Controller
       }
 
       elseif ($isconnected) {
-        return $app['twig']->render('connected/profil.html.twig', array(
+        return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
           "connected" => $isconnected,
           "userSearchColocation" => $userSearchColocation,
         ));
