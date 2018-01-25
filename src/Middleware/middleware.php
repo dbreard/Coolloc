@@ -66,7 +66,7 @@ $verifParamChangePassFromProfil = function (Request $request, Application $app)
                       {
                         $retour = verifParam($request->request, array("old_password", "password", "password_repeat"));
                         if($retour["error"])
-                        return $app->redirect("/Coolloc/public/change-password");
+                        return $app->redirect("/Coolloc/public/connected/change-password-from-profil");
 };
 
 

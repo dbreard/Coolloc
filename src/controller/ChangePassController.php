@@ -125,4 +125,182 @@ class ChangePassController extends Controller
         return $app->redirect('/Coolloc/public');
       }
     }
+
+    public function changePassFromProfilAction(Application $app, Request $request){
+
+      //Recuperation des infos utilisateur pour la session en cours
+      $isconnected = Controller::ifConnected();
+      $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+      $userSearchColocation = Controller::userSearchColocation($app);
+      $id_user = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
+      $annonceUser = Model::annonceByUser($id_user['id_user'], $app);
+      $optionUser = Model::userOptionOnly($id_user['id_user'], $app);
+
+      // var_dump($id_user);
+      // die();
+
+      $old_password = strip_tags(trim($request->get("old_password")));
+      $password = strip_tags(trim($request->get("password")));
+      $password_repeat = strip_tags(trim($request->get("password_repeat")));
+
+      ($this->verifCorrespondanceMdp($password, $password_repeat)) ?  : $this->erreur['mdp'] = 'Les mots de passe ne correspondent pas';
+      ($this->verifMdp($password)) ?  : $this->erreur['format'] = 'Votre nouveau Mot de Passe doit faire entre 6 et 20 caractères';
+
+      if(empty($this->erreur)){
+        $sql = "SELECT password FROM user WHERE id_user = ?";
+        $resultat = $app['db']->fetchAssoc($sql, array((string) $id_user['id_user']));
+
+        if ($resultat['password'] == password_verify($old_password, substr($resultat['password'], 0, -32))){
+          $password = password_hash($password, PASSWORD_DEFAULT) . md5('bruh');
+          $updatePassword = new UserModelDAO($app['db']); // MODIFICATION DU MDP UTILISATEUR
+          $rowAffected = $updatePassword->modifyPasswordFromToken($password, $id_user['id_user']);
+
+          if($rowAffected == 1){
+            $this->sendMailToken(
+                array("adress" => $id_user['mail'], "name" => $id_user['firstname']),
+                array("body" => "<!doctype html>
+                <html>
+                  <head>
+                    <meta name='viewport' content='width=device-width'>
+                    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+                    <title>Simple Transactional Email</title>
+                    <style>     /* -------------------------------------         INLINED WITH htmlemail.io/inline     ------------------------------------- */     /* -------------------------------------         RESPONSIVE AND MOBILE FRIENDLY STYLES     ------------------------------------- */     @media only screen and (max-width: 620px) {       table[class=body] h1 {         font-size: 28px !important;         margin-bottom: 10px !important;       }       table[class=body] p,             table[class=body] ul,             table[class=body] ol,             table[class=body] td,             table[class=body] span,             table[class=body] a {         font-size: 16px !important;       }       table[class=body] .wrapper,             table[class=body] .article {         padding: 10px !important;       }       table[class=body] .content {         padding: 0 !important;       }       table[class=body] .container {         padding: 0 !important;         width: 100% !important;       }       table[class=body] .main {         border-left-width: 0 !important;         border-radius: 0 !important;         border-right-width: 0 !important;       }       table[class=body] .btn table {         width: 100% !important;       }       table[class=body] .btn a {         width: 100% !important;       }       table[class=body] .img-responsive {         height: auto !important;         max-width: 100% !important;         width: auto !important;       }     }     /* -------------------------------------         PRESERVE THESE STYLES IN THE HEAD     ------------------------------------- */     @media all {       .ExternalClass {         width: 100%;       }       .ExternalClass,             .ExternalClass p,             .ExternalClass span,             .ExternalClass font,             .ExternalClass td,             .ExternalClass div {         line-height: 100%;       }       .apple-link a {         color: inherit !important;         font-family: inherit !important;         font-size: inherit !important;         font-weight: inherit !important;         line-height: inherit !important;         text-decoration: none !important;       }       .btn-primary table td:hover {         background-color: #34495e !important;       }       .btn-primary a:hover {         background-color: #34495e !important;         border-color: #34495e !important;       }     }
+                    </style>
+                  </head>
+                  <body class='' style='background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;'>
+                    <table border='0' cellpadding='0' cellspacing='0' class='body' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;'>
+                      <tr>
+                        <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+                        <td class='container' style='font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;'>           <div class='content' style='box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;'>              <!-- START CENTERED WHITE CONTAINER -->             <span class='preheader' style='color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;'>This is preheader text. Some clients will show this text as a preview.</span>
+                          <table class='main' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;'>                <!-- START MAIN CONTENT AREA -->               <tr>                 <td class='wrapper' style='font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;'>                   <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                            <tr>
+                              <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'>Bonjour,</p>
+                              <p style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;'>Nous vous informons que le mot de passe de votre compte a ete modifie. Si vous n'etes pas a l'origine de cette modification, merci de <a href='http://localhost/Coolloc/public/contact'> contacter le staff au plus vite pour securiser votre compte.</a> Vous pouvez egalement vous rendre sur la rubrique <a href='http://localhost/Coolloc/public/forgotten-password'>login / Mot de passe oublie</a> pour changer votre mot de passe.</p>
+                                <table border='0' cellpadding='0' cellspacing='0' class='btn btn-primary' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;'>
+                                  <tbody>
+                                    <tr>
+                                      <td align='left' style='font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;'>
+                                        <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;'>
+                                          <tbody>
+                                            <tr>
+                                             <td style='font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;'></td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- END MAIN CONTENT AREA -->
+                    </table>
+                    <!-- START FOOTER -->
+                    <div class='footer' style='clear: both; Margin-top: 10px; text-align: center; width: 100%;'>
+                      <table border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;'>
+                        <tr>
+                          <td class='content-block' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'>  <span class='apple-link' style='color: #999999; font-size: 12px; text-align: center;'>Merci de faire confiance a CoolLoc</span>                   </td>                 </tr>                 <tr>                   <td class='content-block powered-by' style='font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;'></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <!-- END FOOTER -->
+                    <!-- END CENTERED WHITE CONTAINER -->
+                  </div>
+                </td>
+                <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>&nbsp;</td>
+              </tr>
+            </table>
+          </body>
+        </html>",
+        "subject" => 'Notification de changement de Mot de Passe'));
+
+                if($isConnectedAndAdmin){
+                  return $app['twig']->render('connected/profil.html.twig', array(
+                  "pass_modified" => "Votre mot de Passe a ete modifie",
+                  "profilInfo" => $id_user,
+                  "userOption" => $optionUser,
+                  "annonceUser" => $annonceUser,
+                  "isConnectedAndAmin" => $isConnectedAndAdmin,
+                  "connected" => $isconnected,
+                  "userSearchColocation" => $userSearchColocation,));
+                }
+                elseif($isconnected){
+                  return $app['twig']->render('connected/profil.html.twig', array(
+                  "pass_modified" => "Votre mot de Passe a ete modifie",
+                  "profilInfo" => $id_user,
+                  "userOption" => $optionUser,
+                  "annonceUser" => $annonceUser,
+                  "connected" => $isconnected,
+                  "userSearchColocation" => $userSearchColocation,));
+                }
+                else{
+                  return $app->redirect('/Coolloc/public');
+                }
+            $app['twig']->render('connected/profil.html.twig', array());
+          }
+          else{
+            $this->erreur['change_password'] = "Erreur lors du changement de Mot de Passe. Veuillez Réessayer";
+            if($isConnectedAndAdmin){
+              return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+              "error" => $this->erreur,
+              "isConnectedAndAmin" => $isConnectedAndAdmin,
+              "connected" => $isconnected,
+              "userSearchColocation" => $userSearchColocation,));
+            }
+            elseif($isconnected){
+              return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+              "error" => $this->erreur,
+              "connected" => $isconnected,
+              "userSearchColocation" => $userSearchColocation,));
+            }
+            else{
+              return $app->redirect('/Coolloc/public');
+            }
+          }
+        }
+        else{
+          $this->erreur['old_password'] = "Mot de passe erroné";
+
+          if($isConnectedAndAdmin){
+            return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+            "error" => $this->erreur,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
+            "userSearchColocation" => $userSearchColocation,));
+          }
+          elseif($isconnected){
+            return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+            "error" => $this->erreur,
+            "connected" => $isconnected,
+            "userSearchColocation" => $userSearchColocation,));
+          }
+          else{
+            return $app->redirect('/Coolloc/public');
+          }
+        }
+        // die();
+      }
+      else{
+        if($isConnectedAndAdmin){
+          return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+          "error" => $this->erreur,
+          "isConnectedAndAmin" => $isConnectedAndAdmin,
+          "connected" => $isconnected,
+          "userSearchColocation" => $userSearchColocation,));
+        }
+        elseif($isconnected){
+          return $app['twig']->render('connected/change-password-from-profil.html.twig', array(
+          "error" => $this->erreur,
+          "connected" => $isconnected,
+          "userSearchColocation" => $userSearchColocation,));
+        }
+        else{
+          return $app->redirect('/Coolloc/public');
+        }
+      }
+    }
   }
