@@ -173,7 +173,7 @@ class UpdateAnnonceModelDAO extends Model{
 
                     }
 
-                    for ($i = ($nbPhotoInBDD + 1); $i < 13; $i++) {
+                    for ($i = ((int) $nbPhotoInBDD + 1); $i < 13; $i++) {
 
                         if (isset($arrayMedia["photo$i"])) {
 

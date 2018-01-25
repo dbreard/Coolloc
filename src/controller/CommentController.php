@@ -26,17 +26,20 @@ class CommentController extends Controller
       if ($isConnectedAndAdmin){
           $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
           return $app['twig']->render('connected/temoigner.html.twig', array(
-              "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "userSearchColocation" => $userSearchColocation, "user_id" => $profilInfo['id_user'], 
-
+              "isConnectedAndAmin" => $isConnectedAndAdmin,
+              "connected" => $isconnected,
+              "userSearchColocation" => $userSearchColocation,
+              "user_id" => $profilInfo['id_user'],
           ));
       }
 
       elseif ($isconnected) {
           $profilInfo = Model::userByTokenSession($_SESSION['membre']['zoubida'], $app);
           return $app['twig']->render('connected/temoigner.html.twig', array(
-       "connected" => $isconnected, "userSearchColocation" => $userSearchColocation,
-
-      ));
+              "connected" => $isconnected,
+              "userSearchColocation" => $userSearchColocation,
+              "user_id" => $profilInfo['id_user'],
+          ));
       }
       else
       {
@@ -47,6 +50,10 @@ class CommentController extends Controller
     //fonction d'analyse des champs saisie
     public function commentAction(Application $app, Request $request)
     {
+        $isconnected = Controller::ifConnected();
+        $isConnectedAndAdmin = Controller::ifConnectedAndAdmin();
+        $userSearchColocation = Controller::userSearchColocation($app);
+
         $comment = strip_tags(trim($request->get('comment')));
 
 
@@ -56,9 +63,27 @@ class CommentController extends Controller
           }
 
           if(!empty($this->erreur)){
-            return $app['twig']->render('connected/temoigner.html.twig', array(
-                "error" => $this->erreur,
-            ));
+            if ($isConnectedAndAdmin)
+            {
+                return $app['twig']->render('connected/temoigner.html.twig', array(
+                    "error" => $this->erreur,
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
+                ));
+            } elseif ($isConnectedAndAdmin)
+            {
+                return $app['twig']->render('connected/temoigner.html.twig', array(
+                    "error" => $this->erreur,
+                    "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
+                ));
+            } else
+            {
+                return $app['twig']->render('connected/temoigner.html.twig', array(
+                    "error" => $this->erreur,
+                ));
+            }
           }
 
           else {
@@ -84,16 +109,32 @@ class CommentController extends Controller
 
         if (!empty($this->erreur))
         { // si il y a des erreurs lors de la connexion, on les affiche
-            return $app['twig']->render('connected/temoigner.html.twig', array(
-                "error" => $this->erreur,
-            ));
+            if ($isConnectedAndAdmin)
+            {
+                return $app['twig']->render('connected/temoigner.html.twig', array(
+                    "error" => $this->erreur,
+                    "isConnectedAndAmin" => $isConnectedAndAdmin,
+                    "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
+                ));
+            } elseif ($isConnectedAndAdmin)
+            {
+                return $app['twig']->render('connected/temoigner.html.twig', array(
+                    "error" => $this->erreur,
+                    "connected" => $isconnected,
+                    "userSearchColocation" => $userSearchColocation,
+                ));
+            } else
+            {
+                return $app['twig']->render('connected/temoigner.html.twig', array(
+                    "error" => $this->erreur,
+                ));
+            }
         }
         else
         { // si les formats du message,
-
             $comment = new CommentModelDAO($app['db']);
             return $app['twig']->redirect('Coolloc/public/connected/merci');
-
         }
 
 

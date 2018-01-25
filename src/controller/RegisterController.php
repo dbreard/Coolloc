@@ -83,7 +83,12 @@ class RegisterController extends Controller
         // SI IL Y A DES ERREURS
         if (!empty($this->erreur)) {
             return $app['twig']->render('formulaires/register.html.twig', array(
-                "error" => $this->erreur, "email" => $email, "birthdate" => $birthdate, "firstname" => $first_name, "lastname" => $last_name, "tel" => $tel,
+                "error" => $this->erreur,
+                "email" => $email,
+                "birthdate" => $birthdate,
+                "firstname" => $first_name,
+                "lastname" => $last_name,
+                "tel" => $tel,
             ));
         } else { // SI IL N'Y A PAS D'ERREUR
             $insertUser = new UserModelDAO($app['db']);

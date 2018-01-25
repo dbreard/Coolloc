@@ -173,7 +173,15 @@ class UserModelDAO {
     // COMPTE LE NOMBRE D'UTILISATEUR EN BDD
     public function countAllUsers(): int{
 
-        $sql = "SELECT COUNT(*) AS 'count_user' FROM user";
+        $sql = "SELECT COUNT(*) AS 'count_user' FROM user ";
+        return $this->getDb()->fetchAssoc($sql)['count_user'];
+    }
+
+
+    // COMPTE LE NOMBRE D'UTILISATEUR CHERCHANT DES COLOCATION EN BDD
+    public function countAllUsersFromColocations(): int{
+
+        $sql = "SELECT COUNT(*) AS 'count_user' FROM user WHERE status = 'cherche colocation'";
         return $this->getDb()->fetchAssoc($sql)['count_user'];
     }
 

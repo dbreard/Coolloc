@@ -54,7 +54,7 @@
                         <ul>
                             <li><a href="#step1" data-toggle="tab">Étape 1</a></li>
                             <li><a href="#step2" data-toggle="tab">Étape 2</a></li>
-                            <li><a href="#step3" data-toggle="tab">Étape 3</a></li>
+                            <!-- <li><a href="#step3" data-toggle="tab">Étape 3</a></li> -->
                             <li><a href="#step4" data-toggle="tab">Terminé</a></li>
                         </ul>
 
@@ -740,18 +740,19 @@
                             </div>
                             <!-- End step 2 -->
 
-                            <div class="tab-pane" id="step3">
-                                <h4 class="info-text">Choississez vos options</h4>
+                            {# <div class="tab-pane" id="step3">
+                                <!-- <h4 class="info-text">Choississez vos options</h4> -->
+                                <h4 class="info-text">Des photos supplémentaires</h4>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 col-sm-offset-3">
                                         <div class="form-group">
                                             <div>
                                                 {% if error.photo is defined %}
                                                     <span class="red">{{ error.photo }}</span>
                                                 {% endif %}
                                             </div>
-                                            <h4>Des photos supplémentaires</h4>
-                                            <p>Ajoutez jusqu'à 8 photos supplémentaires contre paiement de 10 euros</p>
+                                            <!-- <h4>Des photos supplémentaires</h4> -->
+                                            <!-- <p>Ajoutez jusqu'à 8 photos supplémentaires contre paiement de 10 euros</p> -->
 
                                             <div class="col-sm-3">
                                                 <div class="picture">
@@ -816,42 +817,42 @@
                                                 <input type="file" id="wizard-picture13a" name="photo13">
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-
-                                        <h4>Remontez votre annonce en tête de liste</h4>
-
-                                        <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros
-                                        <label class="radio-inline">
-                                            <input type="radio" id="Top de liste" value="yes" name="Top de liste"> oui
-
-                                        </label>
-
-                                        <label class="radio-inline">
-                                            <input type="radio" id="Top de liste2" value="no" checked name="Top de liste"> non
-                                        </label>
-                                        </p>
-
-                                        <hr>
-
-                                        <h4>Le pack options</h4>
-                                        <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
-                                        <p>Je choisis le pack option
-
-                                        <label class="radio-inline">
-                                            <input type="radio" id="pack option" value="yes" name="pack option"> oui
-
-                                        </label>
-
-                                        <label class="radio-inline">
-                                            <input type="radio" id="pack option2" value="no" name="pack option" checked> non
-                                        </label>
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
-                            <!--  End step 3 -->
+                        </div>
+                        <div class="col-sm-6">
+
+                            <h4>Remontez votre annonce en tête de liste</h4>
+
+                            <p>Je choisis l'option Remonter l'annonce :<br> contre paiement de 10 euros
+                            <label class="radio-inline">
+                                <input type="radio" id="Top de liste" value="yes" name="Top de liste"> oui
+
+                            </label>
+
+                            <label class="radio-inline">
+                                <input type="radio" id="Top de liste2" value="no" checked name="Top de liste"> non
+                            </label>
+                            </p>
+
+                            <hr>
+
+                            <h4>Le pack options</h4>
+                            <p>Cumulez nos option :<br> contre paiement de 15 euros <br>Vous économisez 5 euros</p>
+                            <p>Je choisis le pack option
+
+                            <label class="radio-inline">
+                                <input type="radio" id="pack option" value="yes" name="pack option"> oui
+
+                            </label>
+
+                            <label class="radio-inline">
+                                <input type="radio" id="pack option2" value="no" name="pack option" checked> non
+                            </label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--  End step 3 --> #}
 
 
                             <div class="tab-pane" id="step4">

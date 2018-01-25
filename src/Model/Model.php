@@ -90,6 +90,15 @@ class Model {
     // Retourne l'annonces enregistré en fonction de l'id de celle ci
     public static function selectAnnonceById(int $id_annonce, Application $app) {
 
+        // ON VERIFIE QUE L'ANNONCE EXISTE
+        $sql = "SELECT * FROM user_post_annonce WHERE id_user_post_annonce = ?";
+
+        $annonceExist = $app['db']->fetchAssoc($sql, array((int) $id_annonce));
+
+        // Si l'annonce n'éxiste pas
+        if (!$annonceExist)
+            return FALSE;
+
         // REQUETE DE SELECTION DE L'ANNONCE
         $sql = "SELECT * FROM user, user_post_annonce, options, city WHERE user_post_annonce.user_id = user.id_user AND user_post_annonce.ville_id = city.ville_id AND user_post_annonce.options_id = options.id_options AND user_post_annonce.id_user_post_annonce = ?";
 

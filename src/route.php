@@ -32,19 +32,16 @@ $app->get('/', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('index.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
             "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
-      // echo '<pre>';
-      // var_dump($donneesMembresAnnonces);
-      // echo '</pre>';
-      // die();
         return $app['twig']->render('index.html.twig', array(
-     "connected" => $isconnected,
+            "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
             "userSearchColocation" => $userSearchColocation,
     ));
@@ -221,7 +218,7 @@ $app->get('/faq', function () use ($app) {
     }
     elseif ($isconnected) {
         return $app['twig']->render('faq.html.twig', array(
-     "connected" => $isconnected,
+            "connected" => $isconnected,
             "infosFaqs" => $resultatFaq,
             "userSearchColocation" => $userSearchColocation,
     ));
@@ -251,15 +248,16 @@ $app->get('/contact', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('contact.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
             "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('contact.html.twig', array(
-     "connected" => $isconnected,
-     "userSearchColocation" => $userSearchColocation,
+             "connected" => $isconnected,
+             "userSearchColocation" => $userSearchColocation,
     ));
     } else {
         return $app['twig']->render('contact.html.twig', array()) ;
@@ -284,15 +282,16 @@ $app->get('connected/merci', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('connected/merci.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
             "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('connected/merci.html.twig', array(
-     "connected" => $isconnected,
-     "userSearchColocation" => $userSearchColocation,
+             "connected" => $isconnected,
+             "userSearchColocation" => $userSearchColocation,
     ));
     } else {
         return $app->redirect('/Coolloc/public');
@@ -312,14 +311,16 @@ $app->get('/mentions-legales', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('mentions-legales.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
             "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('mentions-legales.html.twig', array(
-     "connected" => $isconnected, "userSearchColocation" => $userSearchColocation,
+            "connected" => $isconnected,
+            "userSearchColocation" => $userSearchColocation,
     ));
     } else {
         return $app['twig']->render('mentions-legales.html.twig', array());
@@ -338,13 +339,16 @@ $app->get('/conditions-generales-de-vente', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected, "userSearchColocation" => $userSearchColocation,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
+            "userSearchColocation" => $userSearchColocation,
         ));
     }
 
     elseif ($isconnected) {
         return $app['twig']->render('conditions-generales-de-vente.html.twig', array(
-     "connected" => $isconnected, "userSearchColocation" => $userSearchColocation,
+            "connected" => $isconnected,
+            "userSearchColocation" => $userSearchColocation,
     ));
     } else {
         return $app['twig']->render('conditions-generales-de-vente.html.twig', array());
@@ -366,7 +370,8 @@ $app->get('/a-propos', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('a-propos.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
             "affichage" => $donneesMembresAnnonces,
             "userSearchColocation" => $userSearchColocation,
         ));
@@ -411,15 +416,6 @@ $app->get('/verif-connected/{pagename}/', 'Coolloc\Controller\Controller::verifC
 
 //*** ROUTES GET/POST ***//
 
-//DETAILS ANNONCE CONNECTER
-$app->get('/connected/details-annonce-connecter', function () use ($app) {
-    return $app['twig']->render('details-annonce-connecter.html.twig', array());
-})
-    ->bind('details-annonce-connecter');
-$app->post('/connected/details-annonce-connecter', function () use ($app) {
-    //controleur
-});
-
 
 //PROFIL
 $app->get('/connected/profil', 'Coolloc\Controller\ProfilAccessController::profilAccessAction')
@@ -446,7 +442,8 @@ $app->get('/connected/ajout-annonce', function () use ($app) {
 
     if ($isConnectedAndAdmin){
         return $app['twig']->render('/connected/ajout-annonce.html.twig', array(
-            "isConnectedAndAmin" => $isConnectedAndAdmin, "connected" => $isconnected,
+            "isConnectedAndAmin" => $isConnectedAndAdmin,
+            "connected" => $isconnected,
             "userSearchColocation" => $userSearchColocation,
         ));
     }
