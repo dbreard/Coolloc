@@ -61,6 +61,14 @@ $verifParamChangePass = function (Request $request, Application $app)
                         return $app->redirect("/Coolloc/public/change-password");
 };
 
+$verifParamChangePassFromProfil = function (Request $request, Application $app)
+
+                      {
+                        $retour = verifParam($request->request, array("old_password", "password", "password_repeat"));
+                        if($retour["error"])
+                        return $app->redirect("/Coolloc/public/connected/change-password-from-profil");
+};
+
 
 //----------------- MiddleWare du formulaire de CONTACT-----------------------//
 $verifContact = function (Request $request, Application $app)
